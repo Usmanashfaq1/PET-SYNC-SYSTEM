@@ -8,7 +8,7 @@
   <link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png">
   <link rel="icon" type="image/png" href="../assets/img/pet_logo.jpg">
   <title>
-    Admin - PET SYNC
+    Forget Password - PET SYNC
   </title>
   <!--     Fonts and icons     -->
   <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900|Roboto+Slab:400,700" />
@@ -45,7 +45,7 @@
             <div class="card z-index-0 fadeIn3 fadeInBottom">
               <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
                 <div class="bg-gradient-primary shadow-primary border-radius-lg py-3 pe-1">
-                  <h4 class="text-white font-weight-bolder text-center mt-2 mb-0">Admin</h4>
+                  <h4 class="text-white font-weight-bolder text-center mt-2 mb-0">Password Reset</h4>
                   <h6 class="text-white font-weight-bolder text-center mt-2 mb-0">Pet Sync</h6>
                   <div class="row mt-3">
                     <div class="col-2 text-center ms-auto">
@@ -68,18 +68,14 @@
                 </div>
               </div>
               <div class="card-body">
-                <form id="sign"  role="form" class="text-start">
+                <form id="forget_code"  role="form" class="text-start">
                   <div class="input-group input-group-outline my-3">
                     <label class="form-label">Email</label>
                     <input type="email" name="email" id="email"  class="form-control" required>
                   </div>
-                  <div class="input-group input-group-outline mb-3">
-                    <label class="form-label">Password</label>
-                    <input type="password" name="password" id="password" class="form-control" required>
-                  </div>
-                  
                   <div class="text-center">
-                    <button  type="submit"  onclick=""  class="btn bg-gradient-primary w-100 my-4 mb-2">Sign in</button>
+                    <button type="submit" class="btn bg-gradient-primary w-100 my-4 mb-2">Get Code</button>
+
                   </div>
                 </form>
               </div>
@@ -96,7 +92,7 @@
                   document.write(new Date().getFullYear())
                 </script>,
                 Offical <i class="fa fa-heart" aria-hidden="true"></i> PETSYNC
-                <a href="" class="font-weight-bold text-white" target="_blank">ADMIN</a>
+                <a href="" class="font-weight-bold text-white" target="_blank">Password Reset</a>
                 
               </div>
             </div>
@@ -121,6 +117,12 @@
   <script src="../assets/js/core/bootstrap.min.js"></script>
   <script src="../assets/js/plugins/perfect-scrollbar.min.js"></script>
   <script src="../assets/js/plugins/smooth-scrollbar.min.js"></script>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.0/js/bootstrap.bundle.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
   <script>
     var win = navigator.platform.indexOf('Win') > -1;
     if (win && document.querySelector('#sidenav-scrollbar')) {
@@ -138,86 +140,23 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
   
 <script>
-
-$(document).ready(function() {
+  $(document).ready(function() {
       $('#forget_code').submit(function(e) {
     e.preventDefault(); // Prevent form submission
    // function uploaddata()
    // here put your ajax queries do not use previous approch otherwise using form is useless then 
 
-   // here ajax ka success call ma next page ma enter karna ka (where user code enter kara ga)  
-   /// here get the user back to sign in page
+   // its open the new page
+   //var newPageUrl = '../PETSYNC/code_reset_page.html'; // 
+   //   window.open(newPageUrl, '_blank');
+
+// its just make this page that page
+      var newPageUrl = '../PETSYNC/code_reset_page.html'; // Replace this with the actual filename
+      window.location.href = newPageUrl;
+   // here ajax ka success call ma next page ma enter karna ka (where user code enter kara ga)
 });
 
     });
-
-    // under discussion
-  function getdata() {
-   
-            var password = $("#password").val();
-            var email = $("#email").val().trim();
-            if (email == '' || password == '')
-            {
-              alert("Please Fill the Required Fields");
-              return;
-            }
-            var data = {email: email, password:password};
-            let post = JSON.stringify(data);
-            $.ajax({
-                url: 'http://localhost:4000/getdata',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                type: 'POST',
-                contentType: 'application/json',
-                data:post,
-                success: function (data) {
-                    if (data == 1)
-                    {
-                      window.open("dashboard.html");
-                      $('#sign')[0].reset(); // Clear form fields
-                    }
-                    else if (data == -1)
-                    {
-                      checkAdmin();
-                    }else {
-                      alert("Login Failed");
-                    }
-                 
-                },
-                error: function () {
-                    alert('error');
-                }
-            });
-        }
-function checkAdmin(){
-           var password = $("#password").val();
-            var email = $("#email").val().trim();
-  var data = {email: email, password:password};
-            let post = JSON.stringify(data);
-            $.ajax({
-                url: 'http://localhost:4000/getdataAdmin',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                type: 'POST',
-                contentType: 'application/json',
-                data:post,
-                success: function (data) {
-                    if (data == 1)
-                    {
-                      window.open("admin.html");
-                    }
-                    else {
-                      alert("Login Failed");
-                    }
-                 
-                },
-                error: function () {
-                    alert('error');
-                }
-            });
-}
 
 
 </script>
