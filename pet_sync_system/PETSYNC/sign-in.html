@@ -175,9 +175,9 @@
   <script>
 
 
-    $("#email").on("input", function () {
-      validateEmail();
-    });
+    // $("#email").on("input", function () {
+
+    // });
 
     function validateEmail() {
       var emailInput = $("#email");
@@ -187,9 +187,11 @@
       if (!email.match(emailRegex)) {
         emailInput.removeClass("is-valid").addClass("is-invalid");
         emailError.text('Email is not valid');
+        return true;
       } else {
         emailInput.removeClass("is-invalid").addClass("is-valid");
         emailError.text('');
+        return false;
       }
     }
 
@@ -197,7 +199,12 @@
     $(document).ready(function () {
       $('#sign').submit(function (e) {
         e.preventDefault();
-        login();
+        if (validateEmail() == true) {
+          return;
+        }
+        else {
+          login();
+        }
 
       });
 
@@ -208,12 +215,12 @@
 
     function login() {
 
-        var password = $("#password").val();
-       var email = $("#email").val();
-        if (email == '' || password == '') {
-          alert("Please Fill the Required Fields");
-          return;
-        }
+      var password = $("#password").val();
+      var email = $("#email").val();
+      // if (email == '' || password == '') {
+      //   alert("Please Fill the Required Fields");
+      //   return;
+      // }
       var data = { email: email, password: password };
       let post = JSON.stringify(data);
       $.ajax({

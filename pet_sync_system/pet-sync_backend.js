@@ -32,7 +32,6 @@ conn.connect(function (err) {
 });
 
 
-//const salt = bcrypt.genSaltSync(10);
 
 app.get("/", function (req, res) {
   res.render("insert");
@@ -42,7 +41,6 @@ app.post("/insert_sign_up", function (req, res) {
   var username = req.body.username;
   var email = req.body.email;
   var password = req.body.password;
-  //var confirm_password = req.body.confirm_password;
   const salt = bcrypt.genSaltSync(10);
   const hash = bcrypt.hashSync(password, salt);
   var sql = `insert into sign_up(username,email,password,confirm_password) values('${username}', '${email}', '${hash.toString()}', '${hash.toString()}')`;
@@ -118,14 +116,15 @@ app.post("/login_Admin", function (req, res) {
 
   var password = req.body.password;
   var email = req.body.email;
-  var sql = `SELECT password FROM sign_up WHERE email= '${email}'`;
+  var sql = `SELECT password FROM admin_login WHERE email= '${email}'`;
   conn.query(sql, function (err2, results) {
     if (err2) {
       console.error(err2);
-    } else {
+    } 
+    else {
       var found = false;
       results.forEach(element => {
-        if (bcrypt.compareSync(password.toString(), element.password) && found == false) {
+        if ((password == element.password) && found == false) {
           found = true;
         }
       });
