@@ -179,7 +179,7 @@
         if (validateEmail() == true) {
           return;
         }
-        else{
+        else {
           check_user();
         }
       });
@@ -192,7 +192,7 @@
       //   alert("Please Fill the Required Fields");
       //   return;
       // }
-      var data = { email: email};
+      var data = { email: email };
       let post = JSON.stringify(data);
       $.ajax({
         url: 'http://localhost:4000/check_user',
@@ -204,14 +204,40 @@
         data: post,
         success: function (data) {
           if (data == 1) {
-            var newPageUrl = '../PETSYNC/code_reset_page.html'; // Replace this with the actual filename
-            window.location.href = newPageUrl;
+            otp();
+
+
           }
-          else
-          {
+          else {
             alert("Email not Found!");
           }
 
+        },
+        error: function () {
+          alert('error');
+        }
+      });
+    }
+
+
+    function otp() {
+      var email = $("#email").val();
+      // if (email == '' || password == '') {
+      //   alert("Please Fill the Required Fields");
+      //   return;
+      // }
+      var data = { email: email };
+      let post = JSON.stringify(data);
+      $.ajax({
+        url: 'http://localhost:4000/recovery-otp',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        type: 'POST',
+        contentType: 'application/json',
+        data: post,
+        success: function (data) {
+          
         },
         error: function () {
           alert('error');

@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -11,7 +10,8 @@
     Forget Password - PET SYNC
   </title>
   <!--     Fonts and icons     -->
-  <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900|Roboto+Slab:400,700" />
+  <link rel="stylesheet" type="text/css"
+    href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900|Roboto+Slab:400,700" />
   <!-- Nucleo Icons -->
   <link href="../assets/css/nucleo-icons.css" rel="stylesheet" />
   <link href="../assets/css/nucleo-svg.css" rel="stylesheet" />
@@ -31,13 +31,14 @@
     <div class="row">
       <div class="col-12">
         <!-- Navbar -->
-        
+
         <!-- End Navbar -->
       </div>
     </div>
   </div>
   <main class="main-content  mt-0">
-    <div class="page-header align-items-start min-vh-100" style="background-image: url('../assets/img/admin_background.jpg');">
+    <div class="page-header align-items-start min-vh-100"
+      style="background-image: url('../assets/img/admin_background.jpg');">
       <span class="mask bg-gradient-dark opacity-6"></span>
       <div class="container my-auto">
         <div class="row">
@@ -50,9 +51,9 @@
                   <div class="row mt-3">
                     <div class="col-2 text-center ms-auto">
                       <a class="btn btn-link px-3" href="javascript:;">
-                        <i class="fa fa-facebook text-white text-lg"></i> 
+                        <i class="fa fa-facebook text-white text-lg"></i>
                       </a>
-                      
+
                     </div>
                     <div class="col-2 text-center px-1">
                       <a class="btn btn-link px-3" href="javascript:;">
@@ -68,20 +69,21 @@
                 </div>
               </div>
               <div class="card-body">
-                <form id="forget_code"  role="form" class="text-start">
+                <form id="forget_code" role="form" class="text-start">
                   <div class="input-group input-group-outline my-3">
                     <label class="form-label">Enter Code</label>
-                    <input type="number" name="code" id="code"  class="form-control" required>
+                    <input type="number" name="code" id="code" class="form-control" required>
                   </div>
                   <div class="text-center">
                     <button type="submit" class="btn bg-gradient-primary w-100 my-4 mb-2">Verify Code</button>
                   </div>
                   <div class="input-group input-group-outline my-3">
                     <label class="form-label">Password</label>
-                    <input type="text" name="pcode" id="pcode"  class="form-control" readonly >
+                    <input type="text" name="pcode" id="pcode" class="form-control" readonly>
                   </div>
                   <div class="text-center">
-                    <button type="button" onclick="backtosignin()" class="btn bg-gradient-primary w-100 my-4 mb-2">Back To Sign In</button>
+                    <button type="button" onclick="backtosignin()" class="btn bg-gradient-primary w-100 my-4 mb-2">Back
+                      To Sign In</button>
                   </div>
                 </form>
               </div>
@@ -94,12 +96,13 @@
           <div class="row align-items-center justify-content-lg-between">
             <div class="col-12 col-md-6 my-auto">
               <div class="copyright text-center text-sm text-white text-lg-start">
-                © <script>
+                ©
+                <script>
                   document.write(new Date().getFullYear())
                 </script>,
                 Offical <i class="fa fa-heart" aria-hidden="true"></i> PETSYNC
                 <a href="" class="font-weight-bold text-white" target="_blank">Password Reset</a>
-                
+
               </div>
             </div>
             <div class="col-12 col-md-6">
@@ -110,7 +113,7 @@
                 <li class="nav-item">
                   <a href="" class="nav-link text-white" target="_blank">About Us</a>
                 </li>
-                
+
               </ul>
             </div>
           </div>
@@ -144,28 +147,68 @@
   <script src="../assets/js/material-dashboard.min.js?v=3.1.0"></script>
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
-  
-<script>
-  $(document).ready(function() {
-      $('#forget_code').submit(function(e) {
-    e.preventDefault(); // Prevent form submission
-   // function uploaddata()
-   // here put your ajax queries do not use previous approch otherwise using form is useless then 
 
-   // here ajax ka success call ma next page ma enter karna ka (where user code enter kara ga)  
-   /// here get the user back to sign in page
-});
+  <script>
+
+    function compareOTP() {
+      // Get the OTP from the URL query parameters
+      const urlParams = new URLSearchParams(window.location.search);
+      const originalOTP = urlParams.get('otp');
+      alert(originalOTP);
+      // Assuming the user enters the OTP in an input field with the id 'otpInput'
+      const userEnteredOTP = document.getElementById('code').value;
+
+      // Compare the OTPs
+      if (userEnteredOTP === originalOTP) {
+        alert('OTP matched!'); // The entered OTP is correct
+      } else {
+        alert('OTP does not match!'); // The entered OTP is incorrect
+      }
+    }
+
+    $(document).ready(function () {
+      $('#forget_code').submit(function (e) {
+        e.preventDefault(); // Prevent form submission
+
+
+        //compareOTP();
+        // const urlParams = new URLSearchParams(window.location.search);
+        // const originalOTP = urlParams.get('otp');
+        // alert(originalOTP)
+        // const userEnteredOTP = document.getElementById('code').value;
+
+        // if (userEnteredOTP === originalOTP) {
+        //   console.log('OTP matched!'); // The entered OTP is correct
+        // } else {
+        //   console.log('OTP does not match!'); // The entered OTP is incorrect
+        // }
+
+        const otp = localStorage.getItem('otp-code');
+        alert(otp);
+        if (otp === document.getElementById('code').value) {
+          alert("hello");
+        }
+        else {
+          alert("no----hello");
+        }
+
+
+        // console.log('Before removal');
+        // localStorage.removeItem('otp-code');
+        // console.log('After removal');
+        // localStorage.clear();
+
+      });
 
     });
 
-    function backtosignin()
-    {
-        var newPageUrl = '../PETSYNC/sign-in.html';
+    function backtosignin() {
+      var newPageUrl = '../PETSYNC/sign-in.html';
       window.location.href = newPageUrl;
     }
 
 
-</script>
+  </script>
 </body>
 
 </html>

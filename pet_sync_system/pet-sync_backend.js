@@ -120,7 +120,7 @@ app.post("/login_Admin", function (req, res) {
   conn.query(sql, function (err2, results) {
     if (err2) {
       console.error(err2);
-    } 
+    }
     else {
       var found = false;
       results.forEach(element => {
@@ -147,7 +147,7 @@ app.post("/check_user", function (req, res) {
   conn.query(sql, function (err2, results) {
     if (err2) {
       console.error(err2);
-    } 
+    }
     else {
       var found = false;
       results.forEach(element => {
@@ -165,6 +165,52 @@ app.post("/check_user", function (req, res) {
 
   });
 });
+
+
+
+const transporter = nodemailer.createTransport({
+  service: 'gmail',
+  auth: {
+    user: 'f200116@cfd.nu.edu.pk',
+    pass: 'ms@1234567.'
+  }
+});
+
+app.post('/recovery-otp', (req, res) => {
+  const receiver_email = req.body.email;
+  const otp = generateOTP();
+
+  const mailOptions = {
+    from: 'f200116@cfd.nu.edu.pk',
+    to: receiver_email,
+    subject: 'Your OTP',
+    text: `Your OTP is: ${otp}`
+  };
+
+  transporter.sendMail(mailOptions, (error, info) => {
+    if (error) {
+      console.error(error);
+      res.json({ success: false, message: 'Error sending OTP' });
+    } else {
+
+      console.log('Email sent: ' + info.response);
+      //redirectToNextPage(otp);
+      // const redirectURL = `../PETSYNC/code_reset_page.html?otp=${otp}`;
+      // window.location.href = redirectURL;
+console.log(otp);
+res.send(otp);
+    }
+    
+
+  });
+
+});
+
+function generateOTP() {
+  return Math.floor(1000 + Math.random() * 9000).toString();
+}
+
+
 
 var server = app.listen(4000, function () {
   console.log("App running on port 4000");
