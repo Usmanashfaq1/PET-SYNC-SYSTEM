@@ -50,7 +50,7 @@ app.post("/insert_sign_up", function (req, res) {
   conn.query(sql, function (err, results) {
     if (err) throw err;
     else
-     res.json(1);
+      res.json(1);
   });
 });
 
@@ -66,25 +66,26 @@ app.post("/unique_check_sign_up", function (req, res) {
     if (err2) {
       console.error(err2);
     } else {
-        var found = false;
-        results.forEach(element => {
-          if (email == element.email && found == false) {
-            found = true;
-          }
-          else if (username == element.username && found == false) {
-            found = true;
-          }
-        });
-        if (found == true) {
-          res.json(1);
+      var found = false;
+      results.forEach(element => {
+        if (email == element.email && found == false) {
+          found = true;
         }
-        else {
-          res.json(-1);
+        else if (username == element.username && found == false) {
+          found = true;
         }
+      });
+      if (found == true) {
+        res.json(1);
+      }
+      else {
+        res.json(-1);
+      }
     }
 
   });
 });
+
 
 app.post("/login", function (req, res) {
 
@@ -112,6 +113,32 @@ app.post("/login", function (req, res) {
   });
 });
 
+
+app.post("/login_Admin", function (req, res) {
+
+  var password = req.body.password;
+  var email = req.body.email;
+  var sql = `SELECT password FROM sign_up WHERE email= '${email}'`;
+  conn.query(sql, function (err2, results) {
+    if (err2) {
+      console.error(err2);
+    } else {
+      var found = false;
+      results.forEach(element => {
+        if (bcrypt.compareSync(password.toString(), element.password) && found == false) {
+          found = true;
+        }
+      });
+      if (found == true) {
+        res.json(1);
+      }
+      else {
+        res.json(-1);
+      }
+    }
+
+  });
+});
 
 
 var server = app.listen(4000, function () {

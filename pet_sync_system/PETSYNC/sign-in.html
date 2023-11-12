@@ -208,12 +208,12 @@
 
     function login() {
 
-      //  var password = $("#password").val();
-      /*  var email = $("#email").val();
+        var password = $("#password").val();
+       var email = $("#email").val();
         if (email == '' || password == '') {
           alert("Please Fill the Required Fields");
           return;
-        }*/
+        }
       var data = { email: email, password: password };
       let post = JSON.stringify(data);
       $.ajax({
