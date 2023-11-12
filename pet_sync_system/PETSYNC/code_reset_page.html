@@ -74,12 +74,13 @@
                     <label class="form-label">Enter Code</label>
                     <input type="number" name="code" id="code" class="form-control" required>
                   </div>
-                  <div class="text-center">
-                    <button type="submit" class="btn bg-gradient-primary w-100 my-4 mb-2">Verify Code</button>
-                  </div>
+
                   <div class="input-group input-group-outline my-3">
                     <label class="form-label">Password</label>
-                    <input type="text" name="pcode" id="pcode" class="form-control" readonly>
+                    <input type="text" name="pcode" id="pcode" class="form-control">
+                  </div>
+                  <div class="text-center">
+                    <button type="submit" class="btn bg-gradient-primary w-100 my-4 mb-2">Verify and update</button>
                   </div>
                   <div class="text-center">
                     <button type="button" onclick="backtosignin()" class="btn bg-gradient-primary w-100 my-4 mb-2">Back
@@ -152,10 +153,11 @@
 
     $(document).ready(function () {
       $('#forget_code').submit(function (e) {
-        e.preventDefault(); 
+        e.preventDefault();
         const otp = localStorage.getItem('otp-code');
         if (otp === document.getElementById('code').value) {
           alert("code matched");
+          updatePassword();
         }
         else {
           alert("incorrect code");
@@ -170,6 +172,38 @@
       window.location.href = newPageUrl;
     }
 
+    function updatePassword() {
+      var password = $("#pcode").val();
+      var email = localStorage.getItem('email');
+      // if (email == '' || password == '') {
+      //   alert("Please Fill the Required Fields");
+      //   return;
+      // }
+      var data = { email: email, password: password };
+      let post = JSON.stringify(data);
+      $.ajax({
+        url: 'http://localhost:4000/update_password',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        type: 'POST',
+        contentType: 'application/json',
+        data: post,
+        success: function (data) {
+          if (data == 1) {
+            alert('Updated Successfully')
+            //admin dashboard
+          }
+          else {
+            alert("Updation Failed! Email or password not correct");
+          }
+
+        },
+        error: function () {
+          alert('error');
+        }
+      });
+    }
 
   </script>
 </body>

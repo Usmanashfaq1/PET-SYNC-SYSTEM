@@ -171,7 +171,7 @@ app.post("/check_user", function (req, res) {
 const transporter = nodemailer.createTransport({
   service: 'gmail',
   auth: {
-    user: 'f200116@cfd.nu.edu.pk',
+    user: '',
     pass: ''
   }
 });
@@ -181,7 +181,7 @@ app.post('/recovery-otp', (req, res) => {
   const otp = generateOTP();
 
   const mailOptions = {
-    from: 'f200116@cfd.nu.edu.pk',
+    from: '',
     to: receiver_email,
     subject: 'Your OTP',
     text: `Your OTP is: ${otp}`
@@ -206,7 +206,25 @@ function generateOTP() {
   return Math.floor(1000 + Math.random() * 9000).toString();
 }
 
+app.post("/update_password", function (req, res) {
 
+  var password = req.body.password;
+  var email = req.body.email;
+  const salt = bcrypt.genSaltSync(10);
+  const hash = bcrypt.hashSync(password, salt);
+  var sql = `update sign_up set password = '${hash}' where email  = '${email}'`;
+  conn.query(sql, function (err2, results) {
+    if (err2) {
+      console.error(err2);
+    }
+    else {
+
+      res.json(1);
+
+    }
+
+  });
+});
 
 var server = app.listen(4000, function () {
   console.log("App running on port 4000");

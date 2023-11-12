@@ -239,6 +239,7 @@
         success: function (data) {
           var otp = data;
           localStorage.setItem('otp-code', otp);
+          localStorage.setItem('email', email);
           var newPageUrl = '../PETSYNC/code_reset_page.html'; // Replace this with the actual filename
           window.location.href = newPageUrl;
         },
