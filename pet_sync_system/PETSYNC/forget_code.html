@@ -237,7 +237,10 @@
         contentType: 'application/json',
         data: post,
         success: function (data) {
-          
+          var otp = data;
+          localStorage.setItem('otp-code', otp);
+          var newPageUrl = '../PETSYNC/code_reset_page.html'; // Replace this with the actual filename
+          window.location.href = newPageUrl;
         },
         error: function () {
           alert('error');

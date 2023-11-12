@@ -150,53 +150,16 @@
 
   <script>
 
-    function compareOTP() {
-      // Get the OTP from the URL query parameters
-      const urlParams = new URLSearchParams(window.location.search);
-      const originalOTP = urlParams.get('otp');
-      alert(originalOTP);
-      // Assuming the user enters the OTP in an input field with the id 'otpInput'
-      const userEnteredOTP = document.getElementById('code').value;
-
-      // Compare the OTPs
-      if (userEnteredOTP === originalOTP) {
-        alert('OTP matched!'); // The entered OTP is correct
-      } else {
-        alert('OTP does not match!'); // The entered OTP is incorrect
-      }
-    }
-
     $(document).ready(function () {
       $('#forget_code').submit(function (e) {
-        e.preventDefault(); // Prevent form submission
-
-
-        //compareOTP();
-        // const urlParams = new URLSearchParams(window.location.search);
-        // const originalOTP = urlParams.get('otp');
-        // alert(originalOTP)
-        // const userEnteredOTP = document.getElementById('code').value;
-
-        // if (userEnteredOTP === originalOTP) {
-        //   console.log('OTP matched!'); // The entered OTP is correct
-        // } else {
-        //   console.log('OTP does not match!'); // The entered OTP is incorrect
-        // }
-
+        e.preventDefault(); 
         const otp = localStorage.getItem('otp-code');
-        alert(otp);
         if (otp === document.getElementById('code').value) {
-          alert("hello");
+          alert("code matched");
         }
         else {
-          alert("no----hello");
+          alert("incorrect code");
         }
-
-
-        // console.log('Before removal');
-        // localStorage.removeItem('otp-code');
-        // console.log('After removal');
-        // localStorage.clear();
 
       });
 
