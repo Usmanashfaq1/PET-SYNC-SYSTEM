@@ -139,6 +139,32 @@ app.post("/login_Admin", function (req, res) {
   });
 });
 
+app.post("/check_user", function (req, res) {
+
+  var password = req.body.password;
+  var email = req.body.email;
+  var sql = `SELECT email FROM sign_up WHERE email= '${email}'`;
+  conn.query(sql, function (err2, results) {
+    if (err2) {
+      console.error(err2);
+    } 
+    else {
+      var found = false;
+      results.forEach(element => {
+        if ((email == element.email) && found == false) {
+          found = true;
+        }
+      });
+      if (found == true) {
+        res.json(1);
+      }
+      else {
+        res.json(-1);
+      }
+    }
+
+  });
+});
 
 var server = app.listen(4000, function () {
   console.log("App running on port 4000");
