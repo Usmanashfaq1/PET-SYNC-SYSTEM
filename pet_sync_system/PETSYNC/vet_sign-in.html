@@ -14,7 +14,9 @@
   <link href="../assets/img/apple-touch-icon.png" rel="apple-touch-icon">
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
   <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+    rel="stylesheet">
 
   <!-- Vendor CSS Files -->
   <link href="../assets/vendor/fontawesome-free/css/all.min.css" rel="stylesheet">
@@ -28,119 +30,157 @@
 
   <link href="../assets/css/style.css" rel="stylesheet">
 
-  
+
 </head>
 
 <body>
 
   <style>
     @media (min-width: 1025px) {
-    .vh-100 {
-      height: 100vh !important;
-      overflow-y: auto; /* Add this line to enable vertical scrollbar */
+      .vh-100 {
+        height: 100vh !important;
+        overflow-y: auto;
+        /* Add this line to enable vertical scrollbar */
+      }
     }
-  }
+
+    
+    .is-invalid {
+      border-color: #dc3545;
+      background-color: #f8d7da;
+    }
+
+    /* You can add more styles for the error message if needed */
+    .error-message {
+      color: #ffffff;
+      margin-top: 2px;
+    }
+
   </style>
 
-    <section class="vh-100" style="background-color: lightblue;">
-        <div class="container py-5 h-100">
-          <div class="row d-flex justify-content-center align-items-center h-100">
-            <div class="col col-xl-10">
-              <div class="card" style="border-radius: 1rem;">
-                <div class="row g-0">
-                  <div class="col-md-6 col-lg-5 d-none d-md-block">
-                    <img src="../assets/img/vet.jpg"
-                      alt="login form" class="img-fluid" style="border-radius: 1rem 0 0 1rem;" />
-                  </div>
-                  <div class="col-md-6 col-lg-7 d-flex align-items-center">
-                    <div class="card-body p-4 p-lg-5 text-black">
-      
-                      <form id="vet">
-      
-                        <div class="d-flex align-items-center mb-3 pb-1">
-                          
-                          <span class="h1 fw-bold mb-0">PETSYNC VET-SIGN-IN</span>
-                        </div>
-      
-                        <h5 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Sign into your account</h5>
-      
-                        <div class="form-outline mb-4">
-                          <input type="email" id="email" name="email" class="form-control form-control-lg"  required/>
-                          <label class="form-label" for="form2Example17">Email address</label>
-                        </div>
-      
-                        <div class="form-outline mb-4">
-                          <input type="password" id="password" name="password" class="form-control form-control-lg" required/>
-                          <label class="form-label" for="form2Example27">Password</label>
-                        </div>
-      
-                        <div class="pt-1 mb-4">
-                          <button type="submit" class="btn btn-dark btn-lg btn-block">Login</button>
-                        </div>
-      
-                        <a class="small text-muted" href="#!">Forgot password?</a>
-                        <p class="mb-5 pb-lg-2" style="color: #393f81;">Don't have an account? <a href="../PETSYNC/VET_REGISTER.html"
-                            style="color: #393f81;">Register here</a></p>
-                        <a href="#!" class="small text-muted">PETSYNC.</a>
-                        <a href="#!" class="small text-muted">Veterinarian SIGN IN</a>
-                      </form>
-      
+  <section class="vh-100" style="background-color: lightblue;">
+    <div class="container py-5 h-100">
+      <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col col-xl-10">
+          <div class="card" style="border-radius: 1rem;">
+            <div class="row g-0">
+              <div class="col-md-6 col-lg-5 d-none d-md-block">
+                <img src="../assets/img/vet.jpg" alt="login form" class="img-fluid"
+                  style="border-radius: 1rem 0 0 1rem;" />
+              </div>
+              <div class="col-md-6 col-lg-7 d-flex align-items-center">
+                <div class="card-body p-4 p-lg-5 text-black">
+
+                  <form id="vet">
+
+                    <div class="d-flex align-items-center mb-3 pb-1">
+
+                      <span class="h1 fw-bold mb-0">PETSYNC VET-SIGN-IN</span>
                     </div>
-                  </div>
+
+                    <h5 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Sign into your account</h5>
+
+                    <div class="form-outline mb-4">
+                      <input type="email" id="email" name="email" class="form-control form-control-lg" required />
+                      <label class="form-label" for="form2Example17">Email address</label>
+                    </div>
+                    <div class="form-outline mb-4">
+                      <input type="password" id="password" name="password" class="form-control form-control-lg"
+                        required />
+                      <label class="form-label" for="form2Example27">Password</label>
+                    </div>
+
+                    <div class="pt-1 mb-4">
+                      <button type="submit" class="btn btn-dark btn-lg btn-block">Login</button>
+                    </div>
+
+                    <a class="small text-muted" href="#!">Forgot password?</a>
+                    <p class="mb-5 pb-lg-2" style="color: #393f81;">Don't have an account? <a
+                        href="../PETSYNC/VET_REGISTER.html" style="color: #393f81;">Register here</a></p>
+                    <a href="#!" class="small text-muted">PETSYNC.</a>
+                    <a href="#!" class="small text-muted">Veterinarian SIGN IN</a>
+                  </form>
+
                 </div>
               </div>
             </div>
           </div>
         </div>
-      </section>
+      </div>
+    </div>
+  </section>
 
-      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.0/js/bootstrap.bundle.min.js"></script>
-      <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.0/js/bootstrap.bundle.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
-      <script>
-        function vet_login() {
-          var password = $("#password").val();
-          var email = $("#email").val();
-    
-          // Check if email and password are provided
-          if (!email || !password) {
-            alert("Please Fill the Required Fields");
-            return;
+  <script>
+    function vet_login() {
+      var password = $("#password").val();
+      var email = $("#email").val();
+
+      // Check if email and password are provided
+      if (!email || !password) {
+        alert("Please Fill the Required Fields");
+        return;
+      }
+
+      var data = { email: email, password: password };
+      var post = JSON.stringify(data);
+
+      $.ajax({
+        url: 'http://localhost:4000/login_vet',
+        type: 'POST',
+        contentType: 'application/json',
+        data: post,
+        success: function (data) {
+          if (data == 1) {
+            alert("Login Success")
+            // Redirect to vet dashboard
+            //window.location.href = '../PETSYNC/admin_dashboard.html';
+          } else {
+            alert("Login Failed! " + data.error);
           }
-    
-          var data = { email: email, password: password };
-          var post = JSON.stringify(data);
-    
-          $.ajax({
-            url: 'http://localhost:4000/login_vet',
-            type: 'POST',
-            contentType: 'application/json',
-            data: post,
-            success: function (data) {
-              if (data.success) {
-                // Redirect to vet dashboard
-                window.location.href = '../PETSYNC/admin_dashboard.html';
-              } else {
-                alert("Login Failed! " + data.error);
-              }
-            },
-            error: function () {
-              alert('Error during login');
-            }
-          });
+        },
+        error: function () {
+          alert('Error during login');
         }
-    
-        $(document).ready(function () {
+      });
+    }
+
+    function validateEmail() {
+    var emailInput = $("#email");
+    var emailError = $("#email-error");
+    var email = emailInput.val();
+    var emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    if (!email.match(emailRegex)) {
+      emailInput.removeClass("is-valid").addClass("is-invalid");
+      emailError.text('Email is not valid');
+      return true;
+    } else {
+      emailInput.removeClass("is-invalid").addClass("is-valid");
+      emailError.text('');
+      return false;
+    }
+  }
+
+    $(document).ready(function () {
       $('#vet').submit(function (e) {
         e.preventDefault();
+        if (validateEmail() == true) {
+        return;
+      }
+      else {
         vet_login();
+      }
         
+
       });
     });
-      </script>
-        
-      
+  </script>
+
+
 </body>
-      </html>
+
+</html>

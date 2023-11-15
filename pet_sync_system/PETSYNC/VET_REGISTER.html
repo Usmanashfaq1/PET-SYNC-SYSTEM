@@ -370,34 +370,34 @@
 
 
   function validateEmail() {
-      var emailInput = $("#email");
-      var emailError = $("#email-error");
-      var email = emailInput.val();
-      var emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-      if (!email.match(emailRegex)) {
-        emailInput.removeClass("is-valid").addClass("is-invalid");
-        emailError.text('Email is not valid');
-        return true;
-      } else {
-        emailInput.removeClass("is-invalid").addClass("is-valid");
-        emailError.text('');
-        return false;
-      }
+    var emailInput = $("#email");
+    var emailError = $("#email-error");
+    var email = emailInput.val();
+    var emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    if (!email.match(emailRegex)) {
+      emailInput.removeClass("is-valid").addClass("is-invalid");
+      emailError.text('Email is not valid');
+      return true;
+    } else {
+      emailInput.removeClass("is-invalid").addClass("is-valid");
+      emailError.text('');
+      return false;
     }
+  }
 
 
 
 
-    $(document).ready(function () {
+  $(document).ready(function () {
     $('#vetr').submit(function (e) {
       e.preventDefault();
       if (validateEmail() == true) {
-          return;
-        }
-        else {
-          insert_vet();
-        }
-      
+        return;
+      }
+      else {
+        insert_vet();
+      }
+
 
     });
 

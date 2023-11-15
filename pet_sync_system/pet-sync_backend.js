@@ -110,54 +110,61 @@ app.post("/login", function (req, res) {
 
   });
 });
+
+
+
+
+
+
 //vet sign in
+
+
+
+
+
 app.post("/login_vet", function (req, res) {
+
   var password = req.body.password;
   var email = req.body.email;
-
-  // Check if email and password are provided
-  if (!email || !password) {
-    return res.status(400).json({ error: 'Email and password are required.' });
-  }
-
-  var sql = `SELECT id, password FROM vet WHERE email = ?`;
-  conn.query(sql, [email], function (err, results) {
-    if (err) {
-      console.error(err);
-      return res.status(500).json({ error: 'Internal Server Error' });
+  var sql = `SELECT password FROM vet WHERE email= '${email}'`;
+  conn.query(sql, function (err2, results) {
+    if (err2) {
+      console.error(err2);
+    } else {
+      var found = false;
+      results.forEach(element => {
+        if (bcrypt.compareSync(password.toString(), element.password) && found == false) {
+          found = true;
+        }
+      });
+      if (found == true) {
+        res.json(1);
+      }
+      else {
+        res.json(-1);
+      }
     }
 
-    // Check if the email exists in the database
-    if (results.length === 0) {
-      return res.status(401).json({ error: 'Invalid email or password.' });
-    }
-
-    // Compare the provided password with the one from the database
-    if (password !== results[0].password) {
-      return res.status(401).json({ error: 'Invalid email or password.' });
-    }
-
-    // Passwords match, redirect to the vet dashboard
-    return res.status(200).json({ success: true, userId: results[0].id });
   });
 });
+
 
 //vet register
 app.post("/register_vet", function (req, res) {
   var fname = req.body.fname;
   var email = req.body.email;
-  
+
   var location = req.body.location;
   var lname = req.body.lname;
   var password = req.body.password;
-  
+
   const salt = bcrypt.genSaltSync(10);
   const hash = bcrypt.hashSync(password, salt);
-  
+
   var specialization = req.body.specialization;
   var qualification = req.body.qualification;
-  var license_number=req.body.license_number;
- 
+  var license_number = req.body.license_number;
+
   var sql = `insert into vet(fname,lname,specialization,qualification,license_number,email,password,location) values('${fname}', '${lname}', '${specialization}', '${qualification}', '${license_number}', '${email}', '${hash}','${location}')`;
 
   conn.query(sql, function (err, results) {
@@ -201,7 +208,7 @@ app.post("/login_Admin", function (req, res) {
 
 app.post("/check_user", function (req, res) {
 
-  var password = req.body.password;
+  // var password = req.body.password;
   var email = req.body.email;
   var sql = `SELECT email FROM sign_up WHERE email= '${email}'`;
   conn.query(sql, function (err2, results) {
