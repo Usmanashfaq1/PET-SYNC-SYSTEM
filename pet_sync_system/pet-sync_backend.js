@@ -110,6 +110,42 @@ app.post("/login", function (req, res) {
 
   });
 });
+//vet sign in
+app.post("/login_vet", function (req, res) {
+  var password = req.body.password;
+  var email = req.body.email;
+
+  // Check if email and password are provided
+  if (!email || !password) {
+    return res.status(400).json({ error: 'Email and password are required.' });
+  }
+
+  var sql = `SELECT id, password FROM vet WHERE email = ?`;
+  conn.query(sql, [email], function (err, results) {
+    if (err) {
+      console.error(err);
+      return res.status(500).json({ error: 'Internal Server Error' });
+    }
+
+    // Check if the email exists in the database
+    if (results.length === 0) {
+      return res.status(401).json({ error: 'Invalid email or password.' });
+    }
+
+    // Compare the provided password with the one from the database
+    if (password !== results[0].password) {
+      return res.status(401).json({ error: 'Invalid email or password.' });
+    }
+
+    // Passwords match, redirect to the vet dashboard
+    return res.status(200).json({ success: true, userId: results[0].id });
+  });
+});
+
+
+
+
+//
 
 
 app.post("/login_Admin", function (req, res) {
