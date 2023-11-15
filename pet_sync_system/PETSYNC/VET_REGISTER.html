@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>PETSYNC VET REGISTERATION</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+  <!-- Favicons -->
+  <link href="../assets/img/favicon.png" rel="icon">
+  <link href="../assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="../assets/vendor/fontawesome-free/css/all.min.css" rel="stylesheet">
+  <link href="../assets/vendor/animate.css/animate.min.css" rel="stylesheet">
+  <link href="../assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="../assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="../assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+  <link href="../assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+  <link href="../assets/vendor/remixicon/remixicon.css" rel="stylesheet">
+  <link href="../assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+
+  <link href="../assets/css/style.css" rel="stylesheet">
+
+  
+</head>
+
+<body>
+  <style>
+    @media (min-width: 1025px) {
+    .h-custom {
+      height: 100vh !important;
+      overflow-y: auto; /* Add this line to enable vertical scrollbar */
+    }
+  }
+
+  #map { 
+            height: 300px;    
+            width: 600px;            
+          } 
+		  
+input[type=radio] {
+    width: 15px;
+    height: 15px;
+
+}	
+  
+    .card-registration .select-input.form-control[readonly]:not([disabled]) {
+      font-size: 1rem;
+      line-height: 2.15;
+      padding-left: .75em;
+      padding-right: .75em;
+    }
+  
+    .card-registration .select-arrow {
+      top: 13px;
+    }
+  
+    .gradient-custom-2 {
+      background: #a1c4fd;
+      background: -webkit-linear-gradient(to right, rgba(161, 196, 253, 1), rgba(194, 233, 251, 1));
+      background: linear-gradient(to right, rgba(161, 196, 253, 1), rgba(194, 233, 251, 1));
+    }
+  
+    .bg-indigo {
+      background-color: #4835d4;
+    }
+  
+    @media (min-width: 992px) {
+      .card-registration-2 .bg-indigo {
+        border-top-right-radius: 15px;
+        border-bottom-right-radius: 15px;
+      }
+    }
+  
+    @media (max-width: 991px) {
+      .card-registration-2 .bg-indigo {
+        border-bottom-left-radius: 15px;
+        border-bottom-right-radius: 15px;
+      }
+
+     
+  
+    }
+  </style>
+  
+    
+
+
+<section class="h-100 h-custom gradient-custom-2">
+  <div class="container py-5 h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col-12">
+        <div class="card card-registration card-registration-2" style="border-radius: 15px;">
+          <form id="vetr">
+          <div class="card-body p-0">
+            <div class="row g-0">
+              
+              <div class="col-lg-6">
+                <div class="p-5">
+                  <h3 class="fw-normal mb-5" style="color: #4835d4;">General Infomation Veterinarian</h3>
+                  <h3 class="fw-normal mb-5" style="color: #4835d4;">PETSYNC</h3>
+                  
+
+                  <div class="row">
+                    <div class="col-md-6 mb-4 pb-2">
+
+                      <div class="form-outline">
+                        <input type="text" id="fname" name="fname" class="form-control form-control-lg" required/>
+                        <label class="form-label" for="form3Examplev2">First name</label>
+                      </div>
+
+                    </div>
+                    <div class="col-md-6 mb-4 pb-2">
+
+                      <div class="form-outline">
+                        <input type="text" id="lname" name="lname" class="form-control form-control-lg" required/>
+                        <label class="form-label" for="form3Examplev3">Last name</label>
+                      </div>
+
+                    </div>
+                  </div>
+
+                  <div class="mb-4 pb-2">
+                    <label class="form-label" for="form3Examplev4">Specialization:</label>
+                    <select id="specialization" name="specialization" class="select" required>
+                      <option value="1">Behavioral Medicine</option>
+                      <option value="2">One Health Approach</option>
+                      <option value="3">Emergency and Critical Care</option>
+                      <option value="4">Preventive Care</option>
+                      <option value="4">Veterinary Medicine</option>
+                    </select>
+                  </div>
+
+                  <div class="mb-4 pb-2">
+                    
+                    <label for="qualification">Qualification:</label>
+<select id="qualification" name="qualification" required>
+  <option value="bvm">Doctor of Veterinary Medicine (DVM)</option>
+  <option value="bvm">Bachelor of Veterinary Medicine (BVM)</option>
+  <option value="bsc">Bachelor of Science (B.Sc.) in Animal Science</option>
+  <!-- Add other relevant options -->
+</select>
+                  </div>
+
+                 
+
+
+<div class="col-md-6 mb-4 pb-2">
+
+  <div class="form-outline">
+    
+<input type="text" id="license_number" name="license_number" class="form-control form-control-lg" required >
+<label for="licenseNumber">License Number</label>
+  </div>
+
+</div>
+
+                  
+
+                </div>
+              </div>
+              <div class="col-lg-6 bg-indigo text-white">
+                <div class="p-5">
+                  <h3 class="fw-normal mb-5">Contact Details Veterinarian</h3>
+                  <div class="mb-4">
+                    <div class="form-outline form-white">
+                      <input type="email" id="email" name="email" class="form-control form-control-lg" required/>
+                      <label class="form-label" for="form3Examplea9">Your Email</label>
+                    </div>
+                  </div>
+                 
+
+                  
+
+                  <div class="row">
+                    <div class="col-md-7 mb-4 pb-2">
+
+                      <div class="form-outline form-white">
+                        
+                        <input id="location" class="form-control form-control-lg"  name="location" class="form-control"
+                            placeholder="Location" required>
+
+                        <label class="form-label" for="form3Examplea5">Place</label>
+                      </div>
+
+                    </div>
+                  </div>
+                  
+
+                  
+
+                  
+
+                  <div class="d-flex flex-row align-items-center mb-4">
+                    <i class="fas fa-lock fa-lg me-3 fa-fw"></i>
+                    <div class="form-outline flex-fill mb-0">
+                      <input type="password" id="password" name="password" class="form-control" required />
+                      <label class="form-label" for="form3Example4c">Password</label>
+                    </div>
+                  </div>
+
+                  <div class="d-flex flex-row align-items-center mb-4">
+                    <i class="fas fa-key fa-lg me-3 fa-fw"></i>
+                    <div class="form-outline flex-fill mb-0">
+                      <input type="password" id="cpassword" name="cpassword" class="form-control" required/>
+                      <label class="form-label" for="form3Example4cd">Repeat your password</label>
+                    </div>
+                  </div>
+
+                 
+
+                  <div class="form-check d-flex justify-content-start mb-4 pb-3">
+                    <input class="form-check-input me-3" type="checkbox" value="" id="confirm" name="confirm" required/>
+                    <label class="form-check-label text-white" for="form2Example3">
+                      I do accept the <a href="#!" class="text-white"><u>Terms and Conditions</u></a> of your
+                      site.
+                    </label>
+                  </div>
+
+                  <button type="submit" class="btn btn-light btn-lg"
+                    data-mdb-ripple-color="dark">Register</button>
+
+                </div>
+              </div>
+            
+            </div>
+          </div>
+        </form>
+        </div>
+      </div>
+    </div>
+  </div>
+ 
+</section>
+
+<div class="register-box" style="display: none;" >
+
+
+
+
+  <div class="card " id="mdiv">
+      <div class="card-body">
+
+
+
+
+
+
+
+
+          <br />
+
+
+          <input type="hidden" id="lattitude" />
+          <input type="hidden" id="longitude" />
+
+
+
+
+
+
+
+
+          <label>Select Location on Map</label>
+
+          <button type="button" onclick="muSubFun();">Submit</button>
+
+          <!-- <input id="roll-input" style="margin-bottom: 5px" class="form-control" placeholder="Enter Your Roll No"> -->
+
+
+
+          <label style="color:red;font-size:12px; display: none;" id="pacinputwarning">This is
+              a Required
+              Field.</label>
+
+
+
+
+
+
+          <div class="row">
+
+
+
+              <div id="map" style="margin-bottom: 10px"></div>
+
+
+          </div>
+
+
+
+          <div class="row">
+              <input type="hidden" id="lattitude" />
+              <input type="hidden" id="longitude" />
+          </div>
+
+          <br />
+
+
+
+
+
+
+
+
+
+
+
+
+
+      </div>
+
+
+
+
+
+
+
+
+      <br>
+      <!-- END CAPTCHA -->
+
+
+
+      <br />
+
+
+
+
+
+
+
+
+
+      
+  </div>
+  <!-- /.form-box -->
+</div><!-- /.card -->
+</body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.0/js/bootstrap.bundle.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+  //
+
+
+
+
+
+
+  //
+  function insert_vet() {
+            var fname = $("#fname").val();
+            var lname = $("#lname").val();
+            
+           
+            var location = $("#location").val();
+            var email = $("#email").val();
+            var qualification = $("#qualification").val();
+            var license_number = $("#license_number").val();
+            
+            var specialization = $("#specialization").val();
+            var password = $("#password").val();
+            
+
+            var data = { fname: fname, lname: lname, specialization: specialization, qualification: qualification,license_number: license_number, email: email, password: password, location: location };
+
+            let post = JSON.stringify(data);
+
+            console.log(post);
+
+            $.ajax({
+                url: 'http://localhost:4000/register_vet',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                type: 'POST',
+                contentType: 'application/json',
+                data: post,
+                success: function () {
+                    alert("Data Inserted");
+
+                },
+                error: function () {
+                    alert('error occured');
+                }
+            });
+
+
+
+
+        }
+
+
+  //
+  var map;
+
+function initAutocomplete() {
+
+    var map = new google.maps.Map(document.getElementById('map'), {
+        center: {
+            lat: 30.3753,
+            lng: 69.3451
+        },
+        zoom: 5
+    });
+
+
+    var options = {
+        componentRestrictions: { country: "pk" }
+    };
+
+    var input = (document.getElementById('location'));
+    var autocomplete = new google.maps.places.Autocomplete(input, options);
+
+    autocomplete.bindTo('bounds', map);
+
+    var infowindow = new google.maps.InfoWindow();
+
+    var marker = new google.maps.Marker({
+        draggable: true,
+        map: map
+
+    });
+
+
+    autocomplete.addListener('place_changed', function () {
+
+        var place = autocomplete.getPlace();
+        var lattitude = place.geometry.location.lat();
+        var longitude = place.geometry.location.lng();
+
+        google.maps.event.addListener(marker, 'dragend', function (event) {
+            document.getElementById("lattitude").value = this.getPosition().lat();
+            document.getElementById("longitude").value = this.getPosition().lng();
+
+            //Marker Location Changed
+
+            document.getElementById("lattitude").value = this.getPosition().lat();
+
+
+            document.getElementById("longitude").value = this.getPosition().lng();
+
+
+        });
+
+        //alert(lattitude + ' ' + longitude);
+        document.getElementById("lattitude").value = lattitude;
+        document.getElementById("longitude").value = longitude;
+
+
+        //Selected Place Changed
+
+        //alert("Hello");
+
+        infowindow.close();
+        marker.setVisible(false);
+        var place = autocomplete.getPlace();
+        if (!place.geometry) {
+            window.alert("Autocomplete's returned place contains no geometry");
+            return;
+        }
+
+        // If the place has a geometry, then present it on a map.
+        if (place.geometry.viewport) {
+            map.fitBounds(place.geometry.viewport);
+        } else {
+            map.setCenter(place.geometry.location);
+            map.setZoom(17);
+            // Why 17? Because it looks good.
+        }
+
+        marker.setPosition(place.geometry.location);
+        marker.setVisible(true);
+
+        var address = '';
+        if (place.address_components) {
+            address = [(place.address_components[0] && place.address_components[0].short_name || ''), (place.address_components[1] && place.address_components[1].short_name || ''), (place.address_components[2] && place.address_components[2].short_name || '')].join(' ');
+        }
+
+        infowindow.setContent('<div><strong>' + place.name + '</strong><br>' + address);
+        infowindow.open(map, marker);
+
+
+
+        // iterate through address_component array
+
+
+
+    });
+
+
+
+}
+
+
+
+function muSubFun() {
+    var latitude = document.getElementById("lattitude").value;
+    var longitude = document.getElementById("longitude").value;
+    var input = document.getElementById("location").value;
+    //  var roll = document.getElementById("roll-input").value;
+
+
+    alert(latitude);
+
+    /*	
+        $.post("controller.phospital", {
+            
+            
+            lat : 1,
+            lon : 2,
+            inp : 'kjsdkf afkjdkdajf jkdfakdfkad hkdafhk',
+            rol : 3,			
+            
+            action : 'adddata'
+            
+        }, function(result) {
+        
+            
+            alert("Datab Added");
+            
+        });		
+        
+        */
+
+
+}
+
+
+
+</script>
+
+
+</script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB9irjntPHdEJf024h7H_XKpS11OeW1Nh8&libraries=places&callback=initAutocomplete"
+        async defer></script>
+
+        <script>
+          $(document).ready(function () {
+        $('#vetr').submit(function (e) {
+          e.preventDefault();
+         insert_vet();
+  
+        });
+  
+  
+      });
+        </script>
+
+</html>

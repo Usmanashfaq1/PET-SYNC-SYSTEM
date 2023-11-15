@@ -142,6 +142,27 @@ app.post("/login_vet", function (req, res) {
   });
 });
 
+//vet register
+app.post("/register_vet", function (req, res) {
+  var fname = req.body.fname;
+  var email = req.body.email;
+  
+  var location = req.body.location;
+  var lname = req.body.lname;
+  var password = req.body.password;
+  
+  var specialization = req.body.specialization;
+  var qualification = req.body.qualification;
+  var license_number=req.body.license_number;
+ 
+  var sql = `insert into vet(fname,lname,specialization,qualification,license_number,email,password,location) values('${fname}', '${lname}', '${specialization}', '${qualification}', '${license_number}', '${email}', '${password}','${location}')`;
+
+  conn.query(sql, function (err, results) {
+    if (err) throw err;
+
+    res.send("<h1>Data Inserted.</h1>");
+  });
+});
 
 
 
