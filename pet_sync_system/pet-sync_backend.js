@@ -151,11 +151,14 @@ app.post("/register_vet", function (req, res) {
   var lname = req.body.lname;
   var password = req.body.password;
   
+  const salt = bcrypt.genSaltSync(10);
+  const hash = bcrypt.hashSync(password, salt);
+  
   var specialization = req.body.specialization;
   var qualification = req.body.qualification;
   var license_number=req.body.license_number;
  
-  var sql = `insert into vet(fname,lname,specialization,qualification,license_number,email,password,location) values('${fname}', '${lname}', '${specialization}', '${qualification}', '${license_number}', '${email}', '${password}','${location}')`;
+  var sql = `insert into vet(fname,lname,specialization,qualification,license_number,email,password,location) values('${fname}', '${lname}', '${specialization}', '${qualification}', '${license_number}', '${email}', '${hash}','${location}')`;
 
   conn.query(sql, function (err, results) {
     if (err) throw err;
