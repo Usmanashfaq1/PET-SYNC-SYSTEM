@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <script src="https://apis.google.com/js/platform.js" async defer></script>
+  <link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png">
+  <link rel="icon" type="image/png" href="../assets/img/pet_logo.jpg">
+  <title>
+    REGISTER - PET SYNC
+  </title>
+  <!--     Fonts and icons     -->
+  <link rel="stylesheet" type="text/css"
+    href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900|Roboto+Slab:400,700" />
+  <!-- Nucleo Icons -->
+  <link href="../assets/css/nucleo-icons.css" rel="stylesheet" />
+  <link href="../assets/css/nucleo-svg.css" rel="stylesheet" />
+  <!-- Font Awesome Icons -->
+  <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
+  <!-- Material Icons -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
+  <!-- CSS Files -->
+  <link id="pagestyle" href="../assets/css/material-dashboard.css?v=3.1.0" rel="stylesheet" />
+  <!-- Nepcha Analytics (nepcha.com) -->
+  <!-- Nepcha is a easy-to-use web analytics. No cookies and fully compliant with GDPR, CCPA and PECR. -->
+  <script defer data-site="YOUR_DOMAIN_HERE" src="https://api.nepcha.com/js/nepcha-analytics.js"></script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+</head>
+<style>
+  /* Add a custom class to target the form container */
+  .wider-form {
+    max-width: 1200px;
+    /* Set the desired maximum width in pixels */
+  }
+
+  .is-invalid {
+    border-color: #dc3545;
+    background-color: #f8d7da;
+  }
+
+  /* You can add more styles for the error message if needed */
+  .error-message {
+    color: #dc3545;
+    margin-top: 2px;
+  }
+
+
+  /* Adjust the width of the form within the container */
+  .wider-form .card {
+    width: 80%;
+    /* Set the desired width in percentage or pixels */
+    margin: 0 auto;
+    /* Center the form horizontally within the container */
+  }
+</style>
+
+<body class="bg-gray-200">
+
+  <div class="container position-sticky z-index-sticky top-0 wider-form">
+    <div class="row">
+      <div class="col-12">
+        <!-- Navbar -->
+
+        <!-- End Navbar -->
+      </div>
+    </div>
+  </div>
+  <main class="main-content  mt-0">
+    <div class="page-header align-items-start min-vh-100" style="background-image: url('../assets/img/register3.jpg');">
+      <span class="mask bg-gradient-dark opacity-6"></span>
+      <div class="container my-auto">
+        <div class="row">
+          <div class="col-lg-4 col-md-8 col-12 mx-auto">
+            <div class="card z-index-0 fadeIn3 fadeInBottom" style="width: 110%; margin: 0 auto;">
+              <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
+                <div class="bg-gradient-primary shadow-primary border-radius-lg py-3 pe-1">
+                  <h4 class="text-white font-weight-bolder text-center mt-2 mb-0">Register</h4>
+                  <h6 class="text-white font-weight-bolder text-center mt-2 mb-0">Pet Sync</h6>
+                  <div class="row mt-3">
+                    <div class="col-2 text-center ms-auto">
+                      <a class="btn btn-link px-3" href="javascript:;">
+                        <i class="fa fa-facebook text-white text-lg"></i>
+                      </a>
+                    </div>
+                    <div class="col-2 text-center px-1">
+                      <a class="btn btn-link px-3" href="javascript:;">
+                        <i class="fa fa-github text-white text-lg"></i>
+                      </a>
+                    </div>
+                    <div class="col-2 text-center me-auto">
+                      <a class="btn btn-link px-3" href="javascript:void(0);" onclick="startGoogleSignIn()">
+                        <i class="fa fa-google text-white text-lg"></i>
+                        <div class="g-signin2" data-onsuccess="onSignIn"></div>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="card-body">
+                <form id="sign" role="form" class="text-start">
+
+                  <div class="input-group input-group-outline my-3">
+                    <label class="form-label">Username</label>
+                    <input type="text" name="username" id="username" class="form-control">
+                  </div>
+
+                  <div class="input-group input-group-outline my-3">
+                    <label class="form-label">Email</label>
+                    <input type="email" name="email" id="email" class="form-control">
+                  </div>
+                  <div id="email-error" class="error-message"></div>
+
+
+
+                  <!---->
+
+                  <div class="input-group input-group-outline mb-3">
+                    <label class="form-label">Password</label>
+                    <input type="password" name="password" id="password" class="form-control">
+                  </div>
+                  <div class="input-group input-group-outline mb-3">
+                    <label class="form-label">Repeat Password</label>
+                    <input type="password" name="repeat_password" id="repeat_password" class="form-control">
+                  </div>
+                  <div class="text-center">
+                    <button type="button" onclick="check()"
+                      class="btn bg-gradient-primary w-100 my-4 mb-2">Register</button>
+                  </div>
+                  <!---->
+
+                  <p class="mt-4 text-sm text-center">
+                    Already have an account?
+                    <a href="/sign-in" class="text-primary text-gradient font-weight-bold">Sign in</a>
+                  </p>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <footer class="footer position-absolute bottom-2 py-2 w-100">
+        <div class="container">
+          <div class="row align-items-center justify-content-lg-between">
+            <div class="col-12 col-md-6 my-auto">
+              <div class="copyright text-center text-sm text-white text-lg-start">
+                ©
+                <script>
+                  document.write(new Date().getFullYear())
+                </script>,
+                Offical <i class="fa fa-heart" aria-hidden="true"></i> PETSYNC
+                <a href="" class="font-weight-bold text-white" target="_blank">Register</a>
+
+              </div>
+            </div>
+            <div class="col-12 col-md-6">
+              <ul class="nav nav-footer justify-content-center justify-content-lg-end">
+                <li class="nav-item">
+                  <a href="https://www.creative-tim.com" class="nav-link text-white" target="_blank">About us</a>
+                </li>
+
+
+              </ul>
+            </div>
+          </div>
+        </div>
+      </footer>
+    </div>
+  </main>
+  <!--   Core JS Files   -->
+  <script src="../assets/js/core/popper.min.js"></script>
+  <script src="../assets/js/core/bootstrap.min.js"></script>
+  <script src="../assets/js/plugins/perfect-scrollbar.min.js"></script>
+  <script src="../assets/js/plugins/smooth-scrollbar.min.js"></script>
+  <script>
+    var win = navigator.platform.indexOf('Win') > -1;
+    if (win && document.querySelector('#sidenav-scrollbar')) {
+      var options = {
+        damping: '0.5'
+      }
+      Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
+    }
+  </script>
+  <!-- Github buttons -->
+  <script async defer src="https://buttons.github.io/buttons.js"></script>
+  <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
+  <script src="../assets/js/material-dashboard.min.js?v=3.1.0"></script>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+
+  <script>
+
+    // function startGoogleSignIn() {
+    //         gapi.load('auth2', function () {
+    //             gapi.auth2.init({
+    //                 client_id: '691946877433-kmrg5o8851td8j7m4p3j1mr7l0jurp9u.apps.googleusercontent.com'
+    //             }).then(function (auth2) {
+    //                 // Sign in the user
+    //                 auth2.signIn().then(function (googleUser) {
+    //                     // Handle the signed-in user
+    //                     var profile = googleUser.getBasicProfile();
+    //                     console.log('ID: ' + profile.getId());
+    //                     console.log('Name: ' + profile.getName());
+    //                     console.log('Image URL: ' + profile.getImageUrl());
+    //                     console.log('Email: ' + profile.getEmail());
+    //                 });
+    //             });
+    //         });
+    //     }
+    //     <a href="#" onclick="signOut();">Sign out</a>
+    //   function signOut() {
+    //     var auth2 = gapi.auth2.getAuthInstance();
+    //     auth2.signOut().then(function () {
+    //       console.log('User signed out.');
+    //     });
+    //   }
+
+    function register() {
+      var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      var username = $("#username").val();
+      var email = $("#email").val();
+      var password = $("#password").val();
+      var repeat_password = $("#repeat_password").val();
+
+      if (email == '' || password == '' || repeat_password == '' || username == '') {
+        alert("Please Fill the Required Fields");
+        return;
+      }
+      else if (password != repeat_password) {
+        alert("Both password and confirm password must be same");
+        return;
+      }
+      var data = { username: username, email: email, password: password, confirm_password: repeat_password };
+      let post = JSON.stringify(data);
+      $.ajax({
+        url: 'http://localhost:4000/insert_sign_up',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        type: 'POST',
+        contentType: 'application/json',
+        data: post,
+        success: function (data) {
+          if (data == 1) {
+            window.location.reload();
+            // window.location.href = 'dashboard.html';
+
+            // window.location.href = 'register.html';
+            // $("#username").val('')
+            // $("#email").val('');
+            // $("#password").val('');
+            // $("#repeat_password").val('');
+            // window.open("dashboard.html");
+            // $('#sign')[0].reset(); // Clear form fields
+          }
+          // else if (data == -1) {
+          //   checkAdmin();
+          //}
+          else {
+            alert("Registeration Failed");
+          }
+
+        },
+        error: function () {
+          alert('Registeration Failed error at local host 127.0.0.1');
+        }
+      });
+    }
+
+
+
+
+    $("#email").on("input", function () {
+      validateEmail();
+    });
+
+    function validateEmail() {
+      var emailInput = $("#email");
+      var emailError = $("#email-error");
+      var email = emailInput.val();
+      var emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+      if (!email.match(emailRegex)) {
+        emailInput.removeClass("is-valid").addClass("is-invalid");
+        emailError.text('Email is not valid');
+      } else {
+        emailInput.removeClass("is-invalid").addClass("is-valid");
+        emailError.text('');
+      }
+    }
+
+    function check() {
+
+      var username = $("#username").val();
+      var email = $("#email").val();
+      if (email == '' || username == '') {
+        alert("Please Fill the Required Fields");
+        return;
+      }
+      var data = { username: username, email: email };
+      let post = JSON.stringify(data);
+      $.ajax({
+        url: 'http://localhost:4000/unique_check_sign_up',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        type: 'POST',
+        contentType: 'application/json',
+        data: post,
+        success: function (data) {
+          if (data == 1) {
+            alert('username or email taken')
+          }
+          else if (data == -1) {
+            register();
+          }
+
+        },
+        error: function () {
+          alert('error at localhost');
+        }
+      });
+    }
+    // function checkAdmin() {
+    //   var password = $("#password").val();
+    //   var email = $("#email").val().trim();
+    //   var data = { email: email, password: password };
+    //   let post = JSON.stringify(data);
+    //   $.ajax({
+    //     url: 'http://localhost:4000/getdataAdmin',
+    //     headers: {
+    //       'Content-Type': 'application/json'
+    //     },
+    //     type: 'POST',
+    //     contentType: 'application/json',
+    //     data: post,
+    //     success: function (data) {
+    //       if (data == 1) {
+    //         window.open("admin.html");
+    //       }
+    //       else {
+    //         alert("Login Failed");
+    //       }
+
+    //     },
+    //     error: function () {
+    //       alert('error');
+    //     }
+    //   });
+    // }
+
+
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+    crossorigin="anonymous"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+</body>
+
+</html>

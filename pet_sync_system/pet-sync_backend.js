@@ -1,9 +1,10 @@
 var express = require("express");
 var cors = require("cors");
+var app = express();
 const bcrypt = require("bcrypt");
 const nodemailer = require("nodemailer");
 
-var app = express();
+app.use(express.static('public'));
 
 app.use(cors());
 
@@ -34,8 +35,51 @@ conn.connect(function (err) {
 
 
 app.get("/", function (req, res) {
-  res.render("insert");
+  res.render("sign-in");
 });
+
+//
+// Define routes to render views
+app.get('/admin-dashboard', (req, res) => {
+  res.render('admin_dashboard'); 
+});
+
+app.get('/admin-sign-in', (req, res) => {
+  res.render('admin_sign_in');
+});
+
+app.get('/appointment-scheduling', (req, res) => {
+  res.render('appointment_scheduling');
+});
+
+app.get('/code-reset-page', (req, res) => {
+  res.render('code_reset_page');
+});
+
+app.get('/forget-code', (req, res) => {
+  res.render('forget_code');
+});
+
+app.get('/register', (req, res) => {
+  res.render('register');
+});
+
+app.get('/sign-in', (req, res) => {
+  res.render('sign-in');
+});
+
+app.get('/user-dashboard', (req, res) => {
+  res.render('user_dashboard');
+});
+
+app.get('/vet-register', (req, res) => {
+  res.render('VET_REGISTER'); // Assumes VET_REGISTER.ejs is in the 'views' folder
+});
+
+app.get('/vet-sign-in', (req, res) => {
+  res.render('vet_sign_in');
+});
+//
 
 app.post("/insert_sign_up", function (req, res) {
   var username = req.body.username;
@@ -100,8 +144,11 @@ app.post("/login", function (req, res) {
           found = true;
         }
       });
-      if (found == true) {
-        res.json(1);
+      if (found == true) 
+      {
+       res.json(1);
+       
+        
       }
       else {
         res.json(-1);
@@ -197,6 +244,7 @@ app.post("/login_Admin", function (req, res) {
       });
       if (found == true) {
         res.json(1);
+        
       }
       else {
         res.json(-1);
