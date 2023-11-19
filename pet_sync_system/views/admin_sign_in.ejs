@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -95,10 +94,12 @@
                   <div class="text-center">
                     <button type="submit" onclick="" class="btn bg-gradient-primary w-100 my-4 mb-2">Sign in</button>
                   </div>
-                  <p class="mt-4 text-sm text-center">
-                    Login as User
-                    <a href="/sign-in" class="text-primary text-gradient font-weight-bold">User Login</a>
-                  </p>
+                  <div lass="mt-4 text-sm text-center" style="padding: 0 28%;">
+                    <button  type="button" class="btn btn-primary me-1" onclick="window.location.href = '/front';">
+                      <span>Selet Role</span>
+                      <i class="fas fa-user-shield icon"></i>
+                    </button>
+                  </div>
                 </form>
               </div>
             </div>
@@ -211,14 +212,12 @@
           else {
             alert("Login Failed! Email or password not correct");
           }
-
         },
         error: function () {
           alert('error');
         }
       });
     }
-
   </script>
 </body>
 

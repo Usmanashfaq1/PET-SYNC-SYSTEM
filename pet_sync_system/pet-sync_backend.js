@@ -35,13 +35,17 @@ conn.connect(function (err) {
 
 
 app.get("/", function (req, res) {
-  res.render("sign-in");
+  res.render("front");
 });
 
 //
 // Define routes to render views
 app.get('/admin-dashboard', (req, res) => {
   res.render('admin_dashboard'); 
+});
+
+app.get('/front', (req, res) => {
+  res.render('front'); 
 });
 
 app.get('/admin-sign-in', (req, res) => {
@@ -77,7 +81,7 @@ app.get('/vet-register', (req, res) => {
 });
 
 app.get('/vet-sign-in', (req, res) => {
-  res.render('vet_sign_in');
+  res.render('vet_sign-in');
 });
 //
 
