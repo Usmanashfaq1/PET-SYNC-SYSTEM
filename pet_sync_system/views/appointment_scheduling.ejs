@@ -28,6 +28,17 @@
 
  
   <link href="../assets/css/style.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/css/bootstrap.min.css">
+  <style>
+    .table-container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+      border-radius: 5px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      background-color: #f8f9fa;
+    }
+  </style>
 
   
 </head>
@@ -73,89 +84,39 @@
 
   <main id="main">
 
-    <section id="doctors" class="doctors">
-        <div class="container">
-  
-          <div class="section-title">
-            <h2>Doctors</h2>
-            <p>Kindly Select the Veterinarian</p>
+    <div class="container py-5">
+      <h2 class="text-center">SELECT VET ACCORDING TO EXPERTISE</h2>
+      <div class="row justify-content-center">
+        <div class="col-lg-10">
+          <div class="table-container">
+              <div class="mb-3">
+                  <label for="party" class="form-label">Vet Type</label>
+                  <select class="form-select" id="party" required>
+                    <option value="">Select Vet Type</option>
+                            <option value="Behavioral Medicine">Behavioral Medicine</option>
+                            <option value="One Health Approach">One Health Approach</option>
+                            <option value="Emergency and Critical Care">Emergency and Critical Care</option>
+                            <option value="Preventive Care">Preventive Care</option>
+                            <option value="Veterinary Medicine">Veterinary Medicine</option>
+                  </select>
+                </div>
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>fname</th>
+                  <th>lname</th>
+                  <th>specialization</th>
+                  <th>qualification</th>
+                </tr>
+              </thead>
+              <tbody id="party-details-body">
+                <!-- Party details will be dynamically added here -->
+              </tbody>
+            </table>
           </div>
-  
-          <div class="row">
-  
-            <div class="col-lg-6">
-              <div class="member d-flex align-items-start">
-                <div class="pic"><img src="../assets/img/doctors/doctors-1.jpg" class="img-fluid" alt=""></div>
-                <div class="member-info">
-                  <h4>Walter White</h4>
-                  <span>Chief Medical Officer</span>
-                  <p>Vet Expert</p>
-                  <div class="social">
-                    <a href=""><i class="ri-twitter-fill"></i></a>
-                    <a href=""><i class="ri-facebook-fill"></i></a>
-                    <a href=""><i class="ri-instagram-fill"></i></a>
-                    <a href=""> <i class="ri-linkedin-box-fill"></i> </a>
-                  </div>
-                 
-                </div>
-              </div>
-            </div>
-  
-            <div class="col-lg-6 mt-4 mt-lg-0">
-              <div class="member d-flex align-items-start">
-                <div class="pic"><img src="../assets/img/doctors/doctors-2.jpg" class="img-fluid" alt=""></div>
-                <div class="member-info">
-                  <h4>Sarah Jhonson</h4>
-                  <span>Anesthesiologist</span>
-                  <p>Vet Expert</p>
-                  <div class="social">
-                    <a href=""><i class="ri-twitter-fill"></i></a>
-                    <a href=""><i class="ri-facebook-fill"></i></a>
-                    <a href=""><i class="ri-instagram-fill"></i></a>
-                    <a href=""> <i class="ri-linkedin-box-fill"></i> </a>
-                  </div>
-                </div>
-              </div>
-            </div>
-  
-            <div class="col-lg-6 mt-4">
-              <div class="member d-flex align-items-start">
-                <div class="pic"><img src="../assets/img/doctors/doctors-3.jpg" class="img-fluid" alt=""></div>
-                <div class="member-info">
-                  <h4>William Anderson</h4>
-                  <span>Cardiology</span>
-                  <p>Vet Expert</p>
-                  <div class="social">
-                    <a href=""><i class="ri-twitter-fill"></i></a>
-                    <a href=""><i class="ri-facebook-fill"></i></a>
-                    <a href=""><i class="ri-instagram-fill"></i></a>
-                    <a href=""> <i class="ri-linkedin-box-fill"></i> </a>
-                  </div>
-                </div>
-              </div>
-            </div>
-  
-            <div class="col-lg-6 mt-4">
-              <div class="member d-flex align-items-start">
-                <div class="pic"><img src="../assets/img/doctors/doctors-4.jpg" class="img-fluid" alt=""></div>
-                <div class="member-info">
-                  <h4>Amanda Jepson</h4>
-                  <span>Neurosurgeon</span>
-                  <p>Vet Expert</p>
-                  <div class="social">
-                    <a href=""><i class="ri-twitter-fill"></i></a>
-                    <a href=""><i class="ri-facebook-fill"></i></a>
-                    <a href=""><i class="ri-instagram-fill"></i></a>
-                    <a href=""> <i class="ri-linkedin-box-fill"></i> </a>
-                  </div>
-                </div>
-              </div>
-            </div>
-  
-          </div>
-  
         </div>
-      </section><!-- End Doctors Section -->
+      </div>
+    </div>
     
 
    
@@ -233,14 +194,65 @@
   <script src="../assets/vendor/swiper/swiper-bundle.min.js"></script>
   <script src="../assets/vendor/php-email-form/validate.js"></script>
 
+
+
   <!--Main JS File code -->
   <script src="../assets/js/main.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+  <script>
+    
+    $(document).ready(function() {
+    // Handle vet type selection change event
+    $('#party').change(function() {
+      var selectedVetType = $(this).val();
+      if (selectedVetType) {
+        // Fetch vet details based on selected vet type
+        $.ajax({
+            url: 'http://localhost:4000/api/vets?type=' + selectedVetType,
+          method: 'GET',
+          success: function(data) {
+            // Clear existing table rows
+            $('#party-details-body').empty();
+            // Append vet details to table
+            if (data && data.length > 0) {
+              data.forEach(function(record) {
+                var row = $('<tr>');
+                row.html(`
+                  <td>${record.fname}</td>
+                  <td>${record.lname}</td>
+                  <td>${record.specialization}</td>
+                  <td>${record.qualification}</td>
+                `);
+                $('#party-details-body').append(row);
+              });
+            } else {
+              // Vet details not found
+              $('#party-details-body').append('<tr><td colspan="4">No vet details found</td></tr>');
+            }
+          },
+          error: function(error) {
+            console.error('Error fetching vet details:', error);
+            alert('Error fetching vet details. Please try again.');
+            $('#party-details-body').empty();
+          }
+        });
+      } else {
+        // No vet type selected
+        $('#party-details-body').empty();
+      }
+    });
+  });
+
+    
+  </script>
   <script>
     function back() {
         //ajax call to delete session here
         window.location.href = "../PETSYNC/user_dashboard.html"; 
     }
 </script>
+
 
 </body>
 

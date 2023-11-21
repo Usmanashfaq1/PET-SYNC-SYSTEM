@@ -345,6 +345,35 @@ app.post("/update_password", function (req, res) {
   });
 });
 
+//vet scheduling api's
+//
+// Get vet details API
+app.get('/api/vets', (req, res) => {
+  const vetType = req.query.type;
+
+  if (!vetType) {
+    res.status(400).json({ error: 'Vet type not specified' });
+    return;
+  }
+
+  const query = 'SELECT * FROM vet WHERE specialization = ?';
+
+  conn.query(query, vetType, (err, result) => {
+    if (err) {
+      console.error('Error fetching vet details:', err);
+      res.status(500).json({ error: 'An error occurred while fetching vet details' });
+      return;
+    }
+
+    if (result.length === 0) {
+      res.json(null); // Vet details not found
+    } else {
+      res.json(result);
+    }
+  });
+});
+
+//
 var server = app.listen(4000, function () {
   console.log("App running on port 4000");
 });
