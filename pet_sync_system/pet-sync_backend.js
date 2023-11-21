@@ -44,6 +44,7 @@ app.get('/admin-dashboard', (req, res) => {
   res.render('admin_dashboard'); 
 });
 
+
 app.get('/front', (req, res) => {
   res.render('front'); 
 });
@@ -373,6 +374,26 @@ app.get('/api/vets', (req, res) => {
   });
 });
 
+// making appointment
+// API endpoint to insert data into the "appointment" table
+app.post('/api/appointments', (req, res) => {
+  const { user_name, user_email, vet_name, vet_email, type } = req.body;
+
+  // Insert data into the "appointment" table
+  const sql = 'INSERT INTO appointment (user_name, user_email, vet_name, vet_email, type) VALUES (?, ?, ?, ?, ?)';
+  const values = [user_name, user_email, vet_name, vet_email, type];
+
+  conn.query(sql, values, (err, result) => {
+    if (err) {
+      console.error('Error inserting appointment data:', err);
+      res.status(500).json({ error: 'An error occurred while inserting appointment data' });
+      return;
+    }
+
+    console.log('Appointment data inserted successfully');
+    res.json({ success: true });
+  });
+});
 //
 var server = app.listen(4000, function () {
   console.log("App running on port 4000");

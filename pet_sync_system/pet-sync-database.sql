@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.1
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 15, 2023 at 05:05 PM
--- Server version: 10.4.28-MariaDB
--- PHP Version: 8.2.4
+-- Generation Time: Nov 21, 2023 at 07:21 PM
+-- Server version: 10.4.25-MariaDB
+-- PHP Version: 8.1.10
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -32,7 +32,7 @@ CREATE TABLE `admin_login` (
   `username` varchar(200) NOT NULL,
   `email` varchar(100) NOT NULL,
   `password` varchar(100) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `admin_login`
@@ -40,6 +40,31 @@ CREATE TABLE `admin_login` (
 
 INSERT INTO `admin_login` (`id`, `username`, `email`, `password`) VALUES
 (1, 'sameed', 'f200116@cfd.nu.edu.pk', '123');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `appointment`
+--
+
+CREATE TABLE `appointment` (
+  `user_name` varchar(2000) NOT NULL,
+  `user_email` varchar(2000) NOT NULL,
+  `vet_name` varchar(2000) NOT NULL,
+  `vet_email` varchar(2000) NOT NULL,
+  `type` varchar(2000) NOT NULL,
+  `id` int(244) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `appointment`
+--
+
+INSERT INTO `appointment` (`user_name`, `user_email`, `vet_name`, `vet_email`, `type`, `id`) VALUES
+('Usman', 'usmanx12@gmail.com', 'Hussan Ahamd', 'hussan1@gmail.com', '(Veterinary Medicine)', 1),
+('ahsan', 'ahsan@gmail.com', 'Ayesha Ali', 'ayesha@gmail.com', '(Veterinary Medicine)', 2),
+('noman', 'noman@gmail.com', 'Ayesha Ali', 'ayesha@gmail.com', '(Veterinary Medicine)', 3),
+('Abdullah', 'abdullah@gmail.com', 'Hussan Ahamd', 'hussan1@gmail.com', '(Veterinary Medicine)', 4);
 
 -- --------------------------------------------------------
 
@@ -53,7 +78,7 @@ CREATE TABLE `sign_up` (
   `email` varchar(50) NOT NULL,
   `password` varchar(500) NOT NULL,
   `confirm_password` varchar(500) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `sign_up`
@@ -66,7 +91,8 @@ INSERT INTO `sign_up` (`id`, `username`, `email`, `password`, `confirm_password`
 (4, 'sameed234', 'sameed4@gmail.com', '$2b$10$ylr3lmGfL5WIkpiUjiiV/ujI7n2cvesjzwx0V8M94vDde8JZPj.MW', '$2b$10$ylr3lmGfL5WIkpiUjiiV/ujI7n2cvesjzwx0V8M94vDde8JZPj.MW'),
 (5, 'sameed12', 'sameed21@gmail.com', '$2b$10$2v6ttMvfE8XDFbYaxksxd.dY.oTCamqC/CV0.4YO8fYug..DaMr/C', '$2b$10$2v6ttMvfE8XDFbYaxksxd.dY.oTCamqC/CV0.4YO8fYug..DaMr/C'),
 (6, '20F-0116', 'us@gmail.com', '$2b$10$xJKK36fB2TGCMQ0KQRiVoejgGIhagL6IpaELvEyzM2ila3aJBNgbW', '$2b$10$xJKK36fB2TGCMQ0KQRiVoejgGIhagL6IpaELvEyzM2ila3aJBNgbW'),
-(7, 'sameed1', 'master.official.445566@gmail.com', '$2b$10$1tJc8aEC2ZgCI9vvjMR.YOUPMcyN1vpCjogy45HobexUMFN6huenW', '$2b$10$k.1X/iaVY8t4LhBus7ud0egdSi8pHulbx/OcTVKdWWL/OtSRkPPcS');
+(7, 'sameed1', 'master.official.445566@gmail.com', '$2b$10$1tJc8aEC2ZgCI9vvjMR.YOUPMcyN1vpCjogy45HobexUMFN6huenW', '$2b$10$k.1X/iaVY8t4LhBus7ud0egdSi8pHulbx/OcTVKdWWL/OtSRkPPcS'),
+(8, 'Abdullah', 'abdullahx458@gmail.com', '$2b$10$sZgjwmXueMkaOb63m6Zw0.Bxy95fDLZOYKnUhzZ8JaD.kDkpKQ9JO', '$2b$10$sZgjwmXueMkaOb63m6Zw0.Bxy95fDLZOYKnUhzZ8JaD.kDkpKQ9JO');
 
 -- --------------------------------------------------------
 
@@ -84,15 +110,16 @@ CREATE TABLE `vet` (
   `password` varchar(2000) NOT NULL,
   `id` int(255) NOT NULL,
   `location` varchar(2000) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `vet`
 --
 
 INSERT INTO `vet` (`fname`, `lname`, `specialization`, `qualification`, `license_number`, `email`, `password`, `id`, `location`) VALUES
-('Ahamd', 'Ali', '4', 'bvm', '14456A', 'ahmadx458@gmail.com', '12345', 1, 'Faisalabad, Pakistan'),
-('as', 'as', '1', 'bvm', 'as', 'as@gmail.co', '$2b$10$zE4ItU9vQtRANZIeCLSu.O76Ya30HpEjPKz6zDacZYAmZ9C5uIMl2', 2, 'Allama Iqbal International Airport, Airport Road, Cantt, Lahore, Pakistan');
+('Ahamd', 'Ali', 'One Health Approach', 'bvm', '14456A', 'ahmadx458@gmail.com', '$2b$10$angUEcdwBNW6iY1ygAxCO.UeHz.bg/.FFaBzDykIcOLXzDW/bpCgK', 1, 'Faisalabad, Pakistan'),
+('Ayesha', 'Ali', 'Veterinary Medicine', 'bsc', '14458A', 'ayesha@gmail.com', '$2b$10$u24JvTfYPzgQZuae/jg2k.VS7gI9VW5AkH2A3wkPRIsnhEmsDvi3W', 2, 'Faisalabad, Pakistan'),
+('Hussan', 'Ahamd', 'Veterinary Medicine', 'bvm', '14451A', 'hussan1@gmail.com', '$2b$10$J1YVD/wqQap475WsvgVY7.tHntBlrACBmvg58VYXQZ5WvtzBzhjwW', 3, 'Faisalabad, Pakistan');
 
 --
 -- Indexes for dumped tables
@@ -102,6 +129,12 @@ INSERT INTO `vet` (`fname`, `lname`, `specialization`, `qualification`, `license
 -- Indexes for table `admin_login`
 --
 ALTER TABLE `admin_login`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `appointment`
+--
+ALTER TABLE `appointment`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -127,16 +160,22 @@ ALTER TABLE `admin_login`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
+-- AUTO_INCREMENT for table `appointment`
+--
+ALTER TABLE `appointment`
+  MODIFY `id` int(244) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
 -- AUTO_INCREMENT for table `sign_up`
 --
 ALTER TABLE `sign_up`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `vet`
 --
 ALTER TABLE `vet`
-  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

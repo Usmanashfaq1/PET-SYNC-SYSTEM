@@ -89,17 +89,25 @@
       <div class="row justify-content-center">
         <div class="col-lg-10">
           <div class="table-container">
+            <div class="mb-3">
               <div class="mb-3">
-                  <label for="party" class="form-label">Vet Type</label>
-                  <select class="form-select" id="party" required>
-                    <option value="">Select Vet Type</option>
-                            <option value="Behavioral Medicine">Behavioral Medicine</option>
-                            <option value="One Health Approach">One Health Approach</option>
-                            <option value="Emergency and Critical Care">Emergency and Critical Care</option>
-                            <option value="Preventive Care">Preventive Care</option>
-                            <option value="Veterinary Medicine">Veterinary Medicine</option>
-                  </select>
-                </div>
+                <label for="userName" class="form-label">Your Name</label>
+                <input type="text" class="form-control" id="userName" required>
+              </div>
+              <div class="mb-3">
+                <label for="userEmail" class="form-label">Your Email</label>
+                <input type="email" class="form-control" id="userEmail" required>
+              </div>
+              <label for="party" class="form-label">Vet Type</label>
+              <select class="form-select" id="party" required>
+                <option value="">Select Vet Type</option>
+                <option value="Behavioral Medicine">Behavioral Medicine</option>
+                <option value="One Health Approach">One Health Approach</option>
+                <option value="Emergency and Critical Care">Emergency and Critical Care</option>
+                <option value="Preventive Care">Preventive Care</option>
+                <option value="Veterinary Medicine">Veterinary Medicine</option>
+              </select>
+            </div>
             <table class="table">
               <thead>
                 <tr>
@@ -107,10 +115,11 @@
                   <th>lname</th>
                   <th>specialization</th>
                   <th>qualification</th>
+                  <th>Action</th>
                 </tr>
               </thead>
               <tbody id="party-details-body">
-                <!-- Party details will be dynamically added here -->
+                <!-- Vet details will be dynamically added here -->
               </tbody>
             </table>
           </div>
@@ -201,50 +210,97 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
   <script>
-    
-    $(document).ready(function() {
-    // Handle vet type selection change event
-    $('#party').change(function() {
-      var selectedVetType = $(this).val();
-      if (selectedVetType) {
-        // Fetch vet details based on selected vet type
-        $.ajax({
+    $(document).ready(function () {
+      // Handle vet type selection change event
+      $('#party').change(function () {
+        var selectedVetType = $(this).val();
+        if (selectedVetType) {
+          // Fetch vet details based on selected vet type
+          $.ajax({
             url: 'http://localhost:4000/api/vets?type=' + selectedVetType,
-          method: 'GET',
-          success: function(data) {
-            // Clear existing table rows
-            $('#party-details-body').empty();
-            // Append vet details to table
-            if (data && data.length > 0) {
-              data.forEach(function(record) {
-                var row = $('<tr>');
-                row.html(`
-                  <td>${record.fname}</td>
-                  <td>${record.lname}</td>
-                  <td>${record.specialization}</td>
-                  <td>${record.qualification}</td>
-                `);
-                $('#party-details-body').append(row);
-              });
-            } else {
-              // Vet details not found
-              $('#party-details-body').append('<tr><td colspan="4">No vet details found</td></tr>');
+            method: 'GET',
+            success: function (data) {
+              // Clear existing table rows
+              $('#party-details-body').empty();
+              // Append vet details to table
+              if (data && data.length > 0) {
+                data.forEach(function (record) {
+                  var row = $('<tr>');
+                  row.html(`
+                    <td>${record.fname}</td>
+                    <td>${record.lname}</td>
+                    <td>${record.specialization}</td>
+                    <td>${record.qualification}</td>
+                    <td><button class="btn btn-primary" onclick="bookAppointment('${record.fname}', '${record.lname}', '${record.specialization}', '${record.qualification}' , '${record.email}')">Book</button></td>
+                  `);
+                  $('#party-details-body').append(row);
+                });
+              } else {
+                // Vet details not found
+                $('#party-details-body').append('<tr><td colspan="5">No vet details found</td></tr>');
+              }
+            },
+            error: function (error) {
+              console.error('Error fetching vet details:', error);
+              alert('Error fetching vet details. Please try again.');
+              $('#party-details-body').empty();
             }
-          },
-          error: function(error) {
-            console.error('Error fetching vet details:', error);
-            alert('Error fetching vet details. Please try again.');
-            $('#party-details-body').empty();
-          }
-        });
-      } else {
-        // No vet type selected
-        $('#party-details-body').empty();
-      }
+          });
+        } else {
+          // No vet type selected
+          $('#party-details-body').empty();
+        }
+      });
     });
-  });
+
+   
 
     
+    
+  function bookAppointment(fname, lname, specialization, qualification,email) {
+    // Retrieve vet information dynamically
+    const vetName = `${fname} ${lname}`;
+    const vetEmail = `${email}`;  
+
+    // Validate input fields (user information)
+    const userName = $('#userName').val().trim();
+    const userEmail = $('#userEmail').val().trim();
+    if (!userName || !userEmail) {
+      alert('Please enter both your name and email.');
+      return;
+    }
+
+    // Prepare data for the AJAX request
+    const appointmentData = {
+      user_name: userName,
+      user_email: userEmail,
+      vet_name: vetName,
+      vet_email: vetEmail,
+      type: `(${specialization})`  
+    };
+
+   
+    $.ajax({
+      url: 'http://localhost:4000/api/appointments',
+      method: 'POST',
+      contentType: 'application/json',
+      data: JSON.stringify(appointmentData),
+      success: function (response) {
+        console.log('Appointment booked successfully:', response);
+        
+        alert(`Appointment booked with ${fname} ${lname}, ${specialization}, ${qualification},${email}`);
+        window.open("/user-dashboard");
+        
+      },
+      error: function (error) {
+        console.error('Error booking appointment:', error);
+        alert('Error booking appointment. Please try again.');
+      }
+    });
+  }
+
+
+   
   </script>
   <script>
     function back() {
