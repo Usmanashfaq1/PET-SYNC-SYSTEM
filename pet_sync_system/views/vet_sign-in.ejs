@@ -143,9 +143,9 @@
         contentType: 'application/json',
         data: post,
         success: function (data) {
-          if (data == 1) {
+         if (data == 1) {
             alert("Login Success")
-            window.location.href = "/admin-dashboard";
+            window.location.href = "/vet-dashboard";
           } else {
             alert("Login Failed! " + data.error);
           }

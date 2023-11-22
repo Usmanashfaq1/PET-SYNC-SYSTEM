@@ -3,6 +3,8 @@ var cors = require("cors");
 var app = express();
 const bcrypt = require("bcrypt");
 const nodemailer = require("nodemailer");
+const session = require('express-session');
+
 
 app.use(express.static('public'));
 
@@ -34,9 +36,29 @@ conn.connect(function (err) {
 
 
 
+//sessions:
+app.use(session({
+  secret:
+ 
+'your-secret-key',
+  resave: false,
+  saveUninitialized: true,
+}));
+
 app.get("/", function (req, res) {
+  if (req.session.vet) {
+    // Redirect to vet dashboard if logged in
+    res.redirect('/vet_dashboard');
+    return;
+  }
+
   res.render("front");
 });
+
+
+//app.get("/", function (req, res) {
+  //res.render("front");
+//});
 
 //
 // Define routes to render views
@@ -55,6 +77,10 @@ app.get('/admin-sign-in', (req, res) => {
 
 app.get('/appointment-scheduling', (req, res) => {
   res.render('appointment_scheduling');
+});
+
+app.get('/manage_appointment', (req, res) => {
+  res.render('manage_appointment');
 });
 
 app.get('/code-reset-page', (req, res) => {
@@ -77,6 +103,10 @@ app.get('/user-dashboard', (req, res) => {
   res.render('user_dashboard');
 });
 
+app.get('/vet-dashboard', (req, res) => {
+  res.render('vet_dashboard');
+});
+
 app.get('/vet-register', (req, res) => {
   res.render('VET_REGISTER'); // Assumes VET_REGISTER.ejs is in the 'views' folder
 });
@@ -84,7 +114,8 @@ app.get('/vet-register', (req, res) => {
 app.get('/vet-sign-in', (req, res) => {
   res.render('vet_sign-in');
 });
-//
+
+
 
 app.post("/insert_sign_up", function (req, res) {
   var username = req.body.username;
@@ -190,7 +221,10 @@ app.post("/login_vet", function (req, res) {
         }
       });
       if (found == true) {
-        res.json(1);
+        // Valid credentials
+    
+       res.json(1);
+        
       }
       else {
         res.json(-1);
@@ -248,6 +282,7 @@ app.post("/login_Admin", function (req, res) {
         }
       });
       if (found == true) {
+        //req.session.user = user.email;
         res.json(1);
         
       }
@@ -394,6 +429,19 @@ app.post('/api/appointments', (req, res) => {
     res.json({ success: true });
   });
 });
+//
+
+app.get('/api/appointment', (req, res) => {
+  conn.query('SELECT * FROM appointment', (err, results) => {
+    if (err) {
+      console.error('Error fetching  data:', err);
+      res.status(500).json({ error: 'An error occurred while fetching  data' });
+      return;
+    }
+
+    res.json(results);
+  });
+});
 
 
 app.post("/add_post", function (req, res) {
@@ -424,7 +472,10 @@ app.post("/get_all_posts", function (req, res) {
 });
 
 
-//
+
+
+
+
 var server = app.listen(4000, function () {
   console.log("App running on port 4000");
 });

@@ -46,7 +46,9 @@
         <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
         <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
         <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></i></a>
-        <a href="/sign-in" class="w3-button w3-black" style="color: chartreuse; font-size: large;" type="button" ><span class="d-none d-md-inline">Sign Out</span></a>
+        <form action="/logout" method="GET">
+          <button type="submit" class="btn btn-danger">Logout</button>
+        </form>
       </div>
     </div>
   </div>
@@ -172,10 +174,11 @@
   <!--Main JS File code -->
   <script src="../assets/js/main.js"></script>
   <script>
-    function signOut() {
-        //ajax call to delete session here
-        window.location.href = "../PETSYNC/sign-in.html"; 
-    }
+    
+
+
+
+   
 </script>
 
 </body>
