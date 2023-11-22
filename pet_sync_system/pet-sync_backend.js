@@ -394,6 +394,36 @@ app.post('/api/appointments', (req, res) => {
     res.json({ success: true });
   });
 });
+
+
+app.post("/add_post", function (req, res) {
+  var blog_title = req.body.blog_title;
+  var blog_description = req.body.blog_description;
+
+  var sql = `insert into pet_profile values( '${blog_title}', '${blog_description}','')`;
+
+  conn.query(sql, function (err, results) {
+    if (err) throw err;
+
+    res.send("<h1>Data Inserted.</h1>");
+  });
+});
+
+app.post("/get_all_posts", function (req, res) {
+  var id = req.body.id;
+  var sql = `SELECT * FROM pet_profile`;
+  conn.query(sql, function (err2, results) {
+      if (err2) {
+          console.error(err2);
+          res.status(500).send("Error occurred in server");
+      } else {
+          res.json(results);
+          console.log(results);
+      }
+  });
+});
+
+
 //
 var server = app.listen(4000, function () {
   console.log("App running on port 4000");
