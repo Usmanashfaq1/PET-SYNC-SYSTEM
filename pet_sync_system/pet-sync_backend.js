@@ -411,6 +411,7 @@ app.get('/api/vets', (req, res) => {
 
 // making appointment
 // API endpoint to insert data into the "appointment" table
+//insert data
 app.post('/api/appointments', (req, res) => {
   const { user_name, user_email, vet_name, vet_email, type } = req.body;
 
