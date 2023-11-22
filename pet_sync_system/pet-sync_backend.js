@@ -430,7 +430,7 @@ app.post('/api/appointments', (req, res) => {
   });
 });
 //
-
+//appointment data api
 app.get('/api/appointment', (req, res) => {
   conn.query('SELECT * FROM appointment', (err, results) => {
     if (err) {
