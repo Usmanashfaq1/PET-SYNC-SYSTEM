@@ -103,7 +103,7 @@
                     <a href="/register" class="text-primary text-gradient font-weight-bold">Sign up</a>
                   </p>
                   <div lass="mt-4 text-sm text-center" style="padding: 0 28%;">
-                    <button  type="button" class="btn btn-primary me-1" onclick="window.location.href = '/front';">
+                    <button type="button" class="btn btn-primary me-1" onclick="window.location.href = '/front';">
                       <span>Selet Role</span>
                       <i class="fas fa-user-shield icon"></i>
                     </button>
@@ -233,24 +233,24 @@
         contentType: 'application/json',
         data: post,
         success: function (data) {
-          
-         var email=data;
-         if (email !== -1) {
-         {
-          var email1 = data.email;
-         var name = data.name;
-            localStorage.setItem('email',email1);
-            localStorage.setItem('name', name);
-          //here updated logic
-            window.open("/user-dashboard");
 
-            window.close("/sign-in");
+          var email = data;
+          if (email !== -1) {
+            {
+              var email1 = data.email;
+              var name = data.name;
+              localStorage.setItem('email', email1);
+              localStorage.setItem('name', name);
+              //here updated logic
+              window.open("/user-dashboard");
 
-            
-         }
-         
-        }
-         
+              window.close("/sign-in");
+
+
+            }
+
+          }
+
         },
         error: function () {
           alert('error');

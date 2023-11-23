@@ -34,9 +34,9 @@
 
 </head>
 
-<body >
+<body>
 
-    <div >
+    <div>
         <!-- ======= Top Bar ======= -->
         <div id="topbar" class="d-flex align-items-center fixed-top">
             <div class="container d-flex justify-content-between">
@@ -65,10 +65,11 @@
             </div>
         </header><!-- End Header -->
 
-        <main id="main" >
+        <main id="main">
 
             <!-- ======= Breadcrumbs Section ======= -->
-            <section class="breadcrumbs" style="background-image: url('../assets/img/bg_profile.jpg'); background-size: cover;">
+            <section class="breadcrumbs"
+                style="background-image: url('../assets/img/bg_profile.jpg'); background-size: cover;">
                 <div class="container">
 
                     <div class="d-flex justify-content-between align-items-center">
@@ -92,8 +93,8 @@
                                                             <th>Pet Profile Picture</th>
                                                         </tr>
                                                     </thead>
-                                                    <tbody id="party-details-body">
-                                                        <!-- Vet details will be dynamically added here -->
+                                                    <tbody id="Data_table">
+
                                                     </tbody>
                                                 </table>
                                             </div>
@@ -199,44 +200,49 @@
             $('#email-link').attr('href', 'mailto:' + email).text(email);
         });
     </script>
-<script>
-    $(document).ready(function () {
-          const  email  = localStorage.getItem('email');
-          $.ajax({
+    <script>
+        $(document).ready(function () {
+            const username = localStorage.getItem('name');
+            $.ajax({
+                url: 'http://localhost:4000/get_profiles/' + username,
+                method: 'GET',
+                success: function (data) {
+                    console.log('Data Length:', data.length); // Log the length of the data array
 
-            url: 'http://localhost:4000/api/get_profiles/' + email,
-          
-            method: 'GET',
-            success: function (data) {
-              // Clear existing table rows
-              $('#party-details-body').empty();
-              if (data && data.length > 0) {
-                data.forEach(function (result) {
-                  var row = $('<tr>');
-                  row.html(`
-                    <td>${result.pet_owner}</td>
-                    <td>${result.gender}</td>
-                    <td>${result.age}</td>
-                    <td>${result.breed}</td>
-                    <td>${result.about}</td>
-                    <td>${result.pic}</td>
-                    <td><button class="btn btn-primary" onclick="bookAppointment('${record.fname}', '${record.lname}', '${record.specialization}', '${record.qualification}' , '${record.email}')">Approve</button></td>
-                  `);
-                  $('#party-details-body').append(row);
-                });
-              } else {
-                // Vet details not found
-                $('#party-details-body').append('<tr><td colspan="5">No vet details found</td></tr>');
-              }
-            },
-            error: function (error) {
-              console.error('Error fetching vet details:', error);
-              alert('Error fetching vet details. Please try again.');
-              $('#party-details-body').empty();
-            }
-          });
-    });
-</script>
+                    // Clear existing table rows
+                    $('#Data_table').empty();
+                    if (data && data.length > 0) {
+                        data.forEach(function (result) {
+                            console.log('Result:', result); // Log each result
+                            var row = $('<tr>');
+                            row.html(`
+  <td>${result.pet_owner}</td>
+  <td>${result.gender}</td>
+  <td>${result.age}</td>
+  <td>${result.breed}</td>
+  <td>${result.about}</td>
+  <td><img src="data:image/jpeg;base64,${result.petPicture}" alt="Pet Picture" style="width: 4rem; height: 4rem;"></td>
+`);
+
+
+
+                            $('#Data_table').append(row);
+                        });
+                    } else {
+                        // Pet details not found
+                        $('#Data_table').append('<tr><td colspan="6">No pet profile details found</td></tr>');
+                    }
+                },
+                error: function (error) {
+                    console.error('Error fetching pet details:', error);
+                    alert('Error fetching pet profile at backend. Please try again.');
+                    $('#Data_table').empty();
+                }
+            });
+        });
+
+
+    </script>
 
 </body>
 

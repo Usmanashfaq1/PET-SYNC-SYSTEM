@@ -129,46 +129,46 @@
   });
 
   function register_profile() {
-  const username = localStorage.getItem('name');
-  var gender = $("input[name='gender']:checked").val();
-  var age = $("#age").val();
-  var breed = $("#breed").val();
-  var about = $("#about").val();
+    const username = localStorage.getItem('name');
+    var gender = $("input[name='gender']:checked").val();
+    var age = $("#age").val();
+    var breed = $("#breed").val();
+    var about = $("#about").val();
 
-  // Handle file upload
-  var petPicture = document.getElementById('petPicture').files[0];
+    // Handle file upload
+    var petPicture = document.getElementById('petPicture').files[0];
 
-  if (gender == undefined || age == '' || breed == '' || !petPicture) {
-    alert("Please fill in all the required fields");
-    return;
-  }
-
-  var formData = new FormData();
-  formData.append('username', username);
-  formData.append('gender', gender);
-  formData.append('age', age);
-  formData.append('breed', breed);
-  formData.append('about', about);
-  formData.append('petPicture', petPicture);
-  $.ajax({
-    url: 'http://localhost:4000/create_pet_profile',
-    type: 'POST',
-    data: formData,
-    contentType: false,
-    processData: false,
-    success: function (response) {
-      if (response === 1) {
-        alert("Profile created successfully");
-        //window.location.reload();
-      } else {
-        alert("Profile creation failed");
-      }
-    },
-    error: function () {
-      alert('Profile creation failed. Error at localhost:4000');
+    if (gender == undefined || age == '' || breed == '' || !petPicture) {
+      alert("Please fill in all the required fields");
+      return;
     }
-  });
-}
+
+    var formData = new FormData();
+    formData.append('username', username);
+    formData.append('gender', gender);
+    formData.append('age', age);
+    formData.append('breed', breed);
+    formData.append('about', about);
+    formData.append('petPicture', petPicture);
+    $.ajax({
+      url: 'http://localhost:4000/create_pet_profile',
+      type: 'POST',
+      data: formData,
+      contentType: false,
+      processData: false,
+      success: function (response) {
+        if (response === 1) {
+          alert("Profile created successfully");
+          //window.location.reload();
+        } else {
+          alert("Profile creation failed");
+        }
+      },
+      error: function () {
+        alert('Profile creation failed. Error at localhost:4000');
+      }
+    });
+  }
 
 
 

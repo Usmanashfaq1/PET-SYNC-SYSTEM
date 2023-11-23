@@ -44,7 +44,7 @@
       }
     }
 
-    
+
     .is-invalid {
       border-color: #dc3545;
       background-color: #f8d7da;
@@ -55,7 +55,6 @@
       color: #ffffff;
       margin-top: 2px;
     }
-
   </style>
 
   <section class="vh-100" style="background-color: lightblue;">
@@ -95,16 +94,16 @@
                     </div>
 
                     <a class="small text-muted" href="#!">Forgot password?</a>
-                    <p class="mb-5 pb-lg-2" style="color: #393f81;">Don't have an account? <a
-                        href="/vet-register" style="color: #393f81;">Register here</a></p>
-                       
-                        <div class="form-outline"  >
-            <button type="button" class="btn btn-primary me-1" onclick="window.location.href = '/front';">
-              <span>Selet Role</span>
-              <i class="fas fa-user-shield icon"></i>
-            </button>
-          </div>
-         
+                    <p class="mb-5 pb-lg-2" style="color: #393f81;">Don't have an account? <a href="/vet-register"
+                        style="color: #393f81;">Register here</a></p>
+
+                    <div class="form-outline">
+                      <button type="button" class="btn btn-primary me-1" onclick="window.location.href = '/front';">
+                        <span>Selet Role</span>
+                        <i class="fas fa-user-shield icon"></i>
+                      </button>
+                    </div>
+
                     <a href="#!" class="small text-muted">PETSYNC.</a>
                     <a href="#!" class="small text-muted">Veterinarian SIGN IN</a>
                   </form>
@@ -146,16 +145,15 @@
         data: post,
         success: function (data) {
 
-         var email=data;
-         if(email!=-1)
-         {
-            localStorage.setItem('email',email);
+          var email = data;
+          if (email != -1) {
+            localStorage.setItem('email', email);
             //here updated logic
             window.open("/vet-dashboard");
 
             window.close("/vet-sign-in");
-         }
-         
+          }
+
         },
         error: function () {
           alert('Error during login');
@@ -164,31 +162,31 @@
     }
 
     function validateEmail() {
-    var emailInput = $("#email");
-    var emailError = $("#email-error");
-    var email = emailInput.val();
-    var emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-    if (!email.match(emailRegex)) {
-      emailInput.removeClass("is-valid").addClass("is-invalid");
-      emailError.text('Email is not valid');
-      return true;
-    } else {
-      emailInput.removeClass("is-invalid").addClass("is-valid");
-      emailError.text('');
-      return false;
+      var emailInput = $("#email");
+      var emailError = $("#email-error");
+      var email = emailInput.val();
+      var emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+      if (!email.match(emailRegex)) {
+        emailInput.removeClass("is-valid").addClass("is-invalid");
+        emailError.text('Email is not valid');
+        return true;
+      } else {
+        emailInput.removeClass("is-invalid").addClass("is-valid");
+        emailError.text('');
+        return false;
+      }
     }
-  }
 
     $(document).ready(function () {
       $('#vet').submit(function (e) {
         e.preventDefault();
         if (validateEmail() == true) {
-        return;
-      }
-      else {
-        vet_login();
-      }
-        
+          return;
+        }
+        else {
+          vet_login();
+        }
+
 
       });
     });

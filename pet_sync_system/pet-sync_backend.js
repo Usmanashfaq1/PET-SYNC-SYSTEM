@@ -6,6 +6,7 @@ const nodemailer = require("nodemailer");
 const storage = require('node-sessionstorage');
 const session = require('express-session');
 const path = require('path');
+const fs = require('fs');
 
 app.use(express.static('public'));
 
@@ -67,6 +68,47 @@ app.post('/create_pet_profile', upload.single('petPicture'), (req, res) => {
   });
 });
 
+app.get('/get_profiles/:username', (req, res) => {
+  const username = req.params.username;
+  const sql = `SELECT * FROM pet_profile WHERE pet_owner = '${username}'`;
+
+  conn.query(sql, (err, result) => {
+    if (err) {
+      console.error('Error fetching pet profiles:', err);
+      res.status(500).json({ error: 'An error occurred while fetching pet profiles' });
+      return;
+    }
+
+    console.log('Result Length:', result.length);
+
+    const fileContents = [];
+
+    // Assuming 'petPicture' is the column name
+    result.forEach(row => {
+      const fileName = row.petPicture;
+
+      // Check if fileName is defined
+      if (fileName) {
+        const filePath = path.join(__dirname, 'upload', fileName);
+
+        try {
+          // Read the file content in base64
+          const content = fs.readFileSync(filePath, { encoding: 'base64' });
+
+          // Include all values from the result set along with the file content
+          const rowWithFileContent = { ...row, petPicture: content };
+          fileContents.push(rowWithFileContent);
+        } catch (err) {
+          console.error('Error reading file:', err);
+        }
+      }
+    });
+
+    // Send the array of result and file contents as a response
+    res.json(fileContents);
+  });
+});
+
 
 
 
@@ -76,25 +118,25 @@ app.get("/", function (req, res) {
 
 
 //app.get("/", function (req, res) {
-  //res.render("front");
+//res.render("front");
 //});
 
 //
 // Define routes to render views
 app.get('/admin-dashboard', (req, res) => {
-  res.render('admin_dashboard'); 
+  res.render('admin_dashboard');
 });
 
 app.get('/pet-profile', (req, res) => {
-  res.render('pet_profile_page'); 
+  res.render('pet_profile_page');
 });
 
 app.get('/create-pet-profile', (req, res) => {
-  res.render('create_pet_profile'); 
+  res.render('create_pet_profile');
 });
 
 app.get('/front', (req, res) => {
-  res.render('front'); 
+  res.render('front');
 });
 
 app.get('/admin-sign-in', (req, res) => {
@@ -208,12 +250,11 @@ app.post("/login", function (req, res) {
             email: email,
             name: element.username
           };
-          
+
           res.json(user);
         }
       });
-      if (found == true) 
-      {
+      if (found == true) {
       }
       else {
         res.json(-1);
@@ -244,12 +285,12 @@ app.post("/login_vet", function (req, res) {
       });
       if (found == true) {
         // Valid credentials
-       // req.session.vetEmail = email;
-      //storage.setItem("email",email);
-      //console.log(storage.getItem("email"));
-      //window.sessionStorage.setItem("name","usman");
-       res.json(email);
-        
+        // req.session.vetEmail = email;
+        //storage.setItem("email",email);
+        //console.log(storage.getItem("email"));
+        //window.sessionStorage.setItem("name","usman");
+        res.json(email);
+
       }
       else {
         res.json(-1);
@@ -306,7 +347,7 @@ app.post("/login_Admin", function (req, res) {
       if (found == true) {
         //req.session.user = user.email;
         res.json(1);
-        
+
       }
       else {
         res.json(-1);
@@ -504,13 +545,13 @@ app.post("/get_all_posts", function (req, res) {
   var id = req.body.id;
   var sql = `SELECT * FROM pet_profile`;
   conn.query(sql, function (err2, results) {
-      if (err2) {
-          console.error(err2);
-          res.status(500).send("Error occurred in server");
-      } else {
-          res.json(results);
-          console.log(results);
-      }
+    if (err2) {
+      console.error(err2);
+      res.status(500).send("Error occurred in server");
+    } else {
+      res.json(results);
+      console.log(results);
+    }
   });
 });
 
