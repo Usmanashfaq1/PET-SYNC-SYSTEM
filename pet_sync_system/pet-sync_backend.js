@@ -12,6 +12,9 @@ app.use(express.static('public'));
 app.use(cors());
 
 const multer = require("multer");
+const multer_storage = multer.memoryStorage(); // Use memory storage for simplicity
+
+const upload = multer({ storage: storage });
 
 var mysql = require("mysql");
 
@@ -55,7 +58,11 @@ app.get('/admin-dashboard', (req, res) => {
 });
 
 app.get('/pet-profile', (req, res) => {
-  res.render('pet_profile'); 
+  res.render('pet_profile_page'); 
+});
+
+app.get('/create-pet-profile', (req, res) => {
+  res.render('create_pet_profile'); 
 });
 
 app.get('/front', (req, res) => {
@@ -507,12 +514,13 @@ app.get('/logout', (req, res) => {
 });
 
 
-app.post("/create_pet_profile", function (req, res) {
+app.post('/create_pet_profile', upload.single('petPicture'), (req, res) => {
   var gender = req.body.gender;
   var age = req.body.age;
   var breed = req.body.breed;
   var username = req.body.username;
   var about = req.body.about;
+  const petPicture = req.file;
   var sql = `insert into pet_profile(pet_owner,gender,age,breed , about) values('${username}', '${gender}', '${age}', '${breed}' , '${about}')`;
 
   conn.query(sql, function (err, results) {
