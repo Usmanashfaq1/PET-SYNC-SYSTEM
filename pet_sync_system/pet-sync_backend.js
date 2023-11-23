@@ -438,10 +438,11 @@ app.post('/api/appointments', (req, res) => {
 //   });
 // });
 //
-// Get party details API
+// Get appointment  details API with specfic to current user session email
+
 app.get('/api/appointment/:email', (req, res) => {
-  const email = req.params.email;
-  conn.query('SELECT * FROM appointment WHERE vet_email = ?', email, (err, result) => {
+  const email = req.params.email; //here taking email from ajax frontend
+  conn.query('SELECT * FROM appointment WHERE vet_email = ?', email, (err, result) => { //here matching data and fetching it
     if (err) {
       console.error('Error fetching party details:', err);
       res.status(500).json({ error: 'An error occurred while fetching party details' });
