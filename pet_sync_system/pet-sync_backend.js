@@ -3,6 +3,7 @@ var cors = require("cors");
 var app = express();
 const bcrypt = require("bcrypt");
 const nodemailer = require("nodemailer");
+const storage = require('node-sessionstorage');
 const session = require('express-session');
 
 
@@ -36,22 +37,9 @@ conn.connect(function (err) {
 
 
 
-//sessions:
-app.use(session({
-  secret:
- 
-'your-secret-key',
-  resave: false,
-  saveUninitialized: true,
-}));
+
 
 app.get("/", function (req, res) {
-  if (req.session.vet) {
-    // Redirect to vet dashboard if logged in
-    res.redirect('/vet_dashboard');
-    return;
-  }
-
   res.render("front");
 });
 
@@ -169,7 +157,7 @@ app.post("/login", function (req, res) {
 
   var password = req.body.password;
   var email = req.body.email;
-  var sql = `SELECT password FROM sign_up WHERE email= '${email}'`;
+  var sql = `SELECT password,username FROM sign_up WHERE email= '${email}'`;
   conn.query(sql, function (err2, results) {
     if (err2) {
       console.error(err2);
@@ -178,13 +166,16 @@ app.post("/login", function (req, res) {
       results.forEach(element => {
         if (bcrypt.compareSync(password.toString(), element.password) && found == false) {
           found = true;
+          const user = {
+            email: email,
+            name: element.username
+          };
+          
+          res.json(user);
         }
       });
       if (found == true) 
       {
-       res.json(1);
-       
-        
       }
       else {
         res.json(-1);
@@ -222,8 +213,11 @@ app.post("/login_vet", function (req, res) {
       });
       if (found == true) {
         // Valid credentials
-    
-       res.json(1);
+       // req.session.vetEmail = email;
+      //storage.setItem("email",email);
+      //console.log(storage.getItem("email"));
+      //window.sessionStorage.setItem("name","usman");
+       res.json(email);
         
       }
       else {
@@ -432,18 +426,38 @@ app.post('/api/appointments', (req, res) => {
 });
 //
 //appointment data api
-app.get('/api/appointment', (req, res) => {
-  conn.query('SELECT * FROM appointment', (err, results) => {
+// app.get('/api/appointment', (req, res) => {
+//   conn.query('SELECT * FROM appointment', (err, results) => {
+//     if (err) {
+//       console.error('Error fetching  data:', err);
+//       res.status(500).json({ error: 'An error occurred while fetching  data' });
+//       return;
+//     }
+
+//     res.json(results);
+//   });
+// });
+//
+// Get party details API
+app.get('/api/appointment/:email', (req, res) => {
+  const email = req.params.email;
+  conn.query('SELECT * FROM appointment WHERE vet_email = ?', email, (err, result) => {
     if (err) {
-      console.error('Error fetching  data:', err);
-      res.status(500).json({ error: 'An error occurred while fetching  data' });
+      console.error('Error fetching party details:', err);
+      res.status(500).json({ error: 'An error occurred while fetching party details' });
       return;
     }
 
-    res.json(results);
+    if (result.length === 0) {
+      res.json(null); // Party details not found
+    } else {
+      res.json(result);
+    }
   });
 });
 
+
+//
 
 app.post("/add_post", function (req, res) {
   var blog_title = req.body.blog_title;
@@ -469,6 +483,33 @@ app.post("/get_all_posts", function (req, res) {
           res.json(results);
           console.log(results);
       }
+  });
+});
+
+
+const secretKey = 'usman_jutt_58';
+
+app.use(
+  session({
+    secret: secretKey,
+    resave: false,
+    saveUninitialized: true
+  })
+);
+
+
+
+
+
+// Logout endpoint
+app.get('/logout', (req, res) => {
+  // Perform logout actions
+  req.session.destroy((err) => {
+    if (err) {
+      console.error('Error destroying session:', err);
+    }
+    // Redirect to the login page or any other logged-out state
+    res.redirect('/sign-in');
   });
 });
 

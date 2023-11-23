@@ -57,7 +57,7 @@
         <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
         <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
         <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></i></a>
-        <a href="/sign-in" class="w3-button w3-black" style="color: chartreuse; font-size: large;" type="button" ><span class="d-none d-md-inline">Sign Out</span></a>
+        <a  class="w3-button w3-black" style="color: chartreuse; font-size: large;" onclick="back()" type="button" ><span class="d-none d-md-inline">Sign Out</span></a>
       </div>
     </div>
   </div>
@@ -195,10 +195,13 @@
     //here calling ajax call to fetch data from api into table accordingly
     $(document).ready(function () {
       // Handle vet type selection change event
-     
+    // alert(req.session.vetEmail);
           // Fetch vet details based on selected vet type
+          const  email  = localStorage.getItem('email');
           $.ajax({
-            url: 'http://localhost:4000/api/appointment',
+
+            url: 'http://localhost:4000/api/appointment/' + email,
+          
             method: 'GET',
             success: function (data) {
               // Clear existing table rows
@@ -209,6 +212,7 @@
                   var row = $('<tr>');
                   row.html(`
                     <td>${record.user_name}</td>
+
                     <td>${record.user_email}</td>
                     <td>${record.type}</td>
                     <td><button class="btn btn-primary" onclick="bookAppointment('${record.fname}', '${record.lname}', '${record.specialization}', '${record.qualification}' , '${record.email}')">Approve</button></td>
@@ -278,11 +282,19 @@
    
   </script>
   <script>
+    
     function back() {
         //ajax call to delete session here
-        window.location.href = "../PETSYNC/user_dashboard.html"; 
+        window.close("/manage_appointment");
+        window.open("/front");
     }
+    
+
 </script>
+
+<script>
+   
+ </script>
 
 
 </body>

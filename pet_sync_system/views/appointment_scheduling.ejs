@@ -49,7 +49,7 @@
   <div id="topbar" class="d-flex align-items-center fixed-top">
     <div class="container d-flex justify-content-between">
       <div class="contact-info d-flex align-items-center">
-        <i class="bi bi-envelope"></i> <a href="mailto:contact@example.com">petsync@gmail.com</a>
+        <i class="bi bi-envelope"></i> <a href="mailto:" id="email-link">contact@example.com</a>
         <i class="bi bi-phone"></i> +92 3389 55568 45
       </div>
       <div class="d-none d-lg-flex social-links align-items-center">
@@ -57,7 +57,7 @@
         <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
         <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
         <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></i></a>
-        <a href="/sign-in" class="w3-button w3-black" style="color: chartreuse; font-size: large;" type="button" ><span class="d-none d-md-inline">Sign Out</span></a>
+        <a  class="w3-button w3-black" style="color: chartreuse; font-size: large;" onclick="back()" type="button" ><span class="d-none d-md-inline">Sign Out</span></a>
       </div>
     </div>
   </div>
@@ -90,14 +90,8 @@
         <div class="col-lg-10">
           <div class="table-container">
             <div class="mb-3">
-              <div class="mb-3">
-                <label for="userName" class="form-label">Your Name</label>
-                <input type="text" class="form-control" id="userName" required>
-              </div>
-              <div class="mb-3">
-                <label for="userEmail" class="form-label">Your Email</label>
-                <input type="email" class="form-control" id="userEmail" required>
-              </div>
+              
+              
               <label for="party" class="form-label">Vet Type</label>
               <select class="form-select" id="party" required>
                 <option value="">Select Vet Type</option>
@@ -211,6 +205,15 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
   <script>
     $(document).ready(function () {
+    const email = localStorage.getItem('email');
+  alert(email);
+    // Update the email link with the dynamic email
+    $('#email-link').attr('href', 'mailto:' + email).text(email);
+    });
+  </script>
+
+  <script>
+    $(document).ready(function () {
       // Handle vet type selection change event
       $('#party').change(function () {
         var selectedVetType = $(this).val();
@@ -264,12 +267,12 @@
     const vetEmail = `${email}`;  
 
     // Validate input fields (user information)
-    const userName = $('#userName').val().trim();
-    const userEmail = $('#userEmail').val().trim();
-    if (!userName || !userEmail) {
-      alert('Please enter both your name and email.');
-      return;
-    }
+    const storedName1 = localStorage.getItem('name');
+    const email1 = localStorage.getItem('email');
+    const userName = storedName1;
+    
+    const userEmail = email1;
+  
 
     // Prepare data for the AJAX request
     const appointmentData = {
@@ -290,6 +293,7 @@
         console.log('Appointment booked successfully:', response);
         
         alert(`Appointment booked with ${fname} ${lname}, ${specialization}, ${qualification},${email}`);
+        window.close("/appointment-scheduling");
         window.open("/user-dashboard");
         
       },
@@ -304,9 +308,12 @@
    
   </script>
   <script>
+   
+
     function back() {
         //ajax call to delete session here
-        
+        window.close("/appointment-scheduling");
+        window.open("/front");
     }
 </script>
 

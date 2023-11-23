@@ -124,6 +124,8 @@
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
   <script>
+    //const storage = require('node-sessionstorage');
+    //alert(storage.getitem("name"));
     function vet_login() {
       var password = $("#password").val();
       var email = $("#email").val();
@@ -143,12 +145,16 @@
         contentType: 'application/json',
         data: post,
         success: function (data) {
-         if (data == 1) {
-            alert("Login Success")
-            window.location.href = "/vet-dashboard";
-          } else {
-            alert("Login Failed! " + data.error);
-          }
+
+         var email=data;
+         if(email!=-1)
+         {
+            localStorage.setItem('email',email);
+            window.open("/vet-dashboard");
+
+            window.close("/vet-sign-in");
+         }
+         
         },
         error: function () {
           alert('Error during login');

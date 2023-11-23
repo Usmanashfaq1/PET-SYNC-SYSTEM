@@ -233,11 +233,24 @@
         contentType: 'application/json',
         data: post,
         success: function (data) {
-          if(data==1)
-          {
-            window.location.href = '/user-dashboard';
-          }
+          
+         var email=data;
+         if (email !== -1) {
+         {
+          var email1 = data.email;
+  var name = data.name;
+            localStorage.setItem('email',email1);
+            localStorage.setItem('name', name);
+          
+            window.open("/user-dashboard");
 
+            window.close("/sign-in");
+
+            
+         }
+         
+        }
+         
         },
         error: function () {
           alert('error');

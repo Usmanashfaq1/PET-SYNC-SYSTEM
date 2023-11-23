@@ -46,9 +46,9 @@
         <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
         <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
         <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></i></a>
-        <form action="/logout" method="GET">
-          <button type="submit" class="btn btn-danger">Logout</button>
-        </form>
+        
+          <button  type="submit"   onclick="back()" class="btn btn-danger">Logout</button>
+        
       </div>
     </div>
   </div>
@@ -175,7 +175,11 @@
   <script src="../assets/js/main.js"></script>
   <script>
     
-
+    function back() {
+        //ajax call to delete session here
+        window.close("/admin-dashboard");
+        window.open("/front");
+    }
 
 
    
