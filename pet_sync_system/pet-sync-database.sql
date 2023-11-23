@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 23, 2023 at 04:46 PM
+-- Generation Time: Nov 23, 2023 at 06:27 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -78,18 +78,20 @@ CREATE TABLE `pet_profile` (
   `gender` varchar(50) NOT NULL,
   `age` int(50) NOT NULL,
   `breed` varchar(50) NOT NULL,
-  `about` varchar(500) NOT NULL
+  `about` varchar(500) NOT NULL,
+  `petPicture` varchar(1000) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `pet_profile`
 --
 
-INSERT INTO `pet_profile` (`id`, `pet_owner`, `gender`, `age`, `breed`, `about`) VALUES
-(1, 'sameed1', 'female', 3, '3', '3'),
-(2, 'null', 'male', 3, 'mackow', 'uhi'),
-(3, 'null', 'male', 3, 'mackow', 'uhi'),
-(4, 'sameed1', 'male', 3, '33', '3333');
+INSERT INTO `pet_profile` (`id`, `pet_owner`, `gender`, `age`, `breed`, `about`, `petPicture`) VALUES
+(1, 'sameed1', 'female', 3, '3', '3', ''),
+(2, 'null', 'male', 3, 'mackow', 'uhi', ''),
+(3, 'null', 'male', 3, 'mackow', 'uhi', ''),
+(4, 'sameed1', 'male', 3, '33', '3333', ''),
+(5, 'sameed1', 'other', 2, '2', '2', '1700760324619-bg_profile.jpg');
 
 -- --------------------------------------------------------
 
@@ -200,7 +202,7 @@ ALTER TABLE `appointment`
 -- AUTO_INCREMENT for table `pet_profile`
 --
 ALTER TABLE `pet_profile`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `sign_up`

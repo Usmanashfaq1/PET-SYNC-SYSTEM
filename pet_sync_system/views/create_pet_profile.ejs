@@ -150,7 +150,6 @@
   formData.append('breed', breed);
   formData.append('about', about);
   formData.append('petPicture', petPicture);
-  return;
   $.ajax({
     url: 'http://localhost:4000/create_pet_profile',
     type: 'POST',

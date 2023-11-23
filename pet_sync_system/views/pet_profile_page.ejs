@@ -199,7 +199,44 @@
             $('#email-link').attr('href', 'mailto:' + email).text(email);
         });
     </script>
+<script>
+    $(document).ready(function () {
+          const  email  = localStorage.getItem('email');
+          $.ajax({
 
+            url: 'http://localhost:4000/api/get_profiles/' + email,
+          
+            method: 'GET',
+            success: function (data) {
+              // Clear existing table rows
+              $('#party-details-body').empty();
+              if (data && data.length > 0) {
+                data.forEach(function (result) {
+                  var row = $('<tr>');
+                  row.html(`
+                    <td>${result.pet_owner}</td>
+                    <td>${result.gender}</td>
+                    <td>${result.age}</td>
+                    <td>${result.breed}</td>
+                    <td>${result.about}</td>
+                    <td>${result.pic}</td>
+                    <td><button class="btn btn-primary" onclick="bookAppointment('${record.fname}', '${record.lname}', '${record.specialization}', '${record.qualification}' , '${record.email}')">Approve</button></td>
+                  `);
+                  $('#party-details-body').append(row);
+                });
+              } else {
+                // Vet details not found
+                $('#party-details-body').append('<tr><td colspan="5">No vet details found</td></tr>');
+              }
+            },
+            error: function (error) {
+              console.error('Error fetching vet details:', error);
+              alert('Error fetching vet details. Please try again.');
+              $('#party-details-body').empty();
+            }
+          });
+    });
+</script>
 
 </body>
 

@@ -5,16 +5,15 @@ const bcrypt = require("bcrypt");
 const nodemailer = require("nodemailer");
 const storage = require('node-sessionstorage');
 const session = require('express-session');
-
+const path = require('path');
 
 app.use(express.static('public'));
 
 app.use(cors());
 
 const multer = require("multer");
-const multer_storage = multer.memoryStorage(); // Use memory storage for simplicity
+//const multer_storage = multer.memoryStorage(); // Use memory storage for simplicity
 
-const upload = multer({ storage: storage });
 
 var mysql = require("mysql");
 
@@ -38,6 +37,35 @@ conn.connect(function (err) {
   console.log("Connection Sucessful");
 });
 
+
+const multer_storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    const uploadDir = path.join(__dirname, 'upload');
+    cb(null, uploadDir);
+  },
+  filename: function (req, file, cb) {
+    cb(null, `${Date.now()}-${file.originalname}`);
+  },
+});
+
+const upload = multer({ storage: multer_storage });
+
+
+app.post('/create_pet_profile', upload.single('petPicture'), (req, res) => {
+  var gender = req.body.gender;
+  var age = req.body.age;
+  var breed = req.body.breed;
+  var username = req.body.username;
+  var about = req.body.about;
+  const petPicture = req.file.filename;
+  var sql = `insert into pet_profile(pet_owner,gender,age,breed , about, petPicture) values('${username}', '${gender}', '${age}', '${breed}' , '${about}', '${petPicture}')`;
+
+  conn.query(sql, function (err, results) {
+    if (err) throw err;
+    else
+      res.json(1);
+  });
+});
 
 
 
@@ -514,21 +542,6 @@ app.get('/logout', (req, res) => {
 });
 
 
-app.post('/create_pet_profile', upload.single('petPicture'), (req, res) => {
-  var gender = req.body.gender;
-  var age = req.body.age;
-  var breed = req.body.breed;
-  var username = req.body.username;
-  var about = req.body.about;
-  const petPicture = req.file;
-  var sql = `insert into pet_profile(pet_owner,gender,age,breed , about) values('${username}', '${gender}', '${age}', '${breed}' , '${about}')`;
-
-  conn.query(sql, function (err, results) {
-    if (err) throw err;
-    else
-      res.json(1);
-  });
-});
 
 
 
