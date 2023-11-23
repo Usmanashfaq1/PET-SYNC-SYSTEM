@@ -116,15 +116,14 @@
   $(document).ready(function () {
     $('#profile').submit(function (e) {
       e.preventDefault();
-      alert("here");
-      register();
+      register_profile();
     });
 
 
   });
 
-  function register() {
-    const username = localStorage.getItem('username');
+  function register_profile() {
+    const username = localStorage.getItem('name');
     alert(username);
     var gender = $("input[name='gender']:checked").val();
     var age = $("#age").val();

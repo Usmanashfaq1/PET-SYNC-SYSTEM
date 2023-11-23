@@ -192,31 +192,6 @@
 
   <script>
 
-    // function startGoogleSignIn() {
-    //         gapi.load('auth2', function () {
-    //             gapi.auth2.init({
-    //                 client_id: '691946877433-kmrg5o8851td8j7m4p3j1mr7l0jurp9u.apps.googleusercontent.com'
-    //             }).then(function (auth2) {
-    //                 // Sign in the user
-    //                 auth2.signIn().then(function (googleUser) {
-    //                     // Handle the signed-in user
-    //                     var profile = googleUser.getBasicProfile();
-    //                     console.log('ID: ' + profile.getId());
-    //                     console.log('Name: ' + profile.getName());
-    //                     console.log('Image URL: ' + profile.getImageUrl());
-    //                     console.log('Email: ' + profile.getEmail());
-    //                 });
-    //             });
-    //         });
-    //     }
-    //     <a href="#" onclick="signOut();">Sign out</a>
-    //   function signOut() {
-    //     var auth2 = gapi.auth2.getAuthInstance();
-    //     auth2.signOut().then(function () {
-    //       console.log('User signed out.');
-    //     });
-    //   }
-
     function register() {
       var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
       var username = $("#username").val();
@@ -245,19 +220,7 @@
         success: function (data) {
           if (data == 1) {
             window.location.reload();
-            // window.location.href = 'dashboard.html';
-
-            // window.location.href = 'register.html';
-            // $("#username").val('')
-            // $("#email").val('');
-            // $("#password").val('');
-            // $("#repeat_password").val('');
-            // window.open("dashboard.html");
-            // $('#sign')[0].reset(); // Clear form fields
           }
-          // else if (data == -1) {
-          //   checkAdmin();
-          //}
           else {
             alert("Registeration Failed");
           }

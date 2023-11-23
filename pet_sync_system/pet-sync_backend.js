@@ -189,14 +189,7 @@ app.post("/login", function (req, res) {
 });
 
 
-
-
-
-
 //vet sign in
-
-
-
 
 
 app.post("/login_vet", function (req, res) {
@@ -257,10 +250,7 @@ app.post("/register_vet", function (req, res) {
   });
 });
 
-
-
 //
-
 
 app.post("/login_Admin", function (req, res) {
 
@@ -293,7 +283,6 @@ app.post("/login_Admin", function (req, res) {
 
 app.post("/check_user", function (req, res) {
 
-  // var password = req.body.password;
   var email = req.body.email;
   var sql = `SELECT email FROM sign_up WHERE email= '${email}'`;
   conn.query(sql, function (err2, results) {

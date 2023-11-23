@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 21, 2023 at 07:21 PM
--- Server version: 10.4.25-MariaDB
--- PHP Version: 8.1.10
+-- Generation Time: Nov 23, 2023 at 04:46 PM
+-- Server version: 10.4.28-MariaDB
+-- PHP Version: 8.2.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -32,7 +32,7 @@ CREATE TABLE `admin_login` (
   `username` varchar(200) NOT NULL,
   `email` varchar(100) NOT NULL,
   `password` varchar(100) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `admin_login`
@@ -54,7 +54,7 @@ CREATE TABLE `appointment` (
   `vet_email` varchar(2000) NOT NULL,
   `type` varchar(2000) NOT NULL,
   `id` int(244) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `appointment`
@@ -69,6 +69,31 @@ INSERT INTO `appointment` (`user_name`, `user_email`, `vet_name`, `vet_email`, `
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `pet_profile`
+--
+
+CREATE TABLE `pet_profile` (
+  `id` int(11) NOT NULL,
+  `pet_owner` varchar(150) NOT NULL,
+  `gender` varchar(50) NOT NULL,
+  `age` int(50) NOT NULL,
+  `breed` varchar(50) NOT NULL,
+  `about` varchar(500) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `pet_profile`
+--
+
+INSERT INTO `pet_profile` (`id`, `pet_owner`, `gender`, `age`, `breed`, `about`) VALUES
+(1, 'sameed1', 'female', 3, '3', '3'),
+(2, 'null', 'male', 3, 'mackow', 'uhi'),
+(3, 'null', 'male', 3, 'mackow', 'uhi'),
+(4, 'sameed1', 'male', 3, '33', '3333');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `sign_up`
 --
 
@@ -78,7 +103,7 @@ CREATE TABLE `sign_up` (
   `email` varchar(50) NOT NULL,
   `password` varchar(500) NOT NULL,
   `confirm_password` varchar(500) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `sign_up`
@@ -91,8 +116,8 @@ INSERT INTO `sign_up` (`id`, `username`, `email`, `password`, `confirm_password`
 (4, 'sameed234', 'sameed4@gmail.com', '$2b$10$ylr3lmGfL5WIkpiUjiiV/ujI7n2cvesjzwx0V8M94vDde8JZPj.MW', '$2b$10$ylr3lmGfL5WIkpiUjiiV/ujI7n2cvesjzwx0V8M94vDde8JZPj.MW'),
 (5, 'sameed12', 'sameed21@gmail.com', '$2b$10$2v6ttMvfE8XDFbYaxksxd.dY.oTCamqC/CV0.4YO8fYug..DaMr/C', '$2b$10$2v6ttMvfE8XDFbYaxksxd.dY.oTCamqC/CV0.4YO8fYug..DaMr/C'),
 (6, '20F-0116', 'us@gmail.com', '$2b$10$xJKK36fB2TGCMQ0KQRiVoejgGIhagL6IpaELvEyzM2ila3aJBNgbW', '$2b$10$xJKK36fB2TGCMQ0KQRiVoejgGIhagL6IpaELvEyzM2ila3aJBNgbW'),
-(7, 'sameed1', 'master.official.445566@gmail.com', '$2b$10$1tJc8aEC2ZgCI9vvjMR.YOUPMcyN1vpCjogy45HobexUMFN6huenW', '$2b$10$k.1X/iaVY8t4LhBus7ud0egdSi8pHulbx/OcTVKdWWL/OtSRkPPcS'),
-(8, 'Abdullah', 'abdullahx458@gmail.com', '$2b$10$sZgjwmXueMkaOb63m6Zw0.Bxy95fDLZOYKnUhzZ8JaD.kDkpKQ9JO', '$2b$10$sZgjwmXueMkaOb63m6Zw0.Bxy95fDLZOYKnUhzZ8JaD.kDkpKQ9JO');
+(7, 'sameed1', 'master.official.445566@gmail.com', '$2b$10$sBzxTQsck9dl5vbd96unrebbWlnx/NnM.j1nJK5Y2bkqBEHb9XRg2', '$2b$10$k.1X/iaVY8t4LhBus7ud0egdSi8pHulbx/OcTVKdWWL/OtSRkPPcS'),
+(8, '1.', '107@gmail.com', '1', '$2b$10$RumXiz39Phfk.oH4FxqjsOKXCy42naFnQAASTSOtiy4bGPQZqqsnC');
 
 -- --------------------------------------------------------
 
@@ -110,7 +135,7 @@ CREATE TABLE `vet` (
   `password` varchar(2000) NOT NULL,
   `id` int(255) NOT NULL,
   `location` varchar(2000) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `vet`
@@ -135,6 +160,12 @@ ALTER TABLE `admin_login`
 -- Indexes for table `appointment`
 --
 ALTER TABLE `appointment`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `pet_profile`
+--
+ALTER TABLE `pet_profile`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -164,6 +195,12 @@ ALTER TABLE `admin_login`
 --
 ALTER TABLE `appointment`
   MODIFY `id` int(244) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `pet_profile`
+--
+ALTER TABLE `pet_profile`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `sign_up`
