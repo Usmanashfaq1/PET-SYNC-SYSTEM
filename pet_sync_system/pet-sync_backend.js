@@ -54,6 +54,9 @@ app.get('/admin-dashboard', (req, res) => {
   res.render('admin_dashboard'); 
 });
 
+app.get('/pet-profile', (req, res) => {
+  res.render('pet_profile'); 
+});
 
 app.get('/front', (req, res) => {
   res.render('front'); 
@@ -515,7 +518,20 @@ app.get('/logout', (req, res) => {
 });
 
 
+app.post("/create_pet_profile", function (req, res) {
+  var gender = req.body.gender;
+  var age = req.body.age;
+  var breed = req.body.breed;
+  var username = req.body.username;
+  var about = req.body.about;
+  var sql = `insert into pet_profile(pet_owner,gender,age,breed , about) values('${username}', '${gender}', '${age}', '${breed}' , '${about}')`;
 
+  conn.query(sql, function (err, results) {
+    if (err) throw err;
+    else
+      res.json(1);
+  });
+});
 
 
 
