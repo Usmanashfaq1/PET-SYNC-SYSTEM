@@ -157,9 +157,9 @@
 
                         <label for="qualification">Qualification:</label>
                         <select id="qualification" name="qualification" required>
-                          <option value="bvm">Doctor of Veterinary Medicine (DVM)</option>
-                          <option value="bvm">Bachelor of Veterinary Medicine (BVM)</option>
-                          <option value="bsc">Bachelor of Science (B.Sc.) in Animal Science</option>
+                          <option value="Doctor of Veterinary Medicine (DVM)">Doctor of Veterinary Medicine (DVM)</option>
+                          <option value="Bachelor of Veterinary Medicine (BVM)">Bachelor of Veterinary Medicine (BVM)</option>
+                          <option value="Bachelor of Science (B.Sc.) in Animal Science">Bachelor of Science (B.Sc.) in Animal Science</option>
                           <!-- Add other relevant options -->
                         </select>
                       </div>
@@ -210,6 +210,21 @@
                         </div>
                       </div>
 
+                      <label for="availability">Availability:</label>
+
+<!-- Select Days -->
+
+
+<!-- Select Time Slots -->
+<div class="mb-3">
+  <label for="timeslot">Select Time Slots:</label>
+  <select id="timeslot" name="timeslot" class="form-select"  required>
+    <option value="Morning (8:00 AM - 12:00 PM)">Morning (8:00 AM - 12:00 PM)</option>
+    <option value="Afternoon (12:00 PM - 4:00 PM)">Afternoon (12:00 PM - 4:00 PM)</option>
+    <option value="Evening (4:00 PM - 8:00 PM)">Evening (4:00 PM - 8:00 PM)</option>
+  </select>
+</div>
+
 
 
 
@@ -257,7 +272,7 @@
 
   </section>
 
-  <div class="register-box" style="display: none;">
+  <div class="register-box" >
 
 
 
@@ -414,6 +429,7 @@
 
     var location = $("#location").val();
     var email = $("#email").val();
+    var timeslot = $("#timeslot").val();
     var qualification = $("#qualification").val();
     var license_number = $("#license_number").val();
 
@@ -426,7 +442,7 @@
       return;
     }
 
-    var data = { fname: fname, lname: lname, specialization: specialization, qualification: qualification, license_number: license_number, email: email, password: password, location: location };
+    var data = { fname: fname, lname: lname, specialization: specialization, qualification: qualification, license_number: license_number, email: email,timeslot:timeslot, password: password, location: location };
 
     let post = JSON.stringify(data);
 

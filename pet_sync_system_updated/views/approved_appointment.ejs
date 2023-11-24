@@ -51,7 +51,7 @@
   <div id="topbar" class="d-flex align-items-center fixed-top">
     <div class="container d-flex justify-content-between">
       <div class="contact-info d-flex align-items-center">
-        <i class="bi bi-envelope"></i> <a href="mailto:contact@example.com">petsync@gmail.com</a>
+        <i class="bi bi-envelope"></i> <a href="mailto:" id="email-link">contact@example.com</a>
         <i class="bi bi-phone"></i> +92 3389 55568 45
       </div>
       <div class="d-none d-lg-flex social-links align-items-center">
@@ -80,7 +80,7 @@
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->
 
-      <a href="/vet-dashboard" class="appointment-btn scrollto"><span class="d-none d-md-inline">Home</span> Page</a>
+      <a href="/user-dashboard" class="appointment-btn scrollto"><span class="d-none d-md-inline">Home</span> Page</a>
 
     </div>
   </header><!-- End Header -->
@@ -99,12 +99,12 @@
                   <tr>
                     <th>Date</th>
                     <th>Client Name</th>
-                    <th>Client Email</th>
+                    <th>Vet Email</th>
                     <th>Type</th>
                     <th>Scheduled Slot</th>
                     <th>Subject</th>
                     <th>Status</th>
-                    <th>Action</th>
+                    <th>Approved by</th>
                   </tr>
                 </thead>
                 <tbody id="party-details-body">
@@ -206,9 +206,10 @@
           // alert(req.session.vetEmail);
           // Fetch vet details based on selected vet type
           const email = localStorage.getItem('email');
+          
           $.ajax({
 
-            url: 'http://localhost:4000/api/appointment/' + email,
+            url: 'http://localhost:4000/api/appointmentapp/' + email,
 
             method: 'GET',
             success: function (data) {
@@ -222,13 +223,14 @@
                   <td>${formatDate(record.date)}</td>
                     <td>${record.user_name}</td>
 
-                    <td>${record.user_email}</td>
+                    <td>${record.vet_email}</td>
                     <td>${record.type}</td>
                     <td>${formatDateWithTime(record.slot)}</td>
                     <td>${record.subject}</td>
                     <td>${record.status}</td>
+                    <td>${record.vet_name}</td>
 
-                    <td><button class="btn btn-primary" onclick="bookAppointment(' ${record.id}','${record.status}')">Approve</button></td>
+                    
                   `);
                   $('#party-details-body').append(row);
                 });
@@ -249,34 +251,7 @@
 
 
 
-        function bookAppointment(id,status) 
-         {
-          const appointmentId = id;
-         if(status==='approved')
-         {
-          alert("already approved!!!")
-          return;
-
-         }
-        // AJAX call to the server-side API
-        $.ajax({
-          type: 'PUT',
-          url: `/updateAppointmentStatus/${appointmentId}`,
-          success: function(response) {
-            console.log(response);
-            // Handle success, e.g., show a success message to the user
-            alert('Appointment status updated to approved!');
-            window.close('/manage-appointment');
-            window.open('/vet-dashboard');
-          },
-          error: function(error) {
-            console.error(error);
-            // Handle error, e.g., show an error message to the user
-            alert('Error updating appointment status');
-          }
-        });
-
-         }
+       
 
 
 
@@ -313,6 +288,14 @@ function formatDate(dateString)
 
       <script>
 
+      </script>
+      <script>
+        $(document).ready(function () {
+          const email = localStorage.getItem('email');
+          
+          // Update the email link with the dynamic email
+          $('#email-link').attr('href', 'mailto:' + email).text(email);
+        });
       </script>
 
 

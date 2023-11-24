@@ -97,11 +97,13 @@
 <!-- Appointment Details -->
 <label for="preferredDateTime">Preferred Date and Time:</label>
 <input type="datetime-local" id="preferredDateTime" name="preferredDateTime" required>
-
+<br>
+<br>
 <!-- Reason for Appointment -->
 <label for="appointmentReason">Reason for Appointment:</label>
-<input id="appointmentReason" name="appointmentReason" rows="4" required></input>
-
+<input id="appointmentReason" name="appointmentReason"  required></input>
+<br>
+<br>
               <label for="party" class="form-label">Vet Type</label>
               <select class="form-select" id="party" required>
                 <option value="">Select Vet Type</option>
@@ -119,6 +121,9 @@
                   <th>lname</th>
                   <th>specialization</th>
                   <th>qualification</th>
+                  <th>location</th>
+                  <th>timeslot</th>
+
                   <th>Action</th>
                 </tr>
               </thead>
@@ -225,6 +230,8 @@
 
       <script>
         $(document).ready(function () {
+
+          
           // Handle vet type selection change event
           $('#party').change(function () {
             var selectedVetType = $(this).val();
@@ -245,6 +252,9 @@
                     <td>${record.lname}</td>
                     <td>${record.specialization}</td>
                     <td>${record.qualification}</td>
+                    <td>${record.location}</td>
+                    <td>${record.timeslot}</td>
+
                     <td><button class="btn btn-primary" onclick="bookAppointment('${record.fname}', '${record.lname}', '${record.specialization}', '${record.qualification}' , '${record.email}')">Book</button></td>
                   `);
                       $('#party-details-body').append(row);
@@ -282,8 +292,14 @@
           const storedName1 = localStorage.getItem('name');
           const email1 = localStorage.getItem('email');// 
           const userName = storedName1;
-
+          var slot = $("#preferredDateTime").val();
+          var subject = $("#appointmentReason").val();
           const userEmail = email1;
+          if (!slot || !subject) {
+  return;
+}
+else{
+
 
 
           // Prepare data for the AJAX request
@@ -292,7 +308,9 @@
             user_email: userEmail,
             vet_name: vetName,
             vet_email: vetEmail,
-            type: `(${specialization})`
+            type: `(${specialization})`,
+            slot: slot,
+            subject :subject
           };
 
 
@@ -316,7 +334,7 @@
           });
         }
 
-
+      }
 
       </script>
       <script>

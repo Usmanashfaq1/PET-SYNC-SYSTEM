@@ -134,6 +134,10 @@ app.get('/pet-profile', (req, res) => {
   res.render('pet_profile_page');
 });
 
+app.get('/approved-app', (req, res) => {
+  res.render('approved_appointment');
+});
+
 app.get('/create-pet-profile', (req, res) => {
   res.render('create_pet_profile');
 });
@@ -319,12 +323,12 @@ app.post("/register_vet", function (req, res) {
 
   const salt = bcrypt.genSaltSync(10);
   const hash = bcrypt.hashSync(password, salt);
-
+var timeslot=req.body.timeslot;
   var specialization = req.body.specialization;
   var qualification = req.body.qualification;
   var license_number = req.body.license_number;
 
-  var sql = `insert into vet(fname,lname,specialization,qualification,license_number,email,password,location) values('${fname}', '${lname}', '${specialization}', '${qualification}', '${license_number}', '${email}', '${hash}','${location}')`;
+  var sql = `insert into vet(fname,lname,specialization,qualification,license_number,email,timeslot,password,location) values('${fname}', '${lname}', '${specialization}', '${qualification}', '${license_number}', '${email}','${timeslot}', '${hash}','${location}')`;
 
   conn.query(sql, function (err, results) {
     if (err) throw err;
@@ -482,11 +486,12 @@ app.get('/api/vets', (req, res) => {
 // API endpoint to insert data into the "appointment" table
 //insert data
 app.post('/api/appointments', (req, res) => {
-  const { user_name, user_email, vet_name, vet_email, type } = req.body;
-
+  const { user_name, user_email, vet_name, vet_email, type,slot,subject } = req.body;
+  const date = new Date();
+  const status='unapproved';
   // Insert data into the "appointment" table
-  const sql = 'INSERT INTO appointment (user_name, user_email, vet_name, vet_email, type) VALUES (?, ?, ?, ?, ?)';
-  const values = [user_name, user_email, vet_name, vet_email, type];
+  const sql = 'INSERT INTO appointment (date,user_name, user_email, vet_name, vet_email, type,slot,subject,status) VALUES (?, ?, ?, ?, ?,?,?,?,?)';
+  const values = [date,user_name, user_email, vet_name, vet_email, type,slot,subject,status];
 
   conn.query(sql, values, (err, result) => {
     if (err) {
@@ -531,6 +536,29 @@ app.get('/api/appointment/:email', (req, res) => {
     }
   });
 });
+
+//
+app.get('/api/appointmentapp/:email', (req, res) => {
+  const email = req.params.email; // Taking email from the AJAX frontend
+
+  // Query the database to fetch appointments for the specified vet
+  conn.query('SELECT * FROM appointment WHERE user_email = ? AND status = ?', [email, 'approved'], (err, result) => {
+    if (err) {
+      console.error('Error fetching appointment details:', err);
+      res.status(500).json({ error: 'An error occurred while fetching appointment details' });
+      return;
+    }
+
+    if (result.length === 0) {
+      res.json(null); // No appointments found for the specified vet
+    } else {
+      res.json(result);
+    }
+  });
+});
+
+
+
 
 
 //
@@ -590,7 +618,23 @@ app.get('/logout', (req, res) => {
 });
 
 
+//approved appointment
+// Define the API endpoint to update the status to "approved"
+app.put('/updateAppointmentStatus/:appointmentId', (req, res) => {
+  const appointmentId = req.params.appointmentId;
 
+  // Update the status to "approved"
+  const sql = 'UPDATE appointment SET status = ? WHERE id = ?';
+  conn.query(sql, ['approved', appointmentId], (err, result) => {
+    if (err) {
+      console.error('Error updating status:', err);
+      res.status(500).send('Internal Server Error');
+    } else {
+      console.log('Status updated successfully');
+      res.status(200).send('Status updated to approved');
+    }
+  });
+});
 
 
 var server = app.listen(4000, function () {
