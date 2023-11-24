@@ -29,7 +29,7 @@ var conn = mysql.createConnection({
   host: "localhost",
   user: "root",
   password: "",
-  database: "pet-sync-database",
+  database: "pet-sync-database1",
 });
 
 conn.connect(function (err) {
@@ -57,9 +57,12 @@ app.post('/create_pet_profile', upload.single('petPicture'), (req, res) => {
   var age = req.body.age;
   var breed = req.body.breed;
   var username = req.body.username;
-  var about = req.body.about;
+  var weight = req.body.weight
+  var color=req.body.color;
+  var petname=req.body.petname;
+  var species=req.body.species;
   const petPicture = req.file.filename;
-  var sql = `insert into pet_profile(pet_owner,gender,age,breed , about, petPicture) values('${username}', '${gender}', '${age}', '${breed}' , '${about}', '${petPicture}')`;
+  var sql = `insert into pet_profile(pet_owner,petname,gender,age,breed , species,weight,color, petPicture) values('${username}', '${petname}', '${gender}', '${age}', '${breed}' , '${species}', '${weight}', '${color}', '${petPicture}')`;
 
   conn.query(sql, function (err, results) {
     if (err) throw err;
@@ -133,6 +136,10 @@ app.get('/pet-profile', (req, res) => {
 
 app.get('/create-pet-profile', (req, res) => {
   res.render('create_pet_profile');
+});
+
+app.get('/create-pet-profile-new', (req, res) => {
+  res.render('create_pet_profile_new');
 });
 
 app.get('/front', (req, res) => {

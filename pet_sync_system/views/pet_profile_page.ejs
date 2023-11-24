@@ -59,7 +59,7 @@
 
                 <h1 class="logo me-auto"><a href="">PETSYNC</a></h1>
 
-                <a href="/create-pet-profile" class="appointment-btn scrollto"><span
+                <a href="/create-pet-profile-new" class="appointment-btn scrollto"><span
                         class="d-none d-md-inline">Create</span> Pet Profile</a>
 
             </div>
@@ -86,10 +86,13 @@
                                                     <thead>
                                                         <tr>
                                                             <th>Pet Owner</th>
+                                                            <th>Pet Name</th>
                                                             <th>Pet Gender</th>
                                                             <th>Pet Age</th>
                                                             <th>Pet Breed</th>
-                                                            <th>Pet About</th>
+                                                            <th>Pet Species</th>
+                                                            <th>Pet Weight</th>
+                                                            <th>Pet Color</th>
                                                             <th>Pet Profile Picture</th>
                                                         </tr>
                                                     </thead>
@@ -217,10 +220,13 @@
                             var row = $('<tr>');
                             row.html(`
   <td>${result.pet_owner}</td>
+  <td>${result.petname}</td>
   <td>${result.gender}</td>
   <td>${result.age}</td>
   <td>${result.breed}</td>
-  <td>${result.about}</td>
+  <td>${result.species}</td>
+  <td>${result.weight}</td>
+  <td>${result.color}</td>
   <td><img src="data:image/jpeg;base64,${result.petPicture}" alt="Pet Picture" style="width: 4rem; height: 4rem;"></td>
 `);
 
