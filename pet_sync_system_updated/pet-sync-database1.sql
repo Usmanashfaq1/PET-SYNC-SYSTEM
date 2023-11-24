@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.1
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 24, 2023 at 09:27 AM
--- Server version: 10.4.28-MariaDB
--- PHP Version: 8.2.4
+-- Generation Time: Nov 24, 2023 at 09:50 AM
+-- Server version: 10.4.25-MariaDB
+-- PHP Version: 8.1.10
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `pet-sync-database`
+-- Database: `pet-sync-database1`
 --
 
 -- --------------------------------------------------------
@@ -32,7 +32,7 @@ CREATE TABLE `admin_login` (
   `username` varchar(200) NOT NULL,
   `email` varchar(100) NOT NULL,
   `password` varchar(100) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `admin_login`
@@ -54,7 +54,7 @@ CREATE TABLE `appointment` (
   `vet_email` varchar(2000) NOT NULL,
   `type` varchar(2000) NOT NULL,
   `id` int(244) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `appointment`
@@ -75,28 +75,22 @@ INSERT INTO `appointment` (`user_name`, `user_email`, `vet_name`, `vet_email`, `
 CREATE TABLE `pet_profile` (
   `id` int(11) NOT NULL,
   `pet_owner` varchar(150) NOT NULL,
+  `petname` varchar(2000) NOT NULL,
   `gender` varchar(50) NOT NULL,
   `age` int(50) NOT NULL,
   `breed` varchar(50) NOT NULL,
-  `about` varchar(500) NOT NULL,
-  `petPicture` varchar(1000) NOT NULL,
-  `petname` varchar(100) NOT NULL,
-  `species` varchar(100) NOT NULL,
-  `weight` varchar(100) NOT NULL,
-  `color` varchar(100) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  `species` varchar(2000) NOT NULL,
+  `weight` varchar(2000) NOT NULL,
+  `color` varchar(2000) NOT NULL,
+  `petPicture` varchar(1000) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `pet_profile`
 --
 
-INSERT INTO `pet_profile` (`id`, `pet_owner`, `gender`, `age`, `breed`, `about`, `petPicture`, `petname`, `species`, `weight`, `color`) VALUES
-(1, 'sameed1', 'female', 22, '22', '22', '1700763046308-admin.jpg', '', '', '', ''),
-(2, 'sameed1', 'female', 3, 'sdsa', 'sadasd', '1700803372405-drake.jpg', '', '', '', ''),
-(3, 'sameed12', 'male', 5, 'mackow', 'i love to meet others mackows', '1700803449844-favicon.png', '', '', '', ''),
-(4, 'sameed1', 'male', 0, 'asd', 'asdsa', '1700814273011-bg-pricing.jpg', 'sad', 'dog', '23', 'asd'),
-(5, 'sameed1', 'male', 0, 'asd', 'asd', '1700814295838-bg-pricing.jpg', 'asd', 'dog', '23', 'das'),
-(6, 'sameed1', 'male', 0, 'asd', 'asd', '1700814321083-bg-pricing.jpg', 'asd', 'dog', '23', 'das');
+INSERT INTO `pet_profile` (`id`, `pet_owner`, `petname`, `gender`, `age`, `breed`, `species`, `weight`, `color`, `petPicture`) VALUES
+(1, 'Usman', 'Tommy', 'male', 5, 'German', 'dog', '20', 'Black', '1700807115781-dog.jpg');
 
 -- --------------------------------------------------------
 
@@ -110,7 +104,7 @@ CREATE TABLE `sign_up` (
   `email` varchar(50) NOT NULL,
   `password` varchar(500) NOT NULL,
   `confirm_password` varchar(500) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `sign_up`
@@ -124,7 +118,8 @@ INSERT INTO `sign_up` (`id`, `username`, `email`, `password`, `confirm_password`
 (5, 'sameed12', 'sameed21@gmail.com', '$2b$10$2v6ttMvfE8XDFbYaxksxd.dY.oTCamqC/CV0.4YO8fYug..DaMr/C', '$2b$10$2v6ttMvfE8XDFbYaxksxd.dY.oTCamqC/CV0.4YO8fYug..DaMr/C'),
 (6, '20F-0116', 'us@gmail.com', '$2b$10$xJKK36fB2TGCMQ0KQRiVoejgGIhagL6IpaELvEyzM2ila3aJBNgbW', '$2b$10$xJKK36fB2TGCMQ0KQRiVoejgGIhagL6IpaELvEyzM2ila3aJBNgbW'),
 (7, 'sameed1', 'master.official.445566@gmail.com', '$2b$10$sBzxTQsck9dl5vbd96unrebbWlnx/NnM.j1nJK5Y2bkqBEHb9XRg2', '$2b$10$k.1X/iaVY8t4LhBus7ud0egdSi8pHulbx/OcTVKdWWL/OtSRkPPcS'),
-(8, '1.', '107@gmail.com', '1', '$2b$10$RumXiz39Phfk.oH4FxqjsOKXCy42naFnQAASTSOtiy4bGPQZqqsnC');
+(8, '1.', '107@gmail.com', '1', '$2b$10$RumXiz39Phfk.oH4FxqjsOKXCy42naFnQAASTSOtiy4bGPQZqqsnC'),
+(9, 'Usman', 'usman123@gmail.com', '$2b$10$TxxhI9WmuBl/IqSM6zYvruJb1Le1bFCMZVBCDjENJ.wRm2MUtPwwi', '$2b$10$TxxhI9WmuBl/IqSM6zYvruJb1Le1bFCMZVBCDjENJ.wRm2MUtPwwi');
 
 -- --------------------------------------------------------
 
@@ -142,7 +137,7 @@ CREATE TABLE `vet` (
   `password` varchar(2000) NOT NULL,
   `id` int(255) NOT NULL,
   `location` varchar(2000) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `vet`
@@ -207,13 +202,13 @@ ALTER TABLE `appointment`
 -- AUTO_INCREMENT for table `pet_profile`
 --
 ALTER TABLE `pet_profile`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `sign_up`
 --
 ALTER TABLE `sign_up`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `vet`
