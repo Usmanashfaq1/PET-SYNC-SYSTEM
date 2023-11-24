@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 23, 2023 at 06:27 PM
+-- Generation Time: Nov 24, 2023 at 09:27 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -79,19 +79,24 @@ CREATE TABLE `pet_profile` (
   `age` int(50) NOT NULL,
   `breed` varchar(50) NOT NULL,
   `about` varchar(500) NOT NULL,
-  `petPicture` varchar(1000) NOT NULL
+  `petPicture` varchar(1000) NOT NULL,
+  `petname` varchar(100) NOT NULL,
+  `species` varchar(100) NOT NULL,
+  `weight` varchar(100) NOT NULL,
+  `color` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `pet_profile`
 --
 
-INSERT INTO `pet_profile` (`id`, `pet_owner`, `gender`, `age`, `breed`, `about`, `petPicture`) VALUES
-(1, 'sameed1', 'female', 3, '3', '3', ''),
-(2, 'null', 'male', 3, 'mackow', 'uhi', ''),
-(3, 'null', 'male', 3, 'mackow', 'uhi', ''),
-(4, 'sameed1', 'male', 3, '33', '3333', ''),
-(5, 'sameed1', 'other', 2, '2', '2', '1700760324619-bg_profile.jpg');
+INSERT INTO `pet_profile` (`id`, `pet_owner`, `gender`, `age`, `breed`, `about`, `petPicture`, `petname`, `species`, `weight`, `color`) VALUES
+(1, 'sameed1', 'female', 22, '22', '22', '1700763046308-admin.jpg', '', '', '', ''),
+(2, 'sameed1', 'female', 3, 'sdsa', 'sadasd', '1700803372405-drake.jpg', '', '', '', ''),
+(3, 'sameed12', 'male', 5, 'mackow', 'i love to meet others mackows', '1700803449844-favicon.png', '', '', '', ''),
+(4, 'sameed1', 'male', 0, 'asd', 'asdsa', '1700814273011-bg-pricing.jpg', 'sad', 'dog', '23', 'asd'),
+(5, 'sameed1', 'male', 0, 'asd', 'asd', '1700814295838-bg-pricing.jpg', 'asd', 'dog', '23', 'das'),
+(6, 'sameed1', 'male', 0, 'asd', 'asd', '1700814321083-bg-pricing.jpg', 'asd', 'dog', '23', 'das');
 
 -- --------------------------------------------------------
 
@@ -202,7 +207,7 @@ ALTER TABLE `appointment`
 -- AUTO_INCREMENT for table `pet_profile`
 --
 ALTER TABLE `pet_profile`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `sign_up`

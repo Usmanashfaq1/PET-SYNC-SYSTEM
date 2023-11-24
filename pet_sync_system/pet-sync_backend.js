@@ -29,7 +29,7 @@ var conn = mysql.createConnection({
   host: "localhost",
   user: "root",
   password: "",
-  database: "pet-sync-database1",
+  database: "pet-sync-database",
 });
 
 conn.connect(function (err) {
@@ -57,19 +57,25 @@ app.post('/create_pet_profile', upload.single('petPicture'), (req, res) => {
   var age = req.body.age;
   var breed = req.body.breed;
   var username = req.body.username;
-  var weight = req.body.weight
-  var color=req.body.color;
-  var petname=req.body.petname;
-  var species=req.body.species;
+  var weight = req.body.weight;
+  var color = req.body.color;
+  var petname = req.body.petname;
+  var species = req.body.species;
+  var about = req.body.about;
+
   const petPicture = req.file.filename;
-  var sql = `insert into pet_profile(pet_owner,petname,gender,age,breed , species,weight,color, petPicture) values('${username}', '${petname}', '${gender}', '${age}', '${breed}' , '${species}', '${weight}', '${color}', '${petPicture}')`;
+  var sql = `INSERT INTO pet_profile(pet_owner, gender, age, breed, about, petPicture, petname, species, weight, color) VALUES('${username}', '${gender}', '${age}', '${breed}', '${about}', '${petPicture}', '${petname}', '${species}', '${weight}', '${color}')`;
 
   conn.query(sql, function (err, results) {
-    if (err) throw err;
-    else
+    if (err) {
+      console.error(err);
+      res.status(500).json({ error: "Internal Server Error" });
+    } else {
       res.json(1);
+    }
   });
 });
+
 
 app.get('/get_profiles/:username', (req, res) => {
   const username = req.params.username;

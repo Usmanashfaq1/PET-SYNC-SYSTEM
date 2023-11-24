@@ -152,6 +152,14 @@
                     </div>
                   </div>
 
+                  <div class="d-flex flex-row align-items-center mb-4">
+                    <i class="fas fa-info fa-lg me-3 fa-fw"></i>
+                    <div class="form-outline flex-fill mb-0">
+                      <label for="about">about:</label>
+                      <input type="text" id="about" name="about" class="form-control">
+                    </div>
+                  </div>
+
                   <div class="mb-4">
                     <label for="petPicture" class="form-label">Pet Picture:</label>
                     <input type="file" name="petPicture" id="petPicture" class="form-control" accept="image/*">
@@ -212,12 +220,9 @@
     var weight = $("#weight").val();
     var species=$("#species").val();
     var color=$("#color").val();
-
-    // Handle file upload
+    var about=$("#about").val();
     var petPicture = document.getElementById('petPicture').files[0];
 
-   alert(petname);
-   alert(gender);
 
     var formData = new FormData();
     formData.append('username', username);
@@ -228,7 +233,7 @@
     formData.append('species', species);
     formData.append('weight', weight);
     formData.append('color', color);
-    
+    formData.append('about', about);
     formData.append('petPicture', petPicture);
     $.ajax({
       url: 'http://localhost:4000/create_pet_profile',
