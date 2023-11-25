@@ -61,8 +61,9 @@ app.post('/create_pet_profile', upload.single('petPicture'), (req, res) => {
   var color=req.body.color;
   var petname=req.body.petname;
   var species=req.body.species;
+  var about=req.body.about;
   const petPicture = req.file.filename;
-  var sql = `insert into pet_profile(pet_owner,petname,gender,age,breed , species,weight,color, petPicture) values('${username}', '${petname}', '${gender}', '${age}', '${breed}' , '${species}', '${weight}', '${color}', '${petPicture}')`;
+  var sql = `insert into pet_profile(pet_owner,petname,gender,age,breed , species,weight,color, petPicture, about) values('${username}', '${petname}', '${gender}', '${age}', '${breed}' , '${species}', '${weight}', '${color}', '${petPicture}', '${about}')`;
 
   conn.query(sql, function (err, results) {
     if (err) throw err;

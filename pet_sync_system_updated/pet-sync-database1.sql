@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 24, 2023 at 09:50 AM
+-- Generation Time: Nov 25, 2023 at 05:17 AM
 -- Server version: 10.4.25-MariaDB
 -- PHP Version: 8.1.10
 
@@ -48,11 +48,15 @@ INSERT INTO `admin_login` (`id`, `username`, `email`, `password`) VALUES
 --
 
 CREATE TABLE `appointment` (
+  `date` varchar(500) NOT NULL,
   `user_name` varchar(2000) NOT NULL,
   `user_email` varchar(2000) NOT NULL,
   `vet_name` varchar(2000) NOT NULL,
   `vet_email` varchar(2000) NOT NULL,
   `type` varchar(2000) NOT NULL,
+  `slot` varchar(500) NOT NULL,
+  `subject` varchar(500) NOT NULL,
+  `status` varchar(500) NOT NULL,
   `id` int(244) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -60,11 +64,10 @@ CREATE TABLE `appointment` (
 -- Dumping data for table `appointment`
 --
 
-INSERT INTO `appointment` (`user_name`, `user_email`, `vet_name`, `vet_email`, `type`, `id`) VALUES
-('Usman', 'usmanx12@gmail.com', 'Hussan Ahamd', 'hussan1@gmail.com', '(Veterinary Medicine)', 1),
-('ahsan', 'ahsan@gmail.com', 'Ayesha Ali', 'ayesha@gmail.com', '(Veterinary Medicine)', 2),
-('noman', 'noman@gmail.com', 'Ayesha Ali', 'ayesha@gmail.com', '(Veterinary Medicine)', 3),
-('Abdullah', 'abdullah@gmail.com', 'Hussan Ahamd', 'hussan1@gmail.com', '(Veterinary Medicine)', 4);
+INSERT INTO `appointment` (`date`, `user_name`, `user_email`, `vet_name`, `vet_email`, `type`, `slot`, `subject`, `status`, `id`) VALUES
+('2023-11-24 15:53:48.926', 'Usman', 'usman123@gmail.com', 'Ayesha Ahsan', 'ayesha123@gmail.com', '(One Health Approach)', '2023-11-30T09:00', 'Cat Check Up', 'approved', 1),
+('2023-11-24 16:40:53.972', 'Usman', 'usman123@gmail.com', 'Ali Ahmad', 'aliahmad123@gmail.com', '(Emergency and Critical Care)', '2023-12-10T15:40', 'Dog Check Up', 'approved', 2),
+('2023-11-24 16:45:29.135', 'bilal', 'bilal1@gmail.com', 'Ayesha Ahsan', 'ayesha123@gmail.com', '(One Health Approach)', '2023-11-27T10:50', 'Cat Check Up', 'approved', 3);
 
 -- --------------------------------------------------------
 
@@ -119,7 +122,8 @@ INSERT INTO `sign_up` (`id`, `username`, `email`, `password`, `confirm_password`
 (6, '20F-0116', 'us@gmail.com', '$2b$10$xJKK36fB2TGCMQ0KQRiVoejgGIhagL6IpaELvEyzM2ila3aJBNgbW', '$2b$10$xJKK36fB2TGCMQ0KQRiVoejgGIhagL6IpaELvEyzM2ila3aJBNgbW'),
 (7, 'sameed1', 'master.official.445566@gmail.com', '$2b$10$sBzxTQsck9dl5vbd96unrebbWlnx/NnM.j1nJK5Y2bkqBEHb9XRg2', '$2b$10$k.1X/iaVY8t4LhBus7ud0egdSi8pHulbx/OcTVKdWWL/OtSRkPPcS'),
 (8, '1.', '107@gmail.com', '1', '$2b$10$RumXiz39Phfk.oH4FxqjsOKXCy42naFnQAASTSOtiy4bGPQZqqsnC'),
-(9, 'Usman', 'usman123@gmail.com', '$2b$10$TxxhI9WmuBl/IqSM6zYvruJb1Le1bFCMZVBCDjENJ.wRm2MUtPwwi', '$2b$10$TxxhI9WmuBl/IqSM6zYvruJb1Le1bFCMZVBCDjENJ.wRm2MUtPwwi');
+(9, 'Usman', 'usman123@gmail.com', '$2b$10$TxxhI9WmuBl/IqSM6zYvruJb1Le1bFCMZVBCDjENJ.wRm2MUtPwwi', '$2b$10$TxxhI9WmuBl/IqSM6zYvruJb1Le1bFCMZVBCDjENJ.wRm2MUtPwwi'),
+(10, 'bilal', 'bilal1@gmail.com', '$2b$10$uCgboQS2jzmU2Weh6pvEpuN6oSHpSBYZIAkMPBAS3zm3LZyvo5whq', '$2b$10$uCgboQS2jzmU2Weh6pvEpuN6oSHpSBYZIAkMPBAS3zm3LZyvo5whq');
 
 -- --------------------------------------------------------
 
@@ -134,6 +138,7 @@ CREATE TABLE `vet` (
   `qualification` varchar(2000) NOT NULL,
   `license_number` varchar(2000) NOT NULL,
   `email` varchar(2000) NOT NULL,
+  `timeslot` varchar(200) NOT NULL,
   `password` varchar(2000) NOT NULL,
   `id` int(255) NOT NULL,
   `location` varchar(2000) NOT NULL
@@ -143,10 +148,9 @@ CREATE TABLE `vet` (
 -- Dumping data for table `vet`
 --
 
-INSERT INTO `vet` (`fname`, `lname`, `specialization`, `qualification`, `license_number`, `email`, `password`, `id`, `location`) VALUES
-('Ahamd', 'Ali', 'One Health Approach', 'bvm', '14456A', 'ahmadx458@gmail.com', '$2b$10$angUEcdwBNW6iY1ygAxCO.UeHz.bg/.FFaBzDykIcOLXzDW/bpCgK', 1, 'Faisalabad, Pakistan'),
-('Ayesha', 'Ali', 'Veterinary Medicine', 'bsc', '14458A', 'ayesha@gmail.com', '$2b$10$u24JvTfYPzgQZuae/jg2k.VS7gI9VW5AkH2A3wkPRIsnhEmsDvi3W', 2, 'Faisalabad, Pakistan'),
-('Hussan', 'Ahamd', 'Veterinary Medicine', 'bvm', '14451A', 'hussan1@gmail.com', '$2b$10$J1YVD/wqQap475WsvgVY7.tHntBlrACBmvg58VYXQZ5WvtzBzhjwW', 3, 'Faisalabad, Pakistan');
+INSERT INTO `vet` (`fname`, `lname`, `specialization`, `qualification`, `license_number`, `email`, `timeslot`, `password`, `id`, `location`) VALUES
+('Ayesha', 'Ahsan', 'One Health Approach', 'Bachelor of Veterinary Medicine (BVM)', '11223A', 'ayesha123@gmail.com', 'Morning (8:00 AM - 12:00 PM)', '$2b$10$M4yueHX66S/IVUu9Vl8p3.koVFc9nNNsUgFSzxgqsqSuA6.ClCnia', 1, '1 Sheikhupura Rd Noorpur, Faisalabad, Punjab 38000 Pakistan'),
+('Ali', 'Ahmad', 'Emergency and Critical Care', 'Doctor of Veterinary Medicine (DVM)', '11223B', 'aliahmad123@gmail.com', 'Afternoon (12:00 PM - 4:00 PM)', '$2b$10$azWQeXkvFMSHYvZSYIV6WuZIJTysfJCiTRDhcTIcaUzlyJplM2F6y', 2, 'GHUFRAN CLINIC, Tariq Rd, Sheikh Colony, Faisalabad, Punjab 38000, Pakistan');
 
 --
 -- Indexes for dumped tables
@@ -196,7 +200,7 @@ ALTER TABLE `admin_login`
 -- AUTO_INCREMENT for table `appointment`
 --
 ALTER TABLE `appointment`
-  MODIFY `id` int(244) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(244) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `pet_profile`
@@ -208,13 +212,13 @@ ALTER TABLE `pet_profile`
 -- AUTO_INCREMENT for table `sign_up`
 --
 ALTER TABLE `sign_up`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `vet`
 --
 ALTER TABLE `vet`
-  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
