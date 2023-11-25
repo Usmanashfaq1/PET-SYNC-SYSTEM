@@ -83,7 +83,6 @@ app.get('/get_profiles/:username', (req, res) => {
       return;
     }
 
-    console.log('Result Length:', result.length);
 
     const fileContents = [];
 

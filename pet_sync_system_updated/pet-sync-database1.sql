@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 25, 2023 at 05:17 AM
--- Server version: 10.4.25-MariaDB
--- PHP Version: 8.1.10
+-- Generation Time: Nov 25, 2023 at 05:58 AM
+-- Server version: 10.4.28-MariaDB
+-- PHP Version: 8.2.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -32,7 +32,7 @@ CREATE TABLE `admin_login` (
   `username` varchar(200) NOT NULL,
   `email` varchar(100) NOT NULL,
   `password` varchar(100) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `admin_login`
@@ -58,7 +58,7 @@ CREATE TABLE `appointment` (
   `subject` varchar(500) NOT NULL,
   `status` varchar(500) NOT NULL,
   `id` int(244) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `appointment`
@@ -67,7 +67,8 @@ CREATE TABLE `appointment` (
 INSERT INTO `appointment` (`date`, `user_name`, `user_email`, `vet_name`, `vet_email`, `type`, `slot`, `subject`, `status`, `id`) VALUES
 ('2023-11-24 15:53:48.926', 'Usman', 'usman123@gmail.com', 'Ayesha Ahsan', 'ayesha123@gmail.com', '(One Health Approach)', '2023-11-30T09:00', 'Cat Check Up', 'approved', 1),
 ('2023-11-24 16:40:53.972', 'Usman', 'usman123@gmail.com', 'Ali Ahmad', 'aliahmad123@gmail.com', '(Emergency and Critical Care)', '2023-12-10T15:40', 'Dog Check Up', 'approved', 2),
-('2023-11-24 16:45:29.135', 'bilal', 'bilal1@gmail.com', 'Ayesha Ahsan', 'ayesha123@gmail.com', '(One Health Approach)', '2023-11-27T10:50', 'Cat Check Up', 'approved', 3);
+('2023-11-24 16:45:29.135', 'bilal', 'bilal1@gmail.com', 'Ayesha Ahsan', 'ayesha123@gmail.com', '(One Health Approach)', '2023-11-27T10:50', 'Cat Check Up', 'approved', 3),
+('2023-11-25 09:33:24.986', 'Usman', 'usman123@gmail.com', 'Ayesha Ahsan', 'ayesha123@gmail.com', '(One Health Approach)', '2023-11-02T11:35', 'pain', 'approved', 4);
 
 -- --------------------------------------------------------
 
@@ -85,15 +86,18 @@ CREATE TABLE `pet_profile` (
   `species` varchar(2000) NOT NULL,
   `weight` varchar(2000) NOT NULL,
   `color` varchar(2000) NOT NULL,
-  `petPicture` varchar(1000) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  `petPicture` varchar(1000) NOT NULL,
+  `about` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `pet_profile`
 --
 
-INSERT INTO `pet_profile` (`id`, `pet_owner`, `petname`, `gender`, `age`, `breed`, `species`, `weight`, `color`, `petPicture`) VALUES
-(1, 'Usman', 'Tommy', 'male', 5, 'German', 'dog', '20', 'Black', '1700807115781-dog.jpg');
+INSERT INTO `pet_profile` (`id`, `pet_owner`, `petname`, `gender`, `age`, `breed`, `species`, `weight`, `color`, `petPicture`, `about`) VALUES
+(1, 'Usman', 'Tommy', 'male', 5, 'German', 'dog', '20', 'Black', '1700807115781-dog.jpg', ''),
+(2, 'sameed1', 'Zerox', 'male', 16, 'German', 'dog', '23', 'Black and white', '1700887991969-favicon.png', 'i love to make other animals my friends'),
+(5, 'sameed1', 'Drake', 'male', 10, 'american', 'dog', '23', 'blue', '1700888217225-drake.jpg', 'i love to make other animals my friends');
 
 -- --------------------------------------------------------
 
@@ -107,7 +111,7 @@ CREATE TABLE `sign_up` (
   `email` varchar(50) NOT NULL,
   `password` varchar(500) NOT NULL,
   `confirm_password` varchar(500) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `sign_up`
@@ -142,7 +146,7 @@ CREATE TABLE `vet` (
   `password` varchar(2000) NOT NULL,
   `id` int(255) NOT NULL,
   `location` varchar(2000) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `vet`
@@ -200,13 +204,13 @@ ALTER TABLE `admin_login`
 -- AUTO_INCREMENT for table `appointment`
 --
 ALTER TABLE `appointment`
-  MODIFY `id` int(244) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(244) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `pet_profile`
 --
 ALTER TABLE `pet_profile`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `sign_up`

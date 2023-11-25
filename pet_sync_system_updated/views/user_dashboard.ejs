@@ -301,7 +301,6 @@
       <script>
         $(document).ready(function () {
           const email = localStorage.getItem('email');
-          alert(email);
           // Update the email link with the dynamic email
           $('#email-link').attr('href', 'mailto:' + email).text(email);
         });
