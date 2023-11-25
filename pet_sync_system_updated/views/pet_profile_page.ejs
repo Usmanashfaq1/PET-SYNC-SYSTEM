@@ -95,6 +95,7 @@
                                                             <th>Pet Color</th>
                                                             <th>Pet Profile About</th>
                                                             <th>Pet Profile Picture</th>
+                                                            <th>Profile</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody id="Data_table">
@@ -230,6 +231,7 @@
   <td>${result.color}</td>
   <td>${result.about}</td>
   <td><img src="data:image/jpeg;base64,${result.petPicture}" alt="Pet Picture" style="width: 4rem; height: 4rem;"></td>
+  <td><button class="btn btn-success" onclick="window.location.href='/view-profile'">Open</button></td>
 `);
 
 

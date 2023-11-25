@@ -130,6 +130,10 @@ app.get('/admin-dashboard', (req, res) => {
   res.render('admin_dashboard');
 });
 
+app.get('/view-profile', (req, res) => {
+  res.render('view_pet_profile');
+});
+
 app.get('/pet-profile', (req, res) => {
   res.render('pet_profile_page');
 });
