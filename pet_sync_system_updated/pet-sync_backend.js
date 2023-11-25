@@ -168,6 +168,10 @@ app.get('/admin-dashboard', (req, res) => {
   res.render('admin_dashboard');
 });
 
+app.get('/edit-profile', (req, res) => {
+  res.render('edit_profile');
+});
+
 app.get('/view-profile', (req, res) => {
   res.render('view_pet_profile');
 });

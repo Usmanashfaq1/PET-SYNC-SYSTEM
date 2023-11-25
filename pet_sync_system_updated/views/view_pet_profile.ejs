@@ -62,7 +62,7 @@
                     <img id = "img"
                       alt="Generic placeholder image" class="img-fluid img-thumbnail mt-4 mb-2"
                       style="width: 150px; z-index: 1">
-                    <button type="button" class="btn btn-outline-dark" data-mdb-ripple-color="dark"
+                    <button type="button" onclick="redirectToEditProfile()"  class="btn btn-outline-dark" data-mdb-ripple-color="dark"
                       style="z-index: 1;">
                       Edit profile
                     </button>
@@ -149,6 +149,7 @@
 
         $(document).ready(function () {
             const id = getParameterByName('id');
+            localStorage.setItem('edit', id);
             $.ajax({
                 url: 'http://localhost:4000/open_profile/' + id,
                 method: 'GET',
@@ -172,6 +173,15 @@
             });
         });
     </script>
+
+
+<script>
+    function redirectToEditProfile() {
+        // Redirect to the edit-profile page
+        window.location.href = '/edit-profile';
+    }
+</script>
+
 </body>
 
 </html>
