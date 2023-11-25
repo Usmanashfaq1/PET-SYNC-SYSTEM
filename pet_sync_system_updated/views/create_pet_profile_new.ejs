@@ -220,7 +220,11 @@
       var color = $("#color").val();
       var about = $("#about").val();
       var petPicture = document.getElementById('petPicture').files[0];
-
+      if(!petPicture )
+      {
+        alert("select picture for profile");
+        return;
+      }
       var formData = new FormData();
       formData.append('username', username);
       formData.append('petname', petname);
