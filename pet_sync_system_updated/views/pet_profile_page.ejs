@@ -212,13 +212,13 @@
                 url: 'http://localhost:4000/get_profiles/' + username,
                 method: 'GET',
                 success: function (data) {
-                    console.log('Data Length:', data.length); // Log the length of the data array
-
+                //     const jsonString = JSON.stringify(data);
+                // localStorage.setItem('profile', jsonString);
                     // Clear existing table rows
                     $('#Data_table').empty();
                     if (data && data.length > 0) {
                         data.forEach(function (result) {
-                            console.log('Result:', result); // Log each result
+                            
                             var row = $('<tr>');
                             row.html(`
   <td>${result.pet_owner}</td>
@@ -231,7 +231,7 @@
   <td>${result.color}</td>
   <td>${result.about}</td>
   <td><img src="data:image/jpeg;base64,${result.petPicture}" alt="Pet Picture" style="width: 4rem; height: 4rem;"></td>
-  <td><button class="btn btn-success" onclick="window.location.href='/view-profile'">Open</button></td>
+  <td><button class="btn btn-success" onclick="openProfile(${result.id})">Open</button></td>
 `);
 
 
@@ -253,7 +253,13 @@
 
 
     </script>
-
+<script>
+      function openProfile(id) {
+        alert(id);
+        // Redirect to the next page with the id as a parameter
+        window.location.href = '/view-profile?id=' + id;
+    }
+</script>
 </body>
 
 </html>
