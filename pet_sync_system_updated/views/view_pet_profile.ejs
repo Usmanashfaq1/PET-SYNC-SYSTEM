@@ -106,10 +106,17 @@
         <div class="card p-4">
             <div class="image d-flex flex-column justify-content-center align-items-center">
                 <button class="btn btn-secondary">
-                    <img src="https://i.imgur.com/wvxPV9S.png" height="100" width="100" />
+                    <img id="img" height="100" width="100" />
                 </button>
-                <span class="name mt-3" id="pet_owner"></span>
+                <!-- <span class="name mt-3" id="pet_owner"></span> -->
                 <span class="idd" id="petname"></span>
+                <span class="idd" id="gender"></span>
+                <span class="idd" id="age"></span>
+                <span class="idd" id="breed"></span>
+                <span class="idd" id="Species"></span>
+                <span class="idd" id="weight"></span>
+                <span class="idd" id="color"></span>
+                <span class="idd" id="about"></span>
                 <div class="d-flex flex-row justify-content-center align-items-center gap-2">
                     <span class="idd1" id="extra_id">Oxc4c16a645_b21a</span>
                     <span><i class="fa fa-copy"></i></span>
@@ -152,35 +159,33 @@
 
         $(document).ready(function () {
             // Usage
-            const profileId = getParameterByName('id');
-            alert(profileId);
+            const id = getParameterByName('id');
+            alert(id);
             $.ajax({
-                url: 'http://localhost:4000/open_profile/' + profileId,
+                url: 'http://localhost:4000/open_profile/' + id,
                 method: 'GET',
                 success: function (data) {
-                    if (data && data.length > 0) {
-                        const result = data[0]; // Assuming you only need the first result
+                    data.forEach(function (result) {
+                        // Assuming 'result' is an object with properties like 'pet_owner', 'petname', etc.
 
-                        // Update or add values to HTML elements
-                        $('#pet_owner').text(result.pet_owner || 'Default Owner');
-                        $('#petname').text('@' + (result.petname || 'Default Petname'));
-                        $('#extra_id').text(result.extra_id || 'Default Extra ID');
-                        $('#followers').text(result.followers || 'Default Followers');
-                        // Add other fields as needed...
+                        // Set values for spans
+                        $('#petname').text(result.petname || 'Default Petname');
+                        $('#gender').text(result.gender || 'Default Gender');
+                        $('#age').text(result.age || 'Default Age');
+                        $('#breed').text(result.breed || 'Default Breed');
+                        $('#species').text(result.species || 'Default Species');
+                        $('#weight').text(result.weight || 'Default Weight');
+                        $('#color').text(result.color || 'Default Color');
                         $('#about').text(result.about || 'Default About');
-                        $('#joined').text(result.joined || 'Default Joined');
 
-                        // Check if a specific tag doesn't exist and add it
-                        if ($('.extra-field').length === 0) {
-                            $('.text').append('<div class="extra-field">Additional Information</div>');
-                        }
-                    } else {
-                        console.log('No pet profile details found');
-                    }
+                        // Set the 'img' source
+                        document.getElementById('img').src = `data:image/jpeg;base64,${result.petPicture}`;
+                    });
                 },
                 error: function (error) {
                     console.error('Error fetching pet details:', error);
                     alert('Error fetching pet profile at backend. Please try again.');
+                    $('#Data_table').empty();
                 }
             });
         });
@@ -188,6 +193,3 @@
 </body>
 
 </html>
-
-
-</script>
