@@ -167,7 +167,7 @@
                                         </div>
 
                                         <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
-                                            <button type="submit" class="btn btn-primary btn-lg">Save Pet
+                                            <button type="submit" class="btn btn-primary btn-lg">Edit Pet
                                                 Profile</button>
                                         </div>
 
@@ -198,45 +198,86 @@
     <script>
 
 
-        // $(document).ready(function () {
-        //   $('#petProfileForm').submit(function (e) {
-        //     e.preventDefault();
-        //     if($("#dobOrAge").val()< 1 || $("#dobOrAge").val() > 30)
-        //     {
-        //       alert('age invalid');
-        //     }
-        //     else if($("#weight").val()< 1 || $("#weight").val() > 200)
-        //     {
-        //       alert('invalid weight');
-        //     }
-        //     else{
-        //         edit_profile();
-        //     }
-        //   });
+        $(document).ready(function () {
+          $('#petProfileForm').submit(function (e) {
+            e.preventDefault();
+            if($("#dobOrAge").val()< 1 || $("#dobOrAge").val() > 30)
+            {
+              alert('age invalid');
+            }
+            else if($("#weight").val()< 1 || $("#weight").val() > 200)
+            {
+              alert('invalid weight');
+            }
+            else{
+                edit_profile();
+            }
+          });
 
-        // });
+        });
 
 
-        // function edit_profile() {
-        //   $.ajax({
-        //     url: 'http://localhost:4000/get_profiles/' + id,
-        //     method: 'GET',
-        //     success: function (result) {
-        //                     $('#petname').val(result.petname);
-        //                     $('#gender').val(result.gender);
-        //                     $('#age').val(result.age);
-        //                     $('#breed').val(result.breed);
-        //                     $('#species').val(result.species);
-        //                     $('#weight').val(result.weight);
-        //                     $('#color').val(result.color);
-        //                     $('#about').val(result.about);
-        //                     document.getElementById('img').src = `data:image/jpeg;base64,${result.petPicture}`;
-        //     },
-        //     error: function () {
-        //       alert('Profile creation failed. Error at localhost:4000');
-        //     }
-        //   });
-        // }
+        function edit_profile() {
+      const username = localStorage.getItem('name');
+      var petname = $("#petname").val();
+      var gender = $("#gender").val();
+      var age = $("#dobOrAge").val();
+      var breed = $("#breed").val();
+      var weight = $("#weight").val();
+      var species = $("#species").val();
+      var color = $("#color").val();
+      var about = $("#about").val();
+      var yes = 'yes';
+      var no = 'no';
+      var petPicture = document.getElementById('petPicture').files[0];
+      if(!petPicture )
+      {
+        var formData = new FormData();
+      formData.append('username', username);
+      formData.append('petname', petname);
+      formData.append('gender', gender);
+      formData.append('age', age);
+      formData.append('breed', breed);
+      formData.append('species', species);
+      formData.append('weight', weight);
+      formData.append('color', color);
+      formData.append('about', about);
+      formData.append('no', no);
+      }
+      else{
+        var formData = new FormData();
+      formData.append('username', username);
+      formData.append('petname', petname);
+      formData.append('gender', gender);
+      formData.append('age', age);
+      formData.append('breed', breed);
+      formData.append('species', species);
+      formData.append('weight', weight);
+      formData.append('color', color);
+      formData.append('about', about);
+      formData.append('yes', yes);
+      formData.append('petPicture', petPicture);
+      }
+     
+      $.ajax({
+        url: 'http://localhost:4000/create_pet_profile',
+        type: 'POST',
+        data: formData,
+        contentType: false,
+        processData: false,
+        success: function (response) {
+          if (response === 1) {
+            alert("Profile updated successfully");
+            //window.location.reload();
+          } else {
+            alert("Profile creation failed");
+          }
+        },
+        error: function () {
+          alert('Profile creation failed. Error at localhost:4000');
+        }
+      });
+    }
 
 
 
