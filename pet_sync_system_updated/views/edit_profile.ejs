@@ -217,7 +217,7 @@
 
 
         function edit_profile() {
-            const username = localStorage.getItem('name');
+            const id = localStorage.getItem('edit');
             var petname = $("#petname").val();
             var gender = $("#gender").val();
             var age = $("#dobOrAge").val();
@@ -227,7 +227,7 @@
             var color = $("#color").val();
             var about = $("#about").val();
 
-            
+
             var petPicture = document.getElementById('petPicture').files[0];
             if (petPicture) {
                 edit_profile_pic();
@@ -235,7 +235,6 @@
             else {
 
                 var formData = new FormData();
-                formData.append('username', username);
                 formData.append('petname', petname);
                 formData.append('gender', gender);
                 formData.append('age', age);
@@ -245,7 +244,7 @@
                 formData.append('color', color);
                 formData.append('about', about);
                 $.ajax({
-                    url: 'http://localhost:4000/edit_pet_profile_no_pic',
+                    url: 'http://localhost:4000/edit_pet_profile_no_pic' + id,
                     type: 'POST',
                     data: formData,
                     contentType: false,
@@ -267,7 +266,7 @@
 
 
         function edit_profile_pic() {
-            const username = localStorage.getItem('name');
+            const id = localStorage.getItem('edit');
             var petname = $("#petname").val();
             var gender = $("#gender").val();
             var age = $("#dobOrAge").val();
@@ -279,7 +278,6 @@
             var petPicture = document.getElementById('petPicture').files[0];
 
             var formData = new FormData();
-            formData.append('username', username);
             formData.append('petname', petname);
             formData.append('gender', gender);
             formData.append('age', age);
@@ -288,8 +286,9 @@
             formData.append('weight', weight);
             formData.append('color', color);
             formData.append('about', about);
+            formData.append('petPicture', petPicture);
             $.ajax({
-                url: 'http://localhost:4000/edit_pet_profile_with_pic',
+                url: 'http://localhost:4000/edit_pet_profile_with_pic' + id,
                 type: 'POST',
                 data: formData,
                 contentType: false,
