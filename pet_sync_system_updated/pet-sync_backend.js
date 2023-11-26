@@ -60,10 +60,10 @@ app.post('/create_pet_profile', upload.single('petPicture'), (req, res) => {
   var breed = req.body.breed;
   var username = req.body.username;
   var weight = req.body.weight
-  var color=req.body.color;
-  var petname=req.body.petname;
-  var species=req.body.species;
-  var about=req.body.about;
+  var color = req.body.color;
+  var petname = req.body.petname;
+  var species = req.body.species;
+  var about = req.body.about;
   const petPicture = req.file.filename;
   var sql = `insert into pet_profile(pet_owner,petname,gender,age,breed , species,weight,color, petPicture, about) values('${username}', '${petname}', '${gender}', '${age}', '${breed}' , '${species}', '${weight}', '${color}', '${petPicture}', '${about}')`;
 
@@ -77,39 +77,77 @@ app.post('/create_pet_profile', upload.single('petPicture'), (req, res) => {
 
 
 app.post('/edit_pet_profile_no_pic/:id', (req, res) => {
+  const id = req.params.id;
   var gender = req.body.gender;
+  console.log(gender);
   var age = req.body.age;
   var breed = req.body.breed;
-  var weight = req.body.weight
-  var color=req.body.color;
-  var petname=req.body.petname;
-  var species=req.body.species;
-  var about=req.body.about;
-  var sql = `insert into pet_profile(pet_owner,petname,gender,age,breed , species,weight,color, petPicture, about) values('${username}', '${petname}', '${gender}', '${age}', '${breed}' , '${species}', '${weight}', '${color}', '${petPicture}', '${about}')`;
+  var weight = req.body.weight;
+  var color = req.body.color;
+  var petname = req.body.petname;
+  var species = req.body.species;
+  var about = req.body.about;
+
+  // Constructing the update query
+  var sql = `UPDATE pet_profile 
+             SET gender = '${gender}', 
+                 age = '${age}', 
+                 breed = '${breed}', 
+                 weight = '${weight}', 
+                 color = '${color}', 
+                 petname = '${petname}', 
+                 species = '${species}', 
+                 about = '${about}' 
+             WHERE id = ${id}`;
 
   conn.query(sql, function (err, results) {
-    if (err) throw err;
-    else
+    if (err) {
+      console.error("Error executing update query:", err);
+      console.log('error at query')
+      res.status(500).json({ error: "Internal server error." });
+    } else {
+      console.log("Update successful.");
       res.json(1);
+    }
   });
 });
 
+
+
 app.post('/edit_pet_profile_with_pic/:id', upload.single('petPicture'), (req, res) => {
+  const id = req.params.id;
   var gender = req.body.gender;
   var age = req.body.age;
   var breed = req.body.breed;
-  var weight = req.body.weight
-  var color=req.body.color;
-  var petname=req.body.petname;
-  var species=req.body.species;
-  var about=req.body.about;
-  const petPicture = req.file.filename;
-  var sql = `insert into pet_profile(pet_owner,petname,gender,age,breed , species,weight,color, petPicture, about) values('${username}', '${petname}', '${gender}', '${age}', '${breed}' , '${species}', '${weight}', '${color}', '${petPicture}', '${about}')`;
+  var weight = req.body.weight;
+  var color = req.body.color;
+  var petname = req.body.petname;
+  var species = req.body.species;
+  var about = req.body.about;
 
+  // Assuming petPicture is a file upload and may not be updated in every request
+  const petPicture = req.file ? req.file.filename : null;
+
+  // Building the update query dynamically based on the provided values
+  var updateFields = [];
+  if (gender) updateFields.push(`gender = '${gender}'`);
+  if (age) updateFields.push(`age = '${age}'`);
+  if (breed) updateFields.push(`breed = '${breed}'`);
+  if (weight) updateFields.push(`weight = '${weight}'`);
+  if (color) updateFields.push(`color = '${color}'`);
+  if (petname) updateFields.push(`petname = '${petname}'`);
+  if (species) updateFields.push(`species = '${species}'`);
+  if (petPicture) updateFields.push(`petPicture = '${petPicture}'`);
+  if (about) updateFields.push(`about = '${about}'`);
+
+  // Constructing the update query
+  var sql = `UPDATE pet_profile SET ${updateFields.join(', ')} WHERE id = ${id}`;
   conn.query(sql, function (err, results) {
     if (err) throw err;
     else
+    {
       res.json(1);
+    }
   });
 });
 
@@ -450,7 +488,7 @@ app.post("/register_vet", function (req, res) {
 
   const salt = bcrypt.genSaltSync(10);
   const hash = bcrypt.hashSync(password, salt);
-var timeslot=req.body.timeslot;
+  var timeslot = req.body.timeslot;
   var specialization = req.body.specialization;
   var qualification = req.body.qualification;
   var license_number = req.body.license_number;
@@ -524,7 +562,7 @@ app.post("/check_user", function (req, res) {
 
 
 // const transporter = nodemailer.createTransport({
-  
+
 //   service: 'gmail',
 //   auth: {
 //     user: 'f200116@cfd.nu.edu.pk',
@@ -551,7 +589,7 @@ const transporter = nodemailer.createTransport(
 
 app.post('/approved', (req, res) => {
   const receiver_email = req.body.email;
-  const val=req.body.slot;
+  const val = req.body.slot;
 
 
   const mailOptions = {
@@ -688,12 +726,12 @@ app.get('/api/vets', (req, res) => {
 // API endpoint to insert data into the "appointment" table
 //insert data
 app.post('/api/appointments', (req, res) => {
-  const { user_name, user_email, vet_name, vet_email, type,slot,subject } = req.body;
+  const { user_name, user_email, vet_name, vet_email, type, slot, subject } = req.body;
   const date = new Date();
-  const status='unapproved';
+  const status = 'unapproved';
   // Insert data into the "appointment" table
   const sql = 'INSERT INTO appointment (date,user_name, user_email, vet_name, vet_email, type,slot,subject,status) VALUES (?, ?, ?, ?, ?,?,?,?,?)';
-  const values = [date,user_name, user_email, vet_name, vet_email, type,slot,subject,status];
+  const values = [date, user_name, user_email, vet_name, vet_email, type, slot, subject, status];
 
   conn.query(sql, values, (err, result) => {
     if (err) {

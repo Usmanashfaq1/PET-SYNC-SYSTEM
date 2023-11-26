@@ -209,14 +209,14 @@
                     alert('invalid weight');
                 }
                 else {
-                    edit_profile();
+                    edit_profile_no_pic();
                 }
             });
 
         });
 
 
-        function edit_profile() {
+        function edit_profile_no_pic() {
             const id = localStorage.getItem('edit');
             var petname = $("#petname").val();
             var gender = $("#gender").val();
@@ -230,35 +230,37 @@
 
             var petPicture = document.getElementById('petPicture').files[0];
             if (petPicture) {
+
                 edit_profile_pic();
             }
             else {
-
-                var formData = new FormData();
-                formData.append('petname', petname);
-                formData.append('gender', gender);
-                formData.append('age', age);
-                formData.append('breed', breed);
-                formData.append('species', species);
-                formData.append('weight', weight);
-                formData.append('color', color);
-                formData.append('about', about);
+                var requestData = {
+                    petname: petname,
+                    gender: gender,
+                    age: age,
+                    breed: breed,
+                    species: species,
+                    weight: weight,
+                    color: color,
+                    about: about
+                };
+                var jsonData = JSON.stringify(requestData);
+                alert(jsonData);
                 $.ajax({
-                    url: 'http://localhost:4000/edit_pet_profile_no_pic' + id,
+                    url: 'http://localhost:4000/edit_pet_profile_no_pic/' + id,
                     type: 'POST',
-                    data: formData,
-                    contentType: false,
-                    processData: false,
+                    data: jsonData,
+                    contentType: 'application/json', // Set content type to JSON
                     success: function (response) {
-                        if (response === 1) {
+                        if (response == 1) {
                             alert("Profile updated successfully");
                             //window.location.reload();
                         } else {
-                            alert("Profile creation failed");
+                            alert("Profile updation failed");
                         }
                     },
                     error: function () {
-                        alert('Profile creation failed. Error at localhost:4000');
+                        alert('Profile creation failed. Error at localhost:4000---');
                     }
                 });
             }
@@ -288,13 +290,13 @@
             formData.append('about', about);
             formData.append('petPicture', petPicture);
             $.ajax({
-                url: 'http://localhost:4000/edit_pet_profile_with_pic' + id,
+                url: 'http://localhost:4000/edit_pet_profile_with_pic/' + id,
                 type: 'POST',
                 data: formData,
                 contentType: false,
                 processData: false,
                 success: function (response) {
-                    if (response === 1) {
+                    if (response == 1) {
                         alert("Profile updated successfully");
                         //window.location.reload();
                     } else {
