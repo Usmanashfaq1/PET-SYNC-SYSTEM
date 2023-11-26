@@ -254,13 +254,13 @@
                     success: function (response) {
                         if (response == 1) {
                             alert("Profile updated successfully");
-                            //window.location.reload();
+                            window.location.reload();
                         } else {
                             alert("Profile updation failed");
                         }
                     },
                     error: function () {
-                        alert('Profile creation failed. Error at localhost:4000---');
+                        alert('Profile creation failed. Error at localhost:4000');
                     }
                 });
             }
@@ -298,9 +298,9 @@
                 success: function (response) {
                     if (response == 1) {
                         alert("Profile updated successfully");
-                        //window.location.reload();
+                        window.location.reload();
                     } else {
-                        alert("Profile creation failed");
+                        alert("Profile updation failed with new picture");
                     }
                 },
                 error: function () {

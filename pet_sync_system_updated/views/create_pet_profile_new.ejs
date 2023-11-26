@@ -193,15 +193,13 @@
     $(document).ready(function () {
       $('#petProfileForm').submit(function (e) {
         e.preventDefault();
-        if($("#dobOrAge").val()< 1 || $("#dobOrAge").val() > 30)
-        {
+        if ($("#dobOrAge").val() < 1 || $("#dobOrAge").val() > 30) {
           alert('age invalid');
         }
-        else if($("#weight").val()< 1 || $("#weight").val() > 200)
-        {
+        else if ($("#weight").val() < 1 || $("#weight").val() > 200) {
           alert('invalid weight');
         }
-        else{
+        else {
           register_profile();
         }
       });
@@ -220,8 +218,7 @@
       var color = $("#color").val();
       var about = $("#about").val();
       var petPicture = document.getElementById('petPicture').files[0];
-      if(!petPicture )
-      {
+      if (!petPicture) {
         alert("select picture for profile");
         return;
       }

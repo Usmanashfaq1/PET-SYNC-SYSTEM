@@ -15,8 +15,6 @@ app.use(express.static('public'));
 app.use(cors());
 
 const multer = require("multer");
-//const multer_storage = multer.memoryStorage(); // Use memory storage for simplicity
-
 
 var mysql = require("mysql");
 
@@ -106,7 +104,6 @@ app.post('/edit_pet_profile_no_pic/:id', (req, res) => {
       console.log('error at query')
       res.status(500).json({ error: "Internal server error." });
     } else {
-      console.log("Update successful.");
       res.json(1);
     }
   });
@@ -116,40 +113,47 @@ app.post('/edit_pet_profile_no_pic/:id', (req, res) => {
 
 app.post('/edit_pet_profile_with_pic/:id', upload.single('petPicture'), (req, res) => {
   const id = req.params.id;
-  var gender = req.body.gender;
-  var age = req.body.age;
-  var breed = req.body.breed;
-  var weight = req.body.weight;
-  var color = req.body.color;
-  var petname = req.body.petname;
-  var species = req.body.species;
-  var about = req.body.about;
+  const {
+    gender,
+    age,
+    breed,
+    weight,
+    color,
+    petname,
+    species,
+    about
+  } = req.body;
 
   // Assuming petPicture is a file upload and may not be updated in every request
   const petPicture = req.file ? req.file.filename : null;
 
-  // Building the update query dynamically based on the provided values
-  var updateFields = [];
-  if (gender) updateFields.push(`gender = '${gender}'`);
-  if (age) updateFields.push(`age = '${age}'`);
-  if (breed) updateFields.push(`breed = '${breed}'`);
-  if (weight) updateFields.push(`weight = '${weight}'`);
-  if (color) updateFields.push(`color = '${color}'`);
-  if (petname) updateFields.push(`petname = '${petname}'`);
-  if (species) updateFields.push(`species = '${species}'`);
-  if (petPicture) updateFields.push(`petPicture = '${petPicture}'`);
-  if (about) updateFields.push(`about = '${about}'`);
+  const sql = `
+    UPDATE pet_profile 
+    SET 
+      gender = ?,
+      age = ?,
+      breed = ?,
+      weight = ?,
+      color = ?,
+      petname = ?,
+      species = ?,
+      petPicture = ?,
+      about = ?
+    WHERE id = ?
+  `;
 
-  // Constructing the update query
-  var sql = `UPDATE pet_profile SET ${updateFields.join(', ')} WHERE id = ${id}`;
-  conn.query(sql, function (err, results) {
-    if (err) throw err;
-    else
-    {
+  const values = [gender, age, breed, weight, color, petname, species, petPicture, about, id];
+
+  conn.query(sql, values, (err, results) => {
+    if (err) {
+      console.error("Error executing update query:", err);
+      res.status(500).json({ error: "Internal server error." });
+    } else {
       res.json(1);
     }
   });
 });
+
 
 app.get('/get_profiles/:username', (req, res) => {
   const username = req.params.username;
@@ -275,11 +279,6 @@ app.get('/edit_open_profile/:id', (req, res) => {
 app.get("/", function (req, res) {
   res.render("front");
 });
-
-
-//app.get("/", function (req, res) {
-//res.render("front");
-//});
 
 //
 // Define routes to render views
@@ -460,11 +459,6 @@ app.post("/login_vet", function (req, res) {
         }
       });
       if (found == true) {
-        // Valid credentials
-        // req.session.vetEmail = email;
-        //storage.setItem("email",email);
-        //console.log(storage.getItem("email"));
-        //window.sessionStorage.setItem("name","usman");
         res.json(email);
 
       }
@@ -561,15 +555,6 @@ app.post("/check_user", function (req, res) {
 
 
 
-// const transporter = nodemailer.createTransport({
-
-//   service: 'gmail',
-//   auth: {
-//     user: 'f200116@cfd.nu.edu.pk',
-//     pass: 'ms@1234567.'
-//   }
-// });
-// Create a SMTP pool transporter
 
 //updated the transpoter using pool to send mutiple emails respectively
 //here the code
@@ -577,8 +562,8 @@ const transporter = nodemailer.createTransport(
   pool({
     service: 'gmail',
     auth: {
-      user: 'f200116@cfd.nu.edu.pk',
-      pass: 'ms@1234567.',
+      user: '',
+      pass: '',
     },
     maxConnections: 5, // Maximum number of simultaneous connections
     maxMessages: 10,   // Maximum number of messages to send in a single connection
@@ -593,7 +578,7 @@ app.post('/approved', (req, res) => {
 
 
   const mailOptions = {
-    from: 'f200116@cfd.nu.edu.pk',
+    from: '',
     to: receiver_email,
     subject: 'Your Appointment is Approved!!!',
     text: `You can visit at : ${val}`
@@ -746,18 +731,7 @@ app.post('/api/appointments', (req, res) => {
 });
 //
 //appointment data api
-// app.get('/api/appointment', (req, res) => {
-//   conn.query('SELECT * FROM appointment', (err, results) => {
-//     if (err) {
-//       console.error('Error fetching  data:', err);
-//       res.status(500).json({ error: 'An error occurred while fetching  data' });
-//       return;
-//     }
 
-//     res.json(results);
-//   });
-// });
-//
 // Get appointment  details API with specfic to current user session email
 
 app.get('/api/appointment/:email', (req, res) => {
