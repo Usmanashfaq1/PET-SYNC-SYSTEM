@@ -492,7 +492,32 @@ const transporter = nodemailer.createTransport({
 
 
 
+app.post('/approved', (req, res) => {
+  const receiver_email = req.body.email;
+  const val=req.body.slot;
 
+
+  const mailOptions = {
+    from: 'f200116@cfd.nu.edu.pk',
+    to: receiver_email,
+    subject: 'Your Appointment is Approved!!!',
+    text: `You can visit at : ${val}`
+  };
+
+  transporter.sendMail(mailOptions, (error, info) => {
+    if (error) {
+      console.error(error);
+      res.json({ success: false, message: 'Error sending OTP' });
+    } else {
+
+      console.log('Email sent: ' + info.response);
+      res.send(otp);
+    }
+
+
+  });
+
+});
 
 app.post('/recovery-otp', (req, res) => {
   const receiver_email = req.body.email;
