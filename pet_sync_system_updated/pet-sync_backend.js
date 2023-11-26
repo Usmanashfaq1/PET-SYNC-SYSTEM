@@ -74,6 +74,31 @@ app.post('/create_pet_profile', upload.single('petPicture'), (req, res) => {
   });
 });
 
+
+
+app.post('/edit_pet_profile_no_pic', upload.single('petPicture'), (req, res) => {
+  var gender = req.body.gender;
+  var age = req.body.age;
+  var breed = req.body.breed;
+  var username = req.body.username;
+  var weight = req.body.weight
+  var color=req.body.color;
+  var petname=req.body.petname;
+  var species=req.body.species;
+  var about=req.body.about;
+  var choice =req.body.choice;
+  const petPicture = req.file.filename;
+  var sql = `insert into pet_profile(pet_owner,petname,gender,age,breed , species,weight,color, petPicture, about) values('${username}', '${petname}', '${gender}', '${age}', '${breed}' , '${species}', '${weight}', '${color}', '${petPicture}', '${about}')`;
+
+  conn.query(sql, function (err, results) {
+    if (err) throw err;
+    else
+      res.json(1);
+  });
+});
+
+
+
 app.get('/get_profiles/:username', (req, res) => {
   const username = req.params.username;
   const sql = `SELECT * FROM pet_profile WHERE pet_owner = '${username}'`;
