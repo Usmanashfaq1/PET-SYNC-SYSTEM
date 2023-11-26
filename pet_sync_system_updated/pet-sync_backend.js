@@ -485,10 +485,14 @@ app.post("/check_user", function (req, res) {
 const transporter = nodemailer.createTransport({
   service: 'gmail',
   auth: {
-    user: '',
-    pass: ''
+    user: 'f200116@cfd.nu.edu.pk',
+    pass: 'ms@1234567.'
   }
 });
+
+
+
+
 
 app.post('/recovery-otp', (req, res) => {
   const receiver_email = req.body.email;
