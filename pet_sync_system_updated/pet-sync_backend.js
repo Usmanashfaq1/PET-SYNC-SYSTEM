@@ -493,6 +493,8 @@ app.post("/check_user", function (req, res) {
 //   }
 // });
 // Create a SMTP pool transporter
+
+//updated the transpoter using pool to send mutiple emails respectively
 const transporter = nodemailer.createTransport(
   pool({
     service: 'gmail',
