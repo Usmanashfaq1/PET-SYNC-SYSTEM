@@ -7,6 +7,8 @@ const storage = require('node-sessionstorage');
 const session = require('express-session');
 const path = require('path');
 const fs = require('fs');
+const emailExistence = require('email-existence');
+const pool = require('nodemailer-smtp-pool');
 
 app.use(express.static('public'));
 
@@ -482,13 +484,26 @@ app.post("/check_user", function (req, res) {
 
 
 
-const transporter = nodemailer.createTransport({
-  service: 'gmail',
-  auth: {
-    user: 'f200116@cfd.nu.edu.pk',
-    pass: 'ms@1234567.'
-  }
-});
+// const transporter = nodemailer.createTransport({
+  
+//   service: 'gmail',
+//   auth: {
+//     user: 'f200116@cfd.nu.edu.pk',
+//     pass: 'ms@1234567.'
+//   }
+// });
+// Create a SMTP pool transporter
+const transporter = nodemailer.createTransport(
+  pool({
+    service: 'gmail',
+    auth: {
+      user: 'f200116@cfd.nu.edu.pk',
+      pass: 'ms@1234567.',
+    },
+    maxConnections: 5, // Maximum number of simultaneous connections
+    maxMessages: 10,   // Maximum number of messages to send in a single connection
+  })
+);
 
 
 
@@ -548,6 +563,36 @@ app.post('/recovery-otp', (req, res) => {
 function generateOTP() {
   return Math.floor(1000 + Math.random() * 9000).toString();
 }
+
+//email checking 
+app.post('/check-otp', (req, res) => {
+  const receiver_email = req.body.email;
+  const otp = generateOTP();
+
+  const mailOptions = {
+    from: 'f200116@cfd.nu.edu.pk',
+    to: receiver_email,
+    subject: 'Your OTP',
+    text: `Your OTP is: ${otp}`
+  };
+
+  transporter.sendMail(mailOptions, (error, info) => {
+    if (error) {
+      console.error(error);
+      res.json({ success: false, message: 'Error sending OTP' });
+    } else {
+
+      console.log('Email sent: ' + info.response);
+      res.send(otp);
+    }
+
+
+  });
+
+});
+// end
+
+
 
 app.post("/update_password", function (req, res) {
 
