@@ -850,7 +850,26 @@ app.put('/updateAppointmentStatus/:appointmentId', (req, res) => {
   });
 });
 
+// count post api
+// Define the /api/pet-memories-count endpoint
+app.get('/api/pet-memories-count/:username/:petname', (req, res) => {
+  const username = req.params.username;
+  const petname = req.params.petname;
+  const sql = `SELECT COUNT(*) AS count FROM pet_memories WHERE pet_owner = '${username}' AND petname = '${petname}'`;
 
+  conn.query(sql, (err, result) => {
+    if (err) {
+      console.error('Error fetching post count:', err);
+      res.status(500).json({ error: 'An error occurred while fetching post count' });
+      return;
+    }
+
+    const count = result[0] ? result[0].count : 0;
+    res.json({ count });
+  });
+});
+
+//
 
 var server = app.listen(4000, function () {
   console.log("App running on port 4000");
