@@ -321,6 +321,10 @@ app.get('/pet-profile', (req, res) => {
   res.render('pet_profile_page');
 });
 
+app.get('/create-post', (req, res) => {
+  res.render('create_post');
+});
+
 app.get('/approved-app', (req, res) => {
   res.render('approved_appointment');
 });
