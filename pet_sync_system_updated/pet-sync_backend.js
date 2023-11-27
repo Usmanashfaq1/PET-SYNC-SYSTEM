@@ -901,6 +901,43 @@ app.get('/api/pet-memories-count/:username/:petname', (req, res) => {
 });
 
 //
+//
+// Define the /api/pet-profiles endpoint
+app.get('/api/pet-profiles/:username/:petname', (req, res) => {
+  const username = req.params.username;
+  const petname = req.params.petname;
+  const sql = `SELECT petPicture,about, date FROM pet_memories WHERE pet_owner = '${username}' AND petname ='${petname}'`;
+
+  conn.query(sql, (err, result) => {
+    if (err) {
+      console.error('Error fetching pet profiles:', err);
+      res.status(500).json({ error: 'An error occurred while fetching pet profiles' });
+      return;
+    }
+
+    const petProfiles = result.map(row => {
+      const fileName = row.petPicture;
+      if (fileName) {
+        const filePath = path.join(__dirname, 'upload', fileName);
+        try {
+          const content = fs.readFileSync(filePath, { encoding: 'base64' });
+          return { petPicture: content, date: row.date, about: row.about, petname: row.petname };
+        } catch (err) {
+          console.error('Error reading file:', err);
+          return null; // Skip this entry if there is an error reading the file
+        }
+      } else {
+        return null; // Skip this entry if petPicture is not defined
+      }
+    }).filter(profile => profile !== null); // Filter out null entries
+
+    res.json(petProfiles);
+  });
+});
+
+
+
+//
 
 var server = app.listen(4000, function () {
   console.log("App running on port 4000");
