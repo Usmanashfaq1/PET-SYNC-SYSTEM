@@ -72,6 +72,29 @@ app.post('/create_pet_profile', upload.single('petPicture'), (req, res) => {
   });
 });
 
+// create pet post (memory post)
+// add post api
+app.post('/create_pet_profile_post', upload.single('petPicture'), (req, res) => {
+  
+  var username = req.body.username;
+  
+  var petname=req.body.petname;
+  
+  var about=req.body.about;
+  const petPicture = req.file.filename;
+  const date = new Date();
+  var sql = `insert into pet_memories(date,pet_owner,petname,about,petPicture) values('${date}','${username}', '${petname}',  '${about}', '${petPicture}')`;
+
+  conn.query(sql, function (err, results) {
+    if (err) throw err;
+    else
+      res.json(1);
+  });
+});
+
+//
+//
+
 
 
 app.post('/edit_pet_profile_no_pic/:id', (req, res) => {
