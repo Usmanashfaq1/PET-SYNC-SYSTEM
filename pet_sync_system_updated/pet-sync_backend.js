@@ -73,7 +73,7 @@ app.post('/create_pet_profile', upload.single('petPicture'), (req, res) => {
 });
 
 // create pet post (memory post)
-// add post api
+// add post api updated
 app.post('/create_pet_profile_post', upload.single('petPicture'), (req, res) => {
   
   var username = req.body.username;
