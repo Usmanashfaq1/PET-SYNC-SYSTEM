@@ -309,6 +309,10 @@ app.get('/admin-dashboard', (req, res) => {
   res.render('admin_dashboard');
 });
 
+app.get('/pet-memories-timeline', (req, res) => {
+  res.render('pet_memories_timeline');
+});
+
 app.get('/edit-profile', (req, res) => {
   res.render('edit_profile');
 });
