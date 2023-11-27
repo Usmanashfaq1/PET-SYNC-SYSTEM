@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.1
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 25, 2023 at 05:58 AM
--- Server version: 10.4.28-MariaDB
--- PHP Version: 8.2.4
+-- Generation Time: Nov 27, 2023 at 05:15 PM
+-- Server version: 10.4.25-MariaDB
+-- PHP Version: 8.1.10
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -32,7 +32,7 @@ CREATE TABLE `admin_login` (
   `username` varchar(200) NOT NULL,
   `email` varchar(100) NOT NULL,
   `password` varchar(100) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `admin_login`
@@ -58,17 +58,40 @@ CREATE TABLE `appointment` (
   `subject` varchar(500) NOT NULL,
   `status` varchar(500) NOT NULL,
   `id` int(244) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `appointment`
 --
 
 INSERT INTO `appointment` (`date`, `user_name`, `user_email`, `vet_name`, `vet_email`, `type`, `slot`, `subject`, `status`, `id`) VALUES
-('2023-11-24 15:53:48.926', 'Usman', 'usman123@gmail.com', 'Ayesha Ahsan', 'ayesha123@gmail.com', '(One Health Approach)', '2023-11-30T09:00', 'Cat Check Up', 'approved', 1),
-('2023-11-24 16:40:53.972', 'Usman', 'usman123@gmail.com', 'Ali Ahmad', 'aliahmad123@gmail.com', '(Emergency and Critical Care)', '2023-12-10T15:40', 'Dog Check Up', 'approved', 2),
-('2023-11-24 16:45:29.135', 'bilal', 'bilal1@gmail.com', 'Ayesha Ahsan', 'ayesha123@gmail.com', '(One Health Approach)', '2023-11-27T10:50', 'Cat Check Up', 'approved', 3),
-('2023-11-25 09:33:24.986', 'Usman', 'usman123@gmail.com', 'Ayesha Ahsan', 'ayesha123@gmail.com', '(One Health Approach)', '2023-11-02T11:35', 'pain', 'approved', 4);
+('2023-11-26 11:59:07.039', 'Usman', 'usmanx458@gmail.com', 'Ayesha Ahsan', 'ayesha123@gmail.com', '(One Health Approach)', '2023-11-28T11:58', 'cat check up', 'approved', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `pet_memories`
+--
+
+CREATE TABLE `pet_memories` (
+  `date` varchar(200) NOT NULL,
+  `pet_owner` varchar(500) NOT NULL,
+  `petname` varchar(500) NOT NULL,
+  `about` varchar(1000) NOT NULL,
+  `petPicture` varchar(1000) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `pet_memories`
+--
+
+INSERT INTO `pet_memories` (`date`, `pet_owner`, `petname`, `about`, `petPicture`) VALUES
+('Mon Nov 27 2023 11:14:41 GMT+0500 (Pakistan Standard Time)', 'UsmanAshfaq', 'Tommy', 'Tommy relaxing', '1701065681543-tran-mau-tri-tam-7QjU_u2vGDs-unsplash.jpg'),
+('Mon Nov 27 2023 11:15:40 GMT+0500 (Pakistan Standard Time)', 'UsmanAshfaq', 'Tommy', 'Tommy Enjoying', '1701065740202-dog.jpg'),
+('Mon Nov 27 2023 11:33:19 GMT+0500 (Pakistan Standard Time)', 'UsmanAshfaq', 'Mano', 'mano chilling', '1701066798992-sign2.jpg'),
+('Mon Nov 27 2023 11:33:38 GMT+0500 (Pakistan Standard Time)', 'UsmanAshfaq', 'Mano', 'mano gazing', '1701066818870-manja-vitolic-gKXKBY-C-Dk-unsplash.jpg'),
+('Mon Nov 27 2023 11:44:31 GMT+0500 (Pakistan Standard Time)', 'UsmanAshfaq', 'Tommy', 'Tommy gazing at something', '1701067471038-tommy12.jpeg'),
+('Mon Nov 27 2023 17:46:38 GMT+0500 (Pakistan Standard Time)', 'UsmanAshfaq', 'Mano', 'Candid', '1701089198296-alicja-gancarz-HoC9ttceIGo-unsplash.jpg');
 
 -- --------------------------------------------------------
 
@@ -78,6 +101,7 @@ INSERT INTO `appointment` (`date`, `user_name`, `user_email`, `vet_name`, `vet_e
 
 CREATE TABLE `pet_profile` (
   `id` int(11) NOT NULL,
+  `date` varchar(200) NOT NULL,
   `pet_owner` varchar(150) NOT NULL,
   `petname` varchar(2000) NOT NULL,
   `gender` varchar(50) NOT NULL,
@@ -86,18 +110,17 @@ CREATE TABLE `pet_profile` (
   `species` varchar(2000) NOT NULL,
   `weight` varchar(2000) NOT NULL,
   `color` varchar(2000) NOT NULL,
-  `petPicture` varchar(1000) NOT NULL,
-  `about` varchar(100) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  `about` varchar(500) NOT NULL,
+  `petPicture` varchar(1000) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `pet_profile`
 --
 
-INSERT INTO `pet_profile` (`id`, `pet_owner`, `petname`, `gender`, `age`, `breed`, `species`, `weight`, `color`, `petPicture`, `about`) VALUES
-(1, 'Usman', 'Tommy', 'male', 5, 'German', 'dog', '20', 'Black', '1700807115781-dog.jpg', ''),
-(2, 'sameed1', 'Zerox', 'male', 16, 'German', 'dog', '23', 'Black and white', '1700887991969-favicon.png', 'i love to make other animals my friends'),
-(5, 'sameed1', 'Drake', 'male', 10, 'american', 'dog', '23', 'blue', '1700888217225-drake.jpg', 'i love to make other animals my friends');
+INSERT INTO `pet_profile` (`id`, `date`, `pet_owner`, `petname`, `gender`, `age`, `breed`, `species`, `weight`, `color`, `about`, `petPicture`) VALUES
+(1, 'Mon Nov 27 2023 10:23:20 GMT+0500 (Pakistan Standard Time)', 'UsmanAshfaq', 'Tommy', 'male', 5, 'German', 'dog', '25', 'Black', 'Tommy1', '1701062600562-dog.jpg'),
+(2, 'Mon Nov 27 2023 11:32:51 GMT+0500 (Pakistan Standard Time)', 'UsmanAshfaq', 'Mano', 'female', 7, 'Persian', 'cat', '10', 'brown', 'catty ', '1701066771204-sign2.jpg');
 
 -- --------------------------------------------------------
 
@@ -111,7 +134,7 @@ CREATE TABLE `sign_up` (
   `email` varchar(50) NOT NULL,
   `password` varchar(500) NOT NULL,
   `confirm_password` varchar(500) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `sign_up`
@@ -127,7 +150,9 @@ INSERT INTO `sign_up` (`id`, `username`, `email`, `password`, `confirm_password`
 (7, 'sameed1', 'master.official.445566@gmail.com', '$2b$10$sBzxTQsck9dl5vbd96unrebbWlnx/NnM.j1nJK5Y2bkqBEHb9XRg2', '$2b$10$k.1X/iaVY8t4LhBus7ud0egdSi8pHulbx/OcTVKdWWL/OtSRkPPcS'),
 (8, '1.', '107@gmail.com', '1', '$2b$10$RumXiz39Phfk.oH4FxqjsOKXCy42naFnQAASTSOtiy4bGPQZqqsnC'),
 (9, 'Usman', 'usman123@gmail.com', '$2b$10$TxxhI9WmuBl/IqSM6zYvruJb1Le1bFCMZVBCDjENJ.wRm2MUtPwwi', '$2b$10$TxxhI9WmuBl/IqSM6zYvruJb1Le1bFCMZVBCDjENJ.wRm2MUtPwwi'),
-(10, 'bilal', 'bilal1@gmail.com', '$2b$10$uCgboQS2jzmU2Weh6pvEpuN6oSHpSBYZIAkMPBAS3zm3LZyvo5whq', '$2b$10$uCgboQS2jzmU2Weh6pvEpuN6oSHpSBYZIAkMPBAS3zm3LZyvo5whq');
+(10, 'bilal1', 'bilal1@gmail.com', '$2b$10$uCgboQS2jzmU2Weh6pvEpuN6oSHpSBYZIAkMPBAS3zm3LZyvo5whq', '$2b$10$uCgboQS2jzmU2Weh6pvEpuN6oSHpSBYZIAkMPBAS3zm3LZyvo5whq'),
+(12, 'UsmanAshfaq', 'usmanx458@gmail.com', '$2b$10$SyUKvsZd8x6rETRXuCkque5nrHjnaYzfCpxu3mubHwzd5.0vJyV42', '$2b$10$SyUKvsZd8x6rETRXuCkque5nrHjnaYzfCpxu3mubHwzd5.0vJyV42'),
+(13, 'ahmad', 'chusmanjutt.129@gmail.com', '$2b$10$enx8PahdyYQv0jTwaVnd2OVjkgRzlDIQTydkBJoffFMNLxBBwqLdC', '$2b$10$enx8PahdyYQv0jTwaVnd2OVjkgRzlDIQTydkBJoffFMNLxBBwqLdC');
 
 -- --------------------------------------------------------
 
@@ -146,7 +171,7 @@ CREATE TABLE `vet` (
   `password` varchar(2000) NOT NULL,
   `id` int(255) NOT NULL,
   `location` varchar(2000) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `vet`
@@ -204,19 +229,19 @@ ALTER TABLE `admin_login`
 -- AUTO_INCREMENT for table `appointment`
 --
 ALTER TABLE `appointment`
-  MODIFY `id` int(244) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(244) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `pet_profile`
 --
 ALTER TABLE `pet_profile`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `sign_up`
 --
 ALTER TABLE `sign_up`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `vet`
