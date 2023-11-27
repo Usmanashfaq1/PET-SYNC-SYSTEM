@@ -74,16 +74,9 @@
                 </div>
                 <div class="p-4 text-black" style="background-color: #f8f9fa;">
                   <div class="d-flex justify-content-end text-center py-1">
-                    <div>
-                      <p class="mb-1 h5">0</p>
-                      <p class="small text-muted mb-0">Photos</p>
-                    </div>
-                    <div class="px-3">
-                      <p class="mb-1 h5">0</p>
-                      <p class="small text-muted mb-0">messages</p>
-                    </div>
-                    <div>
-                      <p class="mb-1 h5">0</p>
+                    
+                    <div id="postCount">
+                      <p class="mb-1 h5">Loading...</p>
                       <p class="small text-muted mb-0">Posts</p>
                     </div>
                   </div>
@@ -103,12 +96,13 @@
                         <p class="font-italic mb-1"  id = "about"></p>
                       </div>
                     </div>
-                <div class="card-body p-4 text-black">
-                  <div class="d-flex justify-content-between align-items-center mb-4">
-                    <p class="lead fw-normal mb-0">Recent Posts</p>
-                    <p class="mb-0"><a href="#!" class="text-muted">Show all</a></p>
-                  </div>
-                </div>
+                    <div class="card-body p-4 text-black">
+                      <div class="d-flex justify-content-between align-items-center mb-4">
+                        <p class="lead fw-normal mb-0">Create Post</p>
+                        <p class="mb-0"><a href="/create-post" class="text-muted">Create Post</a></p>
+                        <p class="mb-0"><a href="/pet-memories-timeline" class="text-muted">View PET-MEMORIES</a></p>
+                      </div>
+                    </div>
               </div>
             </div>
           </div>
@@ -155,6 +149,7 @@
                 method: 'GET',
                 success: function (data) {
                     data.forEach(function (result) {
+                      localStorage.setItem('petname', result.petname);
                         $('#petname').text(result.petname || 'Default Petname');
                         $('#gender').text(result.gender || 'Default Gender');
                         $('#age').text( 'Age : '+result.age + ' years'|| 'Default Age');
@@ -165,6 +160,36 @@
                         $('#about').text(result.about || 'Default About');
                         document.getElementById('img').src = `data:image/jpeg;base64,${result.petPicture}`;
                     });
+
+                    // here doing ajax call to backend api to show number of posts of that specfic pet
+                    const petname1=localStorage.getItem('petname');
+                   const username1= localStorage.getItem('name');
+    // Fetch the count of posts for the specific pet
+    $.ajax({
+      
+      url: `/api/pet-memories-count/${username1}/${petname1}`, // Update with your actual API endpoint
+      type: 'GET',
+      dataType: 'json',
+      success: function (data) {
+        // Update the post count in the div
+        $('#postCount').html(`
+          <p class="mb-1 h5">${data.count}</p>
+          <p class="small text-muted mb-0">Posts</p>
+        `);
+      },
+      error: function (error) {
+        console.error('Error fetching post count:', error);
+        // Handle the error accordingly
+      }
+    });
+                },
+                error: function (error) {
+                    console.error('Error fetching pet details:', error);
+                    alert('Error fetching pet profile at backend. Please try again.');
+                }
+            });
+        });
+    </script>
                 },
                 error: function (error) {
                     console.error('Error fetching pet details:', error);
