@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 27, 2023 at 05:15 PM
+-- Generation Time: Nov 27, 2023 at 06:44 PM
 -- Server version: 10.4.25-MariaDB
 -- PHP Version: 8.1.10
 
@@ -60,13 +60,6 @@ CREATE TABLE `appointment` (
   `id` int(244) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Dumping data for table `appointment`
---
-
-INSERT INTO `appointment` (`date`, `user_name`, `user_email`, `vet_name`, `vet_email`, `type`, `slot`, `subject`, `status`, `id`) VALUES
-('2023-11-26 11:59:07.039', 'Usman', 'usmanx458@gmail.com', 'Ayesha Ahsan', 'ayesha123@gmail.com', '(One Health Approach)', '2023-11-28T11:58', 'cat check up', 'approved', 1);
-
 -- --------------------------------------------------------
 
 --
@@ -80,18 +73,6 @@ CREATE TABLE `pet_memories` (
   `about` varchar(1000) NOT NULL,
   `petPicture` varchar(1000) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `pet_memories`
---
-
-INSERT INTO `pet_memories` (`date`, `pet_owner`, `petname`, `about`, `petPicture`) VALUES
-('Mon Nov 27 2023 11:14:41 GMT+0500 (Pakistan Standard Time)', 'UsmanAshfaq', 'Tommy', 'Tommy relaxing', '1701065681543-tran-mau-tri-tam-7QjU_u2vGDs-unsplash.jpg'),
-('Mon Nov 27 2023 11:15:40 GMT+0500 (Pakistan Standard Time)', 'UsmanAshfaq', 'Tommy', 'Tommy Enjoying', '1701065740202-dog.jpg'),
-('Mon Nov 27 2023 11:33:19 GMT+0500 (Pakistan Standard Time)', 'UsmanAshfaq', 'Mano', 'mano chilling', '1701066798992-sign2.jpg'),
-('Mon Nov 27 2023 11:33:38 GMT+0500 (Pakistan Standard Time)', 'UsmanAshfaq', 'Mano', 'mano gazing', '1701066818870-manja-vitolic-gKXKBY-C-Dk-unsplash.jpg'),
-('Mon Nov 27 2023 11:44:31 GMT+0500 (Pakistan Standard Time)', 'UsmanAshfaq', 'Tommy', 'Tommy gazing at something', '1701067471038-tommy12.jpeg'),
-('Mon Nov 27 2023 17:46:38 GMT+0500 (Pakistan Standard Time)', 'UsmanAshfaq', 'Mano', 'Candid', '1701089198296-alicja-gancarz-HoC9ttceIGo-unsplash.jpg');
 
 -- --------------------------------------------------------
 
@@ -113,14 +94,6 @@ CREATE TABLE `pet_profile` (
   `about` varchar(500) NOT NULL,
   `petPicture` varchar(1000) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `pet_profile`
---
-
-INSERT INTO `pet_profile` (`id`, `date`, `pet_owner`, `petname`, `gender`, `age`, `breed`, `species`, `weight`, `color`, `about`, `petPicture`) VALUES
-(1, 'Mon Nov 27 2023 10:23:20 GMT+0500 (Pakistan Standard Time)', 'UsmanAshfaq', 'Tommy', 'male', 5, 'German', 'dog', '25', 'Black', 'Tommy1', '1701062600562-dog.jpg'),
-(2, 'Mon Nov 27 2023 11:32:51 GMT+0500 (Pakistan Standard Time)', 'UsmanAshfaq', 'Mano', 'female', 7, 'Persian', 'cat', '10', 'brown', 'catty ', '1701066771204-sign2.jpg');
 
 -- --------------------------------------------------------
 
@@ -229,13 +202,13 @@ ALTER TABLE `admin_login`
 -- AUTO_INCREMENT for table `appointment`
 --
 ALTER TABLE `appointment`
-  MODIFY `id` int(244) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(244) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `pet_profile`
 --
 ALTER TABLE `pet_profile`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `sign_up`

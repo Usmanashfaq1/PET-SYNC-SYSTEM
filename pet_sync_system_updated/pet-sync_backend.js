@@ -586,6 +586,7 @@ app.post("/check_user", function (req, res) {
 
 
 
+// Create a SMTP pool transporter
 
 //updated the transpoter using pool to send mutiple emails respectively
 //here the code
@@ -593,8 +594,8 @@ const transporter = nodemailer.createTransport(
   pool({
     service: 'gmail',
     auth: {
-      user: '',
-      pass: '',
+      user: 'f200116@cfd.nu.edu.pk',
+      pass: 'ms@1234567.',
     },
     maxConnections: 5, // Maximum number of simultaneous connections
     maxMessages: 10,   // Maximum number of messages to send in a single connection
@@ -605,11 +606,11 @@ const transporter = nodemailer.createTransport(
 
 app.post('/approved', (req, res) => {
   const receiver_email = req.body.email;
-  const val = req.body.slot;
+  const val=req.body.slot;
 
 
   const mailOptions = {
-    from: '',
+    from: 'f200116@cfd.nu.edu.pk',
     to: receiver_email,
     subject: 'Your Appointment is Approved!!!',
     text: `You can visit at : ${val}`
@@ -629,6 +630,7 @@ app.post('/approved', (req, res) => {
   });
 
 });
+
 
 app.post('/recovery-otp', (req, res) => {
   const receiver_email = req.body.email;
@@ -660,6 +662,7 @@ function generateOTP() {
   return Math.floor(1000 + Math.random() * 9000).toString();
 }
 
+
 //email checking 
 app.post('/check-otp', (req, res) => {
   const receiver_email = req.body.email;
@@ -668,8 +671,8 @@ app.post('/check-otp', (req, res) => {
   const mailOptions = {
     from: 'f200116@cfd.nu.edu.pk',
     to: receiver_email,
-    subject: 'Your OTP',
-    text: `Your OTP is: ${otp}`
+    subject: 'Verfication Code',
+    text: `Your Verification code is : ${otp}`
   };
 
   transporter.sendMail(mailOptions, (error, info) => {
@@ -687,7 +690,6 @@ app.post('/check-otp', (req, res) => {
 
 });
 // end
-
 
 
 app.post("/update_password", function (req, res) {
