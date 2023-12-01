@@ -241,6 +241,17 @@
                         </div>
                       </div>
 
+                      <button onclick="checking_email()" class="btn btn-light btn-lg" data-mdb-ripple-color="light">Get Code</button>
+                      <br>
+                      <br>
+                      <div class="d-flex flex-row align-items-center mb-4">
+                        <i class="fas fa-key fa-lg me-3 fa-fw"></i>
+                        <div class="form-outline flex-fill mb-0">
+                          <input type="number" id="code" name="code" class="form-control"  />
+                          <label class="form-label" for="form3Example4cd">Enter Verification Code</label>
+                        </div>
+                      </div>
+
 
 
                       <div class="form-check d-flex justify-content-start mb-4 pb-3">
@@ -337,7 +348,7 @@
 <script>
   //
 
-
+code123=null;
   function validateEmail() {
     var emailInput = $("#email");
     var emailError = $("#email-error");
@@ -390,9 +401,16 @@
     var specialization = $("#specialization").val();
     var password = $("#password").val();
     var cpassword = $("#cpassword").val();
+    var code5 = $("#code").val();
 
-    if (password != cpassword) {
+    if (password != cpassword ||code123===null) {
       alert("Both password and confirm password must be same")
+      return;
+    }
+
+    if(code5!=code123)
+    {
+      alert("Incorrect Verification Code Entered!");
       return;
     }
 
@@ -559,6 +577,51 @@
 
 
   }
+
+  //
+  function checking_email() {
+
+
+var email = $("#email").val();
+var password = $("#password").val();
+var repeat_password = $("#repeat_password").val();
+
+if (email == '') {
+  alert("Please Fill the Required Fields");
+  return;
+}
+
+
+
+var data = { email: email };
+let post = JSON.stringify(data);
+
+$.ajax({
+  url: 'http://localhost:4000/check-otp',
+  headers: {
+    'Content-Type': 'application/json'
+  },
+  type: 'POST',
+  contentType: 'application/json',
+  data: post,
+  success: function (data) {
+    var otp = data;
+    localStorage.setItem('otp-code', otp);
+    localStorage.setItem('email', email);
+    code123=localStorage.getItem('otp-code');
+    alert(code123);
+    if(code123===null)
+    {
+      alert("Email dont exist this is not a valid gmail account!!!!");
+    }
+  },
+  error: function () {
+    alert('error');
+  }
+});
+}
+
+  //
 
 
 

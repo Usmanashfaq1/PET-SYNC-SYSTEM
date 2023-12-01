@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 27, 2023 at 06:44 PM
+-- Generation Time: Dec 01, 2023 at 06:11 AM
 -- Server version: 10.4.25-MariaDB
 -- PHP Version: 8.1.10
 
@@ -114,18 +114,8 @@ CREATE TABLE `sign_up` (
 --
 
 INSERT INTO `sign_up` (`id`, `username`, `email`, `password`, `confirm_password`) VALUES
-(1, 'sameed', 'sameed@gmail.com', '$2b$10$1ru/cZBX3oUzuXG0xrt38O3Z.wK.Sz811d4s.J8yvoAINtIzq8yfS', '$2b$10$1ru/cZBX3oUzuXG0xrt38O3Z.wK.Sz811d4s.J8yvoAINtIzq8yfS'),
-(2, 'sameed2', 'sameed2@gmail.com', '$2b$10$dWtvu732Xdvv31l.cby5WOIByrvvbXisPmUTRrVGyHt4/6WJIXWIm', '$2b$10$dWtvu732Xdvv31l.cby5WOIByrvvbXisPmUTRrVGyHt4/6WJIXWIm'),
-(3, 'sameed23', 'sameed23@gmail.com', '$2b$10$1mUa4fl8159CIX02VRznzOJ2jQZxd2Zyv3QjwnpWewItyLfiXhXly', '$2b$10$1mUa4fl8159CIX02VRznzOJ2jQZxd2Zyv3QjwnpWewItyLfiXhXly'),
-(4, 'sameed234', 'sameed4@gmail.com', '$2b$10$ylr3lmGfL5WIkpiUjiiV/ujI7n2cvesjzwx0V8M94vDde8JZPj.MW', '$2b$10$ylr3lmGfL5WIkpiUjiiV/ujI7n2cvesjzwx0V8M94vDde8JZPj.MW'),
-(5, 'sameed12', 'sameed21@gmail.com', '$2b$10$2v6ttMvfE8XDFbYaxksxd.dY.oTCamqC/CV0.4YO8fYug..DaMr/C', '$2b$10$2v6ttMvfE8XDFbYaxksxd.dY.oTCamqC/CV0.4YO8fYug..DaMr/C'),
-(6, '20F-0116', 'us@gmail.com', '$2b$10$xJKK36fB2TGCMQ0KQRiVoejgGIhagL6IpaELvEyzM2ila3aJBNgbW', '$2b$10$xJKK36fB2TGCMQ0KQRiVoejgGIhagL6IpaELvEyzM2ila3aJBNgbW'),
-(7, 'sameed1', 'master.official.445566@gmail.com', '$2b$10$sBzxTQsck9dl5vbd96unrebbWlnx/NnM.j1nJK5Y2bkqBEHb9XRg2', '$2b$10$k.1X/iaVY8t4LhBus7ud0egdSi8pHulbx/OcTVKdWWL/OtSRkPPcS'),
-(8, '1.', '107@gmail.com', '1', '$2b$10$RumXiz39Phfk.oH4FxqjsOKXCy42naFnQAASTSOtiy4bGPQZqqsnC'),
-(9, 'Usman', 'usman123@gmail.com', '$2b$10$TxxhI9WmuBl/IqSM6zYvruJb1Le1bFCMZVBCDjENJ.wRm2MUtPwwi', '$2b$10$TxxhI9WmuBl/IqSM6zYvruJb1Le1bFCMZVBCDjENJ.wRm2MUtPwwi'),
-(10, 'bilal1', 'bilal1@gmail.com', '$2b$10$uCgboQS2jzmU2Weh6pvEpuN6oSHpSBYZIAkMPBAS3zm3LZyvo5whq', '$2b$10$uCgboQS2jzmU2Weh6pvEpuN6oSHpSBYZIAkMPBAS3zm3LZyvo5whq'),
-(12, 'UsmanAshfaq', 'usmanx458@gmail.com', '$2b$10$SyUKvsZd8x6rETRXuCkque5nrHjnaYzfCpxu3mubHwzd5.0vJyV42', '$2b$10$SyUKvsZd8x6rETRXuCkque5nrHjnaYzfCpxu3mubHwzd5.0vJyV42'),
-(13, 'ahmad', 'chusmanjutt.129@gmail.com', '$2b$10$enx8PahdyYQv0jTwaVnd2OVjkgRzlDIQTydkBJoffFMNLxBBwqLdC', '$2b$10$enx8PahdyYQv0jTwaVnd2OVjkgRzlDIQTydkBJoffFMNLxBBwqLdC');
+(1, 'usmanashfaq1', 'usmanx458@gmail.com', '$2b$10$nSenlqGmptOuVt4bCGOk8eDR/.qWSu.vhOFIOHJU.6IOw/.5PdIIG', '$2b$10$nSenlqGmptOuVt4bCGOk8eDR/.qWSu.vhOFIOHJU.6IOw/.5PdIIG'),
+(2, 'Background_Lab_8473', 'f200115@cfd.nu.edu.pk', '$2b$10$vqjVTbK6I84RVdfw1vkBNeHXysKFIlrk2OWAqKGMNzDYFtGpmigVi', '$2b$10$vqjVTbK6I84RVdfw1vkBNeHXysKFIlrk2OWAqKGMNzDYFtGpmigVi');
 
 -- --------------------------------------------------------
 
@@ -151,8 +141,7 @@ CREATE TABLE `vet` (
 --
 
 INSERT INTO `vet` (`fname`, `lname`, `specialization`, `qualification`, `license_number`, `email`, `timeslot`, `password`, `id`, `location`) VALUES
-('Ayesha', 'Ahsan', 'One Health Approach', 'Bachelor of Veterinary Medicine (BVM)', '11223A', 'ayesha123@gmail.com', 'Morning (8:00 AM - 12:00 PM)', '$2b$10$M4yueHX66S/IVUu9Vl8p3.koVFc9nNNsUgFSzxgqsqSuA6.ClCnia', 1, '1 Sheikhupura Rd Noorpur, Faisalabad, Punjab 38000 Pakistan'),
-('Ali', 'Ahmad', 'Emergency and Critical Care', 'Doctor of Veterinary Medicine (DVM)', '11223B', 'aliahmad123@gmail.com', 'Afternoon (12:00 PM - 4:00 PM)', '$2b$10$azWQeXkvFMSHYvZSYIV6WuZIJTysfJCiTRDhcTIcaUzlyJplM2F6y', 2, 'GHUFRAN CLINIC, Tariq Rd, Sheikh Colony, Faisalabad, Punjab 38000, Pakistan');
+('Ayesha', 'Ali', 'One Health Approach', 'Bachelor of Veterinary Medicine (BVM)', '14456A', 'petsyncsystem@gmail.com', 'Morning (8:00 AM - 12:00 PM)', '$2b$10$5jIa6YqH2hpvM2Vk5bHBaOQhSlpMzgs8eJn2G1HdjEkkS5U3HVppG', 1, 'Faisalabad, Pakistan');
 
 --
 -- Indexes for dumped tables
@@ -214,13 +203,13 @@ ALTER TABLE `pet_profile`
 -- AUTO_INCREMENT for table `sign_up`
 --
 ALTER TABLE `sign_up`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `vet`
 --
 ALTER TABLE `vet`
-  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

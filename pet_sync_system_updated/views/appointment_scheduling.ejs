@@ -80,7 +80,7 @@
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->
 
-      <a href="/user_dashboard" class="appointment-btn scrollto"><span class="d-none d-md-inline">Home</span> Page</a>
+      <a href="/user-dashboard" class="appointment-btn scrollto"><span class="d-none d-md-inline">Home</span> Page</a>
 
     </div>
   </header><!-- End Header -->
@@ -223,7 +223,7 @@
       <script>
         $(document).ready(function () {
           const email = localStorage.getItem('email');
-          alert(email);
+          //alert(email);
           // Update the email link with the dynamic email
           $('#email-link').attr('href', 'mailto:' + email).text(email);
         });
@@ -297,6 +297,7 @@
           var subject = $("#appointmentReason").val();
           const userEmail = email1;
           if (!slot || !subject) {
+            alert("Please Fill in the required Fields!");
   return;
 }
 else{

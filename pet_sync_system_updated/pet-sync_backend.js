@@ -337,6 +337,10 @@ app.get('/create-pet-profile', (req, res) => {
   res.render('create_pet_profile');
 });
 
+app.get('/record-health-information', (req, res) => {
+  res.render('record_health_information');
+});
+
 app.get('/create-pet-profile-new', (req, res) => {
   res.render('create_pet_profile_new');
 });
@@ -594,11 +598,11 @@ const transporter = nodemailer.createTransport(
   pool({
     service: 'gmail',
     auth: {
-      user: 'f200116@cfd.nu.edu.pk',
-      pass: 'ms@1234567.',
+      user: 'chusmanjutt.129@gmail.com',
+      pass: 'ehkb kphm hmpl dilv',
     },
-    maxConnections: 5, // Maximum number of simultaneous connections
-    maxMessages: 10,   // Maximum number of messages to send in a single connection
+    maxConnections: 50, // Maximum number of simultaneous connections
+    maxMessages: 50,   // Maximum number of messages to send in a single connection
   })
 );
 
@@ -610,7 +614,7 @@ app.post('/approved', (req, res) => {
 
 
   const mailOptions = {
-    from: 'f200116@cfd.nu.edu.pk',
+    from: 'chusmanjutt.129@gmail.com',
     to: receiver_email,
     subject: 'Your Appointment is Approved!!!',
     text: `You can visit at : ${val}`
@@ -662,14 +666,14 @@ function generateOTP() {
   return Math.floor(1000 + Math.random() * 9000).toString();
 }
 
-
+//ehkb kphm hmpl dilv
 //email checking 
 app.post('/check-otp', (req, res) => {
   const receiver_email = req.body.email;
   const otp = generateOTP();
 
   const mailOptions = {
-    from: 'f200116@cfd.nu.edu.pk',
+    from: 'chusmanjutt.129@gmail.com',
     to: receiver_email,
     subject: 'Verfication Code',
     text: `Your Verification code is : ${otp}`
@@ -678,7 +682,7 @@ app.post('/check-otp', (req, res) => {
   transporter.sendMail(mailOptions, (error, info) => {
     if (error) {
       console.error(error);
-      res.json({ success: false, message: 'Error sending OTP' });
+      res.json({ success: false, message: 'Error sending verification' });
     } else {
 
       console.log('Email sent: ' + info.response);
@@ -945,4 +949,6 @@ var server = app.listen(4000, function () {
   console.log("App running on port 4000");
 });
 
+
+// https://bootstrapmade.com/demo/Medilab/  (dashboards template link refernece)
 
