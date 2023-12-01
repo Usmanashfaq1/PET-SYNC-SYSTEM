@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 01, 2023 at 06:11 AM
+-- Generation Time: Dec 01, 2023 at 12:35 PM
 -- Server version: 10.4.25-MariaDB
 -- PHP Version: 8.1.10
 
@@ -63,6 +63,29 @@ CREATE TABLE `appointment` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `health_records`
+--
+
+CREATE TABLE `health_records` (
+  `id` int(11) NOT NULL,
+  `pet_id` int(11) DEFAULT NULL,
+  `vaccination` varchar(255) DEFAULT NULL,
+  `medication` varchar(255) DEFAULT NULL,
+  `allergies` varchar(255) DEFAULT NULL,
+  `surgeries` varchar(255) DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `health_records`
+--
+
+INSERT INTO `health_records` (`id`, `pet_id`, `vaccination`, `medication`, `allergies`, `surgeries`, `created_at`) VALUES
+(1, 1, 'parvovirus', 'allergy-medication', 'Contact Allergens', 'no_surgery', '2023-12-01 11:21:13');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `pet_memories`
 --
 
@@ -94,6 +117,13 @@ CREATE TABLE `pet_profile` (
   `about` varchar(500) NOT NULL,
   `petPicture` varchar(1000) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `pet_profile`
+--
+
+INSERT INTO `pet_profile` (`id`, `date`, `pet_owner`, `petname`, `gender`, `age`, `breed`, `species`, `weight`, `color`, `about`, `petPicture`) VALUES
+(1, '', 'usmanashfaq1', 'caspher', 'male', 8, 'Persian', 'cat', '10', 'Black', 'CASPHER@1', '1701428180021-manja-vitolic-gKXKBY-C-Dk-unsplash.jpg');
 
 -- --------------------------------------------------------
 
@@ -160,6 +190,13 @@ ALTER TABLE `appointment`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `health_records`
+--
+ALTER TABLE `health_records`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `c1` (`pet_id`);
+
+--
 -- Indexes for table `pet_profile`
 --
 ALTER TABLE `pet_profile`
@@ -194,10 +231,16 @@ ALTER TABLE `appointment`
   MODIFY `id` int(244) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT for table `health_records`
+--
+ALTER TABLE `health_records`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT for table `pet_profile`
 --
 ALTER TABLE `pet_profile`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `sign_up`
@@ -210,6 +253,16 @@ ALTER TABLE `sign_up`
 --
 ALTER TABLE `vet`
   MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `health_records`
+--
+ALTER TABLE `health_records`
+  ADD CONSTRAINT `c1` FOREIGN KEY (`pet_id`) REFERENCES `pet_profile` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

@@ -943,7 +943,49 @@ app.get('/api/pet-profiles/:username/:petname', (req, res) => {
 
 
 
-//
+//record health info
+// Sample Health Information Record Route
+app.post('/api/record-health-information/:petId', (req, res) => {
+  const petId = req.params.petId;
+  const { vaccination, medication, allergies, surgeries } = req.body;
+
+  // Insert into MySQL
+  const sql = `
+    INSERT INTO health_records (pet_id, vaccination, medication, allergies, surgeries)
+    VALUES (?, ?, ?, ?, ?)
+  `;
+
+  conn.query(sql, [petId, vaccination, medication, allergies, surgeries], (err, result) => {
+    if (err) {
+      console.error('Error recording health information:', err);
+      res.status(500).json({ error: 'An error occurred while recording health information' });
+    } else {
+      res.json({ success: true, message: 'Health information recorded successfully' });
+    }
+  });
+});
+
+// Sample Health Information Update Route
+app.put('/api/update-health-information/:recordId', (req, res) => {
+  const recordId = req.params.recordId;
+  const { vaccination, medication, allergies, surgeries } = req.body;
+
+  // Update MySQL record
+  const sql = `
+    UPDATE health_records
+    SET vaccination = ?, medication = ?, allergies = ?, surgeries = ?
+    WHERE id = ?
+  `;
+
+  conn.query(sql, [vaccination, medication, allergies, surgeries, recordId], (err, result) => {
+    if (err) {
+      console.error('Error updating health information:', err);
+      res.status(500).json({ error: 'An error occurred while updating health information' });
+    } else {
+      res.json({ success: true, message: 'Health information updated successfully' });
+    }
+  });
+});
 
 var server = app.listen(4000, function () {
   console.log("App running on port 4000");

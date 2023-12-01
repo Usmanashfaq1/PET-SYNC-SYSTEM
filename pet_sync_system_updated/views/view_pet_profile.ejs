@@ -12,6 +12,27 @@
 </head>
 
 <style>
+  .btn-cute {
+  font-family: 'Your Cute Font', sans-serif; /* Replace with a cute font */
+  font-size: 16px; /* Adjust the font size */
+  border-radius: 20px; /* Adjust the border-radius for rounded corners */
+}
+
+.btn-pink {
+  background-color: #ff4081; /* Adjust the pink color */
+}
+
+.btn-purple {
+  background-color: #9c27b0; /* Adjust the purple color */
+}
+
+.btn-yellow {
+  background-color: #ffeb3b; /* Adjust the yellow color */
+}
+
+.btn-blue {
+  background-color: #2196f3; /* Adjust the blue color */
+}
     /* CSS for the Modal */
     .modal {
         display: none;
@@ -97,10 +118,11 @@
                       </div>
                     </div>
                     <div class="card-body p-4 text-black">
-                      <div class="d-flex justify-content-between align-items-center mb-4">
-                        <p class="lead fw-normal mb-0">Create Post</p>
-                        <p class="mb-0"><a href="/create-post" class="text-muted">Create Post</a></p>
-                        <p class="mb-0"><a href="/pet-memories-timeline" class="text-muted">View PET-MEMORIES</a></p>
+                      <div class="d-flex flex-column align-items-center mb-4">
+                        <a href="/record-health-information" class="btn btn-cute btn-pink mb-2 text-white">Record Health Information</a>
+                        <a href="" class="btn btn-cute btn-purple mb-2 text-white">Update Health Record</a>
+                        <a href="/create-post" class="btn btn-cute btn-yellow mb-2 text-white">Create Post</a>
+                        <a href="/pet-memories-timeline" class="btn btn-cute btn-blue mb-2 text-white">View PET-MEMORIES</a>
                       </div>
                     </div>
               </div>
@@ -150,6 +172,7 @@
                 success: function (data) {
                     data.forEach(function (result) {
                       localStorage.setItem('petname', result.petname);
+                      localStorage.setItem('petid', result.id);
                         $('#petname').text(result.petname || 'Default Petname');
                         $('#gender').text(result.gender || 'Default Gender');
                         $('#age').text( 'Age : '+result.age + ' years'|| 'Default Age');
@@ -164,6 +187,7 @@
                     // here doing ajax call to backend api to show number of posts of that specfic pet
                     const petname1=localStorage.getItem('petname');
                    const username1= localStorage.getItem('name');
+                   
     // Fetch the count of posts for the specific pet
     $.ajax({
       
