@@ -236,6 +236,26 @@ app.get('/get_records/:petId', (req, res) => {
   });
 });
 
+//adding the api to get the previous record by the user
+
+app.get('/get_records_for_update/:idd', (req, res) => {
+  const id = req.params.idd;
+  const sql = `SELECT * FROM health_records where id = '${id}'`;
+
+  conn.query(sql, (err, result) => {
+    if (err) {
+      console.error('Error fetching pet profiles:', err);
+      res.status(500).json({ error: 'An error occurred while fetching pet profiles' });
+      return;
+    }
+    else{
+      res.json(result);
+    }
+    
+  });
+});
+
+
 //added update api
 app.get('/update/:petId', (req, res) => {
   const pet_id = req.params.petId;
@@ -346,6 +366,10 @@ app.get("/", function (req, res) {
 
 app.get('/view-health-information', (req, res) => {
   res.render('view_health_information');
+});
+
+app.get('/update-health-information', (req, res) => {
+  res.render('update_health_information');
 });
 
 app.get('/admin-dashboard', (req, res) => {
