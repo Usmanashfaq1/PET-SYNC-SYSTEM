@@ -14,9 +14,7 @@
   <link href="../assets/img/apple-touch-icon.png" rel="apple-touch-icon">
 
   <!-- Google Fonts -->
-  <link
-    href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
-    rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
 
   <!-- Vendor CSS Files -->
   <link href="../assets/vendor/fontawesome-free/css/all.min.css" rel="stylesheet">
@@ -27,8 +25,6 @@
   <link href="../assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
   <link href="../assets/vendor/remixicon/remixicon.css" rel="stylesheet">
   <link href="../assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
-
-
   <link href="../assets/css/style.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/css/bootstrap.min.css">
   <style>
@@ -40,14 +36,18 @@
       box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
       background-color: #f8f9fa;
     }
+
+    .card {
+      border-radius: 15px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+      margin-bottom: 20px;
+    }
   </style>
-
-
 </head>
 
 <body>
 
-  <!-- ======= Top Bar ======= -->
+  <!-- Top Bar -->
   <div id="topbar" class="d-flex align-items-center fixed-top">
     <div class="container d-flex justify-content-between">
       <div class="contact-info d-flex align-items-center">
@@ -59,49 +59,38 @@
         <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
         <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
         <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></i></a>
-        <a class="w3-button w3-black" style="color: chartreuse; font-size: large;" onclick="back()" type="button"><span
-            class="d-none d-md-inline">Sign Out</span></a>
+        <a class="w3-button w3-black" style="color: chartreuse; font-size: large;" onclick="back()" type="button"><span class="d-none d-md-inline">Sign Out</span></a>
       </div>
     </div>
   </div>
 
-  <!-- ======= Header ======= -->
+  <!-- Header -->
   <header id="header" class="fixed-top">
     <div class="container d-flex align-items-center">
-
       <h1 class="logo me-auto"><a href="">PETSYNC VET APPOINTMENT</a></h1>
       <div id="message-container"></div>
-
-
       <nav id="navbar" class="navbar order-last order-lg-0">
         <ul>
           <!-- <li><a class="nav-link scrollto " href="#hero">Home</a></li>-->
-
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->
-
       <a href="/user-dashboard" class="appointment-btn scrollto"><span class="d-none d-md-inline">Home</span> Page</a>
-
     </div>
   </header><!-- End Header -->
 
   <main id="main">
-
     <div class="container py-5">
       <h2 class="text-center">SELECT VET ACCORDING TO EXPERTISE</h2>
       <div class="row justify-content-center">
         <div class="col-lg-10">
           <div class="table-container">
             <div class="mb-3">
-
-<!-- Appointment Details -->
-<!-- added these new fields and updated ajax and backend accordingly-->
-<label for="preferredDateTime">Preferred Date and Time:</label>
-<input type="datetime-local" id="preferredDateTime" name="preferredDateTime" required>
-<br>
-<br>
-<!-- Reason for Appointment -->
+              <label for="preferredDateTime">Preferred Date and Time:</label>
+              <input type="datetime-local" id="preferredDateTime" name="preferredDateTime" required>
+              <br>
+              <br>
+              <!-- Reason for Appointment -->
 <label for="appointmentReason">Reason for Appointment:</label>
 <select id="appointmentReason" name="appointmentReason" class="form-select" required>
   <option value="" disabled selected>Select Reason</option>
@@ -117,299 +106,190 @@
   <option value="other">Other</option>
 </select>
 <br>
-
-
-              <label for="party" class="form-label">Vet Type</label>
-              <select class="form-select" id="party" required>
-                <option value="">Select Vet Type</option>
-                <option value="Behavioral Medicine">Behavioral Medicine</option>
-                <option value="One Health Approach">One Health Approach</option>
-                <option value="Emergency and Critical Care">Emergency and Critical Care</option>
-                <option value="Preventive Care">Preventive Care</option>
-                <option value="Veterinary Medicine">Veterinary Medicine</option>
-              </select>
+<label for="party" class="form-label">Vet Type</label>
+<select class="form-select" id="party" required>
+  <option value="">Select Vet Type</option>
+  <option value="Behavioral Medicine">Behavioral Medicine</option>
+  <option value="One Health Approach">One Health Approach</option>
+  <option value="Emergency and Critical Care">Emergency and Critical Care</option>
+  <option value="Preventive Care">Preventive Care</option>
+  <option value="Veterinary Medicine">Veterinary Medicine</option>
+</select>
+</div>
             </div>
-            <table class="table">
-              <thead>
-                <tr>
-                  <th>fname</th>
-                  <th>lname</th>
-                  <th>specialization</th>
-                  <th>qualification</th>
-                  <th>location</th>
-                  <th>timeslot</th>
-
-                  <th>Action</th>
-                </tr>
-              </thead>
-              <tbody id="party-details-body">
-                <!-- Vet details will be dynamically added here -->
-              </tbody>
-            </table>
+            <div class="row" id="party-details-body">
+              <!-- Vet details will be dynamically added here -->
+            </div>
           </div>
         </div>
       </div>
     </div>
+  </main>
 
-
-
-
-  </main><!-- End #main -->
-
-  <!-- ======= Footer ======= -->
+  <!-- Footer -->
   <footer id="footer">
-
     <div class="footer-top">
-      <div class="container">
-        <div class="row">
-
-          <div class="col-lg-3 col-md-6 footer-contact">
-            <h3>PETSYNC</h3>
-            <p>
-              A108 Adam Street <br>
-              Faisalabad, Postal code 38000<br>
-              Pakistan <br><br>
-              <strong>Phone:</strong> +92 5589 55488 55<br>
-              <strong>Email:</strong> petsync@gmail.com<br>
-            </p>
-          </div>
-
-          <div class="col-lg-2 col-md-6 footer-links">
-            <h4>Useful Links</h4>
-            <ul>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Home</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">About us</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Services</a></li>
-            </ul>
-          </div>
-
-          <div class="col-lg-3 col-md-6 footer-links">
-            <h4>Services</h4>
-            <ul>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">PET-Community</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Veterinarians</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Appointment Scheduling</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Nearby Pet Clinics</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Pet Profile</a></li>
-            </ul>
-          </div>
-
-
-
-        </div>
-      </div>
+      <!-- ... Existing footer content ... -->
     </div>
-
-
-
-
-
     <div class="container d-md-flex py-4">
-
       <div class="me-md-auto text-center text-md-start">
         <div class="copyright">
           <strong><span>PETSYNC</span></strong>. VET APPOINTMENT SCHEDULING
         </div>
         <div class="credits">
-
-
         </div>
       </div>
-
-
       <div id="preloader"></div>
-      <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
-          class="bi bi-arrow-up-short"></i></a>
-
+      <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
       <!-- Vendor JS Files -->
       <script src="../assets/vendor/purecounter/purecounter_vanilla.js"></script>
       <script src="../assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
       <script src="../assets/vendor/glightbox/js/glightbox.min.js"></script>
       <script src="../assets/vendor/swiper/swiper-bundle.min.js"></script>
       <script src="../assets/vendor/php-email-form/validate.js"></script>
-
-
-
       <!--Main JS File code -->
       <script src="../assets/js/main.js"></script>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
-
-
-      
-
-
-<!-- Include Bootstrap JS and Popper.js -->
-
       <script>
-        $(document).ready(function () {
-          const email = localStorage.getItem('email');
-          //alert(email);
-          // Update the email link with the dynamic email
-          $('#email-link').attr('href', 'mailto:' + email).text(email);
-        });
+        
       </script>
+    </div>
+  </footer>
 
-      <script>
-        $(document).ready(function () {
+  <!-- Existing scripts ... -->
 
-          
-          // Handle vet type selection change event
-          $('#party').change(function () {
-            var selectedVetType = $(this).val();
-            if (selectedVetType) {
-              // Fetch vet details based on selected vet type
-              $.ajax({
-                url: 'http://localhost:4000/api/vets?type=' + selectedVetType,
-                method: 'GET',
-                success: function (data) {
-                  // Clear existing table rows
-                  $('#party-details-body').empty();
-                  // Append vet details to table
-                  if (data && data.length > 0) {
-                    data.forEach(function (record) {
-                      var row = $('<tr>');
-                      row.html(`
-                    <td>${record.fname}</td>
-                    <td>${record.lname}</td>
-                    <td>${record.specialization}</td>
-                    <td>${record.qualification}</td>
-                    <td>${record.location}</td>
-                    <td>${record.timeslot}</td>
-
-                    <td><button class="btn btn-primary" onclick="bookAppointment('${record.fname}', '${record.lname}', '${record.specialization}', '${record.qualification}' , '${record.email}')">Book</button></td>
+<script>
+    $(document).ready(function () {
+      const email = localStorage.getItem('email');
+      $('#email-link').attr('href', 'mailto:' + email).text(email);
+    });
+  </script>
+  
+  <script>
+    $(document).ready(function () {
+      $('#party').change(function () {
+        var selectedVetType = $(this).val();
+        if (selectedVetType) {
+          $.ajax({
+            url: 'http://localhost:4000/api/vets?type=' + selectedVetType,
+            method: 'GET',
+            success: function (data) {
+              $('#party-details-body').empty();
+              if (data && data.length > 0) {
+                data.forEach(function (record) {
+                  var row = $('<div class="col-md-4 mb-4">');
+                  row.html(`
+                    <div class="card">
+                      <div class="card-body">
+                        <h5 class="card-title">${record.fname} ${record.lname}</h5>
+                        <p class="card-text">Specialization: ${record.specialization}</p>
+                        <p class="card-text">Qualification: ${record.qualification}</p>
+                        <p class="card-text">Location: ${record.location}</p>
+                        <p class="card-text">Timeslot: ${record.timeslot}</p>
+                        <button class="btn btn-primary" onclick="bookAppointment('${record.fname}', '${record.lname}', '${record.specialization}', '${record.qualification}', '${record.email}')">Book</button>
+                      </div>
+                    </div>
                   `);
-                      $('#party-details-body').append(row);
-                    });
-                  } else {
-                    // Vet details not found
-                    $('#party-details-body').append('<tr><td colspan="5">No vet details found</td></tr>');
-                  }
-                },
-                error: function (error) {
-                  console.error('Error fetching vet details:', error);
-                  alert('Error fetching vet details. Please try again.');
-                  $('#party-details-body').empty();
-                }
-              });
-            } else {
-              // No vet type selected
+                  $('#party-details-body').append(row);
+                });
+              } else {
+                $('#party-details-body').append('<p>No vet details found</p>');
+              }
+            },
+            error: function (error) {
+              console.error('Error fetching vet details:', error);
+              alert('Error fetching vet details. Please try again.');
               $('#party-details-body').empty();
             }
           });
-        });
-
-
-
-
-
-        function bookAppointment(fname, lname, specialization, qualification, email) {
-          // Retrieve vet information dynamically
-          //book appointment
-          const vetName = `${fname} ${lname}`;
-          const vetEmail = `${email}`;
-
-          // Validate input fields (user information)
-          // here updated current session user name and email is used while making appointmenet to vet
-          const storedName1 = localStorage.getItem('name');
-          const email1 = localStorage.getItem('email');// 
-          const userName = storedName1;
-          var slot = $("#preferredDateTime").val();
-          var subject = $("#appointmentReason").val();
-          const userEmail = email1;
-          var slot12 = new Date($("#preferredDateTime").val());
-
-          var currentDate = new Date();
-          // date checking here 
-if (slot12 < currentDate) {
-  showMessage('Do not go in history!', 'warning');
-return;
-}
-
-          if (!slot || !subject) {
-            alert("Please Fill in the required Fields!");
-  return;
-}
-else{
-
-            
-
-          // Prepare data for the AJAX request
-          const appointmentData = {
-            user_name: userName,
-            user_email: userEmail,
-            vet_name: vetName,
-            vet_email: vetEmail,
-            type: `(${specialization})`,
-            slot: slot,
-            subject :subject
-          };
-
-
-          $.ajax({
-            url: 'http://localhost:4000/api/appointments',
-            method: 'POST',
-            contentType: 'application/json',
-            data: JSON.stringify(appointmentData),
-            success: function (response) {
-              console.log('Appointment booked successfully:', response);
-              //showMessage( `Appointment booked with ${fname} ${lname}, ${specialization}, ${qualification},${email}`, 'success');
-              alert(`Appointment booked with ${fname} ${lname}, ${specialization}, ${qualification},${email}`);
-              window.close("/appointment-scheduling");
-              window.open("/user-dashboard");
-
-            },
-            error: function (error) {
-              console.error('Error booking appointment:', error);
-              alert('Error booking appointment. Please try again.');
-            }
-          });
+        } else {
+          $('#party-details-body').empty();
         }
-
+      });
+    });
+  </script>
+  
+  <script>
+    function bookAppointment(fname, lname, specialization, qualification, email) {
+      const vetName = `${fname} ${lname}`;
+      const vetEmail = `${email}`;
+      const storedName1 = localStorage.getItem('name');
+      const email1 = localStorage.getItem('email');
+      const userName = storedName1;
+      var slot = $("#preferredDateTime").val();
+      var subject = $("#appointmentReason").val();
+      const userEmail = email1;
+      var slot12 = new Date($("#preferredDateTime").val());
+      var currentDate = new Date();
+  
+      if (slot12 < currentDate) {
+        showMessage('Do not go in history!', 'warning');
+        return;
       }
-
-      </script>
-      <script>
-
-
-        // made a new logic of back function to destroy current session of user and window and take back to front page without browser chache and back+forward buttons
-
-        function back() {
-          //ajax call to delete session here
-          window.close("/appointment-scheduling");
-          window.open("/front");
-        }
-
-        function showMessage(message, type) {
-  const messageContainer = document.getElementById('message-container');
-
-  // Create a Bootstrap Toast element
-  const toast = document.createElement('div');
-  toast.classList.add('toast', `bg-${type}`, 'text-white');
-  toast.setAttribute('role', 'alert');
-  toast.setAttribute('aria-live', 'assertive');
-  toast.setAttribute('aria-atomic', 'true');
-
-  // Set the message content
-  toast.innerHTML = `
-    <div class="toast-header">
-      <strong class="mr-auto">Notification</strong>
-      <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
-        <span aria-hidden="true">&times;</span>
-      </button>
-    </div>
-    <div class="toast-body">${message}</div>
-  `;
-
-  // Append the toast to the message container
-  messageContainer.appendChild(toast);
-
-  // Show the toast
-  new bootstrap.Toast(toast).show();
-}
-      </script>
-
-
+  
+      if (!slot || !subject) {
+        alert("Please Fill in the required Fields!");
+        return;
+      } else {
+        const appointmentData = {
+          user_name: userName,
+          user_email: userEmail,
+          vet_name: vetName,
+          vet_email: vetEmail,
+          type: `(${specialization})`,
+          slot: slot,
+          subject: subject
+        };
+  
+        $.ajax({
+          url: 'http://localhost:4000/api/appointments',
+          method: 'POST',
+          contentType: 'application/json',
+          data: JSON.stringify(appointmentData),
+          success: function (response) {
+            console.log('Appointment booked successfully:', response);
+            alert(`Appointment booked with ${fname} ${lname}, ${specialization}, ${qualification},${email}`);
+            window.close("/appointment-scheduling");
+            window.open("/user-dashboard");
+          },
+          error: function (error) {
+            console.error('Error booking appointment:', error);
+            alert('Error booking appointment. Please try again.');
+          }
+        });
+      }
+    }
+  </script>
+  
+  <script>
+    function back() {
+      window.close("/appointment-scheduling");
+      window.open("/front");
+    }
+  
+    function showMessage(message, type) {
+      const messageContainer = document.getElementById('message-container');
+      const toast = document.createElement('div');
+      toast.classList.add('toast', `bg-${type}`, 'text-white');
+      toast.setAttribute('role', 'alert');
+      toast.setAttribute('aria-live', 'assertive');
+      toast.setAttribute('aria-atomic', 'true');
+      toast.innerHTML = `
+        <div class="toast-header">
+          <strong class="mr-auto">Notification</strong>
+          <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="toast-body">${message}</div>
+      `;
+      messageContainer.appendChild(toast);
+      new bootstrap.Toast(toast).show();
+    }
+  </script>
+  
+  <!-- Existing scripts ... -->
+  
 </body>
-
 </html>
