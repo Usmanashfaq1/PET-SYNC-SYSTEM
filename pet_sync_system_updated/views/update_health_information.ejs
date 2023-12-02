@@ -210,6 +210,33 @@
         }
       });
     });
+
+
+    $('#updateRecord').submit(function (event) {
+      event.preventDefault();
+
+      const idd = getParameterByName('idd');
+      const formData = $(this).serializeArray();
+      const healthInfo = {};
+
+      formData.forEach((field) => {
+        healthInfo[field.name] = field.value;
+      });
+
+      $.ajax({
+        url: `/update_health_record/${idd}`,
+        type: 'POST',
+        contentType: 'application/json',
+        data: JSON.stringify(healthInfo),
+        success: function (response) {
+          alert(response.message);
+        },
+        error: function (error) {
+          console.error('Error recording health information:', error);
+          alert('Error recording health information. Please try again.');
+        }
+      });
+    });
   </script>
 
 </body>
