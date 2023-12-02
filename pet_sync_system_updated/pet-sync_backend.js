@@ -218,6 +218,24 @@ app.get('/get_profiles/:username', (req, res) => {
   });
 });
 
+
+app.get('/get_records/:petId', (req, res) => {
+  const pet_id = req.params.petId;
+  const sql = `SELECT * FROM health_records where pet_id = '${pet_id}'`;
+
+  conn.query(sql, (err, result) => {
+    if (err) {
+      console.error('Error fetching pet profiles:', err);
+      res.status(500).json({ error: 'An error occurred while fetching pet profiles' });
+      return;
+    }
+    else{
+      res.json(result);
+    }
+    
+  });
+});
+
 app.get('/open_profile/:id', (req, res) => {
   const id = req.params.id;
   const sql = `SELECT * FROM pet_profile WHERE id = '${id}'`;
