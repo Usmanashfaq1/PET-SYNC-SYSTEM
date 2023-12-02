@@ -256,23 +256,30 @@ app.get('/get_records_for_update/:idd', (req, res) => {
 });
 
 
-//added update api
-app.get('/update/:petId', (req, res) => {
-  const pet_id = req.params.petId;
-  const sql = `SELECT * FROM health_records where pet_id = '${pet_id}'`;
+app.post('/update_health_record/:idd', (req, res) => {
+  const id = req.params.idd;
+  const { vaccination, medication, allergies, surgeries } = req.body;
 
-  conn.query(sql, (err, result) => {
+  const updateQuery = `
+    UPDATE health_records
+    SET vaccination = ?,
+        medication = ?,
+        allergies = ?,
+        surgeries = ?
+    WHERE id = ?
+  `;
+
+  conn.query(updateQuery, [vaccination, medication, allergies, surgeries, id], (err, result) => {
     if (err) {
-      console.error('Error fetching pet profiles:', err);
-      res.status(500).json({ error: 'An error occurred while fetching pet profiles' });
+      console.error('Error updating health record:', err);
+      res.status(500).json({ error: 'An error occurred while updating health record' });
       return;
     }
-    else{
-      res.json(result);
-    }
-    
+
+    res.json({ message: 'Health record updated successfully' });
   });
 });
+
 
 app.get('/open_profile/:id', (req, res) => {
   const id = req.params.id;
