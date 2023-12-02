@@ -451,6 +451,10 @@ app.get('/sign-in', (req, res) => {
   res.render('sign-in');
 });
 
+app.get('/s123-new', (req, res) => {
+  res.render('s123_new');
+});
+
 app.get('/user-dashboard', (req, res) => {
   res.render('user_dashboard');
 });
