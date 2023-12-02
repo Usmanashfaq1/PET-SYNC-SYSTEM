@@ -305,6 +305,13 @@ app.get("/", function (req, res) {
 
 //
 // Define routes to render views
+
+
+
+app.get('/view-health-information', (req, res) => {
+  res.render('view_health_information');
+});
+
 app.get('/admin-dashboard', (req, res) => {
   res.render('admin_dashboard');
 });
