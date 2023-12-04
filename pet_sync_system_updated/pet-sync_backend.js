@@ -75,12 +75,12 @@ app.post('/create_pet_profile', upload.single('petPicture'), (req, res) => {
 // create pet post (memory post)
 // add post api updated
 app.post('/create_pet_profile_post', upload.single('petPicture'), (req, res) => {
-  
+
   var username = req.body.username;
-  
-  var petname=req.body.petname;
-  
-  var about=req.body.about;
+
+  var petname = req.body.petname;
+
+  var about = req.body.about;
   const petPicture = req.file.filename;
   const date = new Date();
   var sql = `insert into pet_memories(date,pet_owner,petname,about,petPicture) values('${date}','${username}', '${petname}',  '${about}', '${petPicture}')`;
@@ -229,10 +229,10 @@ app.get('/get_records/:petId', (req, res) => {
       res.status(500).json({ error: 'An error occurred while fetching pet profiles' });
       return;
     }
-    else{
+    else {
       res.json(result);
     }
-    
+
   });
 });
 
@@ -248,10 +248,10 @@ app.get('/get_records_for_update/:idd', (req, res) => {
       res.status(500).json({ error: 'An error occurred while fetching pet profiles' });
       return;
     }
-    else{
+    else {
       res.json(result);
     }
-    
+
   });
 });
 
@@ -688,7 +688,7 @@ const transporter = nodemailer.createTransport(
 
 app.post('/approved', (req, res) => {
   const receiver_email = req.body.email;
-  const val=req.body.slot;
+  const val = req.body.slot;
 
 
   const mailOptions = {
