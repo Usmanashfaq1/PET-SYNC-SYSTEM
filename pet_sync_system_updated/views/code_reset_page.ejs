@@ -191,8 +191,7 @@
         data: post,
         success: function (data) {
           if (data == 1) {
-            alert('Updated Successfully')
-            //admin dashboard
+            window.location.href = '/sign-in';
           }
           else {
             alert("Updation Failed! Email or password not correct");

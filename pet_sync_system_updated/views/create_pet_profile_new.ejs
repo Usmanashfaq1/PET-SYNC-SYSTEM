@@ -287,8 +287,8 @@
         processData: false,
         success: function (response) {
           if (response === 1) {
-            alert("Profile created successfully");
-            //window.location.reload();
+            window.location.reload();
+            window.location.href = '/pet-profile';
           } else {
             alert("Profile creation failed");
           }

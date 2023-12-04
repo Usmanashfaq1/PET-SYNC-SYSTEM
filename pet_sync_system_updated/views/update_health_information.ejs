@@ -229,7 +229,8 @@
         contentType: 'application/json',
         data: JSON.stringify(healthInfo),
         success: function (response) {
-          alert(response.message);
+          window.location.reload();
+          window.location.href = '/view-health-information';
         },
         error: function (error) {
           console.error('Error recording health information:', error);

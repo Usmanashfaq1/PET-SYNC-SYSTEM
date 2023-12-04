@@ -248,8 +248,8 @@
           contentType: 'application/json',
           data: JSON.stringify(appointmentData),
           success: function (response) {
-            console.log('Appointment booked successfully:', response);
-            alert(`Appointment booked with ${fname} ${lname}, ${specialization}, ${qualification},${email}`);
+            // console.log('Appointment booked successfully:', response);
+            // alert(`Appointment booked with ${fname} ${lname}, ${specialization}, ${qualification},${email}`);
             window.close("/appointment-scheduling");
             window.open("/user-dashboard");
           },
