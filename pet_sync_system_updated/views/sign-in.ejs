@@ -138,7 +138,7 @@
 
 
 
-                 
+
 
 
 
@@ -233,14 +233,14 @@
     // $("#email").on("input", function () {
 
     // });
-     $('#sign').submit(function (e) {
-        e.preventDefault();
-        if (validateEmail() === true) {
-          return;
-        } else {
-          login();
-        }
-      });
+    $('#sign').submit(function (e) {
+      e.preventDefault();
+      if (validateEmail() === true) {
+        return;
+      } else {
+        login();
+      }
+    });
 
 
     function validateEmail() {
@@ -290,7 +290,7 @@
             window.open("/user-dashboard");
             window.close("/sign-in");
           } else {
-            
+
             document.getElementById('message').innerText = 'Login Failed! Incorrect Email or Password!';
             showDialog();
           }
@@ -309,19 +309,19 @@
   </script>
 
   <script>
-   
+
 
     function showDialog() {
       // if ((loginStatus === "idle") || (loginStatus === "finished"))
-        document.getElementById('overlay').style.display = 'flex';
-       // console.log('here');
+      document.getElementById('overlay').style.display = 'flex';
+      // console.log('here');
     }
 
     function closeDialog() {
       document.getElementById('overlay').style.display = 'none';
     }
 
-    
+
   </script>
 
 </body>

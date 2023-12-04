@@ -40,6 +40,41 @@
 <body>
 
   <style>
+    .overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.7);
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+    }
+
+    /* Styles for the dialog box */
+    .dialog-box {
+      background: #fff;
+      padding: 20px;
+      border-radius: 5px;
+      max-width: 400px;
+      text-align: center;
+    }
+
+    /* Close button style */
+    .close-btn {
+      background: #007BFF;
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+
+
+
+
     @media (min-width: 1025px) {
       .vh-100 {
         height: 100vh !important;
@@ -97,55 +132,55 @@
                     <div class="d-flex flex-row align-items-center mb-4">
                       <i class="fas fa-bone fa-lg me-3 fa-fw"></i>
                       <div class="form-outline flex-fill mb-0">
-                          <label for="petBreed">Breed</label>
-                          <select id="breed" name="breed" class="form-select" required>
-                              <option value="" disabled selected>Select a Breed</option>
-                              
-                              <!-- Top 10 Cat Breeds -->
-                              <optgroup label="Top 10 Cat Breeds">
-                                  <option value="persian">Persian</option>
-                                  <option value="maineCoon">Maine Coon</option>
-                                  <option value="siamese">Siamese</option>
-                                  <option value="ragdoll">Ragdoll</option>
-                                  <option value="bengal">Bengal</option>
-                                  <option value="abyssinian">Abyssinian</option>
-                                  <option value="sphynx">Sphynx</option>
-                                  <option value="britishShorthair">British Shorthair</option>
-                                  <option value="scottishFold">Scottish Fold</option>
-                                  <option value="burmese">Burmese</option>
-                              </optgroup>
-                  
-                              <!-- Top 10 Dog Breeds -->
-                              <optgroup label="Top 10 Dog Breeds">
-                                  <option value="labrador">Labrador Retriever</option>
-                                  <option value="germanShepherd">German Shepherd</option>
-                                  <option value="goldenRetriever">Golden Retriever</option>
-                                  <option value="bulldog">Bulldog</option>
-                                  <option value="beagle">Beagle</option>
-                                  <option value="poodle">Poodle</option>
-                                  <option value="boxer">Boxer</option>
-                                  <option value="dachshund">Dachshund</option>
-                                  <option value="siberianHusky">Siberian Husky</option>
-                                  <option value="chihuahua">Chihuahua</option>
-                              </optgroup>
-                  
-                              <!-- Top 10 Bird Breeds -->
-                              <optgroup label="Top 10 Bird Breeds">
-                                  <option value="budgerigar">Budgerigar</option>
-                                  <option value="cockatiel">Cockatiel</option>
-                                  <option value="lovebird">Lovebird</option>
-                                  <option value="canary">Canary</option>
-                                  <option value="parakeet">Parakeet</option>
-                                  <option value="finch">Finch</option>
-                                  <option value="africanGreyParrot">African Grey Parrot</option>
-                                  <option value="amazonParrot">Amazon Parrot</option>
-                                  <option value="cockatoo">Cockatoo</option>
-                                  <option value="macaw">Macaw</option>
-                              </optgroup>
-                          </select>
+                        <label for="petBreed">Breed</label>
+                        <select id="breed" name="breed" class="form-select" required>
+                          <option value="" disabled selected>Select a Breed</option>
+
+                          <!-- Top 10 Cat Breeds -->
+                          <optgroup label="Top 10 Cat Breeds">
+                            <option value="persian">Persian</option>
+                            <option value="maineCoon">Maine Coon</option>
+                            <option value="siamese">Siamese</option>
+                            <option value="ragdoll">Ragdoll</option>
+                            <option value="bengal">Bengal</option>
+                            <option value="abyssinian">Abyssinian</option>
+                            <option value="sphynx">Sphynx</option>
+                            <option value="britishShorthair">British Shorthair</option>
+                            <option value="scottishFold">Scottish Fold</option>
+                            <option value="burmese">Burmese</option>
+                          </optgroup>
+
+                          <!-- Top 10 Dog Breeds -->
+                          <optgroup label="Top 10 Dog Breeds">
+                            <option value="labrador">Labrador Retriever</option>
+                            <option value="germanShepherd">German Shepherd</option>
+                            <option value="goldenRetriever">Golden Retriever</option>
+                            <option value="bulldog">Bulldog</option>
+                            <option value="beagle">Beagle</option>
+                            <option value="poodle">Poodle</option>
+                            <option value="boxer">Boxer</option>
+                            <option value="dachshund">Dachshund</option>
+                            <option value="siberianHusky">Siberian Husky</option>
+                            <option value="chihuahua">Chihuahua</option>
+                          </optgroup>
+
+                          <!-- Top 10 Bird Breeds -->
+                          <optgroup label="Top 10 Bird Breeds">
+                            <option value="budgerigar">Budgerigar</option>
+                            <option value="cockatiel">Cockatiel</option>
+                            <option value="lovebird">Lovebird</option>
+                            <option value="canary">Canary</option>
+                            <option value="parakeet">Parakeet</option>
+                            <option value="finch">Finch</option>
+                            <option value="africanGreyParrot">African Grey Parrot</option>
+                            <option value="amazonParrot">Amazon Parrot</option>
+                            <option value="cockatoo">Cockatoo</option>
+                            <option value="macaw">Macaw</option>
+                          </optgroup>
+                        </select>
                       </div>
-                  </div>
-                  
+                    </div>
+
 
 
 
@@ -212,7 +247,12 @@
                     </div>
 
                   </form>
-
+                  <div class="overlay" id="overlay">
+                    <div class="dialog-box">
+                      <p id='message'></p>
+                      <button class="close-btn" onclick="closeDialog()">Close</button>
+                    </div>
+                  </div>
                 </div>
                 <div class="col-md-10 col-lg-6 col-xl-7 d-flex align-items-center order-1 order-lg-2">
                   <img src="../assets/img/pet_profile.jpg" class="img-fluid" alt="Sample image">
@@ -239,10 +279,12 @@
       $('#petProfileForm').submit(function (e) {
         e.preventDefault();
         if ($("#dobOrAge").val() < 1 || $("#dobOrAge").val() > 30) {
-          alert('age invalid');
+          document.getElementById('message').innerText = 'Choose age between 1 to 30 years';
+          showDialog();
         }
         else if ($("#weight").val() < 1 || $("#weight").val() > 200) {
-          alert('invalid weight');
+          document.getElementById('message').innerText = 'Choose weight between 1 to 50 Kgs';
+          showDialog();
         }
         else {
           register_profile();
@@ -290,7 +332,8 @@
             window.location.reload();
             window.location.href = '/pet-profile';
           } else {
-            alert("Profile creation failed");
+            document.getElementById('message').innerText = 'Profile creation failed';
+            showDialog();
           }
         },
         error: function () {
@@ -299,7 +342,21 @@
       });
     }
   </script>
+  <script>
 
+
+    function showDialog() {
+      // if ((loginStatus === "idle") || (loginStatus === "finished"))
+      document.getElementById('overlay').style.display = 'flex';
+      // console.log('here');
+    }
+
+    function closeDialog() {
+      document.getElementById('overlay').style.display = 'none';
+    }
+
+
+  </script>
 </body>
 
 </html>

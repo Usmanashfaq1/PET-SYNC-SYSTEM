@@ -40,6 +40,40 @@
 <body>
 
   <style>
+    .overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.7);
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+    }
+
+    /* Styles for the dialog box */
+    .dialog-box {
+      background: #fff;
+      padding: 20px;
+      border-radius: 5px;
+      max-width: 400px;
+      text-align: center;
+    }
+
+    /* Close button style */
+    .close-btn {
+      background: #007BFF;
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+
+
+
     @media (min-width: 1025px) {
       .vh-100 {
         height: 100vh !important;
@@ -73,7 +107,7 @@
 
                   <form id="petProfileForm">
 
-                    
+
 
                     <div class="d-flex flex-row align-items-center mb-4">
                       <i class="fas fa-info fa-lg me-3 fa-fw"></i>
@@ -90,14 +124,19 @@
 
                     <!-- Include additional fields as needed -->
 
-                    
+
 
                     <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
                       <button type="submit" class="btn btn-primary btn-lg">POST PET MEMORY</button>
                     </div>
 
                   </form>
-
+                  <div class="overlay" id="overlay">
+                    <div class="dialog-box">
+                      <p id='message'></p>
+                      <button class="close-btn" onclick="closeDialog()">Close</button>
+                    </div>
+                  </div>
                 </div>
                 <div class="col-md-10 col-lg-6 col-xl-7 d-flex align-items-center order-1 order-lg-2">
                   <img src="../assets/img/pet_profile.jpg" class="img-fluid" alt="Sample image">
@@ -123,9 +162,9 @@
     $(document).ready(function () {
       $('#petProfileForm').submit(function (e) {
         e.preventDefault();
-       
-          register_profile();
-        
+
+        register_profile();
+
       });
 
     });
@@ -133,12 +172,12 @@
 
     function register_profile() {
       const username = localStorage.getItem('name');
-      const petname1=localStorage.getItem('petname');
+      const petname1 = localStorage.getItem('petname');
       var about = $("#about").val();
       var petPicture = document.getElementById('petPicture').files[0];
-      if(!petPicture )
-      {
-        alert("select picture for profile");
+      if (!petPicture || !about) {
+        document.getElementById('message').innerText = 'Select Both picture and about to post';
+        showDialog();
         return;
       }
       var formData = new FormData();
@@ -154,10 +193,11 @@
         processData: false,
         success: function (response) {
           if (response === 1) {
-            alert("post  created successfully");
-            //window.location.reload();
+            document.getElementById('message').innerText = 'Post created Successfully';
+            showDialog();
           } else {
-            alert("Post creation failed");
+            document.getElementById('message').innerText = 'Post creation failed';
+            showDialog();
           }
         },
         error: function () {
@@ -166,7 +206,21 @@
       });
     }
   </script>
+  <script>
 
+
+    function showDialog() {
+      // if ((loginStatus === "idle") || (loginStatus === "finished"))
+      document.getElementById('overlay').style.display = 'flex';
+      // console.log('here');
+    }
+
+    function closeDialog() {
+      document.getElementById('overlay').style.display = 'none';
+    }
+
+
+  </script>
 </body>
 
 </html>
