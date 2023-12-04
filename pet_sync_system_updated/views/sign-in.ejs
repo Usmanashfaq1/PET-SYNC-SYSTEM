@@ -291,9 +291,8 @@
             window.close("/sign-in");
           } else {
             
-            document.getElementById('message').innerText = 'Incorrect Email or Password!';
+            document.getElementById('message').innerText = 'Login Failed! Incorrect Email or Password!';
             showDialog();
-            // Set login status back to idle after showing dialog
           }
         },
         error: function () {
