@@ -88,12 +88,18 @@
   <main id="main">
 
     <div class="container py-5">
-      <h2 class="text-center">SELECT VET ACCORDING TO EXPERTISE</h2>
       <div class="row justify-content-center">
         <div class="col-lg-10">
           <div class="table-container">
             <div class="mb-3">
-
+              <div class="row justify-content-center">
+                <div class="col-lg-4 mb-3">
+                  <label for="selectYearMonth">Select Year and Month:</label>
+                  <select id="selectYearMonth" class="form-control" onchange="fetchAppointmentsByYearMonth()">
+                    <!-- Options will be dynamically added in JavaScript -->
+                  </select>
+                </div>
+              </div>
               <table class="table">
                 <thead>
                   <tr>
@@ -200,20 +206,43 @@
       <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
       <script>
-        // added approved appointment feature where user can view approved appointments
-        //here calling ajax call to fetch data from api into table accordingly
-        $(document).ready(function () {
-          // Handle vet type selection change event
-          // alert(req.session.vetEmail);
-          // Fetch vet details based on selected vet type
-          const email = localStorage.getItem('email');
-          
-          $.ajax({
+        // Add this script after your existing scripts
+$(document).ready(function () {
+  const email = localStorage.getItem('email');
+  // Call this function when the document is ready to populate the dropdown
+  populateYearMonthDropdown();
+});
 
-            url: 'http://localhost:4000/api/appointmentapp/' + email,
+function populateYearMonthDropdown() {
+ 
+  const selectYearMonth = document.getElementById('selectYearMonth');
 
-            method: 'GET',
-            success: function (data) {
+// Generate options for the next 12 months
+for (let i = 0; i < 12; i++) {
+  const date = new Date();
+  date.setMonth(date.getMonth() + i);
+
+  // Check if the generated date is in the future
+  if (date >= new Date()) {
+    const option = document.createElement('option');
+    option.value = `${date.getFullYear()}-${(date.getMonth() + 1).toString().padStart(2, '0')}`;
+    option.text = `${date.toLocaleString('default', { month: 'long' })} ${date.getFullYear()}`;
+    selectYearMonth.add(option);
+  }
+}
+  // Fetch appointments when the page loads
+  fetchAppointmentsByYearMonth();
+}
+function fetchAppointmentsByYearMonth() {
+  const selectedYearMonth = document.getElementById('selectYearMonth').value;
+  const email = localStorage.getItem('email');
+
+  $.ajax({
+    url: `http://localhost:4000/api/appointmentapp/${email}?yearMonth=${selectedYearMonth}`,
+    method: 'GET',
+    success: function (data) {
+      // The rest of your existing code to populate the table with fetched data
+      // ...success: function (data) {
               // Clear existing table rows
               $('#party-details-body').empty();
               // Append vet details to table
@@ -237,24 +266,17 @@
                 });
               } else {
                 // Vet details not found
-                $('#party-details-body').append('<tr><td colspan="5">No vet details found</td></tr>');
+                $('#party-details-body').append('<tr><td colspan="5">No apppintment  details found</td></tr>');
               }
-            },
-            error: function (error) {
-              console.error('Error fetching vet details:', error);
-              alert('Error fetching vet details. Please try again.');
-              $('#party-details-body').empty();
-            }
-          });
-        });
-
-
-
-
-
-       
-
-
+            
+    },
+    error: function (error) {
+      console.error('Error fetching vet details:', error);
+      alert('Error fetching vet details. Please try again.');
+      $('#party-details-body').empty();
+    }
+  });
+}
 
       </script>
       <script>

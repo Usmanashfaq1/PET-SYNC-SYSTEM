@@ -687,8 +687,9 @@ const transporter = nodemailer.createTransport(
 
 
 app.post('/approved', (req, res) => {
+  console.log('Received a request to /approved');
   const receiver_email = req.body.email;
-  const val = req.body.slot;
+  const val=req.body.slot;
 
 
   const mailOptions = {
@@ -846,6 +847,32 @@ app.post('/api/appointments', (req, res) => {
 });
 //
 //appointment data api
+app.get('/api/appointmentym/:email', (req, res) => {
+  const email = req.params.email;
+  const yearMonth = req.query.yearMonth; // Get the selected year and month
+
+  let query = 'SELECT * FROM appointment WHERE vet_email = ?';
+  const queryParams = [email];
+
+  if (yearMonth) {
+    query += ' AND DATE_FORMAT(date, "%Y-%m") = ?';
+    queryParams.push(yearMonth);
+  }
+
+  conn.query(query, queryParams, (err, result) => {
+    if (err) {
+      console.error('Error fetching party details:', err);
+      res.status(500).json({ error: 'An error occurred while fetching party details' });
+      return;
+    }
+
+    if (result.length === 0) {
+      res.json(null); // Party details not found
+    } else {
+      res.json(result);
+    }
+  });
+});
 
 // Get appointment  details API with specfic to current user session email
 
@@ -869,9 +896,21 @@ app.get('/api/appointment/:email', (req, res) => {
 //
 app.get('/api/appointmentapp/:email', (req, res) => {
   const email = req.params.email; // Taking email from the AJAX frontend
+  const status = 'approved';
 
-  // Query the database to fetch appointments for the specified vet
-  conn.query('SELECT * FROM appointment WHERE user_email = ? AND status = ?', [email, 'approved'], (err, result) => {
+  // Optional: Get the selected year and month from the query parameters
+  const yearMonth = req.query.yearMonth;
+
+  // Query the database to fetch appointments for the specified user with status 'approved'
+  let query = 'SELECT * FROM appointment WHERE user_email = ? AND status = ?';
+  const queryParams = [email, status];
+
+  if (yearMonth) {
+    query += ' AND DATE_FORMAT(date, "%Y-%m") = ?';
+    queryParams.push(yearMonth);
+  }
+
+  conn.query(query, queryParams, (err, result) => {
     if (err) {
       console.error('Error fetching appointment details:', err);
       res.status(500).json({ error: 'An error occurred while fetching appointment details' });
@@ -879,12 +918,19 @@ app.get('/api/appointmentapp/:email', (req, res) => {
     }
 
     if (result.length === 0) {
-      res.json(null); // No appointments found for the specified vet
+      res.json(null); // No appointments found for the specified user and status 'approved'
     } else {
       res.json(result);
     }
   });
 });
+
+
+
+
+
+
+//
 
 
 

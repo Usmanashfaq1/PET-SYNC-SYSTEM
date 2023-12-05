@@ -103,28 +103,29 @@
       <h1 class="logo me-auto"><a href="">PETSYNC VET MANAGE APPOINTMENTS</a></h1>
 
 
-      <nav id="navbar" class="navbar order-last order-lg-0">
-        <ul>
-          <!-- <li><a class="nav-link scrollto " href="#hero">Home</a></li>-->
-
-        </ul>
-        <i class="bi bi-list mobile-nav-toggle"></i>
-      </nav><!-- .navbar -->
-
       <a href="/vet-dashboard" class="appointment-btn scrollto"><span class="d-none d-md-inline">Home</span> Page</a>
 
     </div>
+
+    
   </header><!-- End Header -->
 
   <main id="main">
-
+    
     <div class="container py-5">
-      <h2 class="text-center">SELECT VET ACCORDING TO EXPERTISE</h2>
+      
       <div class="row justify-content-center">
         <div class="col-lg-10">
           <div class="table-container">
             <div class="mb-3">
-
+              <div class="row justify-content-center">
+                <div class="col-lg-4 mb-3">
+                  <label for="selectYearMonth">Select Year and Month:</label>
+                  <select id="selectYearMonth" class="form-control" onchange="fetchAppointmentsByYearMonth()">
+                    <!-- Options will be dynamically added in JavaScript -->
+                  </select>
+                </div>
+              </div>
               <table class="table">
                 <thead>
                   <tr>
@@ -236,20 +237,43 @@
       <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
       <script>
+        // Add this script after your existing scripts
+$(document).ready(function () {
+  const email = localStorage.getItem('email');
+  // Call this function when the document is ready to populate the dropdown
+  populateYearMonthDropdown();
+});
 
+function populateYearMonthDropdown() {
+ 
+  const selectYearMonth = document.getElementById('selectYearMonth');
 
-        //here calling ajax call to fetch data from api into table accordingly
-        $(document).ready(function () {
-          // Handle vet type selection change event
-          // alert(req.session.vetEmail);
-          // Fetch vet details based on selected vet type
-          const email = localStorage.getItem('email');
-          $.ajax({
+// Generate options for the next 12 months
+for (let i = 0; i < 12; i++) {
+  const date = new Date();
+  date.setMonth(date.getMonth() + i);
 
-            url: 'http://localhost:4000/api/appointment/' + email,
+  // Check if the generated date is in the future
+  if (date >= new Date()) {
+    const option = document.createElement('option');
+    option.value = `${date.getFullYear()}-${(date.getMonth() + 1).toString().padStart(2, '0')}`;
+    option.text = `${date.toLocaleString('default', { month: 'long' })} ${date.getFullYear()}`;
+    selectYearMonth.add(option);
+  }
+}
+  // Fetch appointments when the page loads
+  fetchAppointmentsByYearMonth();
+}
+function fetchAppointmentsByYearMonth() {
+  const selectedYearMonth = document.getElementById('selectYearMonth').value;
+  const email = localStorage.getItem('email');
 
-            method: 'GET',
-            success: function (data) {
+  $.ajax({
+    url: `http://localhost:4000/api/appointmentym/${email}?yearMonth=${selectedYearMonth}`,
+    method: 'GET',
+    success: function (data) {
+      // The rest of your existing code to populate the table with fetched data
+      // ...success: function (data) {
               // Clear existing table rows
               $('#party-details-body').empty();
               // Append vet details to table
@@ -272,81 +296,132 @@
                 });
               } else {
                 // Vet details not found
-                $('#party-details-body').append('<tr><td colspan="5">No vet details found</td></tr>');
+                $('#party-details-body').append('<tr><td colspan="5">No appointment details found</td></tr>');
               }
-            },
-            error: function (error) {
-              console.error('Error fetching vet details:', error);
-              alert('Error fetching vet details. Please try again.');
-              $('#party-details-body').empty();
-            }
-          });
-        });
+            
+    },
+    error: function (error) {
+      console.error('Error fetching vet details:', error);
+      alert('Error fetching vet details. Please try again.');
+      $('#party-details-body').empty();
+    }
+  });
+}
+
+      </script>
+      <script>
+
+
+        //here calling ajax call to fetch data from api into table accordingly
+        // $(document).ready(function () {
+        //   // Handle vet type selection change event
+        //   // alert(req.session.vetEmail);
+        //   // Fetch vet details based on selected vet type
+        //   
+        //   $.ajax({
+
+        //     url: 'http://localhost:4000/api/appointment/' + email,
+
+        //     method: 'GET',
+        //     success: function (data) {
+        //       // Clear existing table rows
+        //       $('#party-details-body').empty();
+        //       // Append vet details to table
+        //       if (data && data.length > 0) {
+        //         data.forEach(function (record) {
+        //           var row = $('<tr>');
+        //           row.html(`
+        //           <td>${formatDate(record.date)}</td>
+        //             <td>${record.user_name}</td>
+
+        //             <td>${record.user_email}</td>
+        //             <td>${record.type}</td>
+        //             <td>${formatDateWithTime(record.slot)}</td>
+        //             <td>${record.subject}</td>
+        //             <td>${record.status}</td>
+
+        //             <td><button class="btn btn-primary" onclick="bookAppointment(' ${record.id}','${record.status}','${record.user_email}','${formatDateWithTime(record.slot)}')">Approve</button></td>
+        //           `);
+        //           $('#party-details-body').append(row);
+        //         });
+        //       } else {
+        //         // Vet details not found
+        //         $('#party-details-body').append('<tr><td colspan="5">No vet details found</td></tr>');
+        //       }
+        //     },
+        //     error: function (error) {
+        //       console.error('Error fetching vet details:', error);
+        //       alert('Error fetching vet details. Please try again.');
+        //       $('#party-details-body').empty();
+        //     }
+        //   });
+        //   //
+        // });
 
 
 
 
         // added approved appointment function (feature to approved appointment and set its status to approved)
-        function bookAppointment(id, status, user_email, slot1) {
+        function bookAppointment(id,status,user_email,slot1) 
+         {
           const appointmentId = id;
-          if (status === 'approved') {
-            document.getElementById('message').innerText = "Appointment is already Approved!";
+         if(status==='approved')
+         {
+          alert("already approved!!!")
+          return;
 
-            showDialog();
-            return;
+         }
+        // AJAX call to the server-side API
+        $.ajax({
+          type: 'PUT',
+          url: `/updateAppointmentStatus/${appointmentId}`,
+          success: function(response) {
+            console.log(response);
+            // Handle success, e.g., show a success message to the user
+            alert('Appointment status updated to approved!');
 
+            // email sending to user
+            var email = user_email;
+            var slot=slot1;
+            handleEmailSending(user_email, slot1);
+            //alert(slot);
+      
+      
+          },
+          error: function(error) {
+            console.error(error);
+            // Handle error, e.g., show an error message to the user
+            alert('Error updating appointment status');
           }
-          // AJAX call to the server-side API
-          $.ajax({
-            type: 'PUT',
-            url: `/updateAppointmentStatus/${appointmentId}`,
-            success: function (response) {
-              console.log(response);
-              // Handle success, e.g., show a success message to the user
-              //alert('Appointment status updated to approved!');
-
-              // email sending to user
-              var email = user_email;
-              var slot = slot1;
-              alert(slot);
-
-              // if (email == '' || password == '') {
-              //   alert("Please Fill the Required Fields");
-              //   return;
-              // }
-              var data = { email: email, slot: slot };
-              let post = JSON.stringify(data);
-              $.ajax({
-                url: 'http://localhost:4000/approved',
-                headers: {
-                  'Content-Type': 'application/json'
-                },
-                type: 'POST',
-                contentType: 'application/json',
-                data: post,
-                success: function (data) {
-
-                },
-                error: function () {
-                  alert('error');
-                }
-              });
-
-              //end of email sending to user
-              window.close('/manage-appointment');
-              window.open('/vet-dashboard');
-            },
-            error: function (error) {
-              console.error(error);
-              // Handle error, e.g., show an error message to the user
-              alert('Error updating appointment status');
-            }
-          });
-        }
+        });
+        
+      }
 
       </script>
       <script>
+function handleEmailSending(email, slot) {
+ // alert('Before email sending to user');
+  var data = { email: email, slot: slot };
+  let post = JSON.stringify(data);
 
+  $.ajax({
+    url: 'http://localhost:4000/approved',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    type: 'POST',
+    contentType: 'application/json',
+    data: post,
+    success: function (data) {
+      alert('Email sent successfully');
+    },
+    error: function () {
+      alert('Error sending email');
+    }
+  });
+
+  //alert('After email sending to user');
+}
         // made a new logic of back function to destroy current session of user and window and take back to front page without browser chache and back+forward buttons
         function back() {
 
