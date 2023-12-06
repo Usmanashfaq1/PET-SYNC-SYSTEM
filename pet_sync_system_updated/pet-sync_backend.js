@@ -63,7 +63,10 @@ app.post('/create_pet_profile', upload.single('petPicture'), (req, res) => {
   var species = req.body.species;
   var about = req.body.about;
   const petPicture = req.file.filename;
-  var sql = `insert into pet_profile(pet_owner,petname,gender,age,breed , species,weight,color, petPicture, about) values('${username}', '${petname}', '${gender}', '${age}', '${breed}' , '${species}', '${weight}', '${color}', '${petPicture}', '${about}')`;
+ // Assuming 'owner_id' is the foreign key column in 'pet_profile'
+ var sql = `INSERT INTO pet_profile (pet_owner, petname, gender, age, breed, species, weight, color, petPicture, about, owner_id) 
+ VALUES ('${username}', '${petname}', '${gender}', '${age}', '${breed}', '${species}', '${weight}', '${color}', '${petPicture}', '${about}', 
+         (SELECT id FROM sign_up WHERE username = '${username}'))`;
 
   conn.query(sql, function (err, results) {
     if (err) throw err;
@@ -830,21 +833,63 @@ app.post('/api/appointments', (req, res) => {
   const { user_name, user_email, vet_name, vet_email, type, slot, subject } = req.body;
   const date = new Date();
   const status = 'unapproved';
-  // Insert data into the "appointment" table
-  const sql = 'INSERT INTO appointment (date,user_name, user_email, vet_name, vet_email, type,slot,subject,status) VALUES (?, ?, ?, ?, ?,?,?,?,?)';
-  const values = [date, user_name, user_email, vet_name, vet_email, type, slot, subject, status];
 
-  conn.query(sql, values, (err, result) => {
+  // Get user_id based on user_name and user_email
+  const getUserQuery = 'SELECT id FROM sign_up WHERE username = ? AND email = ? LIMIT 1';
+  const userValues = [user_name, user_email];
+
+  conn.query(getUserQuery, userValues, (err, userResult) => {
     if (err) {
-      console.error('Error inserting appointment data:', err);
-      res.status(500).json({ error: 'An error occurred while inserting appointment data' });
+      console.error('Error querying user data:', err);
+      res.status(500).json({ error: 'An error occurred while querying user data' });
       return;
     }
 
-    console.log('Appointment data inserted successfully');
-    res.json({ success: true });
+    if (userResult.length === 0) {
+      // User not found, handle accordingly
+      res.status(400).json({ error: 'User not found' });
+      return;
+    }
+
+    const user_id = userResult[0].id;
+
+    // Get vet_id based on vet_name and vet_email
+    const getVetQuery = 'SELECT id FROM vet WHERE  email = ? LIMIT 1';
+    const vetValues = [vet_name, vet_email];
+
+    conn.query(getVetQuery, vetValues, (err, vetResult) => {
+      if (err) {
+        console.error('Error querying vet data:', err);
+        res.status(500).json({ error: 'An error occurred while querying vet data' });
+        return;
+      }
+
+      if (vetResult.length === 0) {
+        // Vet not found, handle accordingly
+        res.status(400).json({ error: 'Vet not found' });
+        return;
+      }
+
+      const vet_id = vetResult[0].id;
+
+      // Insert appointment data with obtained user_id and vet_id
+      const insertAppointmentQuery = 'INSERT INTO appointment (date,user_name,user_email,vet_name,vet_email, user_id, vet_id, type, slot, subject, status) VALUES (?, ?, ?, ?, ?, ?, ?,?,?,?,?)';
+      const appointmentValues = [date,user_name,user_email,vet_name,vet_email, user_id, vet_id, type, slot, subject, status];
+
+      conn.query(insertAppointmentQuery, appointmentValues, (err, result) => {
+        if (err) {
+          console.error('Error inserting appointment data:', err);
+          res.status(500).json({ error: 'An error occurred while inserting appointment data' });
+          return;
+        }
+
+        console.log('Appointment data inserted successfully');
+        res.json({ success: true });
+      });
+    });
   });
 });
+
 //
 //appointment data api
 app.get('/api/appointmentym/:email', (req, res) => {

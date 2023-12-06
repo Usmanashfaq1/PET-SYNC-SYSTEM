@@ -269,12 +269,19 @@
       var email = $("#email").val();
       var password = $("#password").val();
       var repeat_password = $("#repeat_password").val();
+      var code=$("#code").val();
 
        if (password != repeat_password) {
         document.getElementById('message').innerText = 'Both passwords and confirm password must be same!';
         showDialog();
         return;
       }
+      if(code!=code123)
+        {
+          document.getElementById('message').innerText = 'Incorrect code!!!';
+        showDialog();
+          return;
+        }
       var data = { username: username, email: email, password: password, confirm_password: repeat_password };
       let post = JSON.stringify(data);
       $.ajax({
@@ -287,10 +294,18 @@
         data: post,
         success: function (data) {
           if (data == 1) {
-            //alert("Registeration Successfull");
-            window.close();
-            window.open('/sign-in');
-          }
+    //alert("Registration Successful");
+    document.getElementById('message').innerText = 'User is Registered Successfully!';
+    showDialog();
+
+    // Wait for 5 seconds (5000 milliseconds) before closing the window and opening '/sign-in'
+    // Wait for 5 seconds (5000 milliseconds) before refreshing the window
+    setTimeout(function () {
+    window.close('/register');
+    window.open('/sign-in');
+
+}, 5000);
+}
           else {
             alert("Registeration Failed");
           }
@@ -368,16 +383,15 @@
       var password = $("#password").val();
       var repeat_password = $("#repeat_password").val();
 
-      if (email == '') {
-        alert("Please Fill the Required Fields");
+      if (email == ''||username==''||password==''||repeat_password=='') {
+        document.getElementById('message').innerText = 'fill in the required field before code verification';
+        showDialog();
         return;
       }
+      
 
 
-      // if (email == '' || password == '') {
-      //   alert("Please Fill the Required Fields");
-      //   return;
-      // }
+      //code sending and saving in variable code 123
       var data = { email: email };
       let post = JSON.stringify(data);
 
@@ -394,12 +408,21 @@
           localStorage.setItem('otp-code', otp);
           localStorage.setItem('email', email);
           code123 = localStorage.getItem('otp-code');
-          if (code123 === null) {
-            alert("Email dont exist this is not a valid gmail account!!!!");
-          }
+          if(code123===null)
+    {
+      
+      //alert("Email dont exist this is not a valid gmail account!!!!");
+      document.getElementById('message').innerText = 'Email dont exist this is not a valid gmail account!';
+            showDialog();
+    }
+    else{
+      document.getElementById('message').innerText = 'Verification Code is Sent, Enter code below!';
+            showDialog();
+    }
         },
         error: function () {
-          alert('error');
+          document.getElementById('message').innerText = 'error';
+            showDialog();
         }
       });
     }

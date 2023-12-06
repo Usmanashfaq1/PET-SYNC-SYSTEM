@@ -302,7 +302,8 @@ function fetchAppointmentsByYearMonth() {
     },
     error: function (error) {
       console.error('Error fetching vet details:', error);
-      alert('Error fetching vet details. Please try again.');
+      document.getElementById('message').innerText = 'Error fetching vet details';
+            showDialog();
       $('#party-details-body').empty();
     }
   });
@@ -367,7 +368,8 @@ function fetchAppointmentsByYearMonth() {
           const appointmentId = id;
          if(status==='approved')
          {
-          alert("already approved!!!")
+          document.getElementById('message').innerText = 'Appointment Already Approved!';
+            showDialog();
           return;
 
          }
@@ -378,20 +380,28 @@ function fetchAppointmentsByYearMonth() {
           success: function(response) {
             console.log(response);
             // Handle success, e.g., show a success message to the user
-            alert('Appointment status updated to approved!');
+            //alert('Appointment status updated to approved!');
 
             // email sending to user
             var email = user_email;
             var slot=slot1;
             handleEmailSending(user_email, slot1);
             //alert(slot);
+            document.getElementById('message').innerText = 'Email sent to client!';
+            showDialog();
       
-      
+           // Wait for 5 seconds (5000 milliseconds) before refreshing the window
+           setTimeout(function () {
+    window.close('/manage_appointment');
+    window.open('/vet-dashboard');
+
+}, 5000);
           },
           error: function(error) {
             console.error(error);
             // Handle error, e.g., show an error message to the user
-            alert('Error updating appointment status');
+            document.getElementById('message').innerText = 'Error updating appointment status!!';
+            showDialog();
           }
         });
         
@@ -413,10 +423,11 @@ function handleEmailSending(email, slot) {
     contentType: 'application/json',
     data: post,
     success: function (data) {
-      alert('Email sent successfully');
+     
     },
     error: function () {
-      alert('Error sending email');
+      document.getElementById('message').innerText = 'Error Sending email, network error!!!';
+            showDialog();
     }
   });
 

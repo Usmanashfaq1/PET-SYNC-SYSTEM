@@ -480,7 +480,15 @@ code123=null;
       contentType: 'application/json',
       data: post,
       success: function () {
-        window.location.href = '/vet-sign-in';
+        document.getElementById('message').innerText = 'vet is Registered Successfully!';
+            showDialog();
+
+            setTimeout(function () {
+    window.close('/vet-register');
+    window.open('/vet-sign-in');
+
+}, 5000);
+        
       },
       error: function () {
         alert('error occured');
@@ -665,6 +673,10 @@ $.ajax({
       
       //alert("Email dont exist this is not a valid gmail account!!!!");
       document.getElementById('message').innerText = 'Email dont exist this is not a valid gmail account!';
+            showDialog();
+    }
+    else{
+      document.getElementById('message').innerText = 'Verification Code is Sent, Enter code below!';
             showDialog();
     }
   },
