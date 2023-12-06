@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 01, 2023 at 12:35 PM
+-- Generation Time: Dec 06, 2023 at 04:49 PM
 -- Server version: 10.4.25-MariaDB
 -- PHP Version: 8.1.10
 
@@ -57,8 +57,18 @@ CREATE TABLE `appointment` (
   `slot` varchar(500) NOT NULL,
   `subject` varchar(500) NOT NULL,
   `status` varchar(500) NOT NULL,
-  `id` int(244) NOT NULL
+  `id` int(244) NOT NULL,
+  `vet_id` int(11) DEFAULT NULL,
+  `user_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `appointment`
+--
+
+INSERT INTO `appointment` (`date`, `user_name`, `user_email`, `vet_name`, `vet_email`, `type`, `slot`, `subject`, `status`, `id`, `vet_id`, `user_id`) VALUES
+('2023-12-06 20:13:50.412', 'usmanashfaq1', 'usmanx458@gmail.com', 'Ayesha Ali', 'petsyncsystem@gmail.com', '(One Health Approach)', '2023-12-14T08:15', 'grooming', 'approved', 7, NULL, NULL),
+('2023-12-06 20:30:22.936', 'Usman2', 'f200115@cfd.nu.edu.pk', 'Ayesha Ali', 'petsyncsystem@gmail.com', '(One Health Approach)', '2023-12-14T10:33', 'vaccination', 'approved', 8, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -94,7 +104,8 @@ CREATE TABLE `pet_memories` (
   `pet_owner` varchar(500) NOT NULL,
   `petname` varchar(500) NOT NULL,
   `about` varchar(1000) NOT NULL,
-  `petPicture` varchar(1000) NOT NULL
+  `petPicture` varchar(1000) NOT NULL,
+  `id` int(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -105,7 +116,6 @@ CREATE TABLE `pet_memories` (
 
 CREATE TABLE `pet_profile` (
   `id` int(11) NOT NULL,
-  `date` varchar(200) NOT NULL,
   `pet_owner` varchar(150) NOT NULL,
   `petname` varchar(2000) NOT NULL,
   `gender` varchar(50) NOT NULL,
@@ -115,15 +125,17 @@ CREATE TABLE `pet_profile` (
   `weight` varchar(2000) NOT NULL,
   `color` varchar(2000) NOT NULL,
   `about` varchar(500) NOT NULL,
-  `petPicture` varchar(1000) NOT NULL
+  `petPicture` varchar(1000) NOT NULL,
+  `owner_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `pet_profile`
 --
 
-INSERT INTO `pet_profile` (`id`, `date`, `pet_owner`, `petname`, `gender`, `age`, `breed`, `species`, `weight`, `color`, `about`, `petPicture`) VALUES
-(1, '', 'usmanashfaq1', 'caspher', 'male', 8, 'Persian', 'cat', '10', 'Black', 'CASPHER@1', '1701428180021-manja-vitolic-gKXKBY-C-Dk-unsplash.jpg');
+INSERT INTO `pet_profile` (`id`, `pet_owner`, `petname`, `gender`, `age`, `breed`, `species`, `weight`, `color`, `about`, `petPicture`, `owner_id`) VALUES
+(1, 'usmanashfaq1', 'caspher', 'male', 8, 'Persian', 'cat', '10', 'Black', 'CASPHER@1', '1701428180021-manja-vitolic-gKXKBY-C-Dk-unsplash.jpg', 1),
+(3, 'usmanashfaq1', 'Tommy', 'male', 8, 'germanShepherd', 'dog', '35', 'Black', 'Tommy@1', '1701870296224-tommy2.png', 1);
 
 -- --------------------------------------------------------
 
@@ -144,8 +156,7 @@ CREATE TABLE `sign_up` (
 --
 
 INSERT INTO `sign_up` (`id`, `username`, `email`, `password`, `confirm_password`) VALUES
-(1, 'usmanashfaq1', 'usmanx458@gmail.com', '$2b$10$nSenlqGmptOuVt4bCGOk8eDR/.qWSu.vhOFIOHJU.6IOw/.5PdIIG', '$2b$10$nSenlqGmptOuVt4bCGOk8eDR/.qWSu.vhOFIOHJU.6IOw/.5PdIIG'),
-(2, 'Background_Lab_8473', 'f200115@cfd.nu.edu.pk', '$2b$10$vqjVTbK6I84RVdfw1vkBNeHXysKFIlrk2OWAqKGMNzDYFtGpmigVi', '$2b$10$vqjVTbK6I84RVdfw1vkBNeHXysKFIlrk2OWAqKGMNzDYFtGpmigVi');
+(1, 'usmanashfaq1', 'usmanx458@gmail.com', '$2b$10$nSenlqGmptOuVt4bCGOk8eDR/.qWSu.vhOFIOHJU.6IOw/.5PdIIG', '$2b$10$nSenlqGmptOuVt4bCGOk8eDR/.qWSu.vhOFIOHJU.6IOw/.5PdIIG');
 
 -- --------------------------------------------------------
 
@@ -187,7 +198,9 @@ ALTER TABLE `admin_login`
 -- Indexes for table `appointment`
 --
 ALTER TABLE `appointment`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_vet` (`vet_id`),
+  ADD KEY `fk_user` (`user_id`);
 
 --
 -- Indexes for table `health_records`
@@ -197,10 +210,17 @@ ALTER TABLE `health_records`
   ADD KEY `c1` (`pet_id`);
 
 --
+-- Indexes for table `pet_memories`
+--
+ALTER TABLE `pet_memories`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `pet_profile`
 --
 ALTER TABLE `pet_profile`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_owner` (`owner_id`);
 
 --
 -- Indexes for table `sign_up`
@@ -228,7 +248,7 @@ ALTER TABLE `admin_login`
 -- AUTO_INCREMENT for table `appointment`
 --
 ALTER TABLE `appointment`
-  MODIFY `id` int(244) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(244) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `health_records`
@@ -237,32 +257,57 @@ ALTER TABLE `health_records`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
+-- AUTO_INCREMENT for table `pet_memories`
+--
+ALTER TABLE `pet_memories`
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `pet_profile`
 --
 ALTER TABLE `pet_profile`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `sign_up`
 --
 ALTER TABLE `sign_up`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `vet`
 --
 ALTER TABLE `vet`
-  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- Constraints for dumped tables
 --
 
 --
+-- Constraints for table `appointment`
+--
+ALTER TABLE `appointment`
+  ADD CONSTRAINT `fk_user` FOREIGN KEY (`user_id`) REFERENCES `sign_up` (`id`),
+  ADD CONSTRAINT `fk_vet` FOREIGN KEY (`vet_id`) REFERENCES `vet` (`id`);
+
+--
 -- Constraints for table `health_records`
 --
 ALTER TABLE `health_records`
   ADD CONSTRAINT `c1` FOREIGN KEY (`pet_id`) REFERENCES `pet_profile` (`id`);
+
+--
+-- Constraints for table `pet_memories`
+--
+ALTER TABLE `pet_memories`
+  ADD CONSTRAINT `ps1` FOREIGN KEY (`id`) REFERENCES `pet_profile` (`id`);
+
+--
+-- Constraints for table `pet_profile`
+--
+ALTER TABLE `pet_profile`
+  ADD CONSTRAINT `fk_owner` FOREIGN KEY (`owner_id`) REFERENCES `sign_up` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
