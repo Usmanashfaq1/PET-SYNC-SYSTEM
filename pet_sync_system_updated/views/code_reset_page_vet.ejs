@@ -204,7 +204,7 @@
     });
 
     function backtosignin() {
-      var newPageUrl = '/sign-in';
+      var newPageUrl = '/vet-sign-in';
       window.location.href = newPageUrl;
     }
 
@@ -218,7 +218,7 @@
       var data = { email: email, password: password };
       let post = JSON.stringify(data);
       $.ajax({
-        url: 'http://localhost:4000/update_password',
+        url: 'http://localhost:4000/update_password_vet',
         headers: {
           'Content-Type': 'application/json'
         },
@@ -227,7 +227,7 @@
         data: post,
         success: function (data) {
           if (data == 1) {
-            window.location.href = '/sign-in';
+            window.location.href = '/vet-sign-in';
           }
           else {
             document.getElementById('message').innerText = "Updation Failed";

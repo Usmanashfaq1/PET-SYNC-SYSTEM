@@ -450,6 +450,14 @@ app.get('/register', (req, res) => {
   res.render('register');
 });
 
+
+app.get('/code_reset_page_vet', (req, res) => {
+  res.render('code_reset_page_vet');
+});
+
+app.get('/forget-code-vet', (req, res) => {
+  res.render('forget_code_vet');
+});
 app.get('/sign-in', (req, res) => {
   res.render('sign-in');
 });
@@ -847,6 +855,28 @@ app.post("/update_password", function (req, res) {
 
   });
 });
+
+
+app.post("/update_password_vet", function (req, res) {
+
+  var password = req.body.password;
+  var email = req.body.email;
+  const salt = bcrypt.genSaltSync(10);
+  const hash = bcrypt.hashSync(password, salt);
+  var sql = `update vet set password = '${hash}' where email  = '${email}'`;
+  conn.query(sql, function (err2, results) {
+    if (err2) {
+      console.error(err2);
+    }
+    else {
+
+      res.json(1);
+
+    }
+
+  });
+});
+
 
 //vet scheduling api's
 //

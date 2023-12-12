@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 12, 2023 at 02:02 PM
+-- Generation Time: Dec 12, 2023 at 04:45 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -67,9 +67,8 @@ CREATE TABLE `appointment` (
 --
 
 INSERT INTO `appointment` (`date`, `user_name`, `user_email`, `vet_name`, `vet_email`, `type`, `slot`, `subject`, `status`, `id`, `vet_id`, `user_id`) VALUES
-('2023-12-06 22:40:42.955', 'sameed', 'f200116@cfd.nu.edu.pk', 'Ayesha Ali', 'petsyncsystem@gmail.com', '(One Health Approach)', '2023-12-20T11:41', 'illness', 'approved', 9, 1, 7),
-('2023-12-07 13:04:18.147', 'AsifAmeer', 'asif.ameer@nu.edu.pk', 'Ayesha Ali', 'petsyncsystem@gmail.com', '(One Health Approach)', '2023-12-20T09:03', 'dentalCare', 'approved', 10, 1, 8),
-('2023-12-07 13:30:36.214', 'faryalsaud', 'faryal.saud@nu.edu.pk', 'Ayesha Ali', 'petsyncsystem@gmail.com', '(One Health Approach)', '2023-12-15T10:30', 'vaccination', 'approved', 11, 1, 9);
+('2023-12-12 20:14:00.141', 'Minahil  Ali', 'f201088@cfd.nu.edu.pk', 'Muhammad Sameed', 'usmanextra58@gmail.com', '(Behavioral Medicine)', '2023-12-13T10:15', 'illness', 'approved', 12, 10, 10),
+('2023-12-12 20:36:52.800', 'sameed', 'f200116@cfd.nu.edu.pk', 'Muhammad Usman', 'finalyearproject304@gmail.com', '(One Health Approach)', '2023-12-13T20:36', 'vaccination', 'unapproved', 13, 11, 7);
 
 -- --------------------------------------------------------
 
@@ -150,10 +149,11 @@ CREATE TABLE `pet_profile` (
 INSERT INTO `pet_profile` (`id`, `pet_owner`, `petname`, `gender`, `age`, `breed`, `species`, `weight`, `color`, `about`, `petPicture`, `owner_id`) VALUES
 (1, 'usmanashfaq1', 'caspher', 'male', 8, 'Persian', 'cat', '10', 'Black', 'CASPHER@1', '1701428180021-manja-vitolic-gKXKBY-C-Dk-unsplash.jpg', 1),
 (3, 'usmanashfaq1', 'Tommy', 'male', 8, 'germanShepherd', 'dog', '35', 'Black', 'Tommy@1', '1701870296224-tommy2.png', 1),
-(4, 'sameed', 'Zerox2', 'male', 23, 'persian', 'dog', '23', 'Black and white', 'i love to make other animals my friends', '1701884572020-bg_profile.jpg', 7),
+(4, 'sameed', 'Zerox2', 'male', 24, 'persian', 'dog', '23', 'Black and white', 'i love to make other animals my friends', '1701884572020-bg_profile.jpg', 7),
 (5, 'AsifAmeer', 'Zerox1', 'male', 22, 'germanShepherd', 'cat', '33', 'Black and white', 'i love to make other animals my friends', '1701936630089-admin.jpg', 8),
 (6, 'sameed', 'Zerox3', 'male', 23, 'poodle', 'dog', '12', 'Black and white', '121', '1702364289487-admin.jpg', 7),
-(7, 'sameed', 'Zerox2', 'male', 12, 'labrador', 'dog', '12', 'blue', '12', '1702367315547-admin.jpg', 7);
+(7, 'sameed', 'Zerox2', 'male', 12, 'labrador', 'dog', '12', 'blue', '12', '1702367315547-admin.jpg', 7),
+(8, 'Minahil  Ali', 'caspher2', 'male', 14, 'siamese', 'cat', '13', 'Black and white', 'i love to make other animals my friends', '1702394644067-WhatsApp Image 2023-12-12 at 20.23.45_7f5d4ac7.jpg', 10);
 
 -- --------------------------------------------------------
 
@@ -177,7 +177,8 @@ INSERT INTO `sign_up` (`id`, `username`, `email`, `password`, `confirm_password`
 (1, 'usmanashfaq1', 'usmanx458@gmail.com', '$2b$10$nSenlqGmptOuVt4bCGOk8eDR/.qWSu.vhOFIOHJU.6IOw/.5PdIIG', '$2b$10$nSenlqGmptOuVt4bCGOk8eDR/.qWSu.vhOFIOHJU.6IOw/.5PdIIG'),
 (7, 'sameed', 'f200116@cfd.nu.edu.pk', '$2b$10$AgC9C3ouFwoqOVsbMc3WruiFTmGS34FVMo1X6NzPSC1AE1QGYHnYC', '$2b$10$QuSqFafesr3/yrmnI24lKuAu9ATXmpQvuAA0xOT7KDTk49IaNHEJW'),
 (8, 'AsifAmeer', 'asif.ameer@nu.edu.pk', '$2b$10$CC8yebepMjvskoalI/3ikuwQWalMgLLh3PoLD1qArZO8YDma88P8y', '$2b$10$CC8yebepMjvskoalI/3ikuwQWalMgLLh3PoLD1qArZO8YDma88P8y'),
-(9, 'faryalsaud', 'faryal.saud@nu.edu.pk', '$2b$10$jyegANYSJ32oqV4FlRbEre1uzMeODjuwHTWLcpeZaM/4KP6cu/il2', '$2b$10$jyegANYSJ32oqV4FlRbEre1uzMeODjuwHTWLcpeZaM/4KP6cu/il2');
+(9, 'faryalsaud', 'faryal.saud@nu.edu.pk', '$2b$10$jyegANYSJ32oqV4FlRbEre1uzMeODjuwHTWLcpeZaM/4KP6cu/il2', '$2b$10$jyegANYSJ32oqV4FlRbEre1uzMeODjuwHTWLcpeZaM/4KP6cu/il2'),
+(10, 'Minahil  Ali', 'f201088@cfd.nu.edu.pk', '$2b$10$8MdoXNZ8IsvdAbqkSePzlOZne/9SRJy1KvU9s5wbI7F1aSbeY2HP6', '$2b$10$8MdoXNZ8IsvdAbqkSePzlOZne/9SRJy1KvU9s5wbI7F1aSbeY2HP6');
 
 -- --------------------------------------------------------
 
@@ -203,9 +204,8 @@ CREATE TABLE `vet` (
 --
 
 INSERT INTO `vet` (`fname`, `lname`, `specialization`, `qualification`, `license_number`, `email`, `timeslot`, `password`, `id`, `location`) VALUES
-('Ayesha', 'Ali', 'One Health Approach', 'Bachelor of Veterinary Medicine (BVM)', '14456A', 'petsyncsystem@gmail.com', 'Morning (8:00 AM - 12:00 PM)', '$2b$10$5jIa6YqH2hpvM2Vk5bHBaOQhSlpMzgs8eJn2G1HdjEkkS5U3HVppG', 1, 'Faisalabad, Pakistan'),
-('Muhammad', 'Sameed', 'Behavioral Medicine', 'Doctor of Veterinary Medicine (DVM)', '12232', 'usmanextra58@gmail.com', 'Morning (8:00 AM - 12:00 PM)', '$2b$10$FYcrLjHdxx0Icpn6FwT9puA5qe6BRl3FWK1dVI98iYnjojcGjhQ6y', 9, 'Islamabad, Pakistan'),
-('Muhammad', 'Sameed', 'Behavioral Medicine', 'Doctor of Veterinary Medicine (DVM)', '12212', 'usmanextra58@gmail.com', 'Morning (8:00 AM - 12:00 PM)', '$2b$10$ZcvytG.aAU/COZM10tmoueupYtQTQDbn.pn.f3rOJ8opYQQC0w0Lu', 10, 'Islamabad, Pakistan');
+('Muhammad', 'Sameed', 'One Health Approach', 'Doctor of Veterinary Medicine (DVM)', '12212', 'usmanextra58@gmail.com', 'Morning (8:00 AM - 12:00 PM)', '$2b$10$YU5NJZxUPEpBCJCA2W8ZwOJQb4gZ9qFXB5vlS4jccLBGxOQdR3HjC', 10, 'Islamabad, Pakistan'),
+('Muhammad', 'Usman', 'One Health Approach', 'Bachelor of Science (B.Sc.) in Animal Science', '232303', 'finalyearproject304@gmail.com', 'Morning (8:00 AM - 12:00 PM)', '$2b$10$25hGtLMtsk0UQAgXC2eB3OBXCG6ZD63zC/vqondiLAXe7E73.pgBO', 11, 'Islamabad International Airport, New Islamabad Airport Road, Islamabad, Pakistan');
 
 --
 -- Indexes for dumped tables
@@ -271,7 +271,7 @@ ALTER TABLE `admin_login`
 -- AUTO_INCREMENT for table `appointment`
 --
 ALTER TABLE `appointment`
-  MODIFY `id` int(244) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(244) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `health_records`
@@ -289,19 +289,19 @@ ALTER TABLE `pet_memories`
 -- AUTO_INCREMENT for table `pet_profile`
 --
 ALTER TABLE `pet_profile`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `sign_up`
 --
 ALTER TABLE `sign_up`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `vet`
 --
 ALTER TABLE `vet`
-  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- Constraints for dumped tables

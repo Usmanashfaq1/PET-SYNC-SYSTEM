@@ -27,35 +27,49 @@
 </head>
 <style>
   .overlay {
-      display: none;
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.7);
-      justify-content: center;
-      align-items: center;
-      z-index: 9999; /* Adjust z-index to make sure it's above your content */
-    }
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    /* Adjust z-index to make sure it's above your content */
+  }
 
-    .dialog-box {
-      background: #fff;
-      padding: 20px;
-      border-radius: 5px;
-      max-width: 400px;
-      text-align: center;
-    }
+  .dialog-box {
+    background: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    max-width: 400px;
+    text-align: center;
+  }
 
-    .close-btn {
-      background: #007BFF;
-      color: #fff;
-      border: none;
-      padding: 10px 20px;
-      cursor: pointer;
-      border-radius: 5px;
-    }
+  .close-btn {
+    background: #007BFF;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+
+
+  .is-invalid {
+    border-color: #dc3545;
+    background-color: #f8d7da;
+  }
+
+  /* You can add more styles for the error message if needed */
+  .error-message {
+    color: #dc3545;
+    margin-top: 2px;
+  }
 </style>
+
 <body class="bg-gray-200">
   <div class="container position-sticky z-index-sticky top-0">
     <div class="row">
@@ -101,27 +115,21 @@
               <div class="card-body">
                 <form id="forget_code" role="form" class="text-start">
                   <div class="input-group input-group-outline my-3">
-                    <label class="form-label">Enter Code</label>
-                    <input type="number" name="code" id="code" class="form-control" required>
+                    <label class="form-label">Email</label>
+                    <input type="email" name="email" id="email" class="form-control" required>
                   </div>
+                  <div id="email-error" class="error-message"></div>
+                  <div class="text-center">
+                    <button type="submit" class="btn bg-gradient-primary w-100 my-4 mb-2">Get Code</button>
 
-                  <div class="input-group input-group-outline my-3">
-                    <label class="form-label">Password</label>
-                    <input type="password" name="pcode" id="pcode" class="form-control" required>
-                  </div>
-                  <div class="text-center">
-                    <button type="submit" class="btn bg-gradient-primary w-100 my-4 mb-2">Verify and update</button>
-                  </div>
-                  <div class="text-center">
-                    <button type="button" onclick="backtosignin()" class="btn bg-gradient-primary w-100 my-4 mb-2">Back
-                      To Sign In</button>
                   </div>
                 </form>
                 <div class="overlay" id="overlay">
                   <div class="dialog-box">
-                      <p id = 'message' ></p>
-                      <button class="close-btn" onclick="closeDialog()">Close</button>
+                    <p id='message'></p>
+                    <button class="close-btn" onclick="closeDialog()">Close</button>
                   </div>
+                </div>
               </div>
             </div>
           </div>
@@ -186,39 +194,42 @@
 
   <script>
 
+    function validateEmail() {
+      var emailInput = $("#email");
+      var emailError = $("#email-error");
+      var email = emailInput.val();
+      var emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+      if (!email.match(emailRegex)) {
+        emailInput.removeClass("is-valid").addClass("is-invalid");
+        emailError.text('Email is not valid');
+        return true;
+      } else {
+        emailInput.removeClass("is-invalid").addClass("is-valid");
+        emailError.text('');
+        return false;
+      }
+    }
+
+
     $(document).ready(function () {
       $('#forget_code').submit(function (e) {
         e.preventDefault();
-        const otp = localStorage.getItem('otp-code');
-        if (otp === document.getElementById('code').value) {
-          updatePassword();
+        if (validateEmail() == true) {
+          return;
         }
         else {
-          document.getElementById('message').innerText = "Verification Code not correct!";
-
-            showDialog();
+          check_user();
         }
-
       });
 
     });
 
-    function backtosignin() {
-      var newPageUrl = '/sign-in';
-      window.location.href = newPageUrl;
-    }
-
-    function updatePassword() {
-      var password = $("#pcode").val();
-      var email = localStorage.getItem('email');
-      // if (email == '' || password == '') {
-      //   alert("Please Fill the Required Fields");
-      //   return;
-      // }
-      var data = { email: email, password: password };
+    function check_user() {
+      var email = $("#email").val();
+      var data = { email: email };
       let post = JSON.stringify(data);
       $.ajax({
-        url: 'http://localhost:4000/update_password',
+        url: 'http://localhost:4000/check_vet_',
         headers: {
           'Content-Type': 'application/json'
         },
@@ -227,13 +238,14 @@
         data: post,
         success: function (data) {
           if (data == 1) {
-            window.location.href = '/sign-in';
-          }
-          else {
-            document.getElementById('message').innerText = "Updation Failed";
+            otp();
 
+
+          }
+
+          else {
+            document.getElementById('message').innerText = 'Email not found!';
             showDialog();
-            
           }
 
         },
@@ -243,22 +255,56 @@
       });
     }
 
+    function otp() {
+      var email = $("#email").val();
+      // if (email == '' || password == '') {
+      //   alert("Please Fill the Required Fields");
+      //   return;
+      // }
+      var data = { email: email };
+      let post = JSON.stringify(data);
+      $.ajax({
+        url: 'http://localhost:4000/recovery-otp',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        type: 'POST',
+        contentType: 'application/json',
+        data: post,
+        success: function (data) {
+          var otp = data;
+          localStorage.setItem('otp-code', otp);
+          localStorage.setItem('email', email);
+          var newPageUrl = '/code_reset_page_vet'; // Replace this with the actual filename
+          window.location.href = newPageUrl;
+        },
+        error: function () {
+          alert('error');
+        }
+      });
+    }
   </script>
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+    crossorigin="anonymous"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
   <script>
     // Function to show the dialog box
     function showDialog() {
-        document.getElementById('overlay').style.display = 'flex';
+      document.getElementById('overlay').style.display = 'flex';
     }
 
     // Function to close the dialog box
     function closeDialog() {
-        document.getElementById('overlay').style.display = 'none';
+      document.getElementById('overlay').style.display = 'none';
     }
 
     // Check your condition here and call showDialog() if the condition is met
     // For example, let's assume the condition is a variable named "isConditionMet"
-  
-</script>
+
+  </script>
 </body>
 
 </html>

@@ -14,7 +14,9 @@
   <link href="../assets/img/apple-touch-icon.png" rel="apple-touch-icon">
 
   <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+    rel="stylesheet">
 
   <!-- Vendor CSS Files -->
   <link href="../assets/vendor/fontawesome-free/css/all.min.css" rel="stylesheet">
@@ -28,37 +30,36 @@
   <link href="../assets/css/style.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/css/bootstrap.min.css">
   <style>
+    .overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.7);
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+      /* Adjust z-index to make sure it's above your content */
+    }
 
-.overlay {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.7);
-    justify-content: center;
-    align-items: center;
-    z-index: 9999;
-    /* Adjust z-index to make sure it's above your content */
-  }
+    .dialog-box {
+      background: #fff;
+      padding: 20px;
+      border-radius: 5px;
+      max-width: 400px;
+      text-align: center;
+    }
 
-  .dialog-box {
-    background: #fff;
-    padding: 20px;
-    border-radius: 5px;
-    max-width: 400px;
-    text-align: center;
-  }
-
-  .close-btn {
-    background: #007BFF;
-    color: #fff;
-    border: none;
-    padding: 10px 20px;
-    cursor: pointer;
-    border-radius: 5px;
-  }
+    .close-btn {
+      background: #007BFF;
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      cursor: pointer;
+      border-radius: 5px;
+    }
 
 
     .table-container {
@@ -92,7 +93,8 @@
         <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
         <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
         <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></i></a>
-        <a class="w3-button w3-black" style="color: chartreuse; font-size: large;" onclick="back()" type="button"><span class="d-none d-md-inline">Sign Out</span></a>
+        <a class="w3-button w3-black" style="color: chartreuse; font-size: large;" onclick="back()" type="button"><span
+            class="d-none d-md-inline">Sign Out</span></a>
       </div>
     </div>
   </div>
@@ -124,44 +126,44 @@
               <br>
               <br>
               <!-- Reason for Appointment -->
-<label for="appointmentReason">Reason for Appointment:</label>
-<select id="appointmentReason" name="appointmentReason" class="form-select" required>
-  <option value="" disabled selected>Select Reason</option>
-  <option value="regularCheckup">Regular Checkup</option>
-  <option value="vaccination">Vaccination</option>
-  <option value="illness">Illness</option>
-  <option value="grooming">Grooming</option>
-  <option value="dentalCare">Dental Care</option>
-  <option value="behavioralIssues">Behavioral Issues</option>
-  <option value="weightManagement">Weight Management</option>
-  <option value="nutritionalConsultation">Nutritional Consultation</option>
-  <option value="injury">Injury</option>
-  <option value="other">Other</option>
-</select>
-<br>
-<label for="party" class="form-label">Vet Type</label>
-<select class="form-select" id="party" required>
-  <option value="">Select Vet Type</option>
-  <option value="Behavioral Medicine">Behavioral Medicine</option>
-  <option value="One Health Approach">One Health Approach</option>
-  <option value="Emergency and Critical Care">Emergency and Critical Care</option>
-  <option value="Preventive Care">Preventive Care</option>
-  <option value="Veterinary Medicine">Veterinary Medicine</option>
-</select>
-</div>
-            </div>
-            <div class="row" id="party-details-body">
-              <!-- Vet details will be dynamically added here -->
+              <label for="appointmentReason">Reason for Appointment:</label>
+              <select id="appointmentReason" name="appointmentReason" class="form-select" required>
+                <option value="" disabled selected>Select Reason</option>
+                <option value="regularCheckup">Regular Checkup</option>
+                <option value="vaccination">Vaccination</option>
+                <option value="illness">Illness</option>
+                <option value="grooming">Grooming</option>
+                <option value="dentalCare">Dental Care</option>
+                <option value="behavioralIssues">Behavioral Issues</option>
+                <option value="weightManagement">Weight Management</option>
+                <option value="nutritionalConsultation">Nutritional Consultation</option>
+                <option value="injury">Injury</option>
+                <option value="other">Other</option>
+              </select>
+              <br>
+              <label for="party" class="form-label">Vet Type</label>
+              <select class="form-select" id="party" required>
+                <option value="">Select Vet Type</option>
+                <option value="Behavioral Medicine">Behavioral Medicine</option>
+                <option value="One Health Approach">One Health Approach</option>
+                <option value="Emergency and Critical Care">Emergency and Critical Care</option>
+                <option value="Preventive Care">Preventive Care</option>
+                <option value="Veterinary Medicine">Veterinary Medicine</option>
+              </select>
             </div>
           </div>
-        </div>
-        <div class="overlay" id="overlay">
-          <div class="dialog-box">
-            <p id='message'></p>
-            <button class="close-btn" onclick="closeDialog()">Close</button>
+          <div class="row" id="party-details-body">
+            <!-- Vet details will be dynamically added here -->
           </div>
         </div>
       </div>
+      <div class="overlay" id="overlay">
+        <div class="dialog-box">
+          <p id='message'></p>
+          <button class="close-btn" onclick="closeDialog()">Close</button>
+        </div>
+      </div>
+    </div>
     </div>
   </main>
 
@@ -179,7 +181,8 @@
         </div>
       </div>
       <div id="preloader"></div>
-      <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+      <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
+          class="bi bi-arrow-up-short"></i></a>
       <!-- Vendor JS Files -->
       <script src="../assets/vendor/purecounter/purecounter_vanilla.js"></script>
       <script src="../assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -191,20 +194,20 @@
       <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
       <script>
-        
+
       </script>
     </div>
   </footer>
 
   <!-- Existing scripts ... -->
 
-<script>
+  <script>
     $(document).ready(function () {
       const email = localStorage.getItem('email');
       $('#email-link').attr('href', 'mailto:' + email).text(email);
     });
   </script>
-  
+
   <script>
     $(document).ready(function () {
       $('#party').change(function () {
@@ -248,7 +251,7 @@
       });
     });
   </script>
-  
+
   <script>
     function bookAppointment(fname, lname, specialization, qualification, email) {
       const vetName = `${fname} ${lname}`;
@@ -261,14 +264,14 @@
       const userEmail = email1;
       var slot12 = new Date($("#preferredDateTime").val());
       var currentDate = new Date();
-  
+
       if (slot12 < currentDate) {
         document.getElementById('message').innerText = 'please Choose a valid date';
         showDialog();
         //showMessage('Do not go in history!', 'warning');
         return;
       }
-  
+
       if (!slot || !subject) {
         document.getElementById('message').innerText = 'please select both Slot and Reason';
         showDialog();
@@ -283,7 +286,7 @@
           slot: slot,
           subject: subject
         };
-  
+
         $.ajax({
           url: 'http://localhost:4000/api/appointments',
           method: 'POST',
@@ -292,8 +295,13 @@
           success: function (response) {
             // console.log('Appointment booked successfully:', response);
             // alert(`Appointment booked with ${fname} ${lname}, ${specialization}, ${qualification},${email}`);
-            window.close("/appointment-scheduling");
-            window.open("/user-dashboard");
+            document.getElementById('message').innerText = 'Appointment scheduled';
+            showDialog();
+            setTimeout(function () {
+              window.close("/appointment-scheduling");
+              window.open("/user-dashboard");
+            }, 4000);
+
           },
           error: function (error) {
             console.error('Error booking appointment:', error);
@@ -303,13 +311,13 @@
       }
     }
   </script>
-  
+
   <script>
     function back() {
       window.close("/appointment-scheduling");
       window.open("/front");
     }
-  
+
     function showMessage(message, type) {
       const messageContainer = document.getElementById('message-container');
       const toast = document.createElement('div');
@@ -330,22 +338,23 @@
       new bootstrap.Toast(toast).show();
     }
   </script>
-    <script>
-      // Function to show the dialog box
-      function showDialog() {
-        document.getElementById('overlay').style.display = 'flex';
-      }
-  
-      // Function to close the dialog box
-      function closeDialog() {
-        document.getElementById('overlay').style.display = 'none';
-      }
-  
-      // Check your condition here and call showDialog() if the condition is met
-      // For example, let's assume the condition is a variable named "isConditionMet"
-  
-    </script>
+  <script>
+    // Function to show the dialog box
+    function showDialog() {
+      document.getElementById('overlay').style.display = 'flex';
+    }
+
+    // Function to close the dialog box
+    function closeDialog() {
+      document.getElementById('overlay').style.display = 'none';
+    }
+
+    // Check your condition here and call showDialog() if the condition is met
+    // For example, let's assume the condition is a variable named "isConditionMet"
+
+  </script>
   <!-- Existing scripts ... -->
-  
+
 </body>
+
 </html>
