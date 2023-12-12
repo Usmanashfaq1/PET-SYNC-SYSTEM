@@ -282,16 +282,48 @@
           document.getElementById('message').innerText = 'Choose age between 1 to 30 years';
           showDialog();
         }
-        else if ($("#weight").val() < 1 || $("#weight").val() > 200) {
+        else if ($("#weight").val() < 1 || $("#weight").val() > 50) {
           document.getElementById('message').innerText = 'Choose weight between 1 to 50 Kgs';
           showDialog();
         }
         else {
-          register_profile();
+          check_user();
         }
       });
 
     });
+
+
+    function check_user() {
+      var petname = $("#petname").val();
+      var data = { petname: petname };
+      let post = JSON.stringify(data);
+      $.ajax({
+        url: 'http://localhost:4000/check_petname',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        type: 'POST',
+        contentType: 'application/json',
+        data: post,
+        success: function (data) {
+          if (data == 1) {
+
+            document.getElementById('message').innerText = 'Pet name already taken!';
+            showDialog();
+          }
+          else {
+            
+            register_profile();
+
+          }
+
+        },
+        error: function () {
+          alert('error');
+        }
+      });
+    }
 
 
     function register_profile() {

@@ -669,7 +669,57 @@ app.post("/check_user", function (req, res) {
   });
 });
 
+app.post("/check_vet_", function (req, res) {
 
+  var email = req.body.email;
+  var sql = `SELECT email FROM vet WHERE email= '${email}'`;
+  conn.query(sql, function (err2, results) {
+    if (err2) {
+      console.error(err2);
+    }
+    else {
+      var found = false;
+      results.forEach(element => {
+        if ((email == element.email) && found == false) {
+          found = true;
+        }
+      });
+      if (found == true) {
+        res.json(1);
+      }
+      else {
+        res.json(-1);
+      }
+    }
+
+  });
+});
+
+app.post("/check_petname", function (req, res) {
+
+  var petname = req.body.petname;
+  var sql = `SELECT * FROM pet_profile WHERE petname= '${petname}'`;
+  conn.query(sql, function (err2, results) {
+    if (err2) {
+      console.error(err2);
+    }
+    else {
+      var found = false;
+      results.forEach(element => {
+        if ((petname == element.petname) && found == false) {
+          found = true;
+        }
+      });
+      if (found == true) {
+        res.json(1);
+      }
+      else {
+        res.json(-1);
+      }
+    }
+
+  });
+});
 
 // Create a SMTP pool transporter
 
@@ -680,7 +730,7 @@ const transporter = nodemailer.createTransport(
     service: 'gmail',
     auth: {
       user: 'chusmanjutt.129@gmail.com',
-      pass: 'ehkb kphm hmpl dilv',
+      pass: 'atey hxfc dygm izvp',
     },
     maxConnections: 50, // Maximum number of simultaneous connections
     maxMessages: 50,   // Maximum number of messages to send in a single connection
@@ -723,7 +773,7 @@ app.post('/recovery-otp', (req, res) => {
   const otp = generateOTP();
 
   const mailOptions = {
-    from: '',
+    from: 'chusmanjutt.129@gmail.com',
     to: receiver_email,
     subject: 'Your OTP',
     text: `Your OTP is: ${otp}`
@@ -854,8 +904,8 @@ app.post('/api/appointments', (req, res) => {
     const user_id = userResult[0].id;
 
     // Get vet_id based on vet_name and vet_email
-    const getVetQuery = 'SELECT id FROM vet WHERE  email = ? LIMIT 1';
-    const vetValues = [vet_name, vet_email];
+    const getVetQuery = 'SELECT id FROM vet WHERE email = ? LIMIT 1';
+    const vetValues = [vet_email];
 
     conn.query(getVetQuery, vetValues, (err, vetResult) => {
       if (err) {
@@ -873,8 +923,8 @@ app.post('/api/appointments', (req, res) => {
       const vet_id = vetResult[0].id;
 
       // Insert appointment data with obtained user_id and vet_id
-      const insertAppointmentQuery = 'INSERT INTO appointment (date,user_name,user_email,vet_name,vet_email, user_id, vet_id, type, slot, subject, status) VALUES (?, ?, ?, ?, ?, ?, ?,?,?,?,?)';
-      const appointmentValues = [date,user_name,user_email,vet_name,vet_email, user_id, vet_id, type, slot, subject, status];
+      const insertAppointmentQuery = 'INSERT INTO appointment (user_name, user_email, vet_name, vet_email,date, user_id, vet_id, type, slot, subject, status) VALUES (?, ?, ?, ?, ?, ?, ?,?,?,?,?)';
+      const appointmentValues = [user_name, user_email, vet_name, vet_email,date, user_id, vet_id, type, slot, subject, status];
 
       conn.query(insertAppointmentQuery, appointmentValues, (err, result) => {
         if (err) {
