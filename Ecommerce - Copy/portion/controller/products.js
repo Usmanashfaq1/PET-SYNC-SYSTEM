@@ -48,7 +48,7 @@ const handle_get_profiles = (req, res) => {
 
 
 load_products_page = (req, res) => {
-    res.render('pet_profile_page');
+    res.render('E-commerce');
 } 
 
 module.exports = {
