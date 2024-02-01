@@ -1,41 +1,57 @@
-const express = require("express");
-const path = require("path");
-const { promisify } = require("util");
-const app = express();
-if (process.env.NODE_ENV !== "production") 
-{
-  require("dotenv").config();
-}
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+const express = require('express');
+const bodyParser = require('body-parser');
+const path = require('path');
+const cors = require('cors');
+const fs = require('fs');
+var app = express();
+const dotenv =require('dotenv');
+dotenv.config();
+app.use(cors());
 
+
+app.use(express.static(__dirname + "/uploads" ) );
+
+app.use('/public', express.static('public'));
+
+ // all statics files in /public
 app.set("views", path.join(__dirname, "views"));
-app.set("view engine", "ejs");
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended:true}));
+app.set('view engine', 'ejs');
 
-var flash = require("connect-flash");
-//using express-session
+
+//Database
+const connection = require('./config');
+ 
+//SESSION
+const session = require('express-session');
+
 app.use(
-  require("express-session")({
-    secret: "This is secret",
-    resave: false,
-    
-    saveUninitialized: false,
-  })
-);
+    session({
+      secret: 'your-secret-key', 
+      resave: false,
+      saveUninitialized: true,
+      cookie: { maxAge: 600000 } // Set session expiration time to 10 minutes (in milliseconds)
+    })
+  )
+module.exports.session = session; 
 
-app.use(flash());
+const authRoutes = require('./routes/auth');
+app.use('/', authRoutes);
 
-app.use(function (req, res, next) {
-  res.locals.message = req.flash();
-  next();
-});
-
-const Users = require("./routes/userRoutes"); //here we are using routes using variable Users
+const loginRoute=require('./routes/loginRoute');
+app.use('/',loginRoute);
+const signupRoute=require('./routes/signupRoute');
+app.use('/',signupRoute);
 
 
-app.use("/api/v1/", Users);  //here we are making api url  this is the original link which is going to hit
 
-PORT = process.env.PORT || 8085;
-app.listen(PORT, function () {
-  console.log(`Server is listening at port ${PORT}`);
+const mainRoute1=require('./routes/mainRoute');
+app.use('/',mainRoute1);
+
+
+app.listen(3001,(err) =>{
+    if(err) throw err;
+   
+    console.log('Server is running on localhost:3001');
 });
