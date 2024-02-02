@@ -5,7 +5,7 @@ const connection = require('../config/sqlConnection');
 const handle_get_profiles = (req, res) => {
 
 
-  const sql = `SELECT * FROM pet_profile`;
+  const sql = `SELECT * FROM products`;
 
   connection.query(sql, (err, result) => {
     if (err) {
@@ -19,7 +19,7 @@ const handle_get_profiles = (req, res) => {
 
     // Assuming 'petPicture' is the column name
     result.forEach(row => {
-      const fileName = row.petPicture;
+      const fileName = row.productPicture;
 
       // Check if fileName is defined
       if (fileName) {
@@ -28,12 +28,13 @@ const handle_get_profiles = (req, res) => {
         const uploadDirectory = path.join(__dirname, '..', 'upload');
         const filePath = path.join(uploadDirectory, fileName);
 
+
         try {
           // Read the file content in base64
           const content = fs.readFileSync(filePath, { encoding: 'base64' });
 
           // Include all values from the result set along with the file content
-          const rowWithFileContent = { ...row, petPicture: content };
+          const rowWithFileContent = { ...row, productPicture: content };
           fileContents.push(rowWithFileContent);
         } catch (err) {
           console.error('Error reading file:', err);
@@ -48,8 +49,8 @@ const handle_get_profiles = (req, res) => {
 
 
 load_products_page = (req, res) => {
-    res.render('E-commerce');
-} 
+  res.render('E-commerce');
+}
 
 module.exports = {
   handle_get_profiles,
