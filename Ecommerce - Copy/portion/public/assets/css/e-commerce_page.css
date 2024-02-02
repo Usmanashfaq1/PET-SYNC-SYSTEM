@@ -1,23 +1,19 @@
-
+/*
 .carousel-item {
     height: 100%;
 }
   .navbar-scrolled {
-border-bottom: none; /* Remove the blue border when scrolled */
-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add a subtle box shadow for elevation */
+border-bottom: none; 
+box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
 }
 
 .carousel-item img {
     width: 425px;
-    /* Fixed width for all images */
     height: 400px;
-    /* Fixed height for all images */
     object-fit: cover;
     border-radius: 10px;
-    /* Add border-radius for rounded corners */
 }
 
-/* Add the following styles for the cart toggle button */
 .icon-cart-toggle {
     position: relative;
 }
@@ -36,7 +32,6 @@ box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add a subtle box shadow for elevati
     right: -20px;
 }
 
-/* Rest of your existing styles remain the same */
 body {
     margin: 0;
     font-family: Poppins;
