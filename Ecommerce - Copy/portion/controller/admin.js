@@ -1,6 +1,6 @@
 const path = require('path');
 const multer = require("multer");
-const conn = require('../config/sqlConnection');
+const connection = require('../config/sqlConnection');
 
 // const multer_storage = multer.diskStorage({
 //     destination: function (req, file, cb) {
@@ -31,18 +31,18 @@ const conn = require('../config/sqlConnection');
 
 
 const storage = multer.diskStorage({
-    destination : './upload',
-    filename : (req,file,callback)=>{
-            callback(null,`${Date.now()}-${file.originalname}`);
-            //cb(null, `${Date.now()}-${file.originalname}`);
+    destination: './upload',
+    filename: (req, file, callback) => {
+        callback(null, `${Date.now()}-${file.originalname}`);
+        //cb(null, `${Date.now()}-${file.originalname}`);
     }
 });
 
 // Initialize uploader
 const upload = multer({
-    storage : storage,
+    storage: storage,
 }).single('productPicture')
-  
+
 
 // Controller function for handling the form submission
 const handle_add_product = (req, res) => {
@@ -61,8 +61,7 @@ const handle_add_product = (req, res) => {
         // Assuming 'owner_id' is the foreign key column in 'pet_profile'
         var sql = `INSERT INTO products (product_name, category, price, stock, rating, description, productPicture) 
                     VALUES ('${pname}', '${category}', '${price}', '${stock}', '${rating}', '${description}', '${productPicture}')`;
-
-        conn.query(sql, function (err, results) {
+        connection.query(sql, function (err, results) {
             if (err) {
                 console.error(err);
                 res.status(500).json({ error: 'Database error.' });
@@ -77,13 +76,13 @@ const handle_add_product = (req, res) => {
 
 load_admin_products_page = (req, res) => {
     res.render('admin_products');
-} 
+}
 
 
 
 load_admin_page = (req, res) => {
     res.render('admin_dashboard');
-} 
+}
 
 module.exports = {
     load_admin_page,

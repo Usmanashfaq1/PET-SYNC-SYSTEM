@@ -18,8 +18,8 @@ document.addEventListener('DOMContentLoaded', function () {
                         <td>${result.rating}</td>
                         <td>${result.description}</td>
                         <td><img src="data:image/jpeg;base64,${result.productPicture}" alt="Product Picture" style="width: 4rem; height: 4rem;"></td>
-                        <td><button class="btn btn-warning" onclick="openProfile(${result.id})">Update</button></td>
-                        <td><button class="btn btn-danger" onclick="openProfile(${result.id})">Delete</button></td>
+                        <td><button class="btn btn-warning" onclick="openProfile(${result.p_id})">Update</button></td>
+                        <td><button class="btn btn-danger" onclick="deleteProduct(${result.p_id})">Delete</button></td>
                     `);
                     // Append the row to the table
                     $('#Data_table').append(row);
@@ -36,3 +36,25 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 });
+
+
+function deleteProduct(id) {
+    $.ajax({
+        url: 'http://localhost:4000/delete_product/' + id, 
+        method: 'DELETE',
+        success: function (data) {
+            if (data === 1) {
+                document.getElementById('message').innerText = 'Product is Deleted Successfully!';
+                showDialog();
+            } else {
+                document.getElementById('message').innerText = 'Internal failure at backend!';
+                showDialog();
+            }
+        },
+        error: function (error) {
+            console.error('Error deleting product:', error);
+            alert('Error deleting product at the backend. Please try again.');
+            $('#Data_table').empty();
+        }
+    });
+}
