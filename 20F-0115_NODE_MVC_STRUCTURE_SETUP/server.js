@@ -46,9 +46,13 @@ app.use('/',signupRoute);
 
 
 
+
 const mainRoute1=require('./routes/mainRoute');
 app.use('/',mainRoute1);
 
+// USER PROFILE ROUTE ADDED HERE
+const userProfileRoute=require('./routes/profileRoute');
+app.use('/',userProfileRoute);
 
 app.listen(3001,(err) =>{
     if(err) throw err;
