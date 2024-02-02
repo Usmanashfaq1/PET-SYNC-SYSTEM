@@ -1,12 +1,16 @@
 const express = require("express");
 const router = express.Router();
 
-const {handle_get_profiles} = require('../controller/products')
+
 const {load_products_page} = require('../controller/products')
 const {load_admin_page} = require('../controller/admin')
 const {load_admin_products_page} = require('../controller/admin')
+const {load_edit_product_page} = require('../controller/edit_products')
+
+
 
 const {handle_add_product} = require('../controller/admin')
+const {handle_get_profiles} = require('../controller/products')
 // const {handle_add_product_middleware} = require('../controller/admin')
 
 
@@ -20,5 +24,6 @@ router.get('/admin_products', load_admin_products_page);
 
 router.post('/add_product', handle_add_product);
 
+router.get('/edit_product', load_edit_product_page);
 
 module.exports = router;
