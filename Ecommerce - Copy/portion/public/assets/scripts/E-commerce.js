@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', function () {
     $.ajax({
-        url: 'http://localhost:4000/get_profiles',
+        url: 'http://localhost:4000/get_products',
         method: 'GET',
         success: function (data) {
             // Clear existing product items

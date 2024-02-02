@@ -2,7 +2,7 @@ const path = require('path');
 const fs = require('fs');
 const connection = require('../config/sqlConnection');
 
-const handle_get_profiles = (req, res) => {
+const handle_get_products = (req, res) => {
 
 
   const sql = `SELECT * FROM products`;
@@ -53,7 +53,7 @@ load_products_page = (req, res) => {
 }
 
 module.exports = {
-  handle_get_profiles,
+  handle_get_products,
   load_products_page,
 }
 

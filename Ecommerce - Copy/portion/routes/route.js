@@ -10,11 +10,11 @@ const {load_edit_product_page} = require('../controller/edit_products')
 
 
 const {handle_add_product} = require('../controller/admin')
-const {handle_get_profiles} = require('../controller/products')
+const {handle_get_products} = require('../controller/products')
 // const {handle_add_product_middleware} = require('../controller/admin')
 
 
-router.get('/get_profiles', handle_get_profiles);
+router.get('/get_products', handle_get_products);
 
 router.get('/E-commerce', load_products_page);
 
