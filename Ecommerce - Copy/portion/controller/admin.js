@@ -1,40 +1,10 @@
-const path = require('path');
 const multer = require("multer");
 const connection = require('../config/sqlConnection');
-
-// const multer_storage = multer.diskStorage({
-//     destination: function (req, file, cb) {
-//         const uploadDir = path.join(__dirname, '..', 'upload');
-//         console.log('Script Directory:', __dirname);
-//         console.log('Destination Folder:', uploadDir);
-//         cb(null, uploadDir);
-//     },
-//     filename: function (req, file, cb) {
-//         cb(null, `${Date.now()}-${file.originalname}`);
-//     },
-// });
-
-// const upload = multer({ storage: multer_storage });
-
-// Middleware for handling file upload
-// const handle_add_product_middleware = (req, res, next) => {
-//     upload.single('productPicture')(req, res, (err) => {
-//       if (err) {
-//         console.error(err);
-//         return res.status(500).json({ error: 'File upload failed.' });
-//       }
-//         else{
-//             console.log('pic added');
-//         }
-//     });
-//   };
-
 
 const storage = multer.diskStorage({
     destination: './upload',
     filename: (req, file, callback) => {
         callback(null, `${Date.now()}-${file.originalname}`);
-        //cb(null, `${Date.now()}-${file.originalname}`);
     }
 });
 

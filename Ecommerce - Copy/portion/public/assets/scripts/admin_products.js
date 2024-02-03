@@ -1,9 +1,8 @@
 document.getElementById('product').addEventListener('submit', function (event) {
-    event.preventDefault();
 
     fetch('/add_product', {
         method: 'POST',
-        body: new FormData(this), // Assuming this is your form
+        body: new FormData(this),
     })
         .then(response => response.json())
         .then(data => {
@@ -19,5 +18,3 @@ document.getElementById('product').addEventListener('submit', function (event) {
             console.error('Error:', error);
         });
 });
-
-

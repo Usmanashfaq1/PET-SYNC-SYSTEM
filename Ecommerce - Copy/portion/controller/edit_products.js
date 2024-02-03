@@ -2,6 +2,10 @@ const path = require('path');
 const fs = require('fs');
 const connection = require('../config/sqlConnection');
 
+
+
+
+
 handle_delete_product = (req, res) => {
     const pid = req.params.id;
 
@@ -15,6 +19,36 @@ handle_delete_product = (req, res) => {
         }
     });
 }
+
+//delete api
+handle_load_update_product = (req, res) => {
+  const pid = req.params.id;
+
+  const sql = 'select product_name , category , price , stock , rating, description FROM products WHERE p_id = ?';
+  connection.query(sql, [pid], (err, result) => {
+      if (err) {
+          console.error('Error deleting product:', err);
+          res.status(500).json({ error: 'Database error.' }); // Return an error response
+      } 
+      res.json(result);
+    });
+}
+//update api
+handle_updated_product_data = (req, res) => {
+  const pid = req.params.id;
+
+    const sql = 'Update products set product_name= ? , category = ? , price = ? , stock = ? , ratitng = ? , description = ?, productPicture = ? where p_id = ?';
+  connection.query(sql, [pid], (err, result) => {
+      if (err) {
+          console.error('Error updating product:', err);
+          res.status(500).json({ error: 'Database error.' }); // Return an error response
+      } else {
+          res.json(1); // Return a success response
+      }
+  });
+}
+
+
 
 handle_get_specific_product = (req, res) => {
     const category = req.params.category;
@@ -61,10 +95,16 @@ handle_get_specific_product = (req, res) => {
 load_edit_product_page = (req, res) => {
     res.render('edit_product');
 }
+load_update_product_page = (req, res) => {
+  res.render('update_product');
+}
 
 module.exports = {
     load_edit_product_page,
     handle_delete_product,
     handle_get_specific_product,
+    load_update_product_page,
+    handle_load_update_product,
+    handle_updated_product_data,
 }
 
