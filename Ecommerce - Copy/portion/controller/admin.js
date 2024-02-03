@@ -8,13 +8,11 @@ const storage = multer.diskStorage({
     }
 });
 
-// Initialize uploader
 const upload = multer({
     storage: storage,
 }).single('productPicture')
 
 
-// Controller function for handling the form submission
 const handle_add_product = (req, res) => {
     upload(req, res, (err) => {
         if (err) {

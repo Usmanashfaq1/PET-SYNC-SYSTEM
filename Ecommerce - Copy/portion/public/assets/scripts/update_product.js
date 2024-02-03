@@ -1,5 +1,6 @@
 document.addEventListener('DOMContentLoaded', function () {
     var id = localStorage.getItem('Update_id');
+    document.getElementById('update_id').value = id;
     $.ajax({
         url: 'http://localhost:4000/load_update_product/' + id,
         method: 'GET',
@@ -23,3 +24,26 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 
+
+
+document.getElementById('product').addEventListener('submit', function (event) {
+    event.preventDefault();
+    fetch('/updated_product_data', {
+        method: 'POST',
+        body: new FormData(this),
+    })
+        .then(response => response.json())
+        .then(data => {
+            if (data === 1) {
+                document.getElementById('message').innerText = 'Product is Updated Successfully!';
+                showDialog_new_page();          
+                
+            } else {
+                document.getElementById('message').innerText = 'Internal failure at backend!';
+                showDialog_new_page();
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+});

@@ -39,7 +39,7 @@ router.delete('/delete_product/:id', handle_delete_product);
 
 router.get('/load_update_product/:id', handle_load_update_product);
 
-router.put('/updated_product_data/:id', handle_updated_product_data);
+router.post('/updated_product_data', handle_updated_product_data);
 
 
 module.exports = router;

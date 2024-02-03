@@ -1,5 +1,5 @@
 document.getElementById('product').addEventListener('submit', function (event) {
-
+    event.preventDefault();
     fetch('/add_product', {
         method: 'POST',
         body: new FormData(this),
