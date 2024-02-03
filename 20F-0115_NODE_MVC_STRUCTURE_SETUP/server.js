@@ -11,7 +11,12 @@ app.use(cors());
 
 app.use(express.static(__dirname + "/uploads" ) );
 
+
+const upload=require('./middleware/multerSetup').single("uploadFile");
+
 app.use('/public', express.static('public'));
+
+
 
  // all statics files in /public
 app.set("views", path.join(__dirname, "views"));
@@ -56,6 +61,11 @@ app.use('/',findUser);
 // USER PROFILE ROUTE ADDED HERE
 const userProfileRoute=require('./routes/profileRoute');
 app.use('/',userProfileRoute);
+
+
+const profileEditRoute=require('./routes/userSetting');
+const { stringify } = require('querystring');
+app.use('/profile',profileEditRoute);
 
 app.listen(3001,(err) =>{
     if(err) throw err;
