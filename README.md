@@ -34,3 +34,12 @@ Description
 
 ### 10. Setting
 
+## Updated Features
+### 1.User profile dummy
+
+## UPCOMING FEATURES
+### 1. ADMIN ANNOUCMENTS
+### 2. USER REPORTING
+
+
+
