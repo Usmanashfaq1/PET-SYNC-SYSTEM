@@ -7,6 +7,8 @@ const { load_admin_page } = require('../controller/admin')
 const { load_admin_products_page } = require('../controller/admin')
 const { load_edit_product_page } = require('../controller/edit_products')
 const { load_update_product_page } = require('../controller/edit_products')
+const { load_open_cart_page } = require('../controller/cart')
+
 
 
 
@@ -20,6 +22,9 @@ const { handle_updated_product_data } = require('../controller/edit_products')
 
 
 router.get('/update_product', load_update_product_page);
+
+router.get('/open_cart_page', load_open_cart_page);
+
 
 router.get('/get_products', handle_get_products);
 

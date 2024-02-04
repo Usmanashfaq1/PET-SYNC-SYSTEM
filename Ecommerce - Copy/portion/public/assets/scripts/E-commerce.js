@@ -1,4 +1,5 @@
 document.addEventListener('DOMContentLoaded', function () {
+    feather.replace();
     all_products();
 });
 
@@ -48,7 +49,7 @@ function all_products() {
 
     <div class="d-flex justify-content-center">
         <!-- Add to Cart button with onclick event -->
-        <button class="btn border border-secondary rounded-pill px-3 text-primary" onclick="addToCart(${result.petId}, '${result.petname}', ${result.age}, ${rating})">
+        <button class="btn border border-secondary rounded-pill px-3 text-primary" onclick="addToCart(${result.p_id}, ${result.rating})">
             <i class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart
         </button>
         <!-- Added a space after the button -->
@@ -126,8 +127,7 @@ function displayAll(value) {
         </div>
 
         <div class="d-flex justify-content-center">
-            <!-- Add to Cart button with onclick event -->
-            <button class="btn border border-secondary rounded-pill px-3 text-primary" onclick="addToCart(${result.petId}, '${result.petname}', ${result.age}, ${rating})">
+            <button class="btn border border-secondary rounded-pill px-3 text-primary" onclick="addToCart(${result.p_id},${result.rating})">
                 <i class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart
             </button>
             <!-- Added a space after the button -->
@@ -163,63 +163,14 @@ $('#carouselId').carousel({
     interval: 2000
 });
 
+function addToCart(product_id, product_Rating) {
+    var cartCount = $('#cartId');
 
+    var currentCount = parseInt(cartCount.text());
 
+    cartCount.text(currentCount + 1);
 
+    document.getElementById('message').innerText = 'Added to Cart!';
+    showDialog_donot_reload();
+}
 
-// Your existing JavaScript code...
-
-// function addToCart(petId, petName, petPrice, petRating) {
-//     // Your addToCart function logic...
-// }
-
-// Display cart items on page load
-// updateCartIcon();
-
-
-
-
-//  // Additional code for shopping cart functionality
-//  let cart = [];
-
-//  function addToCart(petId, petName, petPrice, petRating) {
-//      let positionThisPetInCart = cart.findIndex((value) => value.petId == petId);
-
-//      if (cart.length <= 0) {
-//          cart = [{
-//              petId: petId,
-//              petName: petName,
-//              petPrice: petPrice,
-//              petRating: petRating,
-//              quantity: 1
-//          }];
-//      } else if (positionThisPetInCart < 0) {
-//          cart.push({
-//              petId: petId,
-//              petName: petName,
-//              petPrice: petPrice,
-//              petRating: petRating,
-//              quantity: 1
-//          });
-//      } else {
-//          // Only append quantity if it's different
-//          if (cart[positionThisPetInCart].quantity !== cart[positionThisPetInCart].quantity + 1) {
-//              cart[positionThisPetInCart].quantity = cart[positionThisPetInCart].quantity + 1;
-//          }
-//      }
-
-//      updateCartIcon();
-//  }
-
-//  function updateCartIcon() {
-//      const cartQuantitySpan = document.getElementById('cartQuantity');
-//      let totalQuantity = 0;
-
-//      if (cart.length > 0) {
-//          cart.forEach(item => {
-//              totalQuantity = totalQuantity + item.quantity;
-//          });
-//      }
-
-//      cartQuantitySpan.innerText = totalQuantity;
-//  }

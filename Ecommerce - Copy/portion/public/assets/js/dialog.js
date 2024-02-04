@@ -22,3 +22,13 @@ function closeDialog_new_page() {
     window.location.href = '/edit_product';
 }, 500);   
 }
+
+
+function showDialog_donot_reload() {
+  document.getElementById('overlay').style.display = 'flex';
+}
+
+
+function closeDialog_donot_reload() {
+  document.getElementById('overlay').style.display = 'none';  
+}
