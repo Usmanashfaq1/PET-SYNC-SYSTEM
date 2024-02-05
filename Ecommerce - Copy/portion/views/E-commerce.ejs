@@ -97,12 +97,15 @@
             aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
+        <label for="" id="user" class="me-auto" style="font-weight: bolder;padding-left: 10px;"></label>
         <div class="navbar-nav">
             <div class="nav-item text-nowrap">
                 <a class="nav-link px-3" href="#" style="font-weight: bold;">Sign out</a>
             </div>
         </div>
     </header>
+    
+    
 
     <div class="container-fluid">
         <div class="row">
@@ -124,7 +127,7 @@
                         </li>
                         <li class="nav-item">
                             <div id="cartIconContainer">
-                                <a class="nav-link cart-link" href="/open_cart_page" id="cartIcon">
+                                <a class="nav-link cart-link" href="/open_cart_page" id="cartIcon" onclick="setIdOfCartItems()">
                                     <span data-feather="shopping-cart"></span> My Cart
                                     <span id='cartId' class="cart-badge">0</span>
                                 </a>

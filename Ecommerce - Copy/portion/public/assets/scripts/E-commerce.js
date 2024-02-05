@@ -1,6 +1,10 @@
+let cart_list= [];
 document.addEventListener('DOMContentLoaded', function () {
+    cart_list = [-1];
     feather.replace();
     all_products();
+    email = localStorage.getItem('email');
+    document.getElementById('user').textContent = email; // Use textContent instead of value
 });
 
 function all_products() {
@@ -49,7 +53,7 @@ function all_products() {
 
     <div class="d-flex justify-content-center">
         <!-- Add to Cart button with onclick event -->
-        <button class="btn border border-secondary rounded-pill px-3 text-primary" onclick="addToCart(${result.p_id}, ${result.rating})">
+        <button class="btn border border-secondary rounded-pill px-3 text-primary" onclick="addToCart(${result.p_id})">
             <i class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart
         </button>
         <!-- Added a space after the button -->
@@ -127,7 +131,7 @@ function displayAll(value) {
         </div>
 
         <div class="d-flex justify-content-center">
-            <button class="btn border border-secondary rounded-pill px-3 text-primary" onclick="addToCart(${result.p_id},${result.rating})">
+            <button class="btn border border-secondary rounded-pill px-3 text-primary" onclick="addToCart(${result.p_id}">
                 <i class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart
             </button>
             <!-- Added a space after the button -->
@@ -163,14 +167,21 @@ $('#carouselId').carousel({
     interval: 2000
 });
 
-function addToCart(product_id, product_Rating) {
+function addToCart(product_id) {
     var cartCount = $('#cartId');
-
     var currentCount = parseInt(cartCount.text());
 
-    cartCount.text(currentCount + 1);
-
-    document.getElementById('message').innerText = 'Added to Cart!';
-    showDialog_donot_reload();
+    if (!cart_list.includes(product_id)) {
+        cartCount.text(currentCount + 1);
+        cart_list.push(product_id);
+        document.getElementById('message').innerText = 'Added to Cart!';
+        showDialog_donot_reload();
+    } else {
+        document.getElementById('message').innerText = 'Item Already Added to Cart!';
+        showDialog_donot_reload();
+    }
 }
 
+function setIdOfCartItems() {
+    localStorage.setItem('idOfCartItems', JSON.stringify(cart_list));
+}
