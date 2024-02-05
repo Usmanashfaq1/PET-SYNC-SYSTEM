@@ -16,7 +16,7 @@ class editProfileController{
                         let birthdate=userInfoResult[0].birthdate;
                         let location=userInfoResult[0].location;
                         let note=userInfoResult[0].note;
-        
+        // here updated user setting controller
                         if (typeof imageName == 'object')
                          {
                             imageName = "default_profilepic.png";
