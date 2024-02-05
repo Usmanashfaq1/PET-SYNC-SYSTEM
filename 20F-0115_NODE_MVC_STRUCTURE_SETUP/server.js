@@ -62,6 +62,9 @@ app.use('/',findUser);
 const userProfileRoute=require('./routes/profileRoute');
 app.use('/',userProfileRoute);
 
+// USER PROFILE ROUTE ADDED HERE
+const createRoute=require('./routes/create');
+app.use('/',createRoute);
 
 const profileEditRoute=require('./routes/userSetting');
 const { stringify } = require('querystring');

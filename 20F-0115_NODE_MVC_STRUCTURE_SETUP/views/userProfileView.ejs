@@ -297,8 +297,8 @@
             <div class="card card-primary card-outline">
               <div class="card-body box-profile">
                 <div class="text-center">
-                  <img class="profile-user-img img-fluid img-circle"
-                       src="../public/static/assets/dist/img/user4-128x128.jpg"
+                  <img  class="profile-user-img img-fluid img-circle" style="width: 120px;height: 135px;"
+                   src="profilepics/<%=dpName%>"
                        alt="User profile picture">
                 </div>
 
@@ -331,17 +331,17 @@
               </div>
               <!-- /.card-header -->
               <div class="card-body">
-                <strong><i class="fas fa-book mr-1"></i> Education</strong>
+                <strong><i class="fas fa-book mr-1"></i> Bio</strong>
 
                 <p class="text-muted">
-                  B.S. in Computer Science from the University of Tennessee at Knoxville
+                  <%=bio%>
                 </p>
 
                 <hr>
 
                 <strong><i class="fas fa-map-marker-alt mr-1"></i> Location</strong>
 
-                <p class="text-muted">Malibu, California</p>
+                <p class="text-muted"><%= location %></p>
 
                 <hr>
 
@@ -357,9 +357,15 @@
 
                 <hr>
 
+                <strong><i class="far fa-file-alt mr-1"></i> BirthDate</strong>
+
+                <p class="text-muted"><%=birthdate%></p>
+
                 <strong><i class="far fa-file-alt mr-1"></i> Notes</strong>
 
-                <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam fermentum enim neque.</p>
+                <p class="text-muted"><%=note%></p>
+
+
               </div>
               <!-- /.card-body -->
             </div>

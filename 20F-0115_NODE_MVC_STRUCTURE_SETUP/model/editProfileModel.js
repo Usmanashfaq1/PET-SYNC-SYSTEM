@@ -15,6 +15,8 @@ class editProfileModel {
                 "fullname":(req.body.fullName=='')?userInfoResult[0].fullname:req.body.fullName,
                 "birthdate":(req.body.DOB=='')?userInfoResult[0].birthdate:req.body.DOB,
                 "bio":(req.body.Bio=='')?userInfoResult[0].bio:req.body.Bio,
+                "note":(req.body.note=='')?userInfoResult[0].note:req.body.note,
+                "location":(req.body.location=='')?userInfoResult[0].location:req.body.location
             };
         
             var sqlQuery1="UPDATE userinfo SET ? WHERE id="+req.session.num;
@@ -28,7 +30,7 @@ class editProfileModel {
                     connection.query(userInfoQuery,(error,userInfoResult)=>{
                         if(error) throw error;
                         console.log(userInfoResult[0]);
-                        return res.render('editProfileView',{msg:"Saved successfully!",userInfo:userInfoResult[0]});
+                        return res.render('userSetting',{msg:"Saved successfully!",userInfo:userInfoResult[0]});
                     });
                 });
             });
