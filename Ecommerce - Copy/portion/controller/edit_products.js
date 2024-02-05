@@ -15,7 +15,7 @@ const upload = multer({
   storage: storage,
 }).single('productPicture')
 
-
+//delete api
 handle_delete_product = (req, res) => {
   const pid = req.params.id;
 
@@ -30,7 +30,7 @@ handle_delete_product = (req, res) => {
   });
 }
 
-//delete api
+
 handle_load_update_product = (req, res) => {
 
   const pid = req.params.id;

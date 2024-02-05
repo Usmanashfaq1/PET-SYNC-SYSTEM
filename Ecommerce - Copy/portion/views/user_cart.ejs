@@ -4,35 +4,6 @@
 
 <head>
 
-    <style>
-        #cartIconContainer {
-            position: relative;
-        }
-
-        .cart-link {
-            text-decoration: none;
-            color: #333;
-            /* Set your desired text color */
-            display: flex;
-            align-items: center;
-        }
-
-        .cart-badge {
-            background-color: #6c757d;
-            /* Set your desired background color */
-            color: #fff;
-            /* Set your desired text color */
-            border-radius: 50%;
-            margin-left: 5px;
-            /* Adjust the spacing between the text and badge */
-            padding: 2px 8px;
-            /* Adjust the padding as needed */
-            font-size: 12px;
-            /* Set your desired font size */
-            font-weight: bold;
-            /* Set your desired font weight */
-        }
-    </style>
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
@@ -70,6 +41,8 @@
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script src="/assets/scripts/E-commerce.js"></script>
 
+    <script src="/assets/scripts/user_cart.js"></script>
+
 
 
 
@@ -97,12 +70,15 @@
             aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
+        <label for="" id="user" class="me-auto" style="font-weight: bolder;padding-left: 10px;"></label>
         <div class="navbar-nav">
             <div class="nav-item text-nowrap">
                 <a class="nav-link px-3" href="#" style="font-weight: bold;">Sign out</a>
             </div>
         </div>
     </header>
+    
+    
 
     <div class="container-fluid">
         <div class="row">
@@ -124,7 +100,7 @@
                         </li>
                         <li class="nav-item">
                             <div id="cartIconContainer">
-                                <a class="nav-link cart-link active" href="#" id="cartIcon">
+                                <a class="nav-link cart-link active" href="/open_cart_page" id="cartIcon">
                                     <span data-feather="shopping-cart"></span> My Cart
                                     <span id='cartId' class="cart-badge">0</span>
                                 </a>
@@ -190,30 +166,51 @@
                 <div
                     class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
                     <h1 class="h2">Cart</h1>
+                    <label id="total"></label>
                 </div>
 
-                <!-- <canvas class="my-4 w-100" id="myChart" width="900" height="380"></canvas> -->
-
-                
                         <main id="main">
-                            <!-- Place this where you want to display the cart icon and quantity -->
-
-                            <!-- Add more tabs and their content as needed -->
-                        </main><!-- End #main -->
+                            <div class="carousel-item active">
+                                <div class="container py-5">
+                                    <div class="row justify-content-center">
+                                        <div class="col-lg-10">
+                                            <div class="table-container">
+                                                <div class="mb-3">
+    
+                                                    <table class="table">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>Picture</th>
+                                                                <th>Name</th>
+                                                                <th>Category</th>
+                                                                <th>Price</th>
+                                                                <th>Quantity</th>
+                                                                <th>Description</th>
+                                                                <th>Remove</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody id="Data_table">
+    
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+    
+                            </div>
+                        </main>
                     </div>
-                </div><!-- End Product Display Section -->
-
-
-                <!-- ... (existing code) ... -->
-
+                </div>
                 <div class="overlay" id="overlay">
                     <div class="dialog-box">
                         <p id='message'></p>
-                        <button class="close-btn" onclick="closeDialog_donot_reload()">Close</button>
+                        <button class="close-btn" onclick="closeDialog()">Close</button>
                     </div>
                 </div>
 
-
+               
         </div>
 
         <div class="container d-md-flex py-4">
@@ -234,7 +231,7 @@
 
 
 
-    <script src="/assets/scripts/user_cart.js"></script>
+
     <script src="/assets/js/dialog.js"></script>
     <link rel="stylesheet" href="/assets/css/dialogbox.css">
     <script src="/assets/dist/js/bootstrap.bundle.min.js"></script>
@@ -244,13 +241,6 @@
         crossorigin="anonymous"></script>
     <!-- Include Feather Icons library (CDN) -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.css">
-
-
-
-    <!-- <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js"
-        integrity="sha384-zNy6FEbO50N+Cg5wap8IKA4M/ZnLJgzc6w2NqACZaK0u0FXfOWRRJOnQtpZun8ha"
-        crossorigin="anonymous"></script> -->
-
 
     <script src="/assets/js/dashboard.js"></script>
 

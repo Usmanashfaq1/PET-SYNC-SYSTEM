@@ -1,49 +1,31 @@
-/*
-.carousel-item {
-    height: 100%;
-}
-  .navbar-scrolled {
-border-bottom: none; 
-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
-}
-
-.carousel-item img {
-    width: 425px;
-    height: 400px;
-    object-fit: cover;
-    border-radius: 10px;
-}
-
-.icon-cart-toggle {
+#cartIconContainer {
     position: relative;
 }
 
-.icon-cart-toggle span {
-    position: absolute;
-    background-color: red;
-    width: 30px;
-    height: 30px;
+.cart-link {
+    text-decoration: none;
+    color: #333;
+    /* Set your desired text color */
     display: flex;
-    justify-content: center;
     align-items: center;
-    border-radius: 50%;
+}
+
+.cart-badge {
+    background-color: #6c757d;
+    /* Set your desired background color */
     color: #fff;
-    top: 50%;
-    right: -20px;
+    /* Set your desired text color */
+    border-radius: 50%;
+    margin-left: 5px;
+    /* Adjust the spacing between the text and badge */
+    padding: 2px 8px;
+    /* Adjust the padding as needed */
+    font-size: 12px;
+    /* Set your desired font size */
+    font-weight: bold;
+    /* Set your desired font weight */
 }
 
-body {
-    margin: 0;
-    font-family: Poppins;
+#totalLabel {
+    margin-right: 10px; /* Adjust the margin as needed */
 }
-
-.container {
-    width: 900px;
-    margin: auto;
-    max-width: 90vw;
-    text-align: center;
-    padding-top: 10px;
-    transition: transform .5s;
-}
-
-/* ... (rest of your existing styles) ... */
