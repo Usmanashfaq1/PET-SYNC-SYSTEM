@@ -4,7 +4,21 @@ document.addEventListener('DOMContentLoaded', function () {
     feather.replace();
     all_products();
     email = localStorage.getItem('email');
-    document.getElementById('user').textContent = email; // Use textContent instead of value
+    document.getElementById('user').textContent = email;
+
+    $.ajax({
+        url: 'http://localhost:4000/cart_item_number?email=' + email,
+        method: 'GET',
+        success: function (data) {
+                var cartCount = $('#cartId');
+                var currentCount = parseInt(cartCount.text());
+                cartCount.text((currentCount *0)+ data);
+        },
+        error: function (error) {
+            console.error('Error adding item to cart:', error);
+            alert('Error adding item to cart. Please try again.');
+        }
+    });
 });
 
 function all_products() {
@@ -167,21 +181,92 @@ $('#carouselId').carousel({
     interval: 2000
 });
 
-function addToCart(product_id) {
-    var cartCount = $('#cartId');
-    var currentCount = parseInt(cartCount.text());
+// function addToCart(product_id) {
+//     var cartCount = $('#cartId');
+//     var currentCount = parseInt(cartCount.text());
 
-    if (!cart_list.includes(product_id)) {
-        cartCount.text(currentCount + 1);
-        cart_list.push(product_id);
-        document.getElementById('message').innerText = 'Added to Cart!';
-        showDialog_donot_reload();
-    } else {
-        document.getElementById('message').innerText = 'Item Already Added to Cart!';
-        showDialog_donot_reload();
-    }
+//     if (!cart_list.includes(product_id)) {
+//         cartCount.text(currentCount + 1);
+//         cart_list.push(product_id);
+//         document.getElementById('message').innerText = 'Added to Cart!';
+//         showDialog_donot_reload();
+
+//     } else {
+//         document.getElementById('message').innerText = 'Item Already Added to Cart!';
+//         showDialog_donot_reload();
+//     }
+// }
+
+// function setIdOfCartItems() {
+//     localStorage.setItem('idOfCartItems', JSON.stringify(cart_list));
+// }
+
+
+function addToCart(item_id) {
+    var email = localStorage.getItem('email');
+
+    $.ajax({
+        url: 'http://localhost:4000/add_to_cart?item_id=' + item_id + '&email=' + email,
+        method: 'POST',
+        success: function (data) {
+            if (data === 1) {
+                document.getElementById('message').innerText = 'Item Added to Cart!';
+                showDialog_donot_reload();
+                // var cartCount = $('#cartId');
+                // var currentCount = parseInt(cartCount.text());
+                // cartCount.text(currentCount + 1);
+            } else {
+                document.getElementById('message').innerText = 'Item Already Added to Cart!';
+                showDialog();
+            }
+        },
+        error: function (error) {
+            console.error('Error adding item to cart:', error);
+            alert('Error adding item to cart. Please try again.');
+        }
+    });
+
+    //check count of cart from DB
+
+    $.ajax({
+        url: 'http://localhost:4000/cart_item_number?email=' + email,
+        method: 'GET',
+        success: function (data) {
+                var cartCount = $('#cartId');
+                var currentCount = parseInt(cartCount.text());
+                cartCount.text((currentCount *0)+ data);
+        },
+        error: function (error) {
+            console.error('Error adding item to cart:', error);
+            alert('Error adding item to cart. Please try again.');
+        }
+    });
+  
 }
 
-function setIdOfCartItems() {
-    localStorage.setItem('idOfCartItems', JSON.stringify(cart_list));
-}
+
+
+
+
+
+// document.getElementById('product').addEventListener('submit', function (event) {
+//     event.preventDefault();
+//     fetch('/updated_product_data', {
+//         method: 'POST',
+//         body: new FormData(this),
+//     })
+//         .then(response => response.json())
+//         .then(data => {
+//             if (data === 1) {
+//                 document.getElementById('message').innerText = 'Item Added to Cart!';
+//                 showDialog();          
+                
+//             } else {
+//                 document.getElementById('message').innerText = 'Item Already Added to Cart!';
+//                 showDialog();
+//             }
+//         })
+//         .catch(error => {
+//             console.error('Error:', error);
+//         });
+// });

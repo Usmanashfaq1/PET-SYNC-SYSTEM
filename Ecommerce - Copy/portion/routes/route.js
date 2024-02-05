@@ -18,7 +18,8 @@ const { handle_delete_product } = require('../controller/edit_products')
 const { handle_get_specific_product } = require('../controller/edit_products')
 const { handle_load_update_product } = require('../controller/edit_products')
 const { handle_updated_product_data } = require('../controller/edit_products')
-
+const { handle_add_to_cart } = require('../controller/cart')
+const { handle_cart_item_number } = require('../controller/cart')
 
 
 router.get('/update_product', load_update_product_page);
@@ -45,6 +46,11 @@ router.delete('/delete_product/:id', handle_delete_product);
 router.get('/load_update_product/:id', handle_load_update_product);
 
 router.post('/updated_product_data', handle_updated_product_data);
+
+router.post('/add_to_cart', handle_add_to_cart);
+
+router.get('/cart_item_number', handle_cart_item_number);
+
 
 
 module.exports = router;
