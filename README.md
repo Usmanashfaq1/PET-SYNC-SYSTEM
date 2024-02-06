@@ -34,6 +34,10 @@ Description
 
 ### 10. Setting
 
+### 11. Gallery Feature
+#### create post fearure
+
+
 ## Updated Features
 ### 1.User profile dummy
 

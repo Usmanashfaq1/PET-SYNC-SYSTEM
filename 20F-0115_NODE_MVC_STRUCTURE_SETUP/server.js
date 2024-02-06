@@ -66,6 +66,9 @@ app.use('/',userProfileRoute);
 const createRoute=require('./routes/create');
 app.use('/',createRoute);
 
+const galleryRoute=require('./routes/gallery');
+app.use('/',galleryRoute);
+
 const profileEditRoute=require('./routes/userSetting');
 const { stringify } = require('querystring');
 app.use('/profile',profileEditRoute);

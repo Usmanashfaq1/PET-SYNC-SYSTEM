@@ -8,14 +8,7 @@
     <link rel="icon" href="../../../../favicon.ico">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-    <!-- Font Awesome -->
-  <link rel="stylesheet" href="../public/static/assets/plugins/fontawesome-free/css/all.min.css">
-  <!-- Ionicons -->
-  <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
-  <!-- Theme style -->
-  <link rel="stylesheet" href="../public/static/assets/css/adminlte.min.css">
-  <!-- Google Font: Source Sans Pro -->
-  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
 
     <script  type="text/javascript" src="../JS/typeahead.min.js"></script>
     <script type="text/javascript" src="../JS/home.js"></script>
@@ -39,7 +32,7 @@
       <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search">
       <ul class="navbar-nav px-3">
         <form action="/logout" method="GET">
-          <button type="submit">Logout</button>
+          <button type="submit" class="btn btn-block btn-success">Logout</button>
       </form>
       </ul>
     </nav>
@@ -50,7 +43,7 @@
           <div class="sidebar-sticky">
             <ul class="nav flex-column">
               <li class="nav-item">
-                <a class="nav-link active" href="/">
+                <a class="nav-link" href="/">
                   <span data-feather="home"></span>
                   Main <span class="sr-only">(current)</span>
                 </a>
@@ -62,17 +55,12 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="/create">
+                <a class="nav-link active" href="#">
                   <span data-feather="shopping-cart"></span>
                   Create
                 </a>
               </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">
-                  <span data-feather="users"></span>
-                  Saved
-                </a>
-              </li>
+              
               <li class="nav-item">
                 <a class="nav-link" href="#">
                   <span data-feather="users"></span>
@@ -94,6 +82,21 @@
               </li>
 
               <li class="nav-item">
+                <a class="nav-link" href="/users">
+                  <span data-feather="bar-chart-2"></span>
+                  Newsfeed
+                </a>
+              </li>
+
+              <li class="nav-item">
+                <a class="nav-link" href="/users">
+                  <span data-feather="bar-chart-2"></span>
+                  Events
+                </a>
+              </li>
+
+
+              <li class="nav-item">
                 <a class="nav-link" href="/profile/edit">
                   <span data-feather="layers"></span>
                   Setting
@@ -102,7 +105,7 @@
             </ul>
 
             <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
-              <span>Saved reports</span>
+              <span>Extras</span>
               <a class="d-flex align-items-center text-muted" href="#">
                 <span data-feather="plus-circle"></span>
               </a>
@@ -111,13 +114,13 @@
               <li class="nav-item">
                 <a class="nav-link" href="#">
                   <span data-feather="file-text"></span>
-                  Current month
+                  Connection List
                 </a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="#">
                   <span data-feather="file-text"></span>
-                  Last quarter
+                 Timeline
                 </a>
               </li>
               <li class="nav-item">
@@ -129,7 +132,7 @@
               <li class="nav-item">
                 <a class="nav-link" href="#">
                   <span data-feather="file-text"></span>
-                  Year-end sale
+                  Saved
                 </a>
               </li>
             </ul>
@@ -138,74 +141,78 @@
 
         <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
           <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
-            <h1 class="h2"> <%= name %></h1>
+            <h1 class="h2">Welcome <%= name %></h1>
             <div class="btn-toolbar mb-2 mb-md-0">
-              <div class="btn-group mr-2">
-                <button class="btn btn-sm btn-outline-secondary">Share</button>
-                <button class="btn btn-sm btn-outline-secondary">Export</button>
-              </div>
-              <button class="btn btn-sm btn-outline-secondary dropdown-toggle">
-                <span data-feather="calendar"></span>
-                This week
-              </button>
+             
+              
             </div>
           </div>
 
-          <!--here show the home view-->
-          <h1>Connect with Pet Lovers</h1>
+         
+<!-- general form elements -->
+<div class="card card-primary">
+    <div class="card-header">
+      <h3 class="card-title">Create Post</h3>
+    </div>
+    <!-- /.card-header -->
+    <!-- form start -->
+    <form role="form" action="/profile/postFeed" method="POST" enctype="multipart/form-data">
+      <div class="card-body">
+       
 
-          <div class="row">
-            <% users.forEach(user => { %>
-              <div class="col-md-4">
-                <!-- Widget: user widget style 1 -->
-                <div class="card card-widget widget-user">
-                  <!-- Add the bg color to the header using any of the bg-* classes -->
-                  <div class="widget-user-header bg-info">
-                    <h3 class="widget-user-username"><%= user.username %></h3>
-                    <!-- <h5 class="widget-user-desc"><%= user.role %></h5> -->
-                  </div>
-                  <div class="widget-user-image">
-                    <img class="img-circle elevation-2" src="../public/static/assets/img/avatar2.png" alt="User Avatar">
-                  </div>
-                  <div class="card-footer">
-                    <div class="row">
-                      <div class="col-sm-4 border-right">
-                        <div class="description-block">
-                          <h5 class="description-header"><%= user.email %></h5>
-                          <span class="description-text">SALES</span>
-                        </div>
-                        <!-- /.description-block -->
-                      </div>
-                      <!-- /.col -->
-                      <div class="col-sm-4 border-right">
-                        <div class="description-block">
-                          <!-- <h5 class="description-header"><%= user.followers %></h5> -->
-                          <span class="description-text">FOLLOWERS</span>
-                        </div>
-                        <!-- /.description-block -->
-                      </div>
-                      <!-- /.col -->
-                      <div class="col-sm-4">
-                        <div class="description-block">
-                          <!-- <h5 class="description-header"><%= user.products %></h5> -->
-                          <span class="description-text">PRODUCTS</span>
-                        </div>
-                        <!-- /.description-block -->
-                      </div>
-                      <!-- /.col -->
-                    </div>
-                    <!-- /.row -->
-                  </div>
-                </div>
-                <!-- /.widget-user -->
-              </div>
-            <% }); %>
+        <div class="form-group">
+            <label for="exampleInputEmail1">Caption</label>
+            <input type="text" class="form-control"  name="caption" placeholder="Add a caption...">
           </div>
-          
+       
+        
+        <!-- <div class="form-group">
+            <label for="upload-File" class="custom-profile-pic-upload">
+                <i class="fa fa-fw fa-camera"></i> Upload
+            </label>
+            <input id="upload-File" type="file" name="userFeed" value="Upload File" />
+        </div> -->
+
+
+        <div class="form-group">
+            <label for="exampleInputFile">File input</label>
+            <div class="input-group">
+              <div class="custom-file">
+                <input input id="upload-File" type="file" class="custom-file-input"  name="userFeed" value="Upload File" required>
+                <label class="custom-file-label" for="exampleInputFile">Choose file</label>
+              </div>
+              <div class="input-group-append">
+                <span class="input-group-text" id="">Upload</span>
+              </div>
+            </div>
+          </div>
+        
+      </div>
+      <!-- /.card-body -->
+
+      <div class="card-footer">
+        <input class="simple-btn" type="submit" id="upload-Feed" name="Upload" />
+            <span id="status"></span>
+      </div>
+    </form>
+  </div>
+  <!-- /.card -->
           
         </main>
       </div>
+      
+      <footer class="main-footer">
+        <!-- To the right -->
+        <div class="float-right d-none d-sm-inline">
+          
+          <br>
+        </div>
+        <!-- Default to the left -->
+      
+      </footer>
     </div>
+
+    
 
     <!-- Bootstrap core JavaScript
     ================================================== -->
@@ -252,5 +259,12 @@
         }
       });
     </script>
+    <script src="../public/static/assets/plugins/jquery/jquery.min.js"></script>
+    <!-- Bootstrap 4 -->
+    <script src="../public/static/assets/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- AdminLTE App -->
+    <script src="../public/static/dist/js/adminlte.min.js"></script>
+    <!-- AdminLTE for demo purposes -->
+    <script src="../public/static/dist/js/demo.js"></script>
   </body>
 </html>
