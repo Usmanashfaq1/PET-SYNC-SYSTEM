@@ -1,4 +1,5 @@
 const profileModel = require('../model/profileModel');
+const PostModel=require('../model/postModel');
 
 
 class ProfileController {
@@ -38,8 +39,8 @@ class ProfileController {
                  {
                     note='not set';
                  }
-              
-                return res.render('userProfileView', { data: userInfo[0], dpName: imageName, name,note,location,birthdate,bio });
+                 const feedResult = await PostModel.getUserFeed(req.session.num);
+                return res.render('userProfileView', { data: userInfo[0], feedResult: feedResult,dpName: imageName, name,note,location,birthdate,bio });
             } 
             else 
             {

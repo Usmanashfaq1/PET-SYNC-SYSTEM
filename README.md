@@ -35,7 +35,7 @@ Description
 ### 10. Setting
 
 ### 11. Gallery Feature
-#### create post fearure
+#### create post feature
 
 
 ## Updated Features
@@ -44,6 +44,11 @@ Description
 ## UPCOMING FEATURES
 ### 1. ADMIN ANNOUCMENTS
 ### 2. USER REPORTING
+### 3. Added gallery full functionality
+### 4. Added time line view 
+### 5. Added post tab view
+
+
 
 
 
