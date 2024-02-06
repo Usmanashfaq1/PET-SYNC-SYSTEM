@@ -766,7 +766,38 @@
     </section>
     <!-- /.content -->
 
- 
+  <!-- /.content-wrapper -->
+<div class="container" style="padding-left: 158px; padding-right: 70px;">
+  <h2>Post Timeline</h2>
+  <div class="gallery">
+    <% for(var i=0; i < feedResult.length; i++) { %>
+    <div class="facebook-post">
+      <div class="post-header">
+        <img src="profilepics/<%=feedResult[i].feedname%>" class="profile-pic" alt="">
+        <div class="post-info">
+          <h3 class="post-author"><%=feedResult[i].username%></h3>
+          <p class="post-time"><%=feedResult[i].timestamp%></p>
+        </div>
+      </div>
+      <div class="post-content">
+        <img src="profilepics/<%=feedResult[i].feedname%>" class="post-image" alt="">
+        <div class="post-caption">
+          <h5><%=feedResult[i].caption%></h5>
+        </div>
+        <div class="post-stats">
+          <ul>
+            <li><i class="fas fa-heart" aria-hidden="true"></i><span class="likes-count"><%=feedResult[i].likes%></span></li>
+            <li><i class="fas fa-comment" aria-hidden="true"></i><span class="comments-count">2</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <% } %>
+  </div>
+</div>
+
+  
+		<!-- End of gallery -->
 
 	<!--	<div class="loader"></div>
     -->
