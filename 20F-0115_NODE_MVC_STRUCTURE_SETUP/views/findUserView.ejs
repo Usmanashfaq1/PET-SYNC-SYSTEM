@@ -58,6 +58,14 @@
         </li>
       </ul>
   
+      <!-- SEARCH FORM -->
+      <form method="GET" id="search-user-form" class="d-flex">
+        <div class="input-group">
+            <input type="search" id="search-text" class="form-control typeahead tt-query" name="typeahead"  autocomplete="off" spellcheck="false" placeholder="Username" style="height: 50px; border-radius: 5px 0 0 5px; background-color: aliceblue;">
+            <button class="btn btn-outline-success" type="submit" style="height: 50px; border-radius: 0 5px 5px 0;">Search</button>
+        </div>
+    </form>
+  
       
   
       <!-- Right navbar links -->
@@ -378,6 +386,17 @@
         }
       });
     </script>
+    <script>
+      document.getElementById("search-user-form").addEventListener("submit", function(event) {
+          event.preventDefault(); // Prevent the default form submission
+  
+          // Get the value of the input field
+          var username = document.getElementById("search-text").value;
+  
+          // Redirect to the URL with the username as a parameter
+          window.location.href = "/account/" + username;
+      });
+  </script>
    
   </body>
 </html>
