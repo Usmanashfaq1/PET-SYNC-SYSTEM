@@ -73,6 +73,9 @@ const profileEditRoute=require('./routes/userSetting');
 const { stringify } = require('querystring');
 app.use('/profile',profileEditRoute);
 
+const displayAccountRoute=require('./routes/displayAccountRoute');
+app.use('/',displayAccountRoute);
+
 app.listen(3001,(err) =>{
     if(err) throw err;
    

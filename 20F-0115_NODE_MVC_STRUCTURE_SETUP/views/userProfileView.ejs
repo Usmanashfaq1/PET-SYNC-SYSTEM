@@ -775,19 +775,18 @@
       <div class="post-header">
         <img src="profilepics/<%=feedResult[i].feedname%>" class="profile-pic" alt="">
         <div class="post-info">
-          <h3 class="post-author"><%=feedResult[i].username%></h3>
+          <h3 class="post-author"> <a href="/account/<%=feedResult[i].username%>"><%=feedResult[i].username%></a></h3>
           <p class="post-time"><%=feedResult[i].timestamp%></p>
         </div>
       </div>
       <div class="post-content">
         <img src="profilepics/<%=feedResult[i].feedname%>" class="post-image" alt="">
         <div class="post-caption">
-          <!-- caption bug fix -->
-          <h4><%=feedResult[i].caption%></h4>
+          <h5><%=feedResult[i].caption%></h5>
         </div>
         <div class="post-stats">
           <ul>
-            <li><i class="fas fa-heart" aria-hidden="true"></i><span class="likes-count"><%=feedResult[i].likes%></span></li>
+            <li><i class="fas fa-heart" aria-hidden="true"></i><span class="likes-count">2</span></li>
             <li><i class="fas fa-comment" aria-hidden="true"></i><span class="comments-count">2</span></li>
           </ul>
         </div>
