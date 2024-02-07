@@ -9,6 +9,9 @@ exports.getAllUsers = async (req, res) => {
     users = users.filter(user => user.username !== currentUser);
     
     const name = req.session.username;
+    
+
+
     res.render('findUserView', { users, name });
   } catch (error) {
     res.status(500).send('Error fetching users');

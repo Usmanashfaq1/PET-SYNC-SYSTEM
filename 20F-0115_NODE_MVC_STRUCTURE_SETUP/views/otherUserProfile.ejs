@@ -152,18 +152,7 @@
         </li>
       </ul>
   
-      <!-- SEARCH FORM -->
-      <form class="form-inline ml-3">
-        <div class="input-group input-group-sm">
-          <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">
-          <div class="input-group-append">
-            <button class="btn btn-navbar" type="submit">
-              <i class="fas fa-search"></i>
-            </button>
-          </div>
-        </div>
-      </form>
-  
+      
       <!-- Right navbar links -->
       <ul class="navbar-nav ml-auto">
         <!-- Messages Dropdown Menu -->
@@ -516,34 +505,39 @@
     
 
   <!-- /.content-wrapper -->
-<div class="container" style="padding-left: 158px; padding-right: 70px;">
-  <h2>Post Timeline</h2>
-  <div class="gallery">
-    <% for(var i=0; i < feedResult.length; i++) { %>
-    <div class="facebook-post">
-      <div class="post-header">
-        <img src="/profilepics/<%=feedResult[i].feedname%>" class="profile-pic" alt="">
-        <div class="post-info">
-          <h3 class="post-author"> <a href="/account/<%=feedResult[i].username%>"><%=feedResult[i].username%></a></h3>
-          <p class="post-time"><%=feedResult[i].timestamp%></p>
-        </div>
-      </div>
-      <div class="post-content">
-        <img src="/profilepics/<%=feedResult[i].feedname%>" class="post-image" alt="">
-        <div class="post-caption">
-          <h5><%=feedResult[i].caption%></h5>
-        </div>
-        <div class="post-stats">
-          <ul>
-            <li><i class="fas fa-heart" aria-hidden="true"></i><span class="likes-count">2</span></li>
-            <li><i class="fas fa-comment" aria-hidden="true"></i><span class="comments-count">2</span></li>
-          </ul>
-        </div>
-      </div>
+  <div class="container" style="padding-left: 158px; padding-right: 70px;">
+    <h2>Post Timeline</h2>
+    <div class="gallery">
+      <% if (feedResult.length === 0) { %>
+        <p>Nothing to show here!</p>
+      <% } else { %>
+        <% for(var i=0; i < feedResult.length; i++) { %>
+          <div class="facebook-post">
+            <div class="post-header">
+              <img src="/profilepics/<%=feedResult[i].feedname%>" class="profile-pic" alt="">
+              <div class="post-info">
+                <h3 class="post-author"> <a href="/account/<%=feedResult[i].username%>"><%=feedResult[i].username%></a></h3>
+                <p class="post-time"><%=feedResult[i].timestamp%></p>
+              </div>
+            </div>
+            <div class="post-content">
+              <img src="/profilepics/<%=feedResult[i].feedname%>" class="post-image" alt="">
+              <div class="post-caption">
+                <h5><%=feedResult[i].caption%></h5>
+              </div>
+              <div class="post-stats">
+                <ul>
+                  <li><i class="fas fa-heart" aria-hidden="true"></i><span class="likes-count">2</span></li>
+                  <li><i class="fas fa-comment" aria-hidden="true"></i><span class="comments-count">2</span></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        <% } %>
+      <% } %>
     </div>
-    <% } %>
   </div>
-</div>
+  
 
   
 		<!-- End of gallery -->
@@ -636,5 +630,6 @@
   });
 }
     </script>
+   
   </body>
 </html>

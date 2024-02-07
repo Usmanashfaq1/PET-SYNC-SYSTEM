@@ -7,14 +7,22 @@ class UserModel {
   }
 
   async getUsers(currentUser) {
-    const query = 'SELECT * FROM users  ORDER BY created_at DESC';
+    const query = `
+      SELECT *
+      FROM userinfo
+      WHERE username != ?
+    `;
     try {
       const results = await this.promiseConnectionQuery(query, [currentUser]);
+      
       return results;
     } catch (error) {
       throw new Error('Error fetching users from database');
     }
   }
+  
+  
+  
 }
   
 
