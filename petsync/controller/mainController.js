@@ -15,7 +15,7 @@ class  mainController {
       } else 
       {
         console.log('User Not logged in !' + req.session.num);
-        return res.redirect('/login');
+        return res.redirect('/');
       }
     } catch (error) 
     {

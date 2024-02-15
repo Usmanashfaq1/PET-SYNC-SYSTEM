@@ -20,7 +20,7 @@ class loginModel {
           // if its Successful login
           req.session.num = results[0].id;
           req.session.username = userName;
-          return res.redirect('/'); 
+          return res.redirect('/main'); 
         } else 
         {
           // if its Incorrect password

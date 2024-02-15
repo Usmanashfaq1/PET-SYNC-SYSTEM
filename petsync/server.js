@@ -30,9 +30,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:true}));
 app.set('view engine', 'ejs');
 
-app.get('/',(req,res)=>{
-  res.render('index');
- });
+
 //Database
 const connection = require('./config');
  
@@ -61,7 +59,8 @@ const signupRoute=require('./routes/signupRoute');
 app.use('/',signupRoute);
 
 
-
+const front=require('./routes/frontRoute');
+app.use('/',front);
 
 const mainRoute1=require('./routes/mainRoute');
 app.use('/',mainRoute1);
@@ -91,9 +90,18 @@ const displayAccountRoute=require('./routes/displayAccountRoute');
 app.use('/',displayAccountRoute);
 
 
-app.get('/contact',(req,res)=>{
-  res.render('contact');
+
+
+app.get('/community',(req,res)=>{
+  res.render('community');
  });
+
+
+ //E-commerce
+// const productsRouter = require('./routes/route');
+const router = require('./routes/route');
+
+app.use('/', router);
 
 app.listen(3001,(err) =>{
     if(err) throw err;
