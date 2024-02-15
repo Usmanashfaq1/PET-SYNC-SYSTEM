@@ -1,5 +1,5 @@
-const connection = require('../config');
-const Model = require('../model/editProfileModel.js');
+const connection = require('../../config.js');
+const Model = require('../../model/editProfileModel.js');
 const editProfileModel = new Model();
 
 class editProfileController{

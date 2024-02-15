@@ -1,4 +1,4 @@
-const displayAccountModel = require("../model/displayAccountModel");
+const displayAccountModel = require("../../model/displayAccountModel");
 
 class DisplayAccountController {
   async displayAccount(req, res) {

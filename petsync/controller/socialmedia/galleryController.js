@@ -1,8 +1,8 @@
-const profileModel = require('../model/profileModel');
-const PostModel=require('../model/postModel');
+const profileModel = require('../../model/profileModel');
+const GalleryModel=require('../../model/galleryModel');
 
 
-class ProfileController {
+class GalleryController {
     async displayPage(req, res) {
         try {
             if (req.session.num != null && typeof req.session.num != "undefined")
@@ -11,36 +11,16 @@ class ProfileController {
                 var name=req.session.username;
                 const userInfo = await profileModel.getUserInfo(req.session.num);
                 let imageName = userInfo[0].profilepic;
-                let bio=userInfo[0].bio;
-                let birthdate=userInfo[0].birthdate;
-                let location=userInfo[0].location;
-                let note=userInfo[0].note;
+                
 
                 if (typeof imageName == 'object')
                  {
                     imageName = "default_profilepic.png";
                  }
 
-                 if(bio== null)
-                 {
-                    bio='no bio';
-                 }
-                 if(birthdate== null)
-                 {
-                    birthdate='not set';
-                 }
-
-                 if(location==null)
-                 {
-                    location='not set';
-                 }
-                   
-                 if(note==null)
-                 {
-                    note='not set';
-                 }
-                 const feedResult = await PostModel.getUserFeed(req.session.num);
-                return res.render('userProfileView', { data: userInfo[0], feedResult: feedResult,dpName: imageName, name,note,location,birthdate,bio });
+                 
+                 const feedResult = await GalleryModel.getUserFeed(req.session.num);
+                return res.render('gallery', { data: userInfo[0], feedResult: feedResult,dpName: imageName, name });
             } 
             else 
             {
@@ -67,4 +47,4 @@ class ProfileController {
     
 }
 
-module.exports = ProfileController;
+module.exports = GalleryController;

@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const Controller = require('../controller/signupController');
+const Controller = require('../controller/socialmedia/signupController');
 const signupController = new Controller();
 
 router.get('/signup',(req,res)=>{

@@ -1,5 +1,5 @@
-const connection = require('../config');
-const Model = require('../model/signupModel');
+const connection = require('../../config');
+const Model = require('../../model/signupModel');
 const signupModel = new Model();
 class signupController{
     displaySignUpPage (req,res)

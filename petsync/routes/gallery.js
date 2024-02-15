@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-const GalleryController1 = require('../controller/galleryController');
+const GalleryController1 = require('../controller/socialmedia/galleryController');
 
 const GalleryController = new GalleryController1();
 

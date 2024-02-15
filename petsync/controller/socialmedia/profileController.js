@@ -1,7 +1,8 @@
-const createModel = require('../model/createModel');
-const profileModel = require('../model/profileModel');
+const profileModel = require('../../model/profileModel');
+const PostModel=require('../../model/postModel');
 
-class CreateController {
+
+class ProfileController {
     async displayPage(req, res) {
         try {
             if (req.session.num != null && typeof req.session.num != "undefined")
@@ -38,8 +39,8 @@ class CreateController {
                  {
                     note='not set';
                  }
-                
-                return res.render('create', { data: userInfo[0], dpName: imageName,name,note,location,birthdate,bio });
+                 const feedResult = await PostModel.getUserFeed(req.session.num);
+                return res.render('userProfileView', { data: userInfo[0], feedResult: feedResult,dpName: imageName, name,note,location,birthdate,bio });
             } 
             else 
             {
@@ -54,24 +55,16 @@ class CreateController {
         }
     }
 
-async uploadFeed(req, res) {
-    try 
-    {
-        let feedData = {
-            "userid": req.session.num,
-            "username": req.session.username,
-            "feedname": req.file.filename,
-            "caption": req.body.caption
-        };
-
-        await createModel.uploadFeed(feedData);
-        res.end("File is uploaded");
-    } catch (error) {
-        console.error(error);
-        return res.status(500).send('Internal Server Error');
+    async enterInfo(req, res) {
+        try {
+            // Handle entering user info
+        } catch (error) {
+            console.error(error);
+            return res.status(500).send('Internal Server Error');
+        }
     }
+
+    
 }
 
-}
-
-module.exports = CreateController;
+module.exports = ProfileController;

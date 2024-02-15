@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const Controller = require('../controller/loginController');
+const Controller = require('../controller/socialmedia/loginController');
 const loginController = new Controller();
 router.get('/login',(req,res)=>{
     loginController.displayPage(req,res);

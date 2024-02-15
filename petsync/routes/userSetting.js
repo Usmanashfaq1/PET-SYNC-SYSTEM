@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const Controller = require('../controller/userSettingController');
+const Controller = require('../controller/socialmedia/userSettingController');
 const editProfileController = new Controller();
 
 const multer=require('../middleware/multerSetup');
