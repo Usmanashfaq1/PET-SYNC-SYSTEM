@@ -1,0 +1,31 @@
+#cartIconContainer {
+    position: relative;
+}
+
+.cart-link {
+    text-decoration: none;
+    color: #333;
+    /* Set your desired text color */
+    display: flex;
+    align-items: center;
+}
+
+.cart-badge {
+    background-color: #6c757d;
+    /* Set your desired background color */
+    color: #fff;
+    /* Set your desired text color */
+    border-radius: 50%;
+    margin-left: 5px;
+    /* Adjust the spacing between the text and badge */
+    padding: 2px 8px;
+    /* Adjust the padding as needed */
+    font-size: 12px;
+    /* Set your desired font size */
+    font-weight: bold;
+    /* Set your desired font weight */
+}
+
+#totalLabel {
+    margin-right: 10px; /* Adjust the margin as needed */
+}
