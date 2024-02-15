@@ -47,6 +47,7 @@ Description
 ### 3. Added gallery full functionality
 ### 4. Added time line view 
 ### 5. Added post tab view
+### 6. Added find people complete functionality with search feature
 
 
 
