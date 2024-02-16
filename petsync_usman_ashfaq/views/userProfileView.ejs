@@ -484,10 +484,10 @@ body.sidebar-open {
                 </button>
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav mr-auto">
-                        <li class="nav-item active">
+                        <li class="nav-item ">
                             <a class="nav-link" href="/main"><i class="fas fa-bolt"></i> Newsfeed</a>
                         </li>
-                        <li class="nav-item">
+                        <li class="nav-item active">
                             <a class="nav-link" href="/profile"><i class="fas fa-user"></i> Profile</a>
                         </li>
                         <li class="nav-item">
@@ -530,10 +530,26 @@ body.sidebar-open {
                                 <!-- Dropdown menu content -->
                             </div>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#" data-widget="control-sidebar" data-slide="true"><i
-                                    class="fas fa-th-large"></i></a>
-                        </li>
+                        <li class="nav-item dropdown">
+                          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                              data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                              <i class="fas fa-th-large"></i></a>
+                              <span class="badge badge-warning navbar-badge">15</span>
+                          </a>
+                          <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                              <a class="dropdown-item" href="profile.html"><i class="icofont-user-alt-3"></i> Your Profile</a>
+                              <a class="dropdown-item" href="add-new-course.html"><i class="icofont-plus"></i> New Course</a>
+                              <a class="dropdown-item" href="#" title><i class="icofont-brand-slideshare"></i> Invite Collegue</a>
+                              <a class="dropdown-item" href="pay-out.html"><i class="icofont-price"></i> Payout</a>
+                              <a class="dropdown-item" href="price-plan.html"><i class="icofont-flash"></i> Upgrade</a>
+                              <a class="dropdown-item" href="help-faq.html"><i class="icofont-question-circle"></i> Help</a>
+                              <a class="dropdown-item" href="/profile/edit"><i class="icofont-gear"></i> Setting</a>
+                              <a class="dropdown-item" href="privacy-n-policy.html"><i class="icofont-notepad"></i> Privacy</a>
+                              <a class="dropdown-item" href="#"><i class="icofont-moon"></i> Dark Mode</a>
+                              <a class="dropdown-item" href="/logout"><i class="icofont-power"></i> Logout</a>
+                          </div>
+                          
+                      </li>
                     </ul>
                 </div>
             </div>
