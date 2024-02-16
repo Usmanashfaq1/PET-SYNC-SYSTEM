@@ -1,6 +1,6 @@
 const path = require('path');
 const fs = require('fs');
-const connection = require('../config');
+const connection = require('../../config');
 
 handle_add_to_cart = (req, res) => {
     var item_id = req.query.item_id;

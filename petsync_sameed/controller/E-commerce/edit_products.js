@@ -1,6 +1,6 @@
 const path = require('path');
 const fs = require('fs');
-const connection = require('../config');
+const connection = require('../../config');
 const multer = require("multer");
 
 const storage = multer.diskStorage({

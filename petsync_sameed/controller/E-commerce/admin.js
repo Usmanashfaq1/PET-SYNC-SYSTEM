@@ -1,5 +1,5 @@
 const multer = require("multer");
-const connection = require('../config');
+const connection = require('../../config');
 
 const storage = multer.diskStorage({
     destination: './upload',

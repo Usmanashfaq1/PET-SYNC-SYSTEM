@@ -1,6 +1,6 @@
 const path = require('path');
 const fs = require('fs');
-const connection = require('../config');
+const connection = require('../../config');
 
 const handle_get_products = (req, res) => {
 

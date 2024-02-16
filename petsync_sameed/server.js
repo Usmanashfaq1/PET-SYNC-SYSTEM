@@ -103,6 +103,10 @@ const router = require('./routes/route');
 
 app.use('/', router);
 
+app.get('/a',(req,res)=>{
+  res.render('product');
+ });
+
 app.listen(3001,(err) =>{
     if(err) throw err;
    
