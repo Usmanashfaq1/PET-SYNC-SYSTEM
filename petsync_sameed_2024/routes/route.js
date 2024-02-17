@@ -25,6 +25,8 @@ const { handle_cart_item_number } = require('../controller/E-commerce/cart')
 const { handle_get_cart_items } = require('../controller/E-commerce/cart')
 const { handle_remove_from_cart } = require('../controller/E-commerce/cart')
 const { handle_E_commerce_login } = require('../controller/E-commerce/E-commerce_login')
+const { handle_get_product_detail_with_id } = require('../controller/E-commerce/product_detail')
+
 
 
 
@@ -64,5 +66,7 @@ router.delete('/remove_from_cart/:id', handle_remove_from_cart);
 router.get('/Load_shop_page', Load_shop_page);
 
 router.post('/login_E', handle_E_commerce_login);
+
+router.get('/get_product_detail_with_id', handle_get_product_detail_with_id);
 
 module.exports = router;
