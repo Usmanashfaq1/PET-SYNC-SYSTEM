@@ -208,12 +208,12 @@
                         <div class="col-lg-6">
                             <div class="login-form-wrap">
                                 <h2 class="title">Login</h2>
-                                <form action="\login" method="POST" class="login-form">
+                                <form action="/login_E" method="POST" class="login-form" id = "login">
                                     <div class="form-group mb-4">
-                                        <input type="text"  name="userName" id="username"  class="form-control" placeholder="Username" required>
+                                        <input type="text"  name="username" id="username"  class="form-control" placeholder="Username" required>
                                     </div>
                                     <div class="form-group mb-4">
-                                        <input type="password" name="passWord" id="password" class="form-control" placeholder="Password" required>
+                                        <input type="password" name="password" id="password" class="form-control" placeholder="Password" required>
                                     </div>
                                     <div class="form-group text-center">
                                         <button type="submit" class="btn btn-primary">Login</button>
@@ -233,8 +233,12 @@
             <br>
         </section>
         <!-- breadcrumb-area-end -->
-
-    
+        <div class="overlay" id="overlay">
+            <div class="dialog-box">
+              <p id='message'></p>
+              <button class="close-btn" onclick="closeDialog_donot_reload()">Close</button>
+            </div>
+          </div>
         <!-- contact-area-end -->
 
     </main>
@@ -375,6 +379,10 @@
     <script>
         SVGInject(document.querySelectorAll("img.injectable"));
     </script>
+    <script src="../public/assets_E/scripts/E-commerce_login.js"></script>
+    <link rel="stylesheet" href="../public/assets_E/css/dialogbox.css">
+    <script src="../public/assets_E/js/dialog.js"></script>
+
 </body>
 
 

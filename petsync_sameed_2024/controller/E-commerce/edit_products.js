@@ -94,7 +94,7 @@ handle_get_specific_product = (req, res) => {
       if (fileName) {
 
         //const filePath = path.join(__dirname, 'upload', fileName);
-        const uploadDirectory = path.join(__dirname, '..', 'upload');
+        const uploadDirectory = path.join(__dirname, '..','..', 'upload');
         const filePath = path.join(uploadDirectory, fileName);
 
 

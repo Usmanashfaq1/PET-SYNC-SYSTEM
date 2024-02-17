@@ -122,23 +122,21 @@
                                     <form action="#" class="tgmenu__search-form">
                                         <input type="text" placeholder="Search Here . . .">
                                         <div class="select-grp">
-                                            <select class="form-select" id="course-cat" aria-label="Default select example" style="width: 130px">
-                                                <option selected disabled>All Categories</option>
-                                                <option value="1">Dogs</option>
-                                                <option value="2">Cats</option>
-                                                <option value="3">Rabbit</option>
-                                                <option value="4">Birds</option>
-                                                <option value="5">Fish</option>
-                                                <option value="6">Others</option>
+                                            <select class="form-select" id="course-cat" aria-label="Default select example" style="width: 130px" onchange="selectCategory(this.value)">
+                                                <!-- <option selected disabled>All Categories</option> -->
+                                                <option value="All">All</option>
+                                                <option value="Pet">Pet</option>
+                                                <option value="Pet Food">Food</option>
+                                                <option value="Pet Medicine">Medicine</option>
                                             </select>
                                         </div>
                                         <button type="submit"><i class="flaticon-loupe"></i></button>
-                                    </form>
+                                    </form>                                                                    
                                 </div>
                                 <div class="tgmenu__action tgmenu__action-three d-none d-md-block">
                                     <ul class="list-wrap">
                                         <li class="header-login">
-                                            <a href="contact.html">
+                                            <a href="">
                                                 <i class="flaticon-user"></i>
                                             </a>
                                         </li>
@@ -191,14 +189,18 @@
                         </div>
                         <div class="tgmobile__menu-backdrop"></div>
                         <!-- End Mobile Menu -->
-
                     </div>
                 </div>
             </div>
         </div>
     </header>
     <!-- header-area-end -->
-
+    <div class="overlay" id="overlay">
+        <div class="dialog-box">
+          <p id='message'></p>
+          <button class="close-btn" onclick="closeDialog_donot_reload()">Close</button>
+        </div>
+      </div>
     <!-- main-area -->
     <main class="fix">
 
@@ -243,7 +245,6 @@
                                 <div class="product__action">
                                     <a href="product-details.html"><i class="flaticon-love"></i></a>
                                     <a href="product-details.html"><i class="flaticon-loupe"></i></a>
-                                    <a href="product-details.html"><i class="flaticon-exchange"></i></a>
                                 </div>
                                 <div class="sale-wrap">
                                     <span>New</span>
@@ -268,458 +269,11 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col">
-                        <div class="product__item">
-                            <div class="product__thumb">
-                                <a href="product-details.html"><img src="../public/assets/img/products/products_img02.jpg" alt="img"></a>
-                                <div class="product__action">
-                                    <a href="product-details.html"><i class="flaticon-love"></i></a>
-                                    <a href="product-details.html"><i class="flaticon-loupe"></i></a>
-                                    <a href="product-details.html"><i class="flaticon-exchange"></i></a>
-                                </div>
-                                <div class="sale-wrap sale-wrap-two">
-                                    <span>Sale!</span>
-                                </div>
-                                <div class="product__add-cart">
-                                    <a href="product-details.html" class="btn"><i class="flaticon-shopping-bag"></i>Add To Cart</a>
-                                </div>
-                            </div>
-                            <div class="product__content">
-                                <div class="product__reviews">
-                                    <div class="rating">
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                    </div>
-                                    <span>(2 Reviews)</span>
-                                </div>
-                                <h4 class="title"><a href="product-details.html">Arm & Hammer Super Deodori zing Dog Shampoo, Pet Wash</a></h4>
-                                <h3 class="price">$20.00 <del>$30.00</del></h3>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="product__item">
-                            <div class="product__thumb">
-                                <a href="product-details.html"><img src="../public/assets/img/products/products_img03.jpg" alt="img"></a>
-                                <div class="product__action">
-                                    <a href="product-details.html"><i class="flaticon-love"></i></a>
-                                    <a href="product-details.html"><i class="flaticon-loupe"></i></a>
-                                    <a href="product-details.html"><i class="flaticon-exchange"></i></a>
-                                </div>
-                                <div class="product__add-cart">
-                                    <a href="product-details.html" class="btn"><i class="flaticon-shopping-bag"></i>Add To Cart</a>
-                                </div>
-                            </div>
-                            <div class="product__content">
-                                <div class="product__reviews">
-                                    <div class="rating">
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                    </div>
-                                    <span>(2 Reviews)</span>
-                                </div>
-                                <h4 class="title"><a href="product-details.html">Milk-Bone Brushing Chews Daily Dental Dog Treats ...</a></h4>
-                                <h3 class="price">$36.00 <del>$56.00</del></h3>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="product__item">
-                            <div class="product__thumb">
-                                <a href="product-details.html"><img src="../public/assets/img/products/products_img04.jpg" alt="img"></a>
-                                <div class="product__action">
-                                    <a href="product-details.html"><i class="flaticon-love"></i></a>
-                                    <a href="product-details.html"><i class="flaticon-loupe"></i></a>
-                                    <a href="product-details.html"><i class="flaticon-exchange"></i></a>
-                                </div>
-                                <div class="sale-wrap sale-wrap-two">
-                                    <span>Sale!</span>
-                                </div>
-                                <div class="product__add-cart">
-                                    <a href="product-details.html" class="btn"><i class="flaticon-shopping-bag"></i>Add To Cart</a>
-                                </div>
-                            </div>
-                            <div class="product__content">
-                                <div class="product__reviews">
-                                    <div class="rating">
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                    </div>
-                                    <span>(2 Reviews)</span>
-                                </div>
-                                <h4 class="title"><a href="product-details.html">Two Door Top Load Plastic Kennel & Pet Carrier, Blue 19”</a>
-                                </h4>
-                                <h3 class="price">$18.00 <del>$33.00</del></h3>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="product__item">
-                            <div class="product__thumb">
-                                <a href="product-details.html"><img src="../public/assets/img/products/products_img05.jpg" alt="img"></a>
-                                <div class="product__action">
-                                    <a href="product-details.html"><i class="flaticon-love"></i></a>
-                                    <a href="product-details.html"><i class="flaticon-loupe"></i></a>
-                                    <a href="product-details.html"><i class="flaticon-exchange"></i></a>
-                                </div>
-                                <div class="sale-wrap">
-                                    <span>New</span>
-                                </div>
-                                <div class="product__add-cart">
-                                    <a href="product-details.html" class="btn"><i class="flaticon-shopping-bag"></i>Add To Cart</a>
-                                </div>
-                            </div>
-                            <div class="product__content">
-                                <div class="product__reviews">
-                                    <div class="rating">
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                    </div>
-                                    <span>(2 Reviews)</span>
-                                </div>
-                                <h4 class="title"><a href="product-details.html">The Kitten House with Mat Sleeping Bed House</a></h4>
-                                <h3 class="price">$19.00 <del>$28.00</del></h3>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="product__item">
-                            <div class="product__thumb">
-                                <a href="product-details.html"><img src="../public/assets/img/products/products_img06.jpg" alt="img"></a>
-                                <div class="product__action">
-                                    <a href="product-details.html"><i class="flaticon-love"></i></a>
-                                    <a href="product-details.html"><i class="flaticon-loupe"></i></a>
-                                    <a href="product-details.html"><i class="flaticon-exchange"></i></a>
-                                </div>
-                                <div class="sale-wrap sale-wrap-two">
-                                    <span>Sale!</span>
-                                </div>
-                                <div class="product__add-cart">
-                                    <a href="product-details.html" class="btn"><i class="flaticon-shopping-bag"></i>Add To Cart</a>
-                                </div>
-                            </div>
-                            <div class="product__content">
-                                <div class="product__reviews">
-                                    <div class="rating">
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                    </div>
-                                    <span>(2 Reviews)</span>
-                                </div>
-                                <h4 class="title"><a href="product-details.html">Dog Puzzle Toys, Squeaky Treat Dispensing Dog</a></h4>
-                                <h3 class="price">$18.00 <del>$33.00</del></h3>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="product__item">
-                            <div class="product__thumb">
-                                <a href="product-details.html"><img src="../public/assets/img/products/products_img07.jpg" alt="img"></a>
-                                <div class="product__action">
-                                    <a href="product-details.html"><i class="flaticon-love"></i></a>
-                                    <a href="product-details.html"><i class="flaticon-loupe"></i></a>
-                                    <a href="product-details.html"><i class="flaticon-exchange"></i></a>
-                                </div>
-                                <div class="sale-wrap">
-                                    <span>New</span>
-                                </div>
-                                <div class="product__add-cart">
-                                    <a href="product-details.html" class="btn"><i class="flaticon-shopping-bag"></i>Add To Cart</a>
-                                </div>
-                            </div>
-                            <div class="product__content">
-                                <div class="product__reviews">
-                                    <div class="rating">
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                    </div>
-                                    <span>(2 Reviews)</span>
-                                </div>
-                                <h4 class="title"><a href="product-details.html">Zesty Paws Calming Puppy Bites Stress Relief for Dogs, 60 Count</a></h4>
-                                <h3 class="price">$16.00 <del>$50.00</del></h3>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="product__item">
-                            <div class="product__thumb">
-                                <a href="product-details.html"><img src="../public/assets/img/products/products_img08.jpg" alt="img"></a>
-                                <div class="product__action">
-                                    <a href="product-details.html"><i class="flaticon-love"></i></a>
-                                    <a href="product-details.html"><i class="flaticon-loupe"></i></a>
-                                    <a href="product-details.html"><i class="flaticon-exchange"></i></a>
-                                </div>
-                                <div class="product__add-cart">
-                                    <a href="product-details.html" class="btn"><i class="flaticon-shopping-bag"></i>Add To Cart</a>
-                                </div>
-                            </div>
-                            <div class="product__content">
-                                <div class="product__reviews">
-                                    <div class="rating">
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                    </div>
-                                    <span>(2 Reviews)</span>
-                                </div>
-                                <h4 class="title"><a href="product-details.html">Hartz Groomer's Best Extra Gentle Puppy Shampoo, 18oz.</a></h4>
-                                <h3 class="price">$30.00 <del>$88.00</del></h3>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="product__item">
-                            <div class="product__thumb">
-                                <a href="product-details.html"><img src="../public/assets/img/products/products_img09.jpg" alt="img"></a>
-                                <div class="product__action">
-                                    <a href="product-details.html"><i class="flaticon-love"></i></a>
-                                    <a href="product-details.html"><i class="flaticon-loupe"></i></a>
-                                    <a href="product-details.html"><i class="flaticon-exchange"></i></a>
-                                </div>
-                                <div class="sale-wrap">
-                                    <span>New</span>
-                                </div>
-                                <div class="product__add-cart">
-                                    <a href="product-details.html" class="btn"><i class="flaticon-shopping-bag"></i>Add To Cart</a>
-                                </div>
-                            </div>
-                            <div class="product__content">
-                                <div class="product__reviews">
-                                    <div class="rating">
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                    </div>
-                                    <span>(2 Reviews)</span>
-                                </div>
-                                <h4 class="title"><a href="product-details.html">The Kitten House with Mat Sleeping Bed House</a></h4>
-                                <h3 class="price">$22.00 <del>$59.00</del></h3>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="product__item">
-                            <div class="product__thumb">
-                                <a href="product-details.html"><img src="../public/assets/img/products/products_img10.jpg" alt="img"></a>
-                                <div class="product__action">
-                                    <a href="product-details.html"><i class="flaticon-love"></i></a>
-                                    <a href="product-details.html"><i class="flaticon-loupe"></i></a>
-                                    <a href="product-details.html"><i class="flaticon-exchange"></i></a>
-                                </div>
-                                <div class="sale-wrap sale-wrap-two">
-                                    <span>Sale!</span>
-                                </div>
-                                <div class="product__add-cart">
-                                    <a href="product-details.html" class="btn"><i class="flaticon-shopping-bag"></i>Add To Cart</a>
-                                </div>
-                            </div>
-                            <div class="product__content">
-                                <div class="product__reviews">
-                                    <div class="rating">
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                    </div>
-                                    <span>(2 Reviews)</span>
-                                </div>
-                                <h4 class="title"><a href="product-details.html">Dog Harness-Neoprene
-                                Comfort Liner-Orange and Comfort</a></h4>
-                                <h3 class="price">$11.00 <del>$48.00</del></h3>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="product__item">
-                            <div class="product__thumb">
-                                <a href="product-details.html"><img src="../public/assets/img/products/products_img11.jpg" alt="img"></a>
-                                <div class="product__action">
-                                    <a href="product-details.html"><i class="flaticon-love"></i></a>
-                                    <a href="product-details.html"><i class="flaticon-loupe"></i></a>
-                                    <a href="product-details.html"><i class="flaticon-exchange"></i></a>
-                                </div>
-                                <div class="sale-wrap">
-                                    <span>New</span>
-                                </div>
-                                <div class="product__add-cart">
-                                    <a href="product-details.html" class="btn"><i class="flaticon-shopping-bag"></i>Add To Cart</a>
-                                </div>
-                            </div>
-                            <div class="product__content">
-                                <div class="product__reviews">
-                                    <div class="rating">
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                    </div>
-                                    <span>(7 Reviews)</span>
-                                </div>
-                                <h4 class="title"><a href="product-details.html">Dog Puzzle Toys, Squeaky Treat Dispensing Dog</a></h4>
-                                <h3 class="price">$19.00 <del>$28.00</del></h3>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="product__item">
-                            <div class="product__thumb">
-                                <a href="product-details.html"><img src="../public/assets/img/products/products_img12.jpg" alt="img"></a>
-                                <div class="product__action">
-                                    <a href="product-details.html"><i class="flaticon-love"></i></a>
-                                    <a href="product-details.html"><i class="flaticon-loupe"></i></a>
-                                    <a href="product-details.html"><i class="flaticon-exchange"></i></a>
-                                </div>
-                                <div class="sale-wrap">
-                                    <span>New</span>
-                                </div>
-                                <div class="product__add-cart">
-                                    <a href="product-details.html" class="btn"><i class="flaticon-shopping-bag"></i>Add To Cart</a>
-                                </div>
-                            </div>
-                            <div class="product__content">
-                                <div class="product__reviews">
-                                    <div class="rating">
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                    </div>
-                                    <span>(2 Reviews)</span>
-                                </div>
-                                <h4 class="title"><a href="product-details.html">Zesty Paws Calming Puppy Bites Stress Relief for Dogs, 60 Count</a></h4>
-                                <h3 class="price">$16.00</h3>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="product__item">
-                            <div class="product__thumb">
-                                <a href="product-details.html"><img src="../public/assets/img/products/products_img13.jpg" alt="img"></a>
-                                <div class="product__action">
-                                    <a href="product-details.html"><i class="flaticon-love"></i></a>
-                                    <a href="product-details.html"><i class="flaticon-loupe"></i></a>
-                                    <a href="product-details.html"><i class="flaticon-exchange"></i></a>
-                                </div>
-                                <div class="sale-wrap sale-wrap-two">
-                                    <span>Sale!</span>
-                                </div>
-                                <div class="product__add-cart">
-                                    <a href="product-details.html" class="btn"><i class="flaticon-shopping-bag"></i>Add To Cart</a>
-                                </div>
-                            </div>
-                            <div class="product__content">
-                                <div class="product__reviews">
-                                    <div class="rating">
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                    </div>
-                                    <span>(20 Reviews)</span>
-                                </div>
-                                <h4 class="title"><a href="product-details.html">Hartz Groomer's Best Extra Gentle Puppy Shampoo, 18oz Shampoo</a></h4>
-                                <h3 class="price">$30.00 <del>$88.00</del></h3>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="product__item">
-                            <div class="product__thumb">
-                                <a href="product-details.html"><img src="../public/assets/img/products/products_img14.jpg" alt="img"></a>
-                                <div class="product__action">
-                                    <a href="product-details.html"><i class="flaticon-love"></i></a>
-                                    <a href="product-details.html"><i class="flaticon-loupe"></i></a>
-                                    <a href="product-details.html"><i class="flaticon-exchange"></i></a>
-                                </div>
-                                <div class="sale-wrap">
-                                    <span>New</span>
-                                </div>
-                                <div class="product__add-cart">
-                                    <a href="product-details.html" class="btn"><i class="flaticon-shopping-bag"></i>Add To Cart</a>
-                                </div>
-                            </div>
-                            <div class="product__content">
-                                <div class="product__reviews">
-                                    <div class="rating">
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                    </div>
-                                    <span>(10 Reviews)</span>
-                                </div>
-                                <h4 class="title"><a href="product-details.html">The Kitten House with Mat Sleeping Bed House</a></h4>
-                                <h3 class="price">$22.00 <del>$59.00</del></h3>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="product__item">
-                            <div class="product__thumb">
-                                <a href="product-details.html"><img src="../public/assets/img/products/products_img15.jpg" alt="img"></a>
-                                <div class="product__action">
-                                    <a href="product-details.html"><i class="flaticon-love"></i></a>
-                                    <a href="product-details.html"><i class="flaticon-loupe"></i></a>
-                                    <a href="product-details.html"><i class="flaticon-exchange"></i></a>
-                                </div>
-                                <div class="sale-wrap sale-wrap-two">
-                                    <span>Sale!</span>
-                                </div>
-                                <div class="product__add-cart">
-                                    <a href="product-details.html" class="btn"><i class="flaticon-shopping-bag"></i>Add To Cart</a>
-                                </div>
-                            </div>
-                            <div class="product__content">
-                                <div class="product__reviews">
-                                    <div class="rating">
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                    </div>
-                                    <span>(2 Reviews)</span>
-                                </div>
-                                <h4 class="title"><a href="product-details.html">Dog Harness-Neoprene Comfort Liner-Orange and ...</a></h4>
-                                <h3 class="price">$11.00 <del>$48.00</del></h3>
-                            </div>
-                        </div>
-                    </div>
                 </div>
                 <nav class="pagination__wrap mt-50">
                     <ul class="list-wrap">
                         <li class="link-arrow"><a href="#"><img src="../public/assets/img/icon/pagination_icon01.svg" alt="" class="injectable"></a></li>
                         <li class="active"><a href="#">1</a></li>
-                        <li><a href="courses.html">2</a></li>
-                        <li><a href="courses.html">3</a></li>
-                        <li><a href="courses.html">4</a></li>
                         <li class="link-arrow"><a href="#"><img src="../public/assets/img/icon/pagination_icon02.svg" alt="" class="injectable"></a></li>
                     </ul>
                 </nav>
@@ -862,9 +416,12 @@
     <script src="../public/assets/js/wow.min.js"></script>
     <script src="../public/assets/js/aos.js"></script>
     <script src="../public/assets/js/main.js"></script>
+    <script src="../public/assets_E/scripts/load_products.js"></script>
     <script>
         SVGInject(document.querySelectorAll("img.injectable"));
     </script>
+    <link rel="stylesheet" href="../public/assets_E/css/dialogbox.css">
+    <script src="../public/assets_E/js/dialog.js"></script>
 </body>
 
 

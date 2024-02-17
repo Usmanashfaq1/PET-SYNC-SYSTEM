@@ -8,6 +8,8 @@ const { load_admin_products_page } = require('../controller/E-commerce/admin')
 const { load_edit_product_page } = require('../controller/E-commerce/edit_products')
 const { load_update_product_page } = require('../controller/E-commerce/edit_products')
 const { load_open_cart_page } = require('../controller/E-commerce/cart')
+const { Load_shop_page } = require('../controller/E-commerce/products')
+
 
 
 
@@ -22,6 +24,7 @@ const { handle_add_to_cart } = require('../controller/E-commerce/cart')
 const { handle_cart_item_number } = require('../controller/E-commerce/cart')
 const { handle_get_cart_items } = require('../controller/E-commerce/cart')
 const { handle_remove_from_cart } = require('../controller/E-commerce/cart')
+const { handle_E_commerce_login } = require('../controller/E-commerce/E-commerce_login')
 
 
 
@@ -29,7 +32,6 @@ const { handle_remove_from_cart } = require('../controller/E-commerce/cart')
 router.get('/update_product', load_update_product_page);
 
 router.get('/open_cart_page', load_open_cart_page);
-
 
 router.get('/get_products', handle_get_products);
 
@@ -59,5 +61,8 @@ router.get('/get_cart_items', handle_get_cart_items);
 
 router.delete('/remove_from_cart/:id', handle_remove_from_cart);
 
+router.get('/Load_shop_page', Load_shop_page);
+
+router.post('/login_E', handle_E_commerce_login);
 
 module.exports = router;

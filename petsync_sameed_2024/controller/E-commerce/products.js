@@ -10,7 +10,7 @@ const handle_get_products = (req, res) => {
   connection.query(sql, (err, result) => {
     if (err) {
       console.error('Error fetching pet profiles:', err);
-      res.status(500).json({ error: 'An error occurred while fetching pet profiles' });
+      res.status(500).json({ error: 'An error occurred while fetching pet products' });
       return;
     }
 
@@ -25,7 +25,7 @@ const handle_get_products = (req, res) => {
       if (fileName) {
 
         //const filePath = path.join(__dirname, 'upload', fileName);
-        const uploadDirectory = path.join(__dirname, '..', 'upload');
+        const uploadDirectory = path.join(__dirname, '..', '..', 'upload');
         const filePath = path.join(uploadDirectory, fileName);
 
 
@@ -52,8 +52,13 @@ load_products_page = (req, res) => {
   res.render('E-commerce');
 }
 
+Load_shop_page =(req, res) => {
+  res.render('product');
+}
+
 module.exports = {
   handle_get_products,
   load_products_page,
+  Load_shop_page
 }
 

@@ -103,9 +103,24 @@ const router = require('./routes/route');
 
 app.use('/', router);
 
-app.get('/a',(req,res)=>{
-  res.render('product');
+
+
+ app.get('/login_E',(req,res)=>{
+  res.render('login_E');
  });
+
+ app.get('/our-shop',(req,res)=>{
+  res.render('our-shop');
+ });
+
+ app.get('/product-details',(req,res)=>{
+  res.render('product-details');
+ });
+
+
+//  app.get('/login_E-commerce',(req,res)=>{
+//   res.render('login_E');
+//  });
 
 app.listen(3001,(err) =>{
     if(err) throw err;

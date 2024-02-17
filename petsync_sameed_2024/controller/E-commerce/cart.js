@@ -70,7 +70,7 @@ const handle_get_cart_items = (req, res) => {
                     const itemsWithFileContent = detailedResults.map(item => {
                         const fileName = item.productPicture;
                         if (fileName) {
-                            const uploadDirectory = path.join(__dirname, '..', 'upload');
+                            const uploadDirectory = path.join(__dirname,'..' ,'..', 'upload');
                             const filePath = path.join(uploadDirectory, fileName);
                             try {
                                 const content = fs.readFileSync(filePath, { encoding: 'base64' });
