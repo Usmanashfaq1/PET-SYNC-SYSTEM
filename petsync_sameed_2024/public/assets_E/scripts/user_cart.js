@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', function () {
     email = localStorage.getItem('email');
     $.ajax({
-        url: 'http://localhost:4000/get_cart_items?email=' + email,
+        url: 'http://localhost:3001/get_cart_items?email=' + email,
         method: 'GET',
         success: function (data) {
             // Clear existing table rows
@@ -69,7 +69,7 @@ function increaseQuantity(productId, stock) {
 
 function removeFromCart(id) {
     $.ajax({
-        url: 'http://localhost:4000/remove_from_cart/' + id,
+        url: 'http://localhost:3001/remove_from_cart/' + id,
         method: 'DELETE',
         success: function (data) {
             var cartCount = $('#cartId');

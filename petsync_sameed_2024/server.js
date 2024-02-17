@@ -118,6 +118,13 @@ app.use('/', router);
  });
 
 
+ app.get('/item_cart',(req,res)=>{
+  res.render('item_cart');
+ });
+
+
+
+
 //  app.get('/login_E-commerce',(req,res)=>{
 //   res.render('login_E');
 //  });

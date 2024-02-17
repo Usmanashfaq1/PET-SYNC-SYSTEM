@@ -189,14 +189,34 @@ function increaseQuantity(productId, stock, price) {
     var currentQuantity = parseInt(quantityElement.text());
 
     if (currentQuantity < stock) {
-        quantityElement.text(currentQuantity + 1);
-        // Get the text content of the .price_of_total element and convert it to a numeric value
+         quantityElement.text(currentQuantity + 1);
+
         var totalPrice = parseFloat($('.price_of_total').text().replace('$', ''));
 
         var totalWithQuantityPrice = totalPrice + price;
 
         $('.price_of_total').text('$' + totalWithQuantityPrice.toFixed(2));
 
+
+
+        // $.ajax({
+        //     url: 'http://localhost:3001/cart_item_number_quantity?email=' + email + '&id=' + productId,
+        //     method: 'GET',
+        //     success: function (data) {
+        //         var cartCount = $('.header-cart-two span');
+        //         var currentCount = parseInt(cartCount.text());
+        //         var newCartCount = (currentCount * 0) + parseInt(data.itemCount);
+        //         cartCount.text(newCartCount);
+
+        //         var totalPrice = data.total;
+        //         $('.price_of_total').text('$' + totalPrice.toFixed(2));
+        //     },
+        //     error: function (error) {
+        //         console.error('Error getting cart item number:', error);
+        //         alert('Error getting cart item number. Please try again.');
+        //     }
+        // });
+        
 
     } else {
         $('#message').text('Product quantity cannot exceed stock!');
