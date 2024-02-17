@@ -560,42 +560,34 @@ body.sidebar-open {
         
                     <div class="row">
                         <% users.forEach(user => { %>
-                        <div class="col-md-4">
-                            <!-- Widget: user widget style 1 -->
-                            <div class="card card-widget widget-user" style="background-color: #ffffff; border-radius: 15px; box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);">
-                                <!-- Add the bg color to the header using any of the bg-* classes -->
-                                <div class="widget-user-header bg-purple" style="border-top-left-radius: 15px; border-top-right-radius: 15px;">
-                                    <h3 class="post-author" style="color: #ffffff;"> <a href="/account/<%=user.username%>" style="color: #ffffff; text-decoration: none;"><%=user.username%></a></h3>
-                                </div>
-                                <div class="widget-user-image">
-                                    <% if (typeof user.profilepic == 'object') { user.profilepic = "images.jpg"; } %>
-                                    <img class="img-circle elevation-2" src="profilepics/<%=user.profilepic%>" alt="User Avatar" style="border-radius: 50%; border: 5px solid #6a0dad;">
-                                </div>
-                                <div class="card-footer" style="background-color: #6a0dad;">
-                                    <div class="row">
-                                        <div class="col-sm-4 border-right">
-                                            <div class="description-block">
-                                                <h5 class="description-header" style="color: #ffffff;"><%= user.location %></h5>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-4 border-right">
-                                            <div class="description-block">
-                                                <h5 class="description-header" style="color: #ffffff;"><%= user.fullname %></h5>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-4">
-                                            <div class="description-block">
-                                                <h5 class="description-header" style="color: #ffffff;"><%= user.bio %></h5>
-                                            </div>
-                                        </div>
+                        <div class="col-lg-3 col-md-6 mb-4 mb-lg-0">
+                            <!-- Card-->
+                            <div class="card shadow-sm border-0 rounded">
+                                <div class="card-body p-0">
+                                    <% if (typeof user.profilepic !== 'string' || user.profilepic.trim() === '') { user.profilepic = "images.jpg"; } %>
+                                    <img src="profilepics/<%=user.profilepic%>" alt="User Avatar" class="w-100 card-img-top" style="border-radius: 10px 10px 0 0; height: 200px;">
+                                    <div class="p-4">
+                                        <h5 class="mb-0">
+                                            <a href="/account/<%=user.username%>" class="text-decoration-none"><%=user.username || 'No Record'%></a>
+                                        </h5>
+                                        <p class="small text-muted mb-2"><%=user.fullname || 'No Record'%></p>
+                                        <p class="small text-muted mb-3"><%=user.location || 'No Record'%></p>
+                                        <p class="small text-muted"><%=user.bio || 'No Record'%></p>
+                                        <ul class="social mb-0 list-inline mt-3">
+                                            <!-- You can add social media links here -->
+                                        </ul>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <% }); %>
                     </div>
-                </main>
-            </div>
+                    
+                    
+                    
+                    
+                    
+                    
         </section>
         
         

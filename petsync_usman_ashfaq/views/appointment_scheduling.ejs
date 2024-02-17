@@ -2,13 +2,32 @@
 <html class="no-js" lang="en">
 
 
-<!-- Mirrored from themedox.com/demo/petpal/contact.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 13 Feb 2024 09:42:28 GMT -->
+<!-- Mirrored from themedox.com/demo/petpal/gallery.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 13 Feb 2024 09:42:18 GMT -->
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <title>Petpal - Pet Care and Pet Shop HTML Template</title>
     <meta name="description" content="Petpal - Pet Care and Pet Shop HTML Template">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="shortcut icon" type="image/x-icon" href="../public/assets/img/favicon.png">
+    <!-- Place favicon.ico in the root directory -->
+    <link rel="icon" href="../../../../favicon.ico">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+ 
+
+    <!-- Font Awesome -->
+  <link rel="stylesheet" href="../public/static/assets/plugins/fontawesome-free/css/all.min.css">
+  <!-- Ionicons -->
+  <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="../public/static/assets/dist/css/adminlte.min.css">
+  <!-- Google Font: Source Sans Pro -->
+  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+
+    <script  type="text/javascript" src="../JS/typeahead.min.js"></script>
+    <script type="text/javascript" src="../JS/home.js"></script>
+    <!-- CSS here -->
 
     <link rel="shortcut icon" type="image/x-icon" href="../public/assets/img/favicon.png">
     <!-- Place favicon.ico in the root directory -->
@@ -26,7 +45,61 @@
     <link rel="stylesheet" href="../public/assets/css/aos.css">
     <link rel="stylesheet" href="../public/assets/css/default.css">
     <link rel="stylesheet" href="../public/assets/css/main.css">
+
+     <!-- Bootstrap core CSS -->
+     <link href="../public/static/assets/dist/css/bootstrap.min.css" rel="stylesheet">
+
+     <!-- Custom styles for this template -->
+     <link href="../public/static/assets/css/board.css" rel="stylesheet">
 </head>
+<style>
+    .overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    /* Adjust z-index to make sure it's above your content */
+  }
+
+  .dialog-box {
+    background: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    max-width: 400px;
+    text-align: center;
+  }
+
+  .close-btn {
+    background: #007BFF;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+
+
+    .table-container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+      border-radius: 5px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      background-color: #f8f9fa;
+    }
+
+    .card {
+      border-radius: 15px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+      margin-bottom: 20px;
+    }
+</style>
 
 <body>
 
@@ -73,11 +146,11 @@
                                                     <li><a href="product-details.html">Shop Details</a></li>
                                                 </ul>
                                             </li>
-                                            <li class="menu-item-has-children"><a href="#">Pages</a>
+                                            <li class="active menu-item-has-children"><a href="#">Pages</a>
                                                 <ul class="sub-menu">
                                                     <li><a href="animal.html">All Pets</a></li>
                                                     <li><a href="animal-details.html">Pet Details</a></li>
-                                                    <li><a href="gallery.html">Gallery</a></li>
+                                                    <li class="active"><a href="gallery.html">Gallery</a></li>
                                                     <li><a href="faq.html">Faq Page</a></li>
                                                     <li><a href="pricing.html">Pricing Page</a></li>
                                                     <li><a href="reservation.html">Reservation Page</a></li>
@@ -88,7 +161,7 @@
                                                     <li><a href="error.html">404 Error Page</a></li>
                                                 </ul>
                                             </li>
-                                            <li class="active"><a href="contact.html">contacts</a></li>
+                                            <li><a href="contact.html">contacts</a></li>
                                         </ul>
                                     </div>
                                 </div>
@@ -111,8 +184,8 @@
                                                     <span>0</span>
                                                 </a>
                                             </li>
-                                            <li class="header-btn login-btn"><a href="/login" class="btn"><i
-                                                        class="flaticon-locked"></i>Login</a></li>
+                                            <li class="header-btn login-btn"><a href="/logout_user" class="btn"><i
+                                                        class="flaticon-locked"></i>Logout</a></li>
                                         </ul>
                                     </div>
                                 </div>
@@ -196,273 +269,264 @@
     <!-- header-area-end -->
 
     <!-- main-area -->
-    <!-- main-area -->
-<main class="fix">
+    <main class="fix">
+       
 
-    <!-- breadcrumb-area -->
-    <section class="breadcrumb__area fix">
-        <div class="container">
-            <div class="row align-items-end">
-                <div class="col-lg-8">
-                    <div class="breadcrumb__content">
-                        <h3 class="title">Pet Social Community</h3>
-                        <nav class="breadcrumb">
-                            <span property="itemListElement" typeof="ListItem">
-                                <a href="index.html">Home</a>
-                            </span>
-                            <span class="breadcrumb-separator"><i class="flaticon-right-arrow-angle"></i></span>
-                            <span property="itemListElement" typeof="ListItem">Community</span>
-                        </nav>
-                    </div>
-                </div>
-                <div class="col-lg-4">
-                    <div class="breadcrumb__img">
-                        <img src="../public/assets/img/images/h3_testimonial_img.jpg" alt="img" data-aos="fade-left" data-aos-delay="800">
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="breadcrumb__shape-wrap">
-            <img src="../public/assets/img/images/breadcrumb_shape01.png" alt="img" data-aos="fade-down-right" data-aos-delay="400">
-            <img src="../public/assets/img/images/breadcrumb_shape02.png" alt="img" data-aos="fade-up-left" data-aos-delay="400">
-        </div>
-    </section>
-    <!-- breadcrumb-area-end -->
-
-    <!-- about-area -->
-    <section class="about__area-four">
-        <div class="container">
-            <div class="row align-items-center justify-content-center">
-                <div class="col-lg-6 col-md-8">
-                    <div class="about__img-four">
-                        <img src="../public/assets/img/images/inner_about_img01.jpg" alt="img" data-aos="fade-right" data-aos-delay="400">
-                        <img src="../public/assets/img/images/inner_about_img02.jpg" alt="img" data-aos="fade-left" data-aos-delay="600">
-                        <div class="shape">
-                            <img src="../public/assets/img/images/inner_about_shape.png" alt="shape" data-aos="fade-down-left" data-aos-delay="800">
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6">
-                    <div class="about__content-four">
-                        <div class="section__title mb-15">
-                            <span class="sub-title">Pet Social Community
-                                <strong class="shake">
-                                    <img src="../public/assets/img/icon/pet_icon02.svg" alt="" class="injectable">
-                                </strong>
-                            </span>
-                            <h2 class="title">Connecting Pet Lovers Everywhere</h2>
-                        </div>
-                        <p>Welcome to our vibrant pet social community! Whether you're a pet owner, a pet lover, or just someone who enjoys cute animal content, you'll find your place here.</p>
-                        <p>Share photos, stories, and tips about your beloved pets, connect with fellow animal enthusiasts, and discover a world of furry, feathery, and scaly companions!</p>
-                        <div class="about__content-inner-two">
-                            <div class="experience__box">
-                                <div class="experience__box-shape">
-                                    <img src="../public/assets/img/images/experience_shape.svg" alt="" class="injectable">
+        <section>
+            <nav class="navbar navbar-expand-lg navbar-dark bg-purple">
+                <div class="container-fluid">
+                    <a class="navbar-brand" href="#">Your Brand</a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarNav">
+                        <ul class="navbar-nav mr-auto">
+                            <li class="nav-item active">
+                                <a class="nav-link" href="/main"><i class="fas fa-bolt"></i> Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/profile"><i class="fas fa-user"></i> Pet-Profile</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/appointment_scheduling"><i class="fas fa-search"></i> Appointment Scheduling</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/gallery"><i class="fas fa-image"></i> View Nutirition Recommendations</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/create"><i class="fas fa-edit"></i> Feeding Schedule</a>
+                            </li>
+                        </ul>
+                        <!-- SEARCH FORM -->
+         
+    
+    
+       
+                        
+                        <ul class="navbar-nav ml-auto">
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <i class="far fa-comments"></i>
+                                    <span class="badge badge-danger navbar-badge">3</span>
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                    <!-- Dropdown menu content -->
                                 </div>
-                                <div class="experience__box-content" style="width: 700px;">
-                                    <h4 class="title" style="font-size: 28px;">Join Us Today</h4>
-                                    <p >Experience the </p>
-                                    <p>joy of being part of </p>
-                                        <p>a pet-loving community.</p>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <i class="far fa-bell"></i>
+                                    <span class="badge badge-warning navbar-badge">15</span>
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                    <!-- Dropdown menu content -->
                                 </div>
-                            </div>
-                            <div class="introducing__list-box introducing__list-box-two">
-                                <ul class="list-wrap">
-                                    <li>
-                                        <span class="icon">
-                                            <img src="../public/assets/img/icon/check_icon02.svg" alt="" class="injectable">
-                                        </span>
-                                        Share photos, stories, and tips
-                                    </li>
-                                    <li>
-                                        <span class="icon">
-                                            <img src="../public/assets/img/icon/check_icon02.svg" alt="" class="injectable">
-                                        </span>
-                                        Connect with pet enthusiasts worldwide
-                                    </li>
-                                    <li>
-                                        <span class="icon">
-                                            <img src="../public/assets/img/icon/check_icon02.svg" alt="" class="injectable">
-                                        </span>
-                                        Discover a world of furry companions
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                        <p>Join our pet social community today and let's celebrate the love and joy our pets bring into our lives!</p>
-                        <a href="signup.html" class="btn">Join Now <img src="../public/assets/img/icon/right_arrow.svg" alt="" class="injectable"></a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- about-area-end -->
-
-    <!-- why-we-are-area -->
-    <section class="why__we-are-area-two">
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-lg-6">
-                    <div class="section__title text-center mb-40">
-                        <span class="sub-title">Why Join Us
-                            <strong class="shake">
-                                <img src="../public/assets/img/icon/pet_icon02.svg" alt="" class="injectable">
-                            </strong>
-                        </span>
-                        <h2 class="title">Discover the Benefits of Our Community</h2>
-                        <p>Find out why thousands of pet lovers are choosing our community!</p>
-                    </div>
-                </div>
-            </div>
-            <div class="row justify-content-center">
-                <div class="col-lg-4 col-md-6 col-sm-10">
-                    <div class="why__we-are-item">
-                        <div class="why__we-are-item-icon">
-                            <img src="../public/assets/img/icon/why_icon01.svg" alt="" class="injectable">
-                        </div>
-                        <div class="why__we-are-item-content">
-                            <h4 class="title">Connect with Pet Lovers</h4>
-                            <p>Join a community of like-minded individuals who share your passion for pets.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 col-sm-10">
-                    <div class="why__we-are-item">
-                        <div class="why__we-are-item-icon">
-                            <img src="../public/assets/img/icon/why_icon02.svg" alt="" class="injectable">
-                        </div>
-                        <div class="why__we-are-item-content">
-                            <h4 class="title">Share Your Pet Stories</h4>
-                            <p>Share memorable moments, funny anecdotes, and helpful tips about your pets.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 col-sm-10">
-                    <div class="why__we-are-item">
-                        <div class="why__we-are-item-icon">
-                            <img src="../public/assets/img/icon/why_icon03.svg" alt="" class="injectable">
-                        </div>
-                        <div class="why__we-are-item-content">
-                            <h4 class="title">Discover New Friends</h4>
-                            <p>Connect with pet owners from around the world and expand your social circle.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="why__shape-wrap">
-            <img src="../public/assets/img/images/h2_why_shape01.png" alt="shape" data-aos="fade-down-right" data-aos-delay="400">
-            <img src="../public/assets/img/images/h2_why_shape02.png" alt="shape" class="ribbonRotate">
-        </div>
-    </section>
-    <!-- why-we-are-area-end -->
-
-    <!-- counter-area -->
-    <div class="counter__area-two counter__area-bg" data-background="../public/assets/img/bg/counter_bg.jpg">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-3 col-sm-6">
-                    <div class="counter__item-two">
-                        <div class="counter__item-shape">
-                            <img src="../public/assets/img/images/h2_counter_shape.png" alt="">
-                        </div>
-                        <span class="count odometer" data-count="5985"></span>
-                        <p>Happy Pet Owners</p>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-sm-6">
-                    <div class="counter__item-two">
-                        <div class="counter__item-shape">
-                            <img src="../public/assets/img/images/h2_counter_shape.png" alt="">
-                        </div>
-                        <span class="count odometer" data-count="1322"></span>
-                        <p>New Pet Stories Shared</p>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-sm-6">
-                    <div class="counter__item-two">
-                        <div class="counter__item-shape">
-                            <img src="../public/assets/img/images/h2_counter_shape.png" alt="">
-                        </div>
-                        <span class="count odometer" data-count="3102"></span>
-                        <p>Photos of Cute Pets</p>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-sm-6">
-                    <div class="counter__item-two">
-                        <div class="counter__item-shape">
-                            <img src="../public/assets/img/images/h2_counter_shape.png" alt="">
-                        </div>
-                        <span class="count odometer" data-count="1125"></span>
-                        <p>Friends Made</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- counter-area-end -->
-
-    <!-- team-area -->
-    <section class="team__area-two">
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-lg-6">
-                    <div class="section__title text-center mb-40">
-                        <span class="sub-title">Meet Our Pet Community Members
-                            <strong class="shake">
-                                <img src="../public/assets/img/icon/pet_icon02.svg" alt="" class="injectable">
-                            </strong>
-                        </span>
-                        <h2 class="title">Get to Know Our Dedicated Pet Lovers</h2>
-                    </div>
-                </div>
-            </div>
-            <div class="row justify-content-center">
-                <div class="col-xl-3 col-lg-4 col-md-6 col-sm-8">
-                    <div class="team__item">
-                        <div class="team__item-img">
-                            <div class="mask-img-wrap">
-                                <img src="../public/assets/img/images/choose_img.png" alt="img">
-                            </div>
-                            <div class="team__item-img-shape">
-                                <div class="shape-one">
-                                    <img src="../public/assets/img/team/team_img_shape01.svg" alt="" class="injectable">
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <i class="fas fa-th-large"></i></a>
+                                    <span class="badge badge-warning navbar-badge">15</span>
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="profile.html"><i class="icofont-user-alt-3"></i> Your Profile</a>
+                                    <a class="dropdown-item" href="add-new-course.html"><i class="icofont-plus"></i> New Course</a>
+                                    <a class="dropdown-item" href="#" title><i class="icofont-brand-slideshare"></i> Invite Collegue</a>
+                                    <a class="dropdown-item" href="pay-out.html"><i class="icofont-price"></i> Payout</a>
+                                    <a class="dropdown-item" href="price-plan.html"><i class="icofont-flash"></i> Upgrade</a>
+                                    <a class="dropdown-item" href="help-faq.html"><i class="icofont-question-circle"></i> Help</a>
+                                    <a class="dropdown-item" href="#"><i class="icofont-gear"></i> Setting</a>
+                                    <a class="dropdown-item" href="privacy-n-policy.html"><i class="icofont-notepad"></i> Privacy</a>
+                                    <a class="dropdown-item" href="#"><i class="icofont-moon"></i> Dark Mode</a>
+                                    <a class="dropdown-item" href="/logout_user"><i class="icofont-power"></i> Logout</a>
                                 </div>
-                                <div class="shape-two">
-                                    <img src="../public/assets/img/team/team_img_shape02.svg" alt="" class="injectable">
-                                </div>
-                            </div>
-                            <div class="team__social">
-                                <ul class="list-wrap">
-                                    <li>
-                                        <a href="https://www.facebook.com/" target="_blank"><i class="fab fa-facebook-f"></i></a>
-                                    </li>
-                                    <!-- Include other social media links as needed -->
-                                </ul>
-                            </div>
+                                
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+            <div class="container-fluid mt-3">
+                <!-- Your content goes here -->
+            </div>
+        </section>
+
+        <!-- breadcrumb-area -->
+        <section class="breadcrumb__area fix">
+            <div class="container">
+                <div class="row align-items-end">
+                    <div class="col-lg-8">
+                        <div class="breadcrumb__content">
+                            <h3 class="title"> Appointment Scheduling</h3>
+                            <nav class="breadcrumb">
+                                <span property="itemListElement" typeof="ListItem">
+                                    <a href="/main">Home</a>
+                                </span>
+                                <span class="breadcrumb-separator"><i class="flaticon-right-arrow-angle"></i></span>
+                                <span property="itemListElement" typeof="ListItem">appointment-scheduling</span>
+                            </nav>
                         </div>
-                        <div class="team__item-content">
-                            <h4 class="title">Daria Andaloro</h4>
-                            <span>Pet Enthusiast</span>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="breadcrumb__img">
+                            <img src="../public/assets/img/images/counter_img.jpg" alt="img" data-aos="fade-left" data-aos-delay="800">
                         </div>
                     </div>
                 </div>
-                <!-- Add more team members as needed -->
             </div>
-            <div class="team__bottom-content">
-                <p>Join Our Community Today!</p>
-                <a href="signup.html" class="btn">Join Now <img src="../public/assets/img/icon/right_arrow.svg" alt="" class="injectable"></a>
+            <div class="breadcrumb__shape-wrap">
+                <img src="../public/assets/img/images/breadcrumb_shape01.png" alt="img" data-aos="fade-down-right" data-aos-delay="400">
+                <img src="../public/assets/img/images/breadcrumb_shape02.png" alt="img" data-aos="fade-up-left" data-aos-delay="400">
             </div>
-        </div>
-        <div class="team__shape-two">
-            <img src="../public/assets/img/team/h2_team_shape.png" alt="img" class="ribbonRotate">
-        </div>
-    </section>
-    <!-- team-area-end -->
+        </section>
 
-</main>
-<!-- main-area-end -->
+        <!-- <main id="main">
+            <div class="container py-5">
+              <h2 class="text-center">SELECT VET ACCORDING TO EXPERTISE</h2>
+              <div class="row justify-content-center">
+                <div class="col-lg-10">
+                  <div class="table-container">
+                    <div class="mb-3">
+                      <label for="preferredDateTime">Preferred Date and Time:</label>
+                      <input type="datetime-local" id="preferredDateTime" name="preferredDateTime" required>
+                      <br>
+                      <br> -->
+                      <!-- Reason for Appointment -->
+        <!-- <label for="appointmentReason">Reason for Appointment:</label>
+        <select id="appointmentReason" name="appointmentReason" class="form-select" required>
+          <option value="" disabled selected>Select Reason</option>
+          <option value="regularCheckup">Regular Checkup</option>
+          <option value="vaccination">Vaccination</option>
+          <option value="illness">Illness</option>
+          <option value="grooming">Grooming</option>
+          <option value="dentalCare">Dental Care</option>
+          <option value="behavioralIssues">Behavioral Issues</option>
+          <option value="weightManagement">Weight Management</option>
+          <option value="nutritionalConsultation">Nutritional Consultation</option>
+          <option value="injury">Injury</option>
+          <option value="other">Other</option>
+        </select>
+        <br>
+        <label for="party" class="form-label">Vet Type</label>
+        <select class="form-select" id="party" required>
+          <option value="">Select Vet Type</option>
+          <option value="Behavioral Medicine">Behavioral Medicine</option>
+          <option value="One Health Approach">One Health Approach</option>
+          <option value="Emergency and Critical Care">Emergency and Critical Care</option>
+          <option value="Preventive Care">Preventive Care</option>
+          <option value="Veterinary Medicine">Veterinary Medicine</option>
+        </select>
+        </div>
+                    </div>
+                    <div class="row" id="party-details-body">
+                      Vet details will be dynamically added here
+                   </div>
+                  </div>
+                </div>
+                <div class="overlay" id="overlay">
+                  <div class="dialog-box">
+                    <p id='message'></p>
+                    <button class="close-btn" onclick="closeDialog()">Close</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </main>  -->
 
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+          <!-- registration-area -->
+        <section class="registration__area">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="registration__inner-wrap">
+                            <h2 class="title">Schedule a visit today!</h2>
+                            <div class="shape">
+                                <img src="../public/assets/img/images/registration_shape.svg" alt="">
+                            </div>
+                            <form action="#">
+                                <div class="row gutter-15">
+                                    
+                                    
+                                    <div class="col-lg-4 col-md-6">
+                                        <div class="form-grp select-grp">
+                                            <label>Interest In</label>
+                                            <select id="appointmentReason" name="appointmentReason" class="form-select" required>
+                                                <option value="" disabled selected>Select Reason</option>
+                                                <option value="regularCheckup">Regular Checkup</option>
+                                                <option value="vaccination">Vaccination</option>
+                                                <option value="illness">Illness</option>
+                                                <option value="grooming">Grooming</option>
+                                                <option value="dentalCare">Dental Care</option>
+                                                <option value="behavioralIssues">Behavioral Issues</option>
+                                                <option value="weightManagement">Weight Management</option>
+                                                <option value="nutritionalConsultation">Nutritional Consultation</option>
+                                                <option value="injury">Injury</option>
+                                                <option value="other">Other</option>
+                                              </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4 col-md-6">
+                                        <div class="form-grp">
+                                            <label for="date">Date</label>
+                                            <input type="datetime-local" id="preferredDateTime" name="preferredDateTime" required>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-4 col-md-6">
+                                        <div class="form-grp select-grp">
+                                            <label>Vet Type</label>
+                                            <select class="form-select" id="party" required>
+                                                <option value="">Select Vet Type</option>
+                                                <option value="Behavioral Medicine">Behavioral Medicine</option>
+                                                <option value="One Health Approach">One Health Approach</option>
+                                                <option value="Emergency and Critical Care">Emergency and Critical Care</option>
+                                                <option value="Preventive Care">Preventive Care</option>
+                                                <option value="Veterinary Medicine">Veterinary Medicine</option>
+                                              </select>
+                                        </div>
+                                       
+                                    </div>
+                                    
+                                    
+                                </div>
+                                <div class="row" id="party-details-body">
+                                    <!-- Vet details will be dynamically added here -->
+                                  </div>
+                                
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+      
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+       
+
+
+
+    </main>
     <!-- main-area-end -->
 
 
@@ -579,6 +643,41 @@
             </div>
         </div>
     </footer>
+    <!-- jQuery -->
+<script src="../public/static/assets/plugins/jquery/jquery.min.js"></script>
+<!-- Bootstrap 4 -->
+<script src="../public/static/assets/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- AdminLTE App -->
+<script src="../public/static/assets/dist/js/adminlte.min.js"></script>
+<!-- AdminLTE for demo purposes -->
+<script src="../public/static/assets/dist/js/demo.js"></script>
+
+<script src="../assets/js/main.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+      
+
+    <script>
+        document.getElementById("search-user-form").addEventListener("submit", function(event) {
+            event.preventDefault(); // Prevent the default form submission
+    
+            // Get the value of the input field
+            var username = document.getElementById("search-text").value;
+    
+            // Redirect to the URL with the username as a parameter
+            window.location.href = "/account/" + username;
+        });
+    </script>
+<script>
+     $(document).ready(function () {
+        const name = localStorage.getItem('name');
+        
+        // Display the name in the h4 tag
+        const namePlaceholder = document.getElementById('namePlaceholder');
+        namePlaceholder.textContent = `${name}`;
+
+     });
+</script>
     <!-- footer-area-end -->
 
 
@@ -600,8 +699,32 @@
     <script>
         SVGInject(document.querySelectorAll("img.injectable"));
     </script>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<!-- start -->
+<!-- Existing scripts ... -->
+
+<script src="../public/custom/js/appointment_scheduling.js"></script>
+<!-- end -->
+
+
 </body>
 
 
-<!-- Mirrored from themedox.com/demo/petpal/contact.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 13 Feb 2024 09:42:28 GMT -->
+<!-- Mirrored from themedox.com/demo/petpal/gallery.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 13 Feb 2024 09:42:21 GMT -->
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+

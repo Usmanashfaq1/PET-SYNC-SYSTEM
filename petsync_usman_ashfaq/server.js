@@ -93,6 +93,8 @@ app.use('/',displayAccountRoute);
 const userin=require('./routes/useInRoute');
 app.use('/',userin);
 
+const appointment=require('./routes/appointment_schedulingRoute');
+app.use('/',appointment);
 
 
 
@@ -272,6 +274,110 @@ app.post('/check-otp', (req, res) => {
 });
 // end
 
+// here appointment scheduling api user side: 
+//start
+//vet scheduling api's
+//
+// Get vet details API
+app.get('/api/vets', (req, res) => {
+  const vetType = req.query.type;
+
+  if (!vetType) {
+    res.status(400).json({ error: 'Vet type not specified' });
+    return;
+  }
+
+  const query = 'SELECT * FROM vet WHERE specialization = ?';
+
+  conn.query(query, vetType, (err, result) => {
+    if (err) {
+      console.error('Error fetching vet details:', err);
+      res.status(500).json({ error: 'An error occurred while fetching vet details' });
+      return;
+    }
+
+    if (result.length === 0) {
+      res.json(null); // Vet details not found
+    } else {
+      res.json(result);
+    }
+  });
+});
+
+// this is appointment scheduling api 
+app.post('/api/appointments', (req, res) => {
+  console.log('Received appointment request:', req.body);
+
+  const { user_name, user_email, vet_name, vet_email, type, slot, subject } = req.body;
+  const date = new Date();
+  const status = 'unapproved';
+
+  // Get user_id based on user_name and user_email
+  const getUserQuery = 'SELECT id FROM users WHERE username = ? AND email = ? LIMIT 1';
+  const userValues = [user_name, user_email];
+
+  conn.query(getUserQuery, userValues, (err, userResult) => {
+    if (err) {
+      console.error('Error querying user data:', err);
+      res.status(500).json({ error: 'An error occurred while querying user data' });
+      return;
+    }
+
+    if (userResult.length === 0) {
+      // User not found, handle accordingly
+      console.log('User not found:', user_name, user_email);
+      res.status(400).json({ error: 'User not found' });
+      return;
+    }
+
+    const user_id = userResult[0].id;
+    console.log('User ID:', user_id);
+
+    // Get vet_id based on vet_name and vet_email
+    const getVetQuery = 'SELECT id FROM vet WHERE  email = ? LIMIT 1';
+    const vetValues = [vet_email];
+
+    conn.query(getVetQuery, vetValues, (err, vetResult) => {
+      if (err) {
+        console.error('Error querying vet data:', err);
+        res.status(500).json({ error: 'An error occurred while querying vet data' });
+        return;
+      }
+
+      if (vetResult.length === 0) {
+        // Vet not found, handle accordingly
+        console.log('Vet not found:', vet_name, vet_email);
+        res.status(400).json({ error: 'Vet not found' });
+        return;
+      }
+
+      const vet_id = vetResult[0].id;
+      console.log('Vet ID:', vet_id);
+
+      // Insert appointment data with obtained user_id and vet_id
+      const insertAppointmentQuery = 'INSERT INTO appointment (date,user_name,user_email,vet_name,vet_email, user_id, vet_id, type, slot, subject, status) VALUES (?, ?, ?, ?, ?, ?, ?,?,?,?,?)';
+      const appointmentValues = [date,user_name,user_email,vet_name,vet_email, user_id, vet_id, type, slot, subject, status];
+
+      conn.query(insertAppointmentQuery, appointmentValues, (err, result) => {
+        if (err) {
+          console.error('Error inserting appointment data:', err);
+          res.status(500).json({ error: 'An error occurred while inserting appointment data' });
+          return;
+        }
+
+        console.log('Appointment data inserted successfully');
+        res.json({ success: true });
+      });
+    });
+  });
+});
+
+
+
+
+// end 2
+
+//end appoint scheduling user side
 
 //end wothout mvc
 
