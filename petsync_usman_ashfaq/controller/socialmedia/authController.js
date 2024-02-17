@@ -3,6 +3,8 @@ exports.logout = (req, res) => {
         if (err) {
             return res.redirect('/error'); // Redirect to login page if session cannot be destroyed
         }
+
+        
         
         res.redirect('/'); // Redirect to login page after successful logout
     });

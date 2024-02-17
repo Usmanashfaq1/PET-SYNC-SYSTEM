@@ -370,7 +370,7 @@
                                                     <span>0</span>
                                                 </a>
                                             </li>
-                                            <li class="header-btn login-btn"><a href="/" class="btn"><i
+                                            <li class="header-btn login-btn"><a href="/logout_user" class="btn"><i
                                                         class="flaticon-locked"></i>Logout</a></li>
                                                         <li class="offCanvas-menu">
                                                             <a href="javascript:void(0)" class="menu-tigger">
@@ -544,7 +544,7 @@
                                     <a class="dropdown-item" href="#"><i class="icofont-gear"></i> Setting</a>
                                     <a class="dropdown-item" href="privacy-n-policy.html"><i class="icofont-notepad"></i> Privacy</a>
                                     <a class="dropdown-item" href="#"><i class="icofont-moon"></i> Dark Mode</a>
-                                    <a class="dropdown-item" href="/logout"><i class="icofont-power"></i> Logout</a>
+                                    <a class="dropdown-item" href="/logout_user"><i class="icofont-power"></i> Logout</a>
                                 </div>
                                 
                             </li>
@@ -564,7 +564,7 @@
                 <div class="row align-items-end">
                     <div class="col-lg-8">
                         <div class="breadcrumb__content">
-                            <h3 class="title">Welcome <%= email %></h3>
+                            <h4 id="namePlaceholder"></h4>
                             <nav class="breadcrumb">
                                 <span property="itemListElement" typeof="ListItem">
                                     <a href="index-2.html">Home</a>
@@ -909,7 +909,25 @@ document.addEventListener("DOMContentLoaded", function () {
     </script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
+
+
+
         $(document).ready(function () {
+// Get the value of email and name from the query parameters
+const params = new URLSearchParams(window.location.search);
+const email1 = params.get('email');
+        const name1 = params.get('name');
+
+        localStorage.setItem('email', email1);
+        localStorage.setItem('name', name1);
+
+
+        const name = localStorage.getItem('name');
+        
+        // Display the name in the h4 tag
+        const namePlaceholder = document.getElementById('namePlaceholder');
+        namePlaceholder.textContent = `Welcome ${name}`;
+    
           const email = localStorage.getItem('email');
           $('#email-link').attr('href', 'mailto:' + email).text(email);
         });

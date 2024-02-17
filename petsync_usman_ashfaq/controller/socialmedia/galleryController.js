@@ -20,7 +20,7 @@ class GalleryController {
 
                  
                  const feedResult = await GalleryModel.getUserFeed(req.session.num);
-                return res.render('gallery1', { data: userInfo[0], feedResult: feedResult,dpName: imageName, name });
+                return res.render('gallery', { data: userInfo[0], feedResult: feedResult,dpName: imageName, name });
             } 
             else 
             {

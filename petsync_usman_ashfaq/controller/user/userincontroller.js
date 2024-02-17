@@ -10,9 +10,10 @@ async function loginUser(req, res) {
 
         if (user && user.password === password) {
             req.session.email = user.email;
-            req.session.name = user.name;
+            req.session.name = user.username;
+        
             console.log('Login successful for user:', user.email);
-            res.render('user_dashboard', { email: user.email, name: user.name });
+            return res.redirect(`/user_dashboard?email=${user.email}&name=${user.username}`);
         } else {
             console.log('Login failed for user:', email);
             res.json(-1); // Login failed
