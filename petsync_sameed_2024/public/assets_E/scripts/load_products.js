@@ -11,14 +11,20 @@ document.addEventListener('DOMContentLoaded', function () {
         success: function (data) {
             var cartCount = $('.header-cart-two span');
             var currentCount = parseInt(cartCount.text());
-            var newCartCount = currentCount + parseInt(data);
+            var newCartCount = currentCount + parseInt(data.itemCount);
             cartCount.text(newCartCount);
-        },
+
+            var totalPrice = data.total;
+            $('.price_of_total').text('$' + totalPrice.toFixed(2));
+        }
+        ,
         error: function (error) {
             console.error('Error adding item to cart:', error);
             alert('Error adding item to cart. Please try again.');
         }
     });
+
+
 });
 
 function all_products() {
@@ -60,7 +66,7 @@ function all_products() {
                                     <span>New</span>
                                 </div>
                                 <div class="product__add-cart" style="margin-top: 15px; text-align: center;">
-                                    <button class="btn" onclick="addToCart(${result.p_id})" style="background-color:  #800080; color: #fff; border: none; border-radius: 5px; padding: 8px 15px;">
+                                    <button class="btn" onclick="addToCart(${result.p_id},${result.price} )" style="background-color:  #800080; color: #fff; border: none; border-radius: 5px; padding: 8px 15px;">
                                         <i class="flaticon-shopping-bag"></i> Add To Cart
                                     </button>
                                 </div>
@@ -145,7 +151,7 @@ function selectCategory(value) {
                                         <span>New</span>
                                     </div>
                                     <div class="product__add-cart" style="margin-top: 15px; text-align: center;">
-                                        <button class="btn" onclick="addToCart(${result.p_id})" style="background-color: #007bff; color: #fff; border: none; border-radius: 5px; padding: 8px 15px;">
+                                        <button class="btn" onclick="addToCart(${result.p_id}, ${result.price})" style="background-color: #007bff; color: #fff; border: none; border-radius: 5px; padding: 8px 15px;">
                                             <i class="flaticon-shopping-bag"></i> Add To Cart
                                         </button>
                                     </div>
@@ -188,11 +194,11 @@ function selectCategory(value) {
 
 
 
-function addToCart(item_id) {
+function addToCart(item_id, price) {
     var email = localStorage.getItem('email');
 
     $.ajax({
-        url: 'http://localhost:3001/add_to_cart?item_id=' + item_id + '&email=' + email,
+        url: 'http://localhost:3001/add_to_cart?item_id=' + item_id + '&email=' + email + '&price=' + price,
         method: 'POST',
         success: function (data) {
             if (data === 1) {
@@ -202,38 +208,38 @@ function addToCart(item_id) {
                 document.getElementById('message').innerText = 'Item Already Added to Cart!';
                 showDialog();
             }
+
+            // Check count of cart from DB
+            $.ajax({
+                url: 'http://localhost:3001/cart_item_number?email=' + email,
+                method: 'GET',
+                success: function (data) {
+                    var cartCount = $('.header-cart-two span');
+                    var currentCount = parseInt(cartCount.text());
+                    var newCartCount = (currentCount * 0) + parseInt(data.itemCount);
+                    cartCount.text(newCartCount);
+
+                    var totalPrice = data.total;
+                    $('.price_of_total').text('$' + totalPrice.toFixed(2));
+                },
+                error: function (error) {
+                    console.error('Error getting cart item number:', error);
+                    alert('Error getting cart item number. Please try again.');
+                }
+            });
         },
         error: function (error) {
             console.error('Error adding item to cart:', error);
             alert('Error adding item to cart. Please try again.');
         }
     });
-
-    //check count of cart from DB
-
-    $.ajax({
-        url: 'http://localhost:3001/cart_item_number?email=' + email,
-        method: 'GET',
-        success: function (data) {
-            var cartCount = $('.header-cart-two span');
-
-            // Assuming 'data' directly holds the new cart count
-            var newCartCount = data;
-
-            // Update the cart count
-            cartCount.text(newCartCount);
-        },
-        error: function (error) {
-            console.error('Error getting cart item number:', error);
-            alert('Error getting cart item number. Please try again.');
-        }
-    });
-
-
 }
 
-function open_details(id)
-{
+
+
+
+
+function open_details(id) {
     localStorage.setItem('id_detail_of_item', id);
     window.location.href = "/product-details";
 }

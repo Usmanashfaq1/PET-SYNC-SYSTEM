@@ -5,7 +5,7 @@ const connection = require('../../config');
 handle_add_to_cart = (req, res) => {
     var item_id = req.query.item_id;
     var email = req.query.email;
-
+    var price = req.query.price;
     var checkCartSql = `SELECT * FROM cart WHERE item_id = '${item_id}' AND email = '${email}'`;
     connection.query(checkCartSql, function (checkCartErr, checkCartResults) {
         if (checkCartErr) {
@@ -15,7 +15,7 @@ handle_add_to_cart = (req, res) => {
             if (checkCartResults.length > 0) {
                 res.json(-1);
             } else {
-                var insertCartSql = `INSERT INTO cart (item_id, email) VALUES ('${item_id}', '${email}')`;
+                var insertCartSql = `INSERT INTO cart (item_id, price , email) VALUES ('${item_id}', '${price}' ,'${email}')`;
                 connection.query(insertCartSql, function (insertCartErr, insertCartResults) {
                     if (insertCartErr) {
                         console.error(insertCartErr);
@@ -32,14 +32,15 @@ handle_add_to_cart = (req, res) => {
 const handle_cart_item_number = (req, res) => {
     var email = req.query.email;
 
-    var checkCartSql = `SELECT count(*) AS count FROM cart WHERE email = '${email}'`;
+    var checkCartSql = `SELECT COUNT(*) AS count, SUM(price) AS total FROM cart WHERE email = '${email}'`;
     connection.query(checkCartSql, function (checkCartErr, checkCartResults) {
         if (checkCartErr) {
             console.error(checkCartErr);
             res.status(500).json({ error: 'Database error.' });
         } else {
             const itemCount = checkCartResults[0].count;
-            res.json(itemCount);
+            const total = checkCartResults[0].total;
+            res.json({ itemCount, total });
         }
     });
 }
