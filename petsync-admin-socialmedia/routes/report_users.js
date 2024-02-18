@@ -12,18 +12,27 @@ const connection = mysql.createPool({
     database: 'petcommunity'
   });
 
-// Route to block a user
-router.post('/block/:userId', async (req, res) => {
+  router.post('/block/:userId', async (req, res) => {
     const userId = req.params.userId;
     try {
+        // Check if the user is already blocked
+        const [rows] = await connection.execute('SELECT is_blocked FROM users WHERE id = ?', [userId]);
+        if (rows.length === 0) {
+            return res.status(404).send('User not found');
+        }
+        if (rows[0].is_blocked === 1) {
+            return res.send('User is already blocked');
+        }
+        
+        // If the user is not blocked, proceed to block the user
         await connection.execute('UPDATE users SET is_blocked = 1 WHERE id = ?', [userId]);
         res.send('User blocked successfully');
     } catch (err) {
         console.error('Error blocking user:', err);
         res.status(500).send('Internal Server Error');
-        
     }
 });
+
 
 // Route to neglect a user
 router.post('/neglect/:userId', async (req, res) => {
