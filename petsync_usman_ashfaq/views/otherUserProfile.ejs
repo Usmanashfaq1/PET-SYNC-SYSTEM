@@ -649,6 +649,25 @@ body.sidebar-open {
                   </ul>
   
                   <a href="#" class="btn btn-primary btn-block"><b>Follow</b></a>
+                  <br>
+                  <!-- User Profile View -->
+<div class="user-profile">
+    <!-- Profile information goes here -->
+    <button class="btn btn-primary report-user-btn" onclick="openReportModal()">Report User</button>
+</div>
+<div id="reportUserModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeReportModal()">&times;</span>
+        <form id="reportUserForm" action="/report/user/<%= data.id %>" method="POST">
+
+            <div class="form-group">
+                <label for="reportReason">Reason for Reporting:</label>
+                <textarea class="form-control" id="reportReason" name="reason" rows="3" required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit Report</button>
+        </form>
+    </div>
+</div>
                 </div>
                 <!-- /.card-body -->
               </div>
@@ -1051,6 +1070,14 @@ document.addEventListener("DOMContentLoaded", function () {
         body.classList.toggle("sidebar-open");
     });
 });
+function openReportModal() {
+    document.getElementById('reportUserModal').style.display = 'block';
+}
+
+function closeReportModal() {
+    document.getElementById('reportUserModal').style.display = 'none';
+}
+
 
     </script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>

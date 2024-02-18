@@ -97,6 +97,10 @@ const appointment=require('./routes/appointment_schedulingRoute');
 app.use('/',appointment);
 
 
+const report=require('./routes/reportRoute');
+app.use('/',report);
+
+
 
 app.get('/community',(req,res)=>{
   res.render('community');

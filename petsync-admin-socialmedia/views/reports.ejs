@@ -1,0 +1,32 @@
+<!-- admin.ejs -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel</title>
+    <style>
+        /* Add your CSS styles here */
+    </style>
+</head>
+<body>
+    <h1>Admin Panel</h1>
+    <ul>
+        <% reports.forEach(report => { %>
+            <li>
+                <strong>Reported User ID:</strong> <%= report.reported_user_id %><br>
+                <strong>Reporter User ID:</strong> <%= report.reporter_user_id %><br>
+                <strong>Reason:</strong> <%= report.reason %><br>
+                <strong>Created At:</strong> <%= report.created_at %><br>
+                <form action="/block/<%= report.reported_user_id %>" method="POST">
+                    <button type="submit">Block User</button>
+                </form>
+                <form action="/neglect/<%= report.reported_user_id %>" method="POST">
+                    <button type="submit">Neglect User</button>
+                </form>
+            </li>
+        <% }); %>
+    </ul>
+</body>
+</html>
