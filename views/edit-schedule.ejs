@@ -1,0 +1,94 @@
+<!-- edit-schedule.ejs -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Schedule Detail</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            text-align: center;
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+
+        form {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        button[type="submit"] {
+            background-color: #4caf50;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #45a049;
+        }
+
+        button[type="submit"], button[type="reset"] {
+            margin-right: 10px;
+        }
+
+        button[type="reset"] {
+            background-color: #f44336;
+        }
+
+        button[type="reset"]:hover {
+            background-color: #da190b;
+        }
+    </style>
+</head>
+<body>
+    <h1>Edit Schedule Detail</h1>
+    <form action="/update-schedule/<%= scheduleDetail.id %>" method="POST">
+        <label for="dayOfWeek">Day of Week:</label>
+        <input type="text" id="dayOfWeek" name="day_of_week" value="<%= scheduleDetail.day_of_week %>">
+        <br><br>
+        <label for="mealName">Meal Name:</label>
+        <input type="text" id="mealName" name="meal_name" value="<%= scheduleDetail.meal_name %>">
+        <br><br>
+        <label for="portionSize">Portion Size:</label>
+        <input type="text" id="portionSize" name="portion_size" value="<%= scheduleDetail.portion_size %>">
+        <br><br>
+        <button type="submit">Update Schedule</button>
+        <button type="reset">Reset</button>
+    </form>
+
+    <form action="/delete-schedule/<%= scheduleDetail.id %>" method="POST">
+        <button type="submit">Delete Schedule</button>
+    </form>
+</body>
+</html>

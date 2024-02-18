@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Pet Feeding Schedule</title>
+        <link rel="stylesheet" href="/style.css">
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f0f0f0;
+        margin: 0;
+        padding: 0;
+    }
+    
+    /* Container styles */
+    .container {
+        max-width: 800px;
+        margin: 20px auto;
+        padding: 20px;
+        background-color: #fff;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    
+    /* Heading styles */
+    h1 {
+        text-align: center;
+        color: #333;
+    }
+    
+    h2 {
+        color: #666;
+    }
+    
+    /* Form styles */
+    form {
+        margin-top: 20px;
+    }
+    
+    label {
+        font-weight: bold;
+        color: #555;
+    }
+    
+    select, input[type="text"] {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        box-sizing: border-box;
+    }
+    
+    button[type="submit"] {
+        background-color: #4caf50;
+        color: #fff;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+    }
+    
+    button[type="submit"]:hover {
+        background-color: #45a049;
+    }
+    
+    /* Table styles */
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+    }
+    
+    th, td {
+        padding: 10px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+    }
+    
+    th {
+        background-color: #f2f2f2;
+        font-weight: bold;
+    }
+    
+</style>
+    </head>
+    <body>
+        <div class="container">
+            <h1>Pet Feeding Schedule</h1>
+    
+            <form id="feedingScheduleForm">
+                <label for="petSelect">Select Pet:</label>
+                <select id="petSelect" name="petSelect">
+                    <% pets.forEach(function(pet) { %>
+                        <option value="<%= pet.id %>"><%= pet.petname %></option>
+                    <% }); %>
+                </select>
+                <br><br>
+    
+                <h2>Set Feeding Schedule for Selected Pet</h2>
+                <table>
+                    <tr>
+                        <th>Day</th>
+                        <th>Meal</th>
+                        <th>Portion Size</th>
+                    </tr>
+                    <% days.forEach(function(day) { %>
+                        <tr>
+                            <td><%= day %></td>
+                            <td>
+                                <input type="text" name="<%= day.toLowerCase() %>Meal" placeholder="Meal name">
+                            </td>
+                            <td>
+                                <input type="text" name="<%= day.toLowerCase() %>Portion" placeholder="Portion size">
+                            </td>
+                        </tr>
+                    <% }); %>
+                </table>
+                <br>
+                <button type="submit">Save Feeding Schedule</button>
+            </form>
+
+    <script>
+        const form = document.getElementById('feedingScheduleForm');
+
+        form.addEventListener('submit', function(event) {
+            event.preventDefault();
+            
+            const petId = document.getElementById('petSelect').value;
+            const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+            const scheduleData = [];
+
+            days.forEach(function(day) {
+                const mealName = document.querySelector(`input[name=${day.toLowerCase()}Meal]`).value;
+                const portionSize = document.querySelector(`input[name=${day.toLowerCase()}Portion]`).value;
+                
+                if (mealName && portionSize) {
+                    scheduleData.push({
+                        day_of_week: day,
+                        meal_name: mealName,
+                        portion_size: portionSize,
+                        pet_id: petId
+                    });
+                }
+            });
+
+            // Sending the schedule data to the server
+            fetch('/save-schedule', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(scheduleData)
+            })
+            .then(response => {
+                if (response.ok) {
+                    alert('Feeding schedule saved successfully!');
+                    form.reset();
+                } else {
+                    throw new Error('Failed to save feeding schedule.');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Failed to save feeding schedule. Please try again.');
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,98 @@
+<!-- view-schedule.ejs -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Schedule Details</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            text-align: center;
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+
+        table {
+            width: 80%;
+            margin: 0 auto;
+            border-collapse: collapse;
+            border: 1px solid #ddd;
+            background-color: #fff;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #f2f2f2;
+            color: #333;
+        }
+
+        td a {
+            text-decoration: none;
+            color: #007bff;
+        }
+
+        td a:hover {
+            color: #0056b3;
+        }
+
+        .edit-link {
+            display: inline-block;
+            padding: 6px 12px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .edit-link:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <h1>Schedule Details</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Pet Id</th>
+                <th>Day of Week</th>
+                <th>Meal Name</th>
+                <th>Portion Size</th>
+                <th>Schedule Timestamp</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% scheduleDetails.forEach(function(detail) { %>
+                <tr>
+                    <td><%= detail.id %></td>
+                    <td><%= detail.pet_id %></td>
+                    <td><%= detail.day_of_week %></td>
+                    <td><%= detail.meal_name %></td>
+                    <td><%= detail.portion_size %></td>
+                    <td><%= detail.schedule_timestamp %></td>
+                    <td>
+                        <a href="/edit-schedule/<%= detail.id %>" class="edit-link">Edit</a>
+                    </td>
+                </tr>
+            <% }); %>
+        </tbody>
+    </table>
+</body>
+</html>
