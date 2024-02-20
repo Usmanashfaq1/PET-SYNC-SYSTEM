@@ -1,6 +1,6 @@
 const path = require('path');
 const fs = require('fs');
-const connection = require('../config');
+const connection = require('../../config');
 const multer = require("multer");
 
 const storage = multer.diskStorage({
@@ -94,7 +94,7 @@ handle_get_specific_product = (req, res) => {
       if (fileName) {
 
         //const filePath = path.join(__dirname, 'upload', fileName);
-        const uploadDirectory = path.join(__dirname, '..', 'upload');
+        const uploadDirectory = path.join(__dirname, '..','..', 'upload');
         const filePath = path.join(uploadDirectory, fileName);
 
 

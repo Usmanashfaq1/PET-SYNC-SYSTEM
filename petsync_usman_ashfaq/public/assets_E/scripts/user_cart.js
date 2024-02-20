@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', function () {
-    email = localStorage.getItem('email');
+    email_e = localStorage.getItem('email_e');
     $.ajax({
-        url: 'http://localhost:4000/get_cart_items?email=' + email,
+        url: 'http://localhost:3001/get_cart_items?email_e=' + email_e,
         method: 'GET',
         success: function (data) {
             // Clear existing table rows
@@ -69,7 +69,7 @@ function increaseQuantity(productId, stock) {
 
 function removeFromCart(id) {
     $.ajax({
-        url: 'http://localhost:4000/remove_from_cart/' + id,
+        url: 'http://localhost:3001/remove_from_cart/' + id,
         method: 'DELETE',
         success: function (data) {
             var cartCount = $('#cartId');
@@ -79,6 +79,8 @@ function removeFromCart(id) {
             if (data === 1) {
                 document.getElementById('message').innerText = 'Item Removed from Cart!';
                 showDialog();
+                
+                //window.location.href="/item_cart";
             } else {
                 document.getElementById('message').innerText = 'Item not found in Cart!';
                 showDialog();
