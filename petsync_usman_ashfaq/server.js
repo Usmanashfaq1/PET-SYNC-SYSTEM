@@ -85,6 +85,10 @@ app.use('/',mainRoute1);
 const findUser=require('./routes/findUserRoutes');
 app.use('/',findUser);
 
+
+const userRequestRoutes = require('./routes/userRequestRoutes');
+app.use('/', userRequestRoutes);
+
 // USER PROFILE ROUTE ADDED HERE
 const userProfileRoute=require('./routes/profileRoute');
 app.use('/',userProfileRoute);

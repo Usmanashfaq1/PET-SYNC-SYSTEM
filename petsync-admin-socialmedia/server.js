@@ -61,6 +61,8 @@ app.use('/',loginRoute);
 const signupRoute=require('./routes/signupRoute');
 app.use('/',signupRoute);
 
+const userRequestRoutes = require('./routes/userRequestRoutes');
+app.use('/', userRequestRoutes);
 
 const front=require('./routes/frontRoute');
 app.use('/',front);

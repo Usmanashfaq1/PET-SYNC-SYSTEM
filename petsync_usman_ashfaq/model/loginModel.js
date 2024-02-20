@@ -8,40 +8,36 @@ class loginModel {
 
   async checkUser(req, res) {
     try {
-      const { userName, passWord } = req.body;
-      const query = 'SELECT * FROM users WHERE username = ?';
-      const results = await this.promiseConnectionQuery(query, [userName]);
+        const { userName, passWord } = req.body;
+        const query = 'SELECT * FROM users WHERE username = ?';
+        const results = await this.promiseConnectionQuery(query, [userName]);
 
-      if (results.length > 0)
-       {
-        const comparision = passWord === results[0].password;
-        if (comparision)
-         {
-          // if its Successful login
-          req.session.num = results[0].id;
-          req.session.username = userName;
-          return res.redirect('/main'); 
-        } else 
-        {
-          // if its Incorrect password
-          req.session.num = null;
-          req.session.username = null;
-          const msg = "Username and password do not match";
-          return res.render('loginView', { msg });
+        if (results.length > 0) {
+            if (results[0].is_blocked) {
+                return { blocked: true, message: "You are blocked. Please contact admin." };
+            }
+
+            const comparision = passWord === results[0].password;
+            if (comparision) {
+                // Successful login
+                req.session.num = results[0].id;
+                req.session.username = userName;
+                return { success: true, redirect: '/main' };
+            } else {
+                // Incorrect password
+                return { success: false, msg: "Username and password do not match" };
+            }
+        } else {
+            // User not found
+            return { success: false, msg: "Username does not exist" };
         }
-      } else {
-        // if User not found
-        req.session.num = null;
-        req.session.username = null;
-        const msg = "Username does not exist";
-        return res.render('loginView', { msg });
-      }
-    } catch (error)
-     {
-      console.error("Error occurred while logging in:", error);
-      return res.status(500).send("Internal Server Error");
+    } catch (error) {
+        console.error("Error occurred while logging in:", error);
+        return { success: false, msg: "Internal Server Error" };
     }
-  }
+}
+
+
 }
 
 module.exports = loginModel;
