@@ -4,7 +4,7 @@ const connection = require('../../config');
 
 handle_add_to_cart = (req, res) => {
     var item_id = req.query.item_id;
-    var email = req.query.email;
+    var email = req.query.email_e;
     var price = req.query.price;
     var quantity = 1;
     var checkCartSql = `SELECT * FROM cart WHERE item_id = '${item_id}' AND email = '${email}'`;
@@ -31,7 +31,7 @@ handle_add_to_cart = (req, res) => {
 }
 
 const handle_cart_item_number = (req, res) => {
-    var email = req.query.email;
+    var email = req.query.email_e;
 
     var checkCartSql = `SELECT COUNT(*) AS count, SUM(price) AS total FROM cart WHERE email = '${email}'`;
     connection.query(checkCartSql, function (checkCartErr, checkCartResults) {
@@ -49,45 +49,34 @@ const handle_cart_item_number = (req, res) => {
 
 
 const handle_get_cart_items = (req, res) => {
-    var email = req.query.email;
-    var checkCartSql = `SELECT * FROM cart WHERE email = '${email}'`;
-    connection.query(checkCartSql, function (checkCartErr, checkCartResults) {
-        if (checkCartErr) {
-            console.error(checkCartErr);
+    var email = req.query.email_e;
+    var sql = `SELECT cart.item_id, cart.price, cart.quantity, products.product_name, products.category, products.productPicture, products.description 
+               FROM cart 
+               INNER JOIN products ON cart.item_id = products.p_id 
+               WHERE cart.email = '${email}'`;
+
+    connection.query(sql, function (err, results) {
+        if (err) {
+            console.error('Error retrieving cart items:', err);
             res.status(500).json({ error: 'Database error.' });
         } else {
-            const itemIds = checkCartResults.map(item => item.item_id);
-
-            if (itemIds.length === 0) {
-                res.json([]);
-                return;
-            }
-
-            const sql = 'SELECT * FROM products WHERE p_id IN (?)';
-            connection.query(sql, [itemIds], (err, detailedResults) => {
-                if (err) {
-                    console.error('Error retrieving cart items:', err);
-                    res.status(500).json({ error: 'Database error.' });
+            const itemsWithFileContent = results.map(item => {
+                const fileName = item.productPicture;
+                if (fileName) {
+                    const uploadDirectory = path.join(__dirname, '..', '..', 'upload');
+                    const filePath = path.join(uploadDirectory, fileName);
+                    try {
+                        const content = fs.readFileSync(filePath, { encoding: 'base64' });
+                        return { ...item, productPicture: content };
+                    } catch (err) {
+                        console.error('Error reading file:', err);
+                        return item;
+                    }
                 } else {
-                    const itemsWithFileContent = detailedResults.map(item => {
-                        const fileName = item.productPicture;
-                        if (fileName) {
-                            const uploadDirectory = path.join(__dirname, '..', '..', 'upload');
-                            const filePath = path.join(uploadDirectory, fileName);
-                            try {
-                                const content = fs.readFileSync(filePath, { encoding: 'base64' });
-                                return { ...item, productPicture: content };
-                            } catch (err) {
-                                console.error('Error reading file:', err);
-                                return item;
-                            }
-                        } else {
-                            return item;
-                        }
-                    });
-                    res.json(itemsWithFileContent);
+                    return item;
                 }
             });
+            res.json(itemsWithFileContent);
         }
     });
 };
@@ -114,10 +103,34 @@ const handle_remove_from_cart = (req, res) => {
     });
 };
 
+handle_check_added_to_cart = (req, res) => {
+    var item_id = req.query.item_id;
+    var email = req.query.email_e;
+    
+    console.log("Received request to check item_id:", item_id, "for email:", email);
+    
+    var checkCartSql = `SELECT * FROM cart WHERE item_id = '${item_id}' AND email = '${email}'`;
+    
+    console.log("Executing SQL query:", checkCartSql);
+    
+    connection.query(checkCartSql, function (checkCartErr, checkCartResults) {
+        if (checkCartErr) {
+            console.error("Error executing SQL query:", checkCartErr);
+            res.status(500).json({ error: 'Database error.' });
+        } else {
+            console.log("Received results:", checkCartResults);
+            if (checkCartResults.length > 0) {
+                res.json(1);
+            } else {
+                res.json(-1);
+            }
+        }
+    });
+}
 
 
 handle_cart_item_number_quantity = (req, res) => {
-    var email = req.query.email;
+    var email = req.query.email_e;
     var item_id = req.query.id;
 
     console.log(item_id , ' ' , email );
@@ -167,5 +180,6 @@ module.exports = {
     handle_cart_item_number,
     handle_get_cart_items,
     handle_remove_from_cart,
-    handle_cart_item_number_quantity
+    handle_cart_item_number_quantity,
+    handle_check_added_to_cart
 }

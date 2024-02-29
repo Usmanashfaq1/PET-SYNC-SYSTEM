@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+    <title>Edit Profile</title>
+    <meta content="" name="description">
+    <meta content="" name="keywords">
+
+    <!-- Favicons -->
+    <link href="../public/assets_E/img/favicon.png" rel="icon">
+    <link href="../public/assets_E/img/apple-touch-icon.png" rel="apple-touch-icon">
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link
+        href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+        rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+    <!-- Vendor CSS Files -->
+    <link href="../public/assets_E/vendor/fontawesome-free/css/all.min.css" rel="stylesheet">
+    <link href="../public/assets_E/vendor/animate.css/animate.min.css" rel="stylesheet">
+    <link href="../public/assets_E/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../public/assets_E/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="../public/assets_E/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+    <link href="../public/assets_E/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+    <link href="../public/assets_E/vendor/remixicon/remixicon.css" rel="stylesheet">
+    <link href="../public/assets_E/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+
+    <link href="../public/assets_E/css/style.css" rel="stylesheet">
+
+
+</head>
+
+<body>
+
+    <style>
+        /* Styles for the overlay */
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+        }
+
+        /* Styles for the dialog box */
+        .dialog-box {
+            background: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            max-width: 400px;
+            text-align: center;
+        }
+
+        /* Close button style */
+        .close-btn {
+            background: #007BFF;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+        }
+
+        /* Styles for the dialog box */
+        .dialog-box {
+            background: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            max-width: 400px;
+            text-align: center;
+        }
+
+        /* Close button style */
+        .close-btn {
+            background: #007BFF;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+        @media (min-width: 1025px) {
+            .vh-100 {
+                height: 100vh !important;
+                overflow-y: auto;
+                /* Add this line to enable vertical scrollbar */
+            }
+        }
+
+
+        .is-invalid {
+            border-color: #dc3545;
+            background-color: #f8d7da;
+        }
+
+        /* You can add more styles for the error message if needed */
+        .error-message {
+            color: #ffffff;
+            margin-top: 2px;
+        }
+    </style>
+
+
+    <section class="vh-100" style="background-color: #eee; background-image: url('../public/assets_E/img/edit.jpg');">
+        <div class="container h-100">
+            <div class="row d-flex justify-content-center align-items-center h-100 ">
+                <div class="col-lg-12 col-xl-11">
+                    <div class="card text-black" style="border-radius: 25px;">
+                        <div class="card-body p-md-5">
+                            <div class="row justify-content-center" style="background-color: aqua;">
+                                <div class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1"
+                                    style="background-color: aqua;">
+                                    <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">Edit Pet Profile</p>
+
+                                    <form id="petProfileForm" style="background-color: aqua;">
+
+                                        <div class="d-flex flex-row align-items-left mb-4">
+                                            <i class="fas fa-user fa-lg me-3 fa-fw"></i>
+                                            <div class="form-outline flex-fill mb-0">
+                                                <label for="petName">Pet's Name:</label>
+                                                <input type="text" id="petname" name="petname" class="form-control"
+                                                    required>
+                                            </div>
+                                        </div>
+
+                                        <div class="d-flex flex-row align-items-center mb-4">
+                                            <i class="fas fa-paw fa-lg me-3 fa-fw"></i>
+                                            <div class="form-outline flex-fill mb-0">
+                                                <label for="species">Species:</label>
+                                                <select id="species" name="species" class="form-control" required>
+                                                    <option value="dog">Dog</option>
+                                                    <option value="cat">Cat</option>
+                                                    <option value="bird">Bird</option>
+                                                    Add more options as needed
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="d-flex flex-row align-items-center mb-4">
+                                            <i class="fas fa-bone fa-lg me-3 fa-fw"></i>
+                                            <div class="form-outline flex-fill mb-0">
+                                                <label for="petName">Breed</label>
+                                                <input type="text" id="breed" name="breed" class="form-control"
+                                                    required>
+                                            </div>
+                                        </div>
+
+
+
+                                        <div class="d-flex flex-row align-items-center mb-4">
+                                            <i class="fas fa-paint-brush fa-lg me-3 fa-fw"></i>
+                                            <div class="form-outline flex-fill mb-0">
+                                                <label for="color">Color:</label>
+                                                <input type="text" id="color" name="color" class="form-control">
+                                            </div>
+                                        </div>
+
+                                        <div class="d-flex flex-row align-items-center mb-4">
+                                            <i class="fas fa-calendar fa-lg me-3 fa-fw"></i>
+                                            <div class="form-outline flex-fill mb-0">
+                                                <label for="dobOrAge">Age:</label>
+                                                <input type="number" id="dobOrAge" name="dobOrAge" class="form-control">
+                                            </div>
+                                        </div>
+
+                                        <div class="d-flex flex-row align-items-center mb-4">
+                                            <i class="fas fa-venus-mars fa-lg me-3 fa-fw"></i>
+                                            <div class="form-outline flex-fill mb-0">
+                                                <label for="gender">Gender:</label>
+                                                <select id="gender" name="gender" class="form-control" required>
+                                                    <option value="male">Male</option>
+                                                    <option value="female">Female</option>
+                                                    <option value="other">Other</option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="d-flex flex-row align-items-center mb-4">
+                                            <i class="fas fa-weight fa-lg me-3 fa-fw"></i>
+                                            <div class="form-outline flex-fill mb-0">
+                                                <label for="weight">Weight (in kg):</label>
+                                                <input type="number" id="weight" name="weight" class="form-control">
+                                            </div>
+                                        </div>
+
+                                        <div class="d-flex flex-row align-items-center mb-4">
+                                            <i class="fas fa-info fa-lg me-3 fa-fw"></i>
+                                            <div class="form-outline flex-fill mb-0">
+                                                <label for="about">About:</label>
+                                                <input type="text" id="about" name="about" class="form-control">
+                                            </div>
+                                        </div>
+
+                                        <div class="mb-4">
+                                            <label for="petPicture" class="form-label">Pet Picture:</label>
+                                            <input type="file" name="petPicture" id="petPicture" class="form-control"
+                                                accept="image/*">
+                                        </div>
+
+
+                                        <div class="form-check d-flex justify-content-center mb-5">
+                                            <input class="form-check-input me-2" type="checkbox" value=""
+                                                id="form2Example3c" required>
+                                            <label class="form-check-label" for="form2Example3">
+                                                I agree to all statements in <a href="#!">Terms of service</a>
+                                            </label>
+                                        </div>
+
+                                        <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
+                                            <button type="submit" class="btn btn-primary btn-lg">Edit Pet
+                                                Profile</button>
+                                        </div>
+
+                                    </form>
+
+                                </div>
+                                <div class="col-md-10 col-lg-6 col-xl-7 d-flex align-items-center order-1 order-lg-2">
+                                    <img src="../public/assets_E/img/editt.jpg" class="img-fluid" alt="Sample image">
+                                </div>
+                                <div class="overlay" id="overlay">
+                                    <div class="dialog-box">
+                                        <p id='message'></p>
+                                        <button class="close-btn" onclick="closeDialog()">Close</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.0/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <script>
+
+
+        $(document).ready(function () {
+            $('#petProfileForm').submit(function (e) {
+                e.preventDefault();
+                if ($("#dobOrAge").val() < 1 || $("#dobOrAge").val() > 30) {
+                    document.getElementById('message').innerText = 'Choose age between 1 to 30 years';
+                    showDialog();
+                }
+                else if ($("#weight").val() < 1 || $("#weight").val() > 50) {
+                    document.getElementById('message').innerText = 'Choose weight between 1 to 50 Kgs';
+                    showDialog();
+                }
+                else {
+                    edit_profile_no_pic();
+                }
+            });
+
+        });
+
+
+        function edit_profile_no_pic() {
+            const id = localStorage.getItem('edit');
+            var petname = $("#petname").val();
+            var gender = $("#gender").val();
+            var age = $("#dobOrAge").val();
+            var breed = $("#breed").val();
+            var weight = $("#weight").val();
+            var species = $("#species").val();
+            var color = $("#color").val();
+            var about = $("#about").val();
+
+
+            var petPicture = document.getElementById('petPicture').files[0];
+            if (petPicture) {
+
+                edit_profile_pic();
+            }
+            else {
+                var requestData = {
+                    petname: petname,
+                    gender: gender,
+                    age: age,
+                    breed: breed,
+                    species: species,
+                    weight: weight,
+                    color: color,
+                    about: about
+                };
+                var jsonData = JSON.stringify(requestData);
+                //alert(jsonData);
+                $.ajax({
+                    url: 'http://localhost:3001/edit_pet_profile_no_pic/' + id,
+                    type: 'POST',
+                    data: jsonData,
+                    contentType: 'application/json', // Set content type to JSON
+                    success: function (response) {
+                        if (response == 1) {
+                            document.getElementById('message').innerText = 'Profile updation sucess';
+                            showDialog();
+                            setTimeout(function () {
+                                window.location.reload();
+                            }, 3001);
+
+                        } else {
+                            document.getElementById('message').innerText = 'Profile updation failed';
+                            showDialog();
+                        }
+                    },
+                    error: function () {
+                        alert('Profile creation failed. Error at localhost:3001');
+                    }
+                });
+            }
+        }
+
+
+        function edit_profile_pic() {
+            const id = localStorage.getItem('edit');
+            var petname = $("#petname").val();
+            var gender = $("#gender").val();
+            var age = $("#dobOrAge").val();
+            var breed = $("#breed").val();
+            var weight = $("#weight").val();
+            var species = $("#species").val();
+            var color = $("#color").val();
+            var about = $("#about").val();
+            var petPicture = document.getElementById('petPicture').files[0];
+
+            var formData = new FormData();
+            formData.append('petname', petname);
+            formData.append('gender', gender);
+            formData.append('age', age);
+            formData.append('breed', breed);
+            formData.append('species', species);
+            formData.append('weight', weight);
+            formData.append('color', color);
+            formData.append('about', about);
+            formData.append('petPicture', petPicture);
+            $.ajax({
+                url: 'http://localhost:3001/edit_pet_profile_with_pic/' + id,
+                type: 'POST',
+                data: formData,
+                contentType: false,
+                processData: false,
+                success: function (response) {
+                    if (response == 1) {
+                        document.getElementById('message').innerText = 'Profile updation sucess';
+                        showDialog();
+
+                        setTimeout(function () {
+                            window.location.reload();
+                        }, 3001);
+                    } else {
+                        //alert("Profile updation failed with new picture");
+                        document.getElementById('message').innerText = 'Profile updation failed with new picture';
+                        showDialog();
+                    }
+                },
+                error: function () {
+                    alert('Profile creation failed. Error at localhost:3001');
+                }
+            });
+        }
+
+        $(document).ready(function () {
+            const id = localStorage.getItem('edit');
+            $.ajax({
+                url: 'http://localhost:3001/edit_open_profile/' + id,
+                method: 'GET',
+                success: function (data) {
+                    data.forEach(function (result) {
+                        $('#petname').val(result.petname);
+                        $('#gender').val(result.gender);
+                        $('#dobOrAge').val(result.age);
+                        $('#breed').val(result.breed);
+                        $('#species').find('option').each(function () {
+                            if ($(this).val() == result.species) {
+                                $(this).prop('selected', true);
+                            }
+                        });
+                        $('#weight').val(result.weight);
+                        $('#color').val(result.color);
+                        $('#about').val(result.about);
+                        //document.getElementById('petPicture').src = `data:image/jpeg;base64,${result.petPicture}`;
+                    });
+                },
+                error: function (error) {
+                    console.error('Error fetching pet details:', error);
+                    alert('Error fetching pet profile at backend. Please try again.');
+                }
+            });
+        });
+
+    </script>
+    <script>
+
+
+        function showDialog() {
+            // if ((loginStatus === "idle") || (loginStatus === "finished"))
+            document.getElementById('overlay').style.display = 'flex';
+            // console.log('here');
+        }
+
+        function closeDialog() {
+            document.getElementById('overlay').style.display = 'none';
+        }
+
+
+    </script>
+
+
+</body>
+
+</html>

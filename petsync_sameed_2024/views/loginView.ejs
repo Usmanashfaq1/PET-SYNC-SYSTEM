@@ -27,6 +27,57 @@
     <link rel="stylesheet" href="../public/assets/css/default.css">
     <link rel="stylesheet" href="../public/assets/css/main.css">
 </head>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f8f9fa;
+    }
+
+    .login-page {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+    }
+
+    .login-form-wrap {
+        background-color: #ffffff;
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .login-form-wrap h2.title {
+        text-align: center;
+        margin-bottom: 30px;
+    }
+
+    .login-form-wrap .form-group {
+        margin-bottom: 20px;
+    }
+
+    .login-form-wrap input[type="text"],
+    .login-form-wrap input[type="password"] {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ced4da;
+        border-radius: 5px;
+        box-sizing: border-box;
+    }
+
+    .login-form-wrap .form-group.text-center {
+        margin-bottom: 0;
+    }
+
+    .login-form-wrap .btn {
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    
+</style>
 
 <body>
 
@@ -88,7 +139,7 @@
                                                     <li><a href="error.html">404 Error Page</a></li>
                                                 </ul>
                                             </li>
-                                            <li class="active"><a href="contact.html">contacts</a></li>
+                                            <li ><a href="/rs">contacts</a></li>
                                         </ul>
                                     </div>
                                 </div>
@@ -156,6 +207,8 @@
             </div>
         </div>
 
+
+
         <!-- header-search -->
         <div class="search__popup">
             <div class="container">
@@ -197,33 +250,47 @@
 
     <!-- main-area -->
     <main class="fix">
+        
 
         <!-- breadcrumb-area -->
         <section class="breadcrumb__area fix">
+            
+            
 <br>
 <br>
-            <div class="login-page">
-                <div class="container">
-                    <div class="row justify-content-center">
-                        <div class="col-lg-6">
-                            <div class="login-form-wrap">
-                                <h2 class="title">Login</h2>
-                                <form action="\login" method="POST" class="login-form">
-                                    <div class="form-group mb-4">
-                                        <input type="text"  name="userName" id="username"  class="form-control" placeholder="Username" required>
-                                    </div>
-                                    <div class="form-group mb-4">
-                                        <input type="password" name="passWord" id="password" class="form-control" placeholder="Password" required>
-                                    </div>
-                                    <div class="form-group text-center">
-                                        <button type="submit" class="btn btn-primary">Login</button>
-                                    </div>
-                                </form>
+<div class="login-page">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-6">
+                <div class="login-form-wrap">
+                    <h2 class="title">Login</h2>
+                    <form action="\login" method="POST" class="login-form">
+                        <div class="form-group">
+                            <input type="text" name="userName" id="username" class="form-control" placeholder="Username" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="password" name="passWord" id="password" class="form-control" placeholder="Password" required>
+                        </div>
+                        <div class="form-group text-center">
+                            <button type="submit" class="btn btn-primary">Login</button>
+                        </div>
+                        <p class="mt-4 text-sm text-center">
+                           Dont have a account?
+                            <a href="/pc" class="text-primary font-weight-bold">Sign Up</a>
+                        </p>
+                        <div class="overlay" id="overlay" onclick="closeDialog()">
+                            <div class="dialog-box" onclick="event.stopPropagation();">
+                                <p id="message"><%= msg %></p>
                             </div>
                         </div>
-                    </div>
+                        
+                        
+                    </form>
                 </div>
             </div>
+        </div>
+    </div>
+</div>
            
             <div class="breadcrumb__shape-wrap">
                 <img src="../public/assets/img/images/breadcrumb_shape01.png" alt="img" data-aos="fade-down-right" data-aos-delay="400">
@@ -373,8 +440,36 @@
     <script src="../public/assets/js/aos.js"></script>
     <script src="../public/assets/js/main.js"></script>
     <script>
-        SVGInject(document.querySelectorAll("img.injectable"));
+        
+        // Function to show the dialog box
+// Function to show dialog box
+// Function to show dialog box
+// Function to show dialog box
+function showDialog() {
+    var overlay = document.getElementById('overlay');
+    var messageElement = document.getElementById('message');
+    
+    overlay.style.display = 'block'; // Show the overlay
+    setTimeout(function() {
+        console.log("Message will disappear now");
+        messageElement.innerText = ''; // Clear the message after 3 seconds
+        closeDialog(); // Close the dialog box
+    }, 3000); // 3000 milliseconds = 3 seconds
+}
+
+
+// Function to close dialog box
+function closeDialog() {
+    document.getElementById('overlay').style.display = 'none';
+}
+
+SVGInject(document.querySelectorAll("img.injectable"));
+
+
+
+  
     </script>
+    
 </body>
 
 

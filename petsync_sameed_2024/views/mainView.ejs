@@ -4,81 +4,211 @@
 
 <!-- Mirrored from themedox.com/demo/petpal/contact.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 13 Feb 2024 09:42:28 GMT -->
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Petpal - Pet Care and Pet Shop HTML Template</title>
-    <meta name="description" content="Petpal - Pet Care and Pet Shop HTML Template">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <link rel="shortcut icon" type="image/x-icon" href="../public/assets/img/favicon.png">
-    <!-- Place favicon.ico in the root directory -->
-
-    <!-- CSS here -->
-    <link rel="stylesheet" href="../public/assets/css/bootstrap.min.css">
-    <link rel="stylesheet" href="../public/assets/css/animate.min.css">
-    <link rel="stylesheet" href="../public/assets/css/magnific-popup.css">
-    <link rel="stylesheet" href="../public/assets/css/fontawesome-all.min.css">
-    <link rel="stylesheet" href="../public/assets/css/flaticon_pet_care.css">
-    <link rel="stylesheet" href="../public/assets/css/odometer.css">
-    <link rel="stylesheet" href="../public/assets/css/swiper-bundle.min.css">
-    <link rel="stylesheet" href="../public/assets/css/select2.min.css">
-    <link rel="stylesheet" href="../public/assets/css/jquery-ui.css">
-    <link rel="stylesheet" href="../public/assets/css/aos.css">
-    <link rel="stylesheet" href="../public/assets/css/default.css">
-    <link rel="stylesheet" href="../public/assets/css/main.css">
-</head>
-<style>
-    .nav-link:hover {
-        color: #007bff; /* Change color on hover */
-    }
-
-    .list-inline-item a:hover {
-        color: #007bff; /* Change color of social media icons on hover */
-    }
-/* Sidebar styles */
-.sidebar {
-    position: fixed;
-    top: 0;
-    left: -250px; /* Initially hidden */
-    width: 250px;
-    height: 100%;
-    background-color: #fff; /* Adjust as needed */
-    transition: left 0.3s ease;
-    z-index: 1000;
-    overflow-y: auto;
-}
-
-.menu-slide {
-    padding: 20px;
-}
-
-.menu-slide a {
-    display: block;
-    padding: 10px 0;
-    color: #333;
-    text-decoration: none;
-}
-
-.menu-slide a:hover {
-    background-color: #f0f0f0;
-}
-
-/* Menu icon styles */
-#menu-toggle {
-    cursor: pointer;
-}
-
-/* Hide scrollbar */
-body {
-    overflow-y: auto;
-}
-
-/* Show scrollbar when sidebar is open */
-body.sidebar-open {
-    overflow-y: hidden;
-}
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>Petpal - Pet Care and Pet Shop HTML Template</title>
+        <meta name="description" content="Petpal - Pet Care and Pet Shop HTML Template">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
     
-</style>
+        <link rel="shortcut icon" type="image/x-icon" href="../public/assets/img/favicon.png">
+        <!-- Place favicon.ico in the root directory -->
+        <link rel="icon" href="../../../../favicon.ico">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+     
+    
+        <!-- Font Awesome -->
+      <link rel="stylesheet" href="../public/static/assets/plugins/fontawesome-free/css/all.min.css">
+      <!-- Ionicons -->
+      <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+      <!-- Theme style -->
+      <link rel="stylesheet" href="../public/static/assets/dist/css/adminlte.min.css">
+      <!-- Google Font: Source Sans Pro -->
+      <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+    
+        <script  type="text/javascript" src="../JS/typeahead.min.js"></script>
+        <script type="text/javascript" src="../JS/home.js"></script>
+        <!-- CSS here -->
+        <link rel="stylesheet" href="../public/assets/css/bootstrap.min.css">
+        <link rel="stylesheet" href="../public/assets/css/animate.min.css">
+        <link rel="stylesheet" href="../public/assets/css/magnific-popup.css">
+        <link rel="stylesheet" href="../public/assets/css/fontawesome-all.min.css">
+        <link rel="stylesheet" href="../public/assets/css/flaticon_pet_care.css">
+        <link rel="stylesheet" href="../public/assets/css/odometer.css">
+        <link rel="stylesheet" href="../public/assets/css/swiper-bundle.min.css">
+        <link rel="stylesheet" href="../public/assets/css/select2.min.css">
+        <link rel="stylesheet" href="../public/assets/css/jquery-ui.css">
+        <link rel="stylesheet" href="../public/assets/css/aos.css">
+        <link rel="stylesheet" href="../public/assets/css/default.css">
+        <link rel="stylesheet" href="../public/assets/css/main.css">
+    
+    
+    
+        <!-- Bootstrap core CSS -->
+        <link href="../public/static/assets/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+        <!-- Custom styles for this template -->
+        <link href="../public/static/assets/css/board.css" rel="stylesheet">
+    </head>
+    <style>
+    
+    /* profile */
+    
+    .container123 {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    
+    .card1 {
+      flex: 1;
+      aspect-ratio: 1 / 1; /* Set aspect ratio to 1:1 for square images */
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    
+    .card-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+     
+    
+    .gallery123 {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      grid-gap: 20px;
+    }
+    
+    
+    .enlarged-image {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: contain; /* Ensure the image fits within the viewport */
+      background-color: rgba(0, 0, 0, 0.8); /* Semi-transparent background */
+      z-index: 1000; /* Ensure the enlarged image is above other content */
+      cursor: pointer; /* Show pointer cursor when hovering over the image */
+    }
+    
+    
+    
+    
+    .facebook-post {
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      margin-bottom: 20px;
+    }
+    
+    .post-header {
+      display: flex;
+      align-items: center;
+      padding: 10px;
+    }
+    
+    .profile-pic {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      margin-right: 10px;
+    }
+    
+    .post-info {
+      flex-grow: 1;
+    }
+    
+    .post-content {
+      padding: 10px;
+    }
+    
+    .post-image {
+      width: 100%;
+      height: auto;
+      margin-bottom: 10px;
+    }
+    
+    .post-stats ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    
+    .post-stats ul li {
+      display: inline-block;
+      margin-right: 10px;
+    }
+    
+    .post-stats ul li i {
+      margin-right: 5px;
+    }
+    
+    /* end profile */
+    
+    
+    
+    
+        .nav-link:hover {
+            color: #007bff; /* Change color on hover */
+        }
+    
+        .list-inline-item a:hover {
+            color: #007bff; /* Change color of social media icons on hover */
+        }
+    
+    
+    .menu-slide {
+        padding: 20px;
+    }
+    
+    .menu-slide a {
+        display: block;
+        padding: 10px 0;
+        color: #333;
+        text-decoration: none;
+    }
+    
+    .menu-slide a:hover {
+        background-color: #f0f0f0;
+    }
+    
+    /* Menu icon styles */
+    #menu-toggle {
+        cursor: pointer;
+    }
+    
+    /* Hide scrollbar */
+    body {
+        overflow-y: auto;
+    }
+    
+    /* Show scrollbar when sidebar is open */
+    body.sidebar-open {
+        overflow-y: hidden;
+    }
+    
+    
+    /* bar */
+    .link-items-container {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between; /* Adjust spacing between items */
+        align-items: center; /* Align items vertically if needed */
+    }
+    
+    .link-item {
+        /* Adjust styles for individual link items if needed */
+        margin-right: 20px; /* Adjust spacing between items */
+    }
+    
+    .link-item:last-child {
+        margin-right: 0; /* Remove margin from the last item */
+    }
+    
+        
+    </style>
 <body>
 
     <!--Preloader-->
@@ -96,11 +226,50 @@ body.sidebar-open {
         <i class="fas fa-angle-up"></i>
     </button>
     <!-- Scroll-top-end-->
+
+<!--  -->
+
+<!-- offCanvas-menu -->
+        <div class="offCanvas__info">
+            <div class="offCanvas__close-icon menu-close">
+                <button><i class="far fa-window-close"></i></button>
+            </div>
+            <div class="offCanvas__logo mb-30">
+                <a href="index-2.html"><img src="../public/assets/img/logo/logo.png" alt="Logo"></a>
+            </div>
+            <div class="offCanvas__side-info mb-30">
+                <div class="contact-list mb-30">
+                    <h4>Office Address</h4>
+                    <%= name %>
+                    <p>123/A, Miranda City Likaoli <br> Prikano, Dope</p>
+                </div>
+                <div class="contact-list mb-30">
+                    <h4>Phone Number</h4>
+                    <p>+0989 7876 9865 9</p>
+                    <p>+(090) 8765 86543 85</p>
+                </div>
+                <div class="contact-list mb-30">
+                    <h4>Email Address</h4>
+                    <p>info@example.com</p>
+                    <p>example.mail@hum.com</p>
+                </div>
+            </div>
+            <div class="offCanvas__social-icon mt-30">
+                <a href="javascript:void(0)"><i class="fab fa-facebook-f"></i></a>
+                <a href="javascript:void(0)"><i class="fab fa-twitter"></i></a>
+                <a href="javascript:void(0)"><i class="fab fa-google-plus-g"></i></a>
+                <a href="javascript:void(0)"><i class="fab fa-instagram"></i></a>
+            </div>
+        </div>
+        <div class="offCanvas__overly"></div>
+        <!-- offCanvas-menu-end -->
+    <!--  -->
   
-    <div class="offcanvas offcanvas-start" id="demo">
+    <!-- <div class="offcanvas offcanvas-start" id="demo">
         <div class="offcanvas-header">
             <h1 class="offcanvas-title">Navigation</h1>
             <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
+            
         </div>
         <div class="offcanvas-body">
             <ul class="nav flex-column">
@@ -138,7 +307,7 @@ body.sidebar-open {
                 </li>
             </ul>
         </div>
-    </div>
+    </div> -->
     <!-- header-area -->
     <header>
         <div id="header-fixed-height"></div>
@@ -204,7 +373,18 @@ body.sidebar-open {
                                             </li>
                                             <li class="header-btn login-btn"><a href="/" class="btn"><i
                                                         class="flaticon-locked"></i>Logout</a></li>
-                                                        <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#demo" style="font-size: small;">Options</button>
+                                                        <li class="offCanvas-menu">
+                                                            <a href="javascript:void(0)" class="menu-tigger">
+                                                                <svg xmlns="http://www.w3.org/2000/svg" width="26" height="16" viewBox="0 0 26 16" fill="none">
+                                                                    <rect width="9" height="2" rx="1" fill="currentcolor"/>
+                                                                    <rect x="11" width="15" height="2" rx="1" fill="currentcolor" />
+                                                                    <rect y="14" width="26" height="2" rx="1" fill="currentcolor" />
+                                                                    <rect y="7" width="16" height="2" rx="1" fill="currentcolor" />
+                                                                    <rect x="17" y="7" width="9" height="2" rx="1" fill="currentcolor" />
+                                                                </svg>
+                                                            </a>
+                                                        </li>
+                                                        <!-- <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#demo" style="font-size: small;">Options</button> -->
                                         </ul>
                                        
                                     </div>
@@ -288,46 +468,96 @@ body.sidebar-open {
     </header>
     
     
-    <nav class="sidebar" id="sidebar">
-        <ul>
-            <li><a href="#">Home</a></li>
-            <li><a href="#">About</a></li>
-            <li><a href="#">Services</a></li>
-            <!-- Add more menu items as needed -->
-        </ul>
-    </nav>
+    
     <!-- header-area-end -->
 
     <!-- main-area -->
     <main class="fix">
 
+        
+       
         <section>
-            <div class="white-bg">
+            <nav class="navbar navbar-expand-lg navbar-dark bg-purple">
                 <div class="container-fluid">
-                    <div class="menu-caro">
-                        <div class="row">
-                            <div class="col-lg-2">
-                                <div class="sidemenu">
-                                    <button id="toggleSidebar">Toggle Sidebar</button>
+                    <a class="navbar-brand" href="#">Your Brand</a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarNav">
+                        <ul class="navbar-nav mr-auto">
+                            <li class="nav-item active">
+                                <a class="nav-link" href="/main"><i class="fas fa-bolt"></i> Newsfeed</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/profile"><i class="fas fa-user"></i> Profile</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/users"><i class="fas fa-search"></i> Find People</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/gallery"><i class="fas fa-image"></i> Gallery</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/create"><i class="fas fa-edit"></i> Create</a>
+                            </li>
+                        </ul>
+                        <!-- SEARCH FORM -->
+         
+    
+    
+        <form method="GET" id="search-user-form" class="form-inline my-2 my-lg-0">
+          <input class="form-control mr-sm-2" type="search" id="search-text" name="typeahead" autocomplete="off" spellcheck="false" placeholder="Username" style="height: 40px; border-radius: 5px 0 0 0; background-color: aliceblue; border-color: transparent;">
+          <button class="btn btn-outline-success my-2 my-sm-0" type="submit" style="height: 40px; border-radius: 0 5px 0 0;">Search</button>
+      </form>
+                        
+                        <ul class="navbar-nav ml-auto">
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <i class="far fa-comments"></i>
+                                    <span class="badge badge-danger navbar-badge">3</span>
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                    <!-- Dropdown menu content -->
                                 </div>
-                            </div>
-                            <div class="col-lg-8">
-                                <div class="page-caro">
-                                    <div class="link-item">
-                                        <a class="active" href="feed.html" title>
-                                            <i>
-                                                <svg class="feather feather-zap" stroke-linejoin="round" stroke-linecap="round" stroke-width="2" stroke="currentColor" fill="none" viewBox="0 0 24 24" height="24" width="24" xmlns="http://www.w3.org/2000/svg"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" /></svg>
-                                            </i>
-                                            <p>Newsfeed</p>
-                                        </a>
-                                    </div>
-                                    <!-- Other link items go here -->
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <i class="far fa-bell"></i>
+                                    <span class="badge badge-warning navbar-badge">15</span>
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                    <!-- Dropdown menu content -->
                                 </div>
-                            </div>
-                           
-                        </div>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <i class="fas fa-th-large"></i></a>
+                                    <span class="badge badge-warning navbar-badge">15</span>
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="profile.html"><i class="icofont-user-alt-3"></i> Your Profile</a>
+                                    <a class="dropdown-item" href="add-new-course.html"><i class="icofont-plus"></i> New Course</a>
+                                    <a class="dropdown-item" href="#" title><i class="icofont-brand-slideshare"></i> Invite Collegue</a>
+                                    <a class="dropdown-item" href="pay-out.html"><i class="icofont-price"></i> Payout</a>
+                                    <a class="dropdown-item" href="price-plan.html"><i class="icofont-flash"></i> Upgrade</a>
+                                    <a class="dropdown-item" href="help-faq.html"><i class="icofont-question-circle"></i> Help</a>
+                                    <a class="dropdown-item" href="/profile/edit"><i class="icofont-gear"></i> Setting</a>
+                                    <a class="dropdown-item" href="privacy-n-policy.html"><i class="icofont-notepad"></i> Privacy</a>
+                                    <a class="dropdown-item" href="#"><i class="icofont-moon"></i> Dark Mode</a>
+                                    <a class="dropdown-item" href="/logout"><i class="icofont-power"></i> Logout</a>
+                                </div>
+                                
+                            </li>
+                        </ul>
                     </div>
                 </div>
+            </nav>
+            <div class="container-fluid mt-3">
+                <!-- Your content goes here -->
             </div>
         </section>
         
@@ -338,19 +568,19 @@ body.sidebar-open {
                 <div class="row align-items-end">
                     <div class="col-lg-8">
                         <div class="breadcrumb__content">
-                            <h3 class="title">Contact Page</h3>
+                            <h3 class="title">Newsfeed</h3>
                             <nav class="breadcrumb">
                                 <span property="itemListElement" typeof="ListItem">
-                                    <a href="index-2.html">Home</a>
+                                    <a>Welcome</a>
                                 </span>
                                 <span class="breadcrumb-separator"><i class="flaticon-right-arrow-angle"></i></span>
-                                <span property="itemListElement" typeof="ListItem">Contact</span>
+                                <span property="itemListElement" typeof="ListItem"><%=name%></span>
                             </nav>
                         </div>
                     </div>
                     <div class="col-lg-4">
                         <div class="breadcrumb__img">
-                            <img src="../public/assets/img/images/breadcrumb_img.png" alt="img" data-aos="fade-left" data-aos-delay="800">
+                            <img src="../public/assets/img/images/cta_img.png" alt="img" data-aos="fade-left" data-aos-delay="800">
                         </div>
                     </div>
                 </div>
@@ -569,6 +799,84 @@ body.sidebar-open {
         </div>
     </footer>
     <!-- footer-area-end -->
+
+
+    <!-- jQuery -->
+<script src="../public/static/assets/plugins/jquery/jquery.min.js"></script>
+<!-- Bootstrap 4 -->
+<script src="../public/static/assets/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- AdminLTE App -->
+<script src="../public/static/assets/dist/js/adminlte.min.js"></script>
+<!-- AdminLTE for demo purposes -->
+<script src="../public/static/assets/dist/js/demo.js"></script>
+
+
+
+
+    <!-- Icons -->
+    <script src="https://unpkg.com/feather-icons/dist/feather.min.js"></script>
+    <script>
+      feather.replace()
+    </script>
+
+    <!-- Graphs -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"></script>
+    <script>
+      var ctx = document.getElementById("myChart");
+      var myChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels: ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+          datasets: [{
+            data: [15339, 21345, 18483, 24003, 23489, 24092, 12034],
+            lineTension: 0,
+            backgroundColor: 'transparent',
+            borderColor: '#007bff',
+            borderWidth: 4,
+            pointBackgroundColor: '#007bff'
+          }]
+        },
+        options: {
+          scales: {
+            yAxes: [{
+              ticks: {
+                beginAtZero: false
+              }
+            }]
+          },
+          legend: {
+            display: false,
+          }
+        }
+      });
+    </script>
+    <script>
+      function openImage(imageSrc) {
+  // Create a new element to display the enlarged image
+  var enlargedImage = document.createElement('img');
+  enlargedImage.src = imageSrc;
+  enlargedImage.classList.add('enlarged-image');
+
+  // Append the enlarged image to the body
+  document.body.appendChild(enlargedImage);
+
+  // Add an event listener to remove the enlarged image when clicked
+  enlargedImage.addEventListener('click', function() {
+    document.body.removeChild(enlargedImage);
+  });
+}
+    </script>
+    <script>
+      document.getElementById("search-user-form").addEventListener("submit", function(event) {
+          event.preventDefault(); // Prevent the default form submission
+  
+          // Get the value of the input field
+          var username = document.getElementById("search-text").value;
+  
+          // Redirect to the URL with the username as a parameter
+          window.location.href = "/account/" + username;
+      });
+  </script>
 
 
     <!-- JS here -->

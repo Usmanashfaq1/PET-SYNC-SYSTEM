@@ -2,11 +2,11 @@ let cart_list = [];
 document.addEventListener('DOMContentLoaded', function () {
     cart_list = [-1];
     //all_products();
-    email = localStorage.getItem('email');
-    //document.getElementById('user').textContent = email;
+    email_e = localStorage.getItem('email_e');
+    //document.getElementById('user').textContent = email_e;
 
     $.ajax({
-        url: 'http://localhost:3001/cart_item_number?email=' + email,
+        url: 'http://localhost:3001/cart_item_number?email_e=' + email_e,
         method: 'GET',
         success: function (data) {
             var cartCount = $('.header-cart-two span');
@@ -142,10 +142,10 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 function addToCart(item_id, price) {
-    var email = localStorage.getItem('email');
+    var email_e = localStorage.getItem('email_e');
 
     $.ajax({
-        url: 'http://localhost:3001/add_to_cart?item_id=' + item_id + '&email=' + email + '&price=' + price,
+        url: 'http://localhost:3001/add_to_cart?item_id=' + item_id + '&email_e=' + email_e + '&price=' + price,
         method: 'POST',
         success: function (data) {
             if (data === 1) {
@@ -158,7 +158,7 @@ function addToCart(item_id, price) {
 
             // Check count of cart from DB
             $.ajax({
-                url: 'http://localhost:3001/cart_item_number?email=' + email,
+                url: 'http://localhost:3001/cart_item_number?email_e=' + email_e,
                 method: 'GET',
                 success: function (data) {
                     var cartCount = $('.header-cart-two span');
@@ -183,45 +183,116 @@ function addToCart(item_id, price) {
 }
 
 
+function addedtoCart(productId) {
+    return new Promise(function (resolve, reject) {
+        email_e = localStorage.getItem('email_e');
+        item_id = productId;
+        $.ajax({
+            url: 'http://localhost:3001/check_added_to_cart?item_id=' + item_id + '&email_e=' + email_e,
+            method: 'GET', 
+            success: function (data) {
+                if (data === 1) {
+                    resolve(true);
+                } else {
+                    resolve(false);
+                }
+            },
+            error: function (error) {
+                console.error('Error checking cart:', error);
+                alert('Error checking cart. Please try again.');
+                reject(error);
+            }
+        });
+    });
+}
 
 function increaseQuantity(productId, stock, price) {
-    var quantityElement = $('#quantity' + productId);
-    var currentQuantity = parseInt(quantityElement.text());
+    addedtoCart(productId)
+        .then(function (isAdded) {
+            if (isAdded) {
+                var quantityElement = $('#quantity' + productId);
+                var currentQuantity = parseInt(quantityElement.text());
 
-    if (currentQuantity < stock) {
-         quantityElement.text(currentQuantity + 1);
+                if (currentQuantity < stock) {
+                    quantityElement.text(currentQuantity + 1);
 
-        var totalPrice = parseFloat($('.price_of_total').text().replace('$', ''));
+                    var totalPrice = parseFloat($('.price_of_total').text().replace('$', ''));
+                    var totalWithQuantityPrice = totalPrice + price;
+                    $('.price_of_total').text('$' + totalWithQuantityPrice.toFixed(2));
 
-        var totalWithQuantityPrice = totalPrice + price;
+                    // Update cart count and total
+                    updateCartDetails(productId);
+                } else {
+                    $('#message').text('Product quantity cannot exceed stock!');
+                    showDialog_donot_reload();
+                }
+            } else {
+                var email_e = localStorage.getItem('email_e');
 
-        $('.price_of_total').text('$' + totalWithQuantityPrice.toFixed(2));
+    $.ajax({
+        url: 'http://localhost:3001/add_to_cart?item_id=' + item_id + '&email_e=' + email_e + '&price=' + price,
+        method: 'POST',
+        success: function (data) {
+            if (data === 1) {
+                document.getElementById('message').innerText = 'Item Added to Cart!';
+                showDialog_donot_reload();
+            } else {
+                document.getElementById('message').innerText = 'Item Already Added to Cart!';
+                showDialog();
+            }
 
+            // Check count of cart from DB
+            $.ajax({
+                url: 'http://localhost:3001/cart_item_number?email_e=' + email_e,
+                method: 'GET',
+                success: function (data) {
+                    var cartCount = $('.header-cart-two span');
+                    var currentCount = parseInt(cartCount.text());
+                    var newCartCount = (currentCount * 0) + parseInt(data.itemCount);
+                    cartCount.text(newCartCount);
 
+                    var totalPrice = data.total;
+                    $('.price_of_total').text('$' + totalPrice.toFixed(2));
+                },
+                error: function (error) {
+                    console.error('Error getting cart item number:', error);
+                    alert('Error getting cart item number. Please try again.');
+                }
+            });
+        },
+        error: function (error) {
+            console.error('Error adding item to cart:', error);
+            alert('Error adding item to cart. Please try again.');
+        }
+    });
+            }
+        })
+        .catch(function (error) {
+            console.error('Error:', error);
+            alert('Error adding item to cart. Please try again.');
+        });
+}
 
-        // $.ajax({
-        //     url: 'http://localhost:3001/cart_item_number_quantity?email=' + email + '&id=' + productId,
-        //     method: 'GET',
-        //     success: function (data) {
-        //         var cartCount = $('.header-cart-two span');
-        //         var currentCount = parseInt(cartCount.text());
-        //         var newCartCount = (currentCount * 0) + parseInt(data.itemCount);
-        //         cartCount.text(newCartCount);
+function updateCartDetails(productId) {
+    // Retrieve email_e from localStorage
+    var email_e = localStorage.getItem('email_e');
+    $.ajax({
+        url: 'http://localhost:3001/cart_item_number_quantity?email_e=' + email_e + '&id=' + productId,
+        method: 'GET',
+        success: function (data) {
+            var cartCount = $('.header-cart-two span');
+            var currentCount = parseInt(cartCount.text());
+            var newCartCount = (currentCount * 0) + parseInt(data.itemCount);
+            cartCount.text(newCartCount);
 
-        //         var totalPrice = data.total;
-        //         $('.price_of_total').text('$' + totalPrice.toFixed(2));
-        //     },
-        //     error: function (error) {
-        //         console.error('Error getting cart item number:', error);
-        //         alert('Error getting cart item number. Please try again.');
-        //     }
-        // });
-        
-
-    } else {
-        $('#message').text('Product quantity cannot exceed stock!');
-        showDialog_donot_reload();
-    }
+            var totalPrice = data.total;
+            $('.price_of_total').text('$' + totalPrice.toFixed(2));
+        },
+        error: function (error) {
+            console.error('Error getting cart item number:', error);
+            alert('Error getting cart item number. Please try again.');
+        }
+    });
 }
 
 function decreaseQuantity(productId, stock, price) {

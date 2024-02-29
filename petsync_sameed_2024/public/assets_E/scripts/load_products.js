@@ -2,11 +2,11 @@ let cart_list = [];
 document.addEventListener('DOMContentLoaded', function () {
     cart_list = [-1];
     all_products();
-    email = localStorage.getItem('email');
-    //document.getElementById('user').textContent = email;
+    email_e = localStorage.getItem('email_e');
+    //document.getElementById('user').textContent = email_e;
 
     $.ajax({
-        url: 'http://localhost:3001/cart_item_number?email=' + email,
+        url: 'http://localhost:3001/cart_item_number?email_e=' + email_e,
         method: 'GET',
         success: function (data) {
             var cartCount = $('.header-cart-two span');
@@ -195,10 +195,10 @@ function selectCategory(value) {
 
 
 function addToCart(item_id, price) {
-    var email = localStorage.getItem('email');
+    var email_e = localStorage.getItem('email_e');
 
     $.ajax({
-        url: 'http://localhost:3001/add_to_cart?item_id=' + item_id + '&email=' + email + '&price=' + price,
+        url: 'http://localhost:3001/add_to_cart?item_id=' + item_id + '&email_e=' + email_e + '&price=' + price,
         method: 'POST',
         success: function (data) {
             if (data === 1) {
@@ -211,7 +211,7 @@ function addToCart(item_id, price) {
 
             // Check count of cart from DB
             $.ajax({
-                url: 'http://localhost:3001/cart_item_number?email=' + email,
+                url: 'http://localhost:3001/cart_item_number?email_e=' + email_e,
                 method: 'GET',
                 success: function (data) {
                     var cartCount = $('.header-cart-two span');
@@ -234,7 +234,6 @@ function addToCart(item_id, price) {
         }
     });
 }
-
 
 
 
