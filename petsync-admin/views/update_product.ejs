@@ -1,0 +1,232 @@
+
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../../../favicon.ico">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <link rel="stylesheet" href="../public/assets_E/css/dialogbox.css">
+
+    <script  type="text/javascript" src="../JS/typeahead.min.js"></script>
+    <script type="text/javascript" src="../JS/home.js"></script>
+    <!-- Bootstrap core CSS -->
+    
+
+    <title>User Management</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="../public/static/assets/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="../public/static/assets/css/board.css" rel="stylesheet">
+  </head>
+<style>
+  
+</style>
+  <body>
+    <nav class="navbar navbar-primary sticky-top bg-info flex-md-nowrap p-0">
+      <a class="navbar-brand col-sm-3 col-md-2 mr-0 text-white" href="#">PetSync Community</a>
+      <ul class="navbar-nav px-3">
+          <form action="/logout_user" method="GET">
+              <button type="submit" class="btn btn-block btn-outline-light">Logout</button>
+          </form>
+      </ul>
+  </nav>
+  
+    
+
+    <div class="container-fluid">
+      <div class="row">
+        <nav class="col-md-2 d-none d-md-block bg-light sidebar">
+          <div class="sidebar-sticky">
+            <ul class="nav flex-column">
+              <li class="nav-item">
+                <a class="nav-link " href="/admin_dashboard">
+                  <span data-feather="home"></span>
+                  Main <span class="sr-only">(current)</span>
+                </a>
+              </li>
+              
+
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle " href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Social media Control
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                  <a class="dropdown-item" href="/admin">Reports</a>
+                  <a class="dropdown-item" href="/users_media">Users</a>
+                  <a class="dropdown-item" href="/requests">View Requests</a>
+                </div>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  E-Commerce Control
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                  <a class="dropdown-item" href="/admin_dashboard1">sales chart</a>
+                  <a class="dropdown-item" href="/admin_products">Add product</a>
+                  <a class="dropdown-item" href="/edit_product">Update or Delete</a>
+                </div>
+              </li>
+              
+              
+            </ul>
+
+            
+          </div>
+        </nav>
+
+        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
+          <div
+                    class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                    <h1 class="h2">Update Product</h1>
+
+                </div>
+
+
+                <div class="row d-flex justify-content-center align-items-center h-100">
+                    <div class="col-12">
+                      <div class="card card-registration card-registration-2 bg-primary" style="border-radius: 15px;">
+                        <form id="product" method="POST" enctype="multipart/form-data" action="/updated_product_data">
+                          <input type="hidden" name="update_id" id = 'update_id'>
+                          <div class="card-body p-0">
+                            <div class="row g-0">
+                              <div class="col-lg-6">
+                                <div class="p-5">
+                                  <h3 class="fw-normal mb-5" style = "font-weight: bolder;">Update Product</h3>
+                  
+                                  <div class="mb-4 pb-2">
+                                    <label style = "font-weight: bolder;" class="form-label" for="pname">Product name</label>
+                                    <div class="form-outline">
+                                      <input type="text" id="pname" name="pname" class="form-control form-control-lg" required />
+                                    </div>
+                                  </div>
+                  
+                                  <div class="mb-4 pb-2">
+                                    <label style = "font-weight: bolder;" class="form-label" for="form3Examplev4">Category:</label>
+                                    <select id="category" name="category" class="select" required>
+                                      <option value="Pet">Pet</option>
+                                      <option value="Pet Food">Pet Food</option>
+                                      <option value="Pet Medicine">Pet Medicine</option>
+                                    </select>
+                                  </div>
+                  
+                                  <div class="mb-4 pb-2">
+                                    <label style = "font-weight: bolder;" class="form-label" for="price">Price</label>
+                                    <div class="form-outline">
+                                      <input type="number" id="price" name="price" class="form-control form-control-lg" required min="1" max="100">
+                                    </div>
+                                  </div>
+                  
+                                  <div class="mb-4 pb-2">
+                                    <label style = "font-weight: bolder;" class="form-label" for="stock">Quantity/Stock</label>
+                                    <div class="form-outline">
+                                      <input type="number" id="stock" name="stock" class="form-control form-control-lg" required min="1" max="100">
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                  
+                              <div class="col-lg-6"style="padding-top:73px">
+                                <div class="p-5">
+                                  <div class="mb-4 pb-2">
+                                    <label style = "font-weight: bolder;" class="form-label" for="rating">Rating(1-5)</label>
+                                    <div class="form-outline">
+                                      <input type="number" id="rating" name="rating" class="form-control form-control-lg" required min="1" max="5">
+                                    </div>
+                                  </div>
+                  
+                                  <div class="mb-4 pb-2">
+                                    <label style = "font-weight: bolder;" class="form-label" for="description">Description</label>
+                                    <div class="form-outline">
+                                      <textarea style="height: 100px; font-size: 16px; vertical-align: middle;" id="description" name="description" class="form-control form-control-lg" required></textarea>
+                                    </div>
+                                  </div>
+
+                                  <div class="mb-1">
+                                    <label style = "font-weight: bolder;padding-top: 30px;" for="productPicture" class="form-label">Product Picture:</label>
+                                    <input   type="file" name="productPicture" id="productPicture" class="form-control" accept="image/*" required>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <button type="submit" class="btn btn-warning d-block mx-auto" style="width: 400px;" data-mdb-ripple-color="dark">Update</button>
+                        </form>
+                        <div class="overlay" id="overlay">
+                            <div class="dialog-box">
+                              <p id='message'></p>
+                              <button class="close-btn" onclick="closeDialog_new_page()">Close</button>
+                            </div>
+                          </div>
+                      </div>
+                    </div>
+                  </div>
+                
+        </main>
+      </div>
+      
+      <footer class="main-footer">
+        <!-- To the right -->
+        <div class="float-right d-none d-sm-inline">
+          
+          <br>
+        </div>
+        <!-- Default to the left -->
+      
+      </footer>
+    </div>
+
+    
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script>window.jQuery || document.write('<script src="../../../../assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
+    <script src="../../../../assets/js/vendor/popper.min.js"></script>
+    <script src="../../../../dist/js/bootstrap.min.js"></script>
+
+    <!-- Icons -->
+    <script src="https://unpkg.com/feather-icons/dist/feather.min.js"></script>
+    <script>
+      feather.replace()
+    </script>
+
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"></script>
+    
+    <script src="../public/static/assets/plugins/jquery/jquery.min.js"></script>
+    <script src="../public/static/assets/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="../public/static/dist/js/adminlte.min.js"></script>
+    <script src="../public/static/dist/js/demo.js"></script> 
+
+    <script src="../public/assets_E/dist/js/bootstrap.bundle.min.js"></script>
+    
+
+
+
+    <script src ="../public/assets_E/scripts/update_product.js"></script>
+
+    <script src="../public/assets_E/js/dialog.js"></script>
+    <script src="../public/assets_E/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js"
+        integrity="sha384-uO3SXW5IuS1ZpFPKugNNWqTZRRglnUJK6UAZ/gxOX80nxEkN9NcGZTftn6RzhGWE"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js"
+        integrity="sha384-zNy6FEbO50N+Cg5wap8IKA4M/ZnLJgzc6w2NqACZaK0u0FXfOWRRJOnQtpZun8ha"
+        crossorigin="anonymous"></script>
+    <script src="../public/assets_E/js/dashboard.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+
+
+  </body>
+</html>
