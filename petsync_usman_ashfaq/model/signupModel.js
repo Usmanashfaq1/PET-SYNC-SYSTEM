@@ -17,6 +17,14 @@ class signupModel {
 
             // Insert user data into the 'users' table
             await this.promiseConnectionQuery('INSERT INTO users SET ?', data);
+            // Insert initial follow count data into the 'followcount' table
+        // const followCountData = {
+        //     "username": data.username,
+        //     "followers": 0,
+        //     "following": 0
+        // };
+        // await this.promiseConnectionQuery('INSERT INTO followcount SET ?', followCountData);
+
 
             // Retrieve the inserted user's information
             const result = await this.promiseConnectionQuery('SELECT * FROM users WHERE username = ?', data.username);

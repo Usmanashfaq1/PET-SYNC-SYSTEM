@@ -235,6 +235,16 @@ body.sidebar-open {
     margin: 0;
 }
 
+.follow-btn {
+    font-size: 1.8rem;
+    line-height: 1.8;
+    border: 0.2rem solid white;
+    border-radius: 0.2rem;
+    padding: 0 2.4rem;
+    margin-left: 2rem;
+    background-color: #007BFF;
+    color: white;
+    }
     
 </style>
 <body>
@@ -628,37 +638,36 @@ body.sidebar-open {
                 <div class="card-body box-profile">
                   <div class="text-center">
                     <img  class="profile-user-img img-fluid img-circle" style="width: 120px;height: 135px;"
-                     src="/profilepics/<%=dpName%>"
+                     src="/profilepics/<%=userData.dpName%>"
                          alt="User profile picture">
                   </div>
   
-                  <h3 class="profile-username text-center"><%= data.username %></h3>
+                  <h3 class="profile-username text-center"><%= userData.data.username %></h3>
   
                   <p class="text-muted text-center">Software Engineer</p>
   
                   <ul class="list-group list-group-unbordered mb-3">
                     <li class="list-group-item">
-                      <b>Followers</b> <a class="float-right">1,322</a>
+                      <b>Followers</b> <a class="float-right"><%= followResult ? followResult.followers : 0 %></a>
                     </li>
                     <li class="list-group-item">
-                      <b>Following</b> <a class="float-right">543</a>
-                    </li>
-                    <li class="list-group-item">
-                      <b>Friends</b> <a class="float-right">13,287</a>
+                      <b>Following</b> <a class="float-right"><%= followResult ? followResult.following : 0 %></a>
                     </li>
                   </ul>
-  
-                  <a href="#" class="btn btn-primary btn-block"><b>Follow</b></a>
+                  
+                  <input type="button" id="follow-btn" class="btn btn-primary btn-block" value="<%=initialFollowedUnfollowed%>" name="followUser">
+                
                   <br>
                   <!-- User Profile View -->
 <div class="user-profile">
+    
     <!-- Profile information goes here -->
     <button class="btn btn-primary report-user-btn" onclick="openReportModal()">Report User</button>
 </div>
 <div id="reportUserModal" class="modal">
     <div class="modal-content">
         <span class="close" onclick="closeReportModal()">&times;</span>
-        <form id="reportUserForm" action="/report/user/<%= data.id %>" method="POST">
+        <form id="reportUserForm" action="/report/user/<%= userData.data.id %>" method="POST">
 
             <div class="form-group">
                 <label for="reportReason">Reason for Reporting:</label>
@@ -683,14 +692,14 @@ body.sidebar-open {
                   <strong><i class="fas fa-book mr-1"></i> Bio</strong>
   
                   <p class="text-muted">
-                    <%=data.bio%>
+                    <%=userData.data.bio%>
                   </p>
   
                   <hr>
   
                   <strong><i class="fas fa-map-marker-alt mr-1"></i> Location</strong>
   
-                  <p class="text-muted"><%= data.location %></p>
+                  <p class="text-muted"><%= userData.data.location %></p>
   
                   <hr>
   
@@ -708,11 +717,11 @@ body.sidebar-open {
   
                   <strong><i class="far fa-file-alt mr-1"></i> BirthDate</strong>
   
-                  <p class="text-muted"><%= data.birthdate%></p>
+                  <p class="text-muted"><%= userData.data.birthdate%></p>
   
                   <strong><i class="far fa-file-alt mr-1"></i> Notes</strong>
   
-                  <p class="text-muted"><%= data.note%></p>
+                  <p class="text-muted"><%=userData.data.note%></p>
   
   
                 </div>
@@ -743,9 +752,9 @@ body.sidebar-open {
                       <!-- post views -->
                       <div class="container123">
                         <div class="gallery123">
-                          <% for(var i=0; i < feedResult.length; i++) { %>
-                            <div class="card1" onclick="openImage('profilepics/<%=feedResult[i].feedname%>')">
-                              <img src="/profilepics/<%=feedResult[i].feedname%>" class="card-image" alt="">
+                          <% for(var i=0; i < userData.feedResult.length; i++) { %>
+                            <div class="card1" onclick="openImage('profilepics/<%=userData.feedResult[i].feedname%>')">
+                              <img src="/profilepics/<%=userData.feedResult[i].feedname%>" class="card-image" alt="">
   
                             </div>
                           <% } %>
@@ -776,22 +785,22 @@ body.sidebar-open {
       <h2>Post Timeline</h2>
       <div class="gallery">
         <!-- here added the check if no post is psoted or user dont have any post show this.... -->
-        <% if (feedResult.length === 0) { %>
+        <% if (userData.feedResult.length === 0) { %>
           <p>Nothing to show here!</p>
         <% } else { %>
-          <% for(var i=0; i < feedResult.length; i++) { %>
+          <% for(var i=0; i < userData.feedResult.length; i++) { %>
             <div class="facebook-post">
               <div class="post-header">
-                <img src="/profilepics/<%=feedResult[i].feedname%>" class="profile-pic" alt="">
+                <img src="/profilepics/<%=userData.feedResult[i].feedname%>" class="profile-pic" alt="">
                 <div class="post-info">
-                  <h3 class="post-author"> <a href="/account/<%=feedResult[i].username%>"><%=feedResult[i].username%></a></h3>
-                  <p class="post-time"><%=feedResult[i].timestamp%></p>
+                  <h3 class="post-author"> <a href="/account/<%=userData.feedResult[i].username%>"><%=userData.feedResult[i].username%></a></h3>
+                  <p class="post-time"><%=userData.feedResult[i].timestamp%></p>
                 </div>
               </div>
               <div class="post-content">
-                <img src="/profilepics/<%=feedResult[i].feedname%>" class="post-image" alt="">
+                <img src="/profilepics/<%=userData.feedResult[i].feedname%>" class="post-image" alt="">
                 <div class="post-caption">
-                  <h5><%=feedResult[i].caption%></h5>
+                  <h5><%=userData.feedResult[i].caption%></h5>
                 </div>
                 <div class="post-stats">
                   <ul>
@@ -1036,6 +1045,36 @@ body.sidebar-open {
           // Redirect to the URL with the username as a parameter
           window.location.href = "/account/" + username;
       });
+
+      $(document).ready(function(){
+            /*$('#follow-form').submit(function() {
+            $(this).ajaxSubmit({
+                error: function(xhr) {
+                status('Error: ' + xhr.status);
+                },
+                success: function(response) {
+                    console.log(response);
+                }
+            });
+            //Very important line, it disables the page refresh.
+            return false;
+            });*/
+            $('#follow-btn').click(function() {
+                let flag=1;
+                if($('#follow-btn').val()=='Unfollow'){
+                    flag=0;
+                    $('#follow-btn').attr('value',"Follow");
+                }
+                else{
+                    $('#follow-btn').attr('value',"Unfollow");
+                }
+
+            $.post('/follow', {following:'<%=userData.data.username%>',flag:flag}, function(result) {
+               
+                return false;
+            });  
+            });  
+        }); 
   </script>
 
 
