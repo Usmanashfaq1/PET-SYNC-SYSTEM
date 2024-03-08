@@ -10,7 +10,17 @@ const dotenv =require('dotenv');
 const nodemailer = require("nodemailer");
 const pool = require('nodemailer-smtp-pool');
 var flash = require("connect-flash");
-app.use(helmet());
+// Use helmet with CSP configuration
+// Use helmet with CSP configuration
+app.use(
+  helmet.contentSecurityPolicy({
+    directives: {
+      defaultSrc: ["'self'"],
+      scriptSrcAttr: ["'unsafe-inline'"],
+      // Add other directives as needed
+    },
+  })
+);
 
 // Use nocache middleware to disable caching
 app.use(nocache());
