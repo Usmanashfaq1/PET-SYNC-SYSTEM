@@ -1,0 +1,25 @@
+<!-- payment.ejs -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment</title>
+</head>
+<body>
+    <h1>Payment Page</h1>
+    <form  id="paymentForm" action="/initiate-payment" method="POST">
+        <label for="cardToken">Card Token:</label>
+        <input type="text" id="cardToken" name="cardToken" required><br><br>
+        <label for="hashedPan">Hashed Pan:</label>
+        <input type="text" id="hashedPan" name="hashedPan" required><br><br>
+        <label for="paymentToken">Payment Token:</label>
+        <input type="text" id="paymentToken" name="paymentToken" required><br><br>
+        <label for="amount">Amount (in PKR):</label>
+        <input type="text" id="amount" name="amount" required><br><br>
+        <button type="submit">Proceed to Payment</button>
+    </form>
+</body>
+<script src="../public/assets_E/scripts/payment.js"></script>
+</html>

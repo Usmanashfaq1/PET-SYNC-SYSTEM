@@ -4,16 +4,10 @@ const path = require('path');
 const cors = require('cors');
 const fs = require('fs');
 var app = express();
-const helmet=require('helmet');
-const nocache=require('nocache');
 const dotenv =require('dotenv');
 const nodemailer = require("nodemailer");
 const pool = require('nodemailer-smtp-pool');
 var flash = require("connect-flash");
-app.use(helmet());
-
-// Use nocache middleware to disable caching
-app.use(nocache());
 dotenv.config();
 app.use(cors());
 const net = require('net');
