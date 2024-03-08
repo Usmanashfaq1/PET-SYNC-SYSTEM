@@ -3,11 +3,17 @@ const bodyParser = require('body-parser');
 const path = require('path');
 const cors = require('cors');
 const fs = require('fs');
+const helmet=require('helmet');
+const nocache=require('nocache');
 var app = express();
 const dotenv =require('dotenv');
 const nodemailer = require("nodemailer");
 const pool = require('nodemailer-smtp-pool');
 var flash = require("connect-flash");
+app.use(helmet());
+
+// Use nocache middleware to disable caching
+app.use(nocache());
 dotenv.config();
 app.use(cors());
 const { isUserAuthenticated } = require('./middleware/authMiddleware');
@@ -122,19 +128,19 @@ app.use('/',report);
 
 
 
-app.get('/community',(req,res)=>{
-  res.render('community');
- });
+// app.get('/community',(req,res)=>{
+//   res.render('community');
+//  });
 
 
-//  dummy views
- app.get('/pc',(req,res)=>{
-  res.render('signup_new');
- });
+// //  dummy views
+//  app.get('/pc',(req,res)=>{
+//   res.render('signup_new');
+//  });
 
- app.get('/cp',(req,res)=>{
-  res.render('settingnew');
- });
+//  app.get('/cp',(req,res)=>{
+//   res.render('settingnew');
+//  });
 
 // end dummy views
 

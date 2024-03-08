@@ -75,4 +75,33 @@ router.get('/cart_item_number_quantity', handle_cart_item_number_quantity);
 
 
 
+
+
+
+//single routes
+
+router.get('/error', (req, res) => {
+    res.render('error');
+});
+
+router.get('/community', (req, res) => {
+    res.render('community');
+});
+
+// dummy views
+router.get('/pc', (req, res) => {
+    res.render('signup_new');
+});
+
+router.get('/cp', (req, res) => {
+    res.render('settingnew');
+});
+
+
+
+
+
+
+
+
 module.exports = router;
