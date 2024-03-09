@@ -12,7 +12,7 @@ payment_route.set('views',path.join(__dirname, '../views'));
 
 const paymentController = require('../controllers/paymentController');
 
-payment_route.get('/', paymentController.renderBuyPage);
+payment_route.get('/buy', paymentController.renderBuyPage);
 payment_route.post('/payment', paymentController.payment);
 payment_route.get('/success', paymentController.success);
 payment_route.get('/failure', paymentController.failure);
