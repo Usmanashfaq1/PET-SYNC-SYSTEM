@@ -87,3 +87,10 @@ function removeFromCart(id) {
         }
     });
 }
+
+
+
+function checkoutPage()
+{
+    
+}

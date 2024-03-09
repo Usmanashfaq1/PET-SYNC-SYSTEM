@@ -54,7 +54,7 @@
 	<form action="payment" method="POST">
     <input type="hidden" name="amount" value="<%= parseInt(amount)*100 %>">
     <input type="hidden" name="productName" value="Shocks">
-    <script
+	<script
     src="https://checkout.stripe.com/checkout.js"
     class="stripe-button"
     data-key="<%= key %>"
