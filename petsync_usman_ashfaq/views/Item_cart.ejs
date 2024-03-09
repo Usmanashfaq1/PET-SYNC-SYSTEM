@@ -29,8 +29,8 @@
     <link rel="stylesheet" href="../public/assets/css/aos.css">
     <link rel="stylesheet" href="../public/assets/css/default.css">
     <link rel="stylesheet" href="../public/assets/css/main.css">
-    
-    
+
+
 </head>
 
 <body>
@@ -291,29 +291,25 @@
     </main>
 
     <form action="payment" method="POST">
-        <input type="hidden" name="amount" value="<%= totalPrice && !isNaN(totalPrice) ? totalPrice * 100 : 0 %>">
-        <% if (items && items.length > 0) { %>
-            <% items.forEach(item => { %>
-                <input type="hidden" name="items[]" value="<%= item.price && !isNaN(item.price) ? item.price * 100 : 0 %>">
+        <input type="hidden" name="amount" value="<%= totalPrice && !isNaN(totalPrice) ? totalPrice : 0 %>">
+        <% if (items && items.length> 0) { %>
+            <% items.forEach(item=> { %>
+                <input type="hidden" name="items[]"
+                    value="<%= item.price && !isNaN(item.price) ? ( item.price * 100 )/item.quantity : 0 %>">
                 <input type="hidden" name="items[]" value="<%= item.product_name || '' %>">
-                <input type="hidden" name="items[]" value="<%= item.quantity && !isNaN(item.quantity) ? item.quantity : 1 %>"> <!-- Quantity -->
+                <input type="hidden" name="items[]"
+                    value="<%= item.quantity && !isNaN(item.quantity) ? item.quantity : 1 %>"> <!-- Quantity -->
                 <input type="hidden" name="items[]" value="<%= item.description || '' %>"> <!-- Description -->
                 <!-- Convert base64 image to URI format -->
                 <input type="hidden" name="items[]" value="<%= item.productPicture %>">
-            <% }); %>
-        <% } %>
-        <!-- Hidden email field -->
-        <input type="hidden" name="email" value="<%= userEmail %>">
-        <script
-            src="https://checkout.stripe.com/checkout.js"
-            class="stripe-button"
-            data-key="<%= key %>"
-            data-amount="<%= totalPrice && !isNaN(totalPrice) ? totalPrice * 100 : 0 %>"
-            data-currency="usd"
-            data-locale="auto">
-        </script>
+                <% }); %>
+                    <% } %>
+                    <div style="text-align: center; margin-bottom: 20px;">
+                        <button type="submit" class="btn btn-success">Checkout</button> <!-- Use btn-success for green -->
+                    </div>
+                    
     </form>
-    
+
 
 
 
@@ -476,7 +472,7 @@
     <link rel="stylesheet" href="../public/assets_E/css/dialogbox.css">
     <script src="../public/assets_E/js/dialog.js"></script>
     <script src="../public/assets_E/scripts/user_cart.js"></script>
- 
+
 </body>
 
 

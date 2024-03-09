@@ -25,7 +25,7 @@ const renderBuyPage = async (req, res) => {
 const payment = async (req, res) => {
     try {
         const amount = parseFloat(req.body.amount);
-
+        console.log(amount);
         if (!isNaN(amount) && Array.isArray(req.body.items) && req.body.items.length > 0) {
             const lineItems = req.body.items.reduce((acc, item, index) => {
                 if (index % 5 === 0 && !isNaN(parseFloat(item))) {
@@ -33,22 +33,22 @@ const payment = async (req, res) => {
                     const productName = req.body.items[index + 1] || '';
                     const quantity = parseInt(req.body.items[index + 2]);
                     const description = req.body.items[index + 3] || '';
-                     const productPictureName = req.body.items[index + 4]; // Product picture name
+                    //  const productPictureName = req.body.items[index + 4]; // Product picture name
 
                     if (!isNaN(quantity) && quantity > 0) {
-                         const uploadDirectory = path.join(__dirname, '..', '..', 'upload');
-                         const filePath = path.join(uploadDirectory, productPictureName);
+                        //  const uploadDirectory = path.join(__dirname, '..', '..', 'upload');
+                        //  const filePath = path.join(uploadDirectory, productPictureName);
                         try {
-                            const content = fs.readFileSync(filePath, { encoding: 'base64' });
+                            // const content = fs.readFileSync(filePath, { encoding: 'base64' });
                             acc.push({
                                 price_data: {
                                     currency: 'usd',
                                     product_data: {
                                         name: productName,
                                         description: description,
-                                        images: [content],
+                                        //images: [content],
                                     },
-                                    unit_amount: price * 100, // Convert to cents
+                                    unit_amount: price , // Convert to cents
                                 },
                                 quantity: quantity,
                             });

@@ -33,8 +33,6 @@ const { handle_E_commerce_login } = require('../controller/E-commerce/E-commerce
 const { handle_get_product_detail_with_id } = require('../controller/E-commerce/product_detail')
 const { handle_cart_item_number_quantity } = require('../controller/E-commerce/cart')
 const { handle_check_added_to_cart } = require('../controller/E-commerce/cart')
-const { handle_process_payment} = require('../controller/E-commerce/payments')
-const { handle_initiate_payment} = require('../controller/E-commerce/payments')
 
 
 
@@ -82,9 +80,6 @@ router.get('/cart_item_number_quantity', handle_cart_item_number_quantity);
 
 router.get ('/check_added_to_cart', handle_check_added_to_cart);
 
-router.post ('/process-payment', handle_process_payment);
-
-router.post ('/initiate-payment', handle_initiate_payment);
 
 
 
