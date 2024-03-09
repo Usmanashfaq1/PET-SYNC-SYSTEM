@@ -242,3 +242,14 @@ function open_details(id) {
     localStorage.setItem('id_detail_of_item', id);
     window.location.href = "/product-details";
 }
+
+
+function itemcartpage() {
+    var email_e = localStorage.getItem('email_e');
+    var itemCartLink = document.getElementById('itemCartLink');
+    if (itemCartLink) {
+        itemCartLink.href = '/item_cart?email_e=' + email_e;
+    } else {
+        console.error("Element with id 'itemCartLink' not found.");
+    }
+}

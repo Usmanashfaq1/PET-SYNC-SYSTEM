@@ -39,6 +39,9 @@ handle_get_product_detail_with_id = (req, res) =>
   });
 }
 
+
+
+
 module.exports = {
     handle_get_product_detail_with_id,
 }

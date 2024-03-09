@@ -13,7 +13,9 @@
 
     <link rel="shortcut icon" type="image/x-icon" href="../public/assets/img/favicon.png">
     <!-- Place favicon.ico in the root directory -->
-
+    <link rel="stylesheet" href="/stylesheets/style.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-H+K7USCnX11h"> </script>
+    <script src="https://js.stripe.com/v3/"></script>
     <!-- CSS here -->
     <link rel="stylesheet" href="../public/assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="../public/assets/css/animate.min.css">
@@ -27,6 +29,8 @@
     <link rel="stylesheet" href="../public/assets/css/aos.css">
     <link rel="stylesheet" href="../public/assets/css/default.css">
     <link rel="stylesheet" href="../public/assets/css/main.css">
+    
+    
 </head>
 
 <body>
@@ -285,15 +289,40 @@
         <!-- product-details-area-end -->
 
     </main>
-    <!-- main-area-end -->
 
-    <div style="text-align: center;margin-bottom: 10px;">
-        <button
-            style="padding: 10px 20px; font-size: 16px; background-color: #007bff; 
-            color: #fff; border: none; cursor: pointer; border-radius: 5px;" onclick="checkoutPage()">
-            Checkout
-        </button>
-    </div>
+    <form action="payment" method="POST">
+        <input type="hidden" name="amount" value="<%= totalPrice && !isNaN(totalPrice) ? totalPrice * 100 : 0 %>">
+        <% if (items && items.length > 0) { %>
+            <% items.forEach(item => { %>
+                <input type="hidden" name="items[]" value="<%= item.price && !isNaN(item.price) ? item.price * 100 : 0 %>">
+                <input type="hidden" name="items[]" value="<%= item.product_name || '' %>">
+                <input type="hidden" name="items[]" value="<%= item.quantity && !isNaN(item.quantity) ? item.quantity : 1 %>"> <!-- Quantity -->
+                <input type="hidden" name="items[]" value="<%= item.description || '' %>"> <!-- Description -->
+                <!-- Convert base64 image to URI format -->
+                <input type="hidden" name="items[]" value="<%= item.productPicture %>">
+            <% }); %>
+        <% } %>
+        <!-- Hidden email field -->
+        <input type="hidden" name="email" value="<%= userEmail %>">
+        <script
+            src="https://checkout.stripe.com/checkout.js"
+            class="stripe-button"
+            data-key="<%= key %>"
+            data-amount="<%= totalPrice && !isNaN(totalPrice) ? totalPrice * 100 : 0 %>"
+            data-currency="usd"
+            data-locale="auto">
+        </script>
+    </form>
+    
+
+
+
+
+
+
+
+
+    </form>
     <!-- footer-area -->
     <footer>
         <div class="footer__area">
@@ -447,6 +476,7 @@
     <link rel="stylesheet" href="../public/assets_E/css/dialogbox.css">
     <script src="../public/assets_E/js/dialog.js"></script>
     <script src="../public/assets_E/scripts/user_cart.js"></script>
+ 
 </body>
 
 
