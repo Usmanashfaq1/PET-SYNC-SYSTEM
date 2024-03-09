@@ -1,0 +1,14 @@
+.close-btn {
+    background: #007BFF;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+
+  .custom-width-btn {
+    background:  #1877F2;
+  color: white;
+  width: 370px;
+  }
