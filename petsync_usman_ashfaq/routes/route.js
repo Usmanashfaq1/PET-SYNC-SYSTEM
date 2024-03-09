@@ -9,7 +9,12 @@ const { load_edit_product_page } = require('../controller/E-commerce/edit_produc
 const { load_update_product_page } = require('../controller/E-commerce/edit_products')
 const { load_open_cart_page } = require('../controller/E-commerce/cart')
 const { Load_shop_page } = require('../controller/E-commerce/products')
-
+ 
+//payment
+const {renderBuyPage} = require('../controller/E-commerce/paymentController');
+const {payment} = require('../controller/E-commerce/paymentController');
+const {success} = require('../controller/E-commerce/paymentController');
+const {failure} = require('../controller/E-commerce/paymentController');
 
 
 
@@ -30,6 +35,7 @@ const { handle_cart_item_number_quantity } = require('../controller/E-commerce/c
 const { handle_check_added_to_cart } = require('../controller/E-commerce/cart')
 const { handle_process_payment} = require('../controller/E-commerce/payments')
 const { handle_initiate_payment} = require('../controller/E-commerce/payments')
+
 
 
 
@@ -79,6 +85,15 @@ router.get ('/check_added_to_cart', handle_check_added_to_cart);
 router.post ('/process-payment', handle_process_payment);
 
 router.post ('/initiate-payment', handle_initiate_payment);
+
+
+
+
+
+router.get('/buy', renderBuyPage);
+router.post('/payment', payment);
+router.get('/success', success);
+router.get('/failure', failure);
 
 //single routes
 

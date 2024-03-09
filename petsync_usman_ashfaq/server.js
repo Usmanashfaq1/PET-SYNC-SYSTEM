@@ -1,26 +1,40 @@
+require("dotenv").config();
 const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path');
 const cors = require('cors');
 const fs = require('fs');
 var app = express();
-const helmet=require('helmet');
+// const helmet=require('helmet');
 const nocache=require('nocache');
 const dotenv =require('dotenv');
 const nodemailer = require("nodemailer");
 const pool = require('nodemailer-smtp-pool');
 var flash = require("connect-flash");
-// Use helmet with CSP configuration
-// Use helmet with CSP configuration
-app.use(
-  helmet.contentSecurityPolicy({
-    directives: {
-      defaultSrc: ["'self'"],
-      scriptSrcAttr: ["'unsafe-inline'"],
-      // Add other directives as needed
-    },
-  })
-);
+
+
+var http = require('http').Server(app);
+
+// // Use helmet with CSP configuration
+// app.use(
+//   helmet.contentSecurityPolicy({
+//     directives: {
+//       defaultSrc: ["'self'"],
+//       scriptSrcAttr: ["'unsafe-inline'"],
+//       scriptSrc: ["'self'", "https://js.stripe.com"],
+//       objectSrc: ["'none'"],
+//       styleSrc: ["'self'"],
+//       imgSrc: ["'self'", 'data:'],
+//       mediaSrc: ["'none'"],
+//       frameAncestors: ["'none'"],
+//       frameSrc: ["'self'", "https://js.stripe.com"], // Corrected domain
+//       fontSrc: ["'self'"],
+//       connectSrc: ["'self'"],
+//     },
+//   })
+// );
+
+
 
 // Use nocache middleware to disable caching
 app.use(nocache());
@@ -1136,7 +1150,7 @@ app.put('/api/update-health-information/:recordId', (req, res) => {
 //end fyp1 pet 
 
 
-app.listen(3001,(err) =>{
+http.listen(3001,(err) =>{
     if(err) throw err;
    
     console.log('Server is running on localhost:3001');

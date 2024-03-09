@@ -1,3 +1,51 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vue 3 Stripe Checkout Example</title>
+\  <script src="https://unpkg.com/vue@3.2.0/dist/vue.global.prod.js"></script>
+</head>
+<body>
+  <div id="app">
+    <h1>Vue 3 Stripe Checkout Example</h1>
+    <button @click="handleCheckout">Checkout</button>
+  </div>
+
+  <script type="module">
+    const { ref } = Vue;
+
+    const app = Vue.createApp({
+      setup() {
+        const handleCheckout = async () => {
+          try {
+            const response = await fetch('http://localhost:3001/payment', {
+              method: 'POST',
+            });
+
+            if (!response.ok) {
+              throw new Error('Failed to checkout. Please try again later.');
+            }
+
+            const data = await response.json();
+            // Perform actions with the response data if needed
+          } catch (error) {
+            console.error('Error occurred during checkout:', error.message);
+          }
+        };
+
+        return {
+          handleCheckout,
+        };
+      },
+    });
+
+    app.mount('#app');
+  </script>
+</body>
+</html> -->
+
+
 <!DOCTYPE html>
 <html>
 <title>Stripe Payment Demo</title>
@@ -6,16 +54,17 @@
 	<form action="payment" method="POST">
     <input type="hidden" name="amount" value="<%= parseInt(amount)*100 %>">
     <input type="hidden" name="productName" value="Shocks">
-	<script
-		src="//checkout.stripe.com/v2/checkout.js"
-		class="stripe-button"
-		data-key="<%= key %>"
-		data-amount="<%= parseInt(amount)*100 %>"
-		data-currency="inr"
-		data-name="Shirt"
-		data-description="Cotton Shirt Products"
-		data-locale="auto" >
-		</script>
+    <script
+    src="https://checkout.stripe.com/checkout.js"
+    class="stripe-button"
+    data-key="<%= key %>"
+    data-amount="<%= parseInt(amount)*100 %>"
+    data-currency="inr"
+    data-name="Shirt"
+    data-description="Cotton Shirt Products"
+    data-locale="auto">
+</script>
+
 	</form>
 </body>
 </html>
