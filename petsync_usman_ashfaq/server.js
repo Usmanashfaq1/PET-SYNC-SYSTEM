@@ -627,37 +627,6 @@ app.get('/product-details', (req, res) => {
 
 
 
-app.get('/item_cart', async (req, res) => {
-  const email = req.query.email_e;
-
-  var sql = `SELECT  cart.price, cart.quantity, products.product_name, products.category, products.productPicture, products.description 
-  FROM cart 
-  INNER JOIN products ON cart.item_id = products.p_id 
-  WHERE cart.email = '${email}'`;
-
-  connection.query(sql, function (err, results) {
-      if (err) {
-          console.error('Error retrieving cart items:', err);
-          res.status(500).json({ error: 'Database error.' });
-      } else {
-          let totalPrice = 0; // Declare totalPrice variable here
-          const items = results.map(item => {
-              const fileName = item.productPicture;
-              if (fileName) {
-                  totalPrice += item.price; // Increment totalPrice here
-                  // Include product picture URL directly in each item object
-                  return { ...item };
-              } else {
-                  return item;
-              }
-          });
-          const key = process.env.STRIPE_PUBLISHABLE_KEY;
-          // Pass items directly to the template
-          res.render('item_cart', { items: items, totalPrice: totalPrice, key: key, userEmail: email });
-      }
-  });
-});
-
 
 // app.get('/item_cart', async (req, res) => {
 //   const email = req.query.email_e;

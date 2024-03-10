@@ -48,7 +48,7 @@ const payment = async (req, res) => {
                                         description: description,
                                         //images: [content],
                                     },
-                                    unit_amount: price , // Convert to cents
+                                    unit_amount: price ,
                                 },
                                 quantity: quantity,
                             });

@@ -169,6 +169,38 @@ handle_cart_item_number_quantity = (req, res) => {
     });
 }
 
+handle_and_load_item_cart = async (req, res) => {
+    const email = req.query.email_e;
+
+    var sql = `SELECT  cart.price, cart.quantity, products.product_name, products.category, products.productPicture, products.description 
+    FROM cart 
+    INNER JOIN products ON cart.item_id = products.p_id 
+    WHERE cart.email = '${email}'`;
+
+    connection.query(sql, function (err, results) {
+        if (err) {
+            console.error('Error retrieving cart items:', err);
+            res.status(500).json({ error: 'Database error.' });
+        } else {
+            let totalPrice = 0; // Declare totalPrice variable here
+            const items = results.map(item => {
+                const fileName = item.productPicture;
+                if (fileName) {
+                    totalPrice += item.price; // Increment totalPrice here
+                    // Include product picture URL directly in each item object
+                    return { ...item };
+                } else {
+                    return item;
+                }
+            });
+            const key = process.env.STRIPE_PUBLISHABLE_KEY;
+            // Pass items directly to the template
+            res.render('item_cart', { items: items, totalPrice: totalPrice, key: key, userEmail: email });
+        }
+    });
+};
+
+
 
 load_open_cart_page = (req, res) => {
     res.render('user_cart');
@@ -181,5 +213,6 @@ module.exports = {
     handle_get_cart_items,
     handle_remove_from_cart,
     handle_cart_item_number_quantity,
-    handle_check_added_to_cart
+    handle_check_added_to_cart,
+    handle_and_load_item_cart
 }
