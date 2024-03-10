@@ -6,6 +6,7 @@ const { load_admin_page } = require('../controller/E-commerce/admin')
 const { load_admin_products_page } = require('../controller/E-commerce/admin')
 const { load_edit_product_page } = require('../controller/E-commerce/edit_products')
 const { load_update_product_page } = require('../controller/E-commerce/edit_products')
+const { load_order_page } = require('../controller/E-commerce/order')
 
 
 
@@ -18,6 +19,7 @@ const { handle_delete_product } = require('../controller/E-commerce/edit_product
 const { handle_get_specific_product } = require('../controller/E-commerce/edit_products')
 const { handle_load_update_product } = require('../controller/E-commerce/edit_products')
 const { handle_updated_product_data } = require('../controller/E-commerce/edit_products')
+const { handle_get_orders } = require('../controller/E-commerce/order')
 
 
 
@@ -41,6 +43,13 @@ router.delete('/delete_product/:id', handle_delete_product);
 
 router.get('/load_update_product/:id', handle_load_update_product);
 
+router.get('/order', load_order_page);
+
+router.get('/get_orders', handle_get_orders);
+
 router.post('/updated_product_data', handle_updated_product_data);
+
+
+
 
 module.exports = router;

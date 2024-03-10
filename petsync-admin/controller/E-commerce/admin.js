@@ -17,7 +17,9 @@ const handle_add_product = (req, res) => {
     upload(req, res, (err) => {
         if (err) {
             res.send(err.toString());
+            return;
         }
+
         var pname = req.body.pname;
         var category = req.body.category;
         var price = req.body.price;
@@ -26,15 +28,27 @@ const handle_add_product = (req, res) => {
         var description = req.body.description;
         const productPicture = req.file.filename;
 
-        // Assuming 'owner_id' is the foreign key column in 'pet_profile'
-        var sql = `INSERT INTO products (product_name, category, price, stock, rating, description, productPicture) 
-                    VALUES ('${pname}', '${category}', '${price}', '${stock}', '${rating}', '${description}', '${productPicture}')`;
-        connection.query(sql, function (err, results) {
-            if (err) {
-                console.error(err);
+        var checkQuery = `SELECT * FROM products WHERE product_name = '${pname}'`;
+        connection.query(checkQuery, function (checkErr, checkResults) {
+            if (checkErr) {
+                console.error(checkErr);
                 res.status(500).json({ error: 'Database error.' });
+                return;
+            }
+
+            if (checkResults.length > 0) {
+                res.json(-1);
             } else {
-                res.json(1);
+                var insertQuery = `INSERT INTO products (product_name, category, price, stock, rating, description, productPicture) 
+                                    VALUES ('${pname}', '${category}', '${price}', '${stock}', '${rating}', '${description}', '${productPicture}')`;
+                connection.query(insertQuery, function (insertErr, insertResults) {
+                    if (insertErr) {
+                        console.error(insertErr);
+                        res.status(500).json({ error: 'Database error.' });
+                        return;
+                    }
+                    res.json(1);
+                });
             }
         });
     });
