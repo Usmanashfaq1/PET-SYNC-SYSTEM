@@ -171,7 +171,7 @@ handle_cart_item_number_quantity = (req, res) => {
 
 handle_and_load_item_cart = async (req, res) => {
     const email = req.query.email_e;
-
+    const name = req.query.name;
     var sql = `SELECT  cart.price, cart.quantity, products.product_name, products.category, products.productPicture, products.description 
     FROM cart 
     INNER JOIN products ON cart.item_id = products.p_id 
@@ -195,7 +195,7 @@ handle_and_load_item_cart = async (req, res) => {
             });
             const key = process.env.STRIPE_PUBLISHABLE_KEY;
             // Pass items directly to the template
-            res.render('item_cart', { items: items, totalPrice: totalPrice, key: key, userEmail: email });
+            res.render('item_cart', { items: items, totalPrice: totalPrice, key: key, userEmail: email , userName : name});
         }
     });
 };

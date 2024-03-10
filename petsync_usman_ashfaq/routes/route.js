@@ -11,9 +11,7 @@ const { load_open_cart_page } = require('../controller/E-commerce/cart')
 const { Load_shop_page } = require('../controller/E-commerce/products')
  
 //payment
-const {renderBuyPage} = require('../controller/E-commerce/paymentController');
 const {payment} = require('../controller/E-commerce/paymentController');
-const {success} = require('../controller/E-commerce/paymentController');
 const {failure} = require('../controller/E-commerce/paymentController');
 
 
@@ -35,6 +33,7 @@ const { handle_cart_item_number_quantity } = require('../controller/E-commerce/c
 const { handle_check_added_to_cart } = require('../controller/E-commerce/cart')
 const { handle_and_load_item_cart } = require('../controller/E-commerce/cart')
 
+const { handle_order_details } = require('../controller/E-commerce/admin')
 
 
 
@@ -84,12 +83,11 @@ router.get ('/check_added_to_cart', handle_check_added_to_cart);
 
 router.get('/item_cart', handle_and_load_item_cart);
 
+router.get('/order_details', handle_order_details);
 
 
 
-router.get('/buy', renderBuyPage);
 router.post('/payment', payment);
-router.get('/success', success);
 router.get('/failure', failure);
 
 //single routes
@@ -111,8 +109,8 @@ router.get('/cp', (req, res) => {
     res.render('settingnew');
 });
 
-router.get('/payment', (req, res) => {
-    res.render('payment');
-});
+// router.get('/payment', (req, res) => {
+//     res.render('payment');
+// });
 
 module.exports = router;

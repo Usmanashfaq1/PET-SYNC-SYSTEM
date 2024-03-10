@@ -628,45 +628,6 @@ app.get('/product-details', (req, res) => {
 
 
 
-// app.get('/item_cart', async (req, res) => {
-//   const email = req.query.email_e;
-
-//   var sql = `SELECT  cart.price, cart.quantity, products.product_name, products.category, products.productPicture, products.description 
-//   FROM cart 
-//   INNER JOIN products ON cart.item_id = products.p_id 
-//   WHERE cart.email = '${email}'`;
-
-//   connection.query(sql, function (err, results) {
-//     if (err) {
-//       console.error('Error retrieving cart items:', err);
-//       res.status(500).json({ error: 'Database error.' });
-//     } else {
-//       let totalPrice = 0; // Declare totalPrice variable here
-//       const itemsWithFileContent = results.map(item => {
-//         const fileName = item.productPicture;
-//         if (fileName) {
-//           const uploadDirectory = path.join(__dirname, '..', 'petsync_usman_ashfaq', 'upload');
-
-//           const filePath = path.join(uploadDirectory, fileName);
-//           try {
-//             const content = fs.readFileSync(filePath, { encoding: 'base64' });
-//             totalPrice += item.price; // Increment totalPrice here
-//             // Include product picture directly as a base64 encoded string in each item object
-//             return { ...item, productPicture: content };
-//           } catch (err) {
-//             console.error('Error reading file:', err);
-//             return item;
-//           }
-//         } else {
-//           return item;
-//         }
-//       });
-//       const key = process.env.STRIPE_PUBLISHABLE_KEY;
-//       // Pass itemsWithFileContent directly to the template
-//       res.render('item_cart', { items: itemsWithFileContent, totalPrice: totalPrice, key: key , userEmail: email});
-//     }
-//   });
-// });
 
 //fyp1
 // pet profile apis

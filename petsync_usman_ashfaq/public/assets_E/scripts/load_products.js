@@ -243,12 +243,13 @@ function open_details(id) {
     window.location.href = "/product-details";
 }
 
-
 function itemcartpage() {
     var email_e = localStorage.getItem('email_e');
+    var name = localStorage.getItem('name');
+
     var itemCartLink = document.getElementById('itemCartLink');
     if (itemCartLink) {
-        itemCartLink.href = '/item_cart?email_e=' + email_e;
+        itemCartLink.href = '/item_cart?email_e=' + email_e + '&name=' + name;
     } else {
         console.error("Element with id 'itemCartLink' not found.");
     }
