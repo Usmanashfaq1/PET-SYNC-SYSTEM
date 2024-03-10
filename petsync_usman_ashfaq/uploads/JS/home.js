@@ -1,26 +1,30 @@
 $(document).ready(function(){
-   
-// here checkibf the value and sending result to route and then controller to update db tables
+    $('input.typeahead').typeahead({
+        name: 'countries',
+        remote: 'http://localhost:3001/profile/search?key=%QUERY',
+        limit: 10
+    });
+
     $('#likeImage').click(function(){
-       //setting flag here
+       
         let flag=1;  
         if($('#likeImage').val()=='dislike')
         flag=0;
 
 
         if($('#likeImage').val()=='like'){
-            //dislike
+           
             $('#likeImage').attr('value',"dislike");
         }
         else{
-            //like
+            
             $('#likeImage').attr('value',"like");
         }
         $.ajax({
-            url: "/profile/postFeed/"+1+"/likeImage/"+flag, //here hitting route 
+            url: "/profile/postFeed/"+1+"/likeImage/"+flag, 
             type:"POST",
             timeout:500,
-            //dataType:'json',
+           
             success: function(){
                 //
                 alert('Liked!');
@@ -31,8 +35,12 @@ $(document).ready(function(){
         });
     });
     
-   
     
+    $('#search-user-form').submit(function(){
+        let username = $('#search-text').val();
+       
+        $(this).attr('action', "/account/" + username);
+    });
 });
 function showFeed(id){
     window.location='/showfeed/'+id;
@@ -45,18 +53,18 @@ function showAccount(username){
 }
 
 function likeImage(feedname,data){
-        //alert(feedname);
+       
         let flag=1;  
         if($(data).val()=='dislike')
         flag=0;
 
 
         if($(data).val()=='like'){
-            //('dislike');
+           
             $(data).attr('value',"dislike");
         }
         else{
-            //('like');
+           
             $(data).attr('value',"like");
         }
         $.ajax({
@@ -65,7 +73,7 @@ function likeImage(feedname,data){
             timeout:500,
            
             success: function(){
-              
+                //
                 alert(url);
                 
             },

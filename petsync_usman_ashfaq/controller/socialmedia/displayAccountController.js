@@ -15,7 +15,6 @@ class DisplayAccountController {
             return res.redirect('/profile');
         } else {
             const userData = await displayAccountModel.getUserData(req.params['username'], req.session.username);
-            //checking if previous liked or not
             if (userData && userData.feedResult) {
                 for (let i = 0; i < userData.feedResult.length; i++) {
                     const feed = userData.feedResult[i];

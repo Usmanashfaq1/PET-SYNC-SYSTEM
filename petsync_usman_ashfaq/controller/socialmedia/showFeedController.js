@@ -1,16 +1,15 @@
 const connection = require('../../config');
 const moments = require('moment');  
 class showFeedController{
-   
-//like feed logic here
+  
     likeFeed(req,res){
-           // checking 
+          
         let val='';
         if(req.params['likeflag']==1)
         val="+1";
         else val="-1"; 
         let sqlQuery="UPDATE userfeed SET likes=likes"+val+" WHERE feedname='"+req.params['id']+"'";
-        
+       
         connection.query(sqlQuery,(error,result)=>{
            
             if(error) throw error;
@@ -29,19 +28,32 @@ class showFeedController{
             if(error) throw error;
            
         });  
-           
+        
         if(req.params['likeflag']==1)
         console.log("liked Post: "+req.params['id']);
         else
         console.log("disliked Post: "+req.params['id']);
         
-    
-
+  
     };
 
-//extras
-    
-  
+ 
+
+
+    uploadFeed(req,res) {
+       
+
+        let feedData={
+            "userid":req.session.num,
+            "feedname":req.file.filename,   
+        }
+        
+        let sql="INSERT INTO userfeed SET ?";
+        connection.query(sql,feedData); 
+        
+        res.end("File is uploaded");
+    };
+
 }
 module.exports = showFeedController;
 
