@@ -288,34 +288,35 @@
         </div>
 
     </main>
+
+<form action="payment" method="POST">
+    <!-- Hidden input field for total price -->
+    <input type="hidden" name="amount" value="<%= totalPrice && !isNaN(totalPrice) ? totalPrice : 0 %>">
     
-    <form action="payment" method="POST">
-        <!-- Hidden input field for total price -->
-        <input type="hidden" name="amount" value="<%= totalPrice && !isNaN(totalPrice) ? totalPrice : 0 %>">
+    <!-- Hidden input fields for items -->
+    <% if (items && items.length > 0) { %>
+        <% items.forEach(item => { %>
+            <input type="hidden" name="items[]"
+                value="<%= item.price && !isNaN(item.price) ? (item.price * 100) / item.quantity : 0 %>">
+            <input type="hidden" name="items[]" value="<%= item.product_name || '' %>">
+            <input type="hidden" name="items[]"
+                value="<%= item.quantity && !isNaN(item.quantity) ? item.quantity : 1 %>">
+            <input type="hidden" name="items[]" value="<%= item.description || '' %>">
+            <!-- Convert base64 image to URI format -->
+            <input type="hidden" name="items[]" value="<%= item.productPicture %>">
+            <!-- Include p_id along with other item details -->
+        <% }); %>
+    <% } %>
     
-        <!-- Hidden input fields for items -->
-        <% if (items && items.length > 0) { %>
-            <% items.forEach(item => { %>
-                <input type="hidden" name="items[]"
-                    value="<%= item.price && !isNaN(item.price) ? (item.price * 100) / item.quantity : 0 %>">
-                <input type="hidden" name="items[]" value="<%= item.product_name || '' %>">
-                <input type="hidden" name="items[]"
-                    value="<%= item.quantity && !isNaN(item.quantity) ? item.quantity : 1 %>">
-                <input type="hidden" name="items[]" value="<%= item.description || '' %>">
-                <!-- Convert base64 image to URI format -->
-                <input type="hidden" name="items[]" value="<%= item.productPicture %>">
-            <% }); %>
-        <% } %>
+    <!-- Hidden input fields for email and name -->
+    <input type="hidden" name="email" value="<%= userEmail %>">
+    <input type="hidden" name="name" value="<%= userName %>">
     
-        <input type="hidden" name="email" value="<%= userEmail %>">
-    
-        <input type="hidden" name="name" value="<%= userName %>">
-    
-        <div style="text-align: center;">
-            <button type="submit" class="btn btn-success">Checkout</button> 
-        </div>
-    </form>
-    
+    <div style="text-align: center;">
+        <button type="submit" class="btn btn-success">Checkout</button> 
+    </div>
+</form>
+
     
 
 

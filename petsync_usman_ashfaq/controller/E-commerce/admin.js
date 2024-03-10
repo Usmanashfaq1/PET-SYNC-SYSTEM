@@ -41,29 +41,22 @@ const handle_add_product = (req, res) => {
 };
 
 handle_order_details = (req, res) => {
-    upload(req, res, (err) => {
-        if (err) {
-            res.send(err.toString());
-        }
-        var pname = req.body.pname;
-        var category = req.body.category;
-        var price = req.body.price;
-        var stock = req.body.stock;
-        var rating = req.body.rating;
-        var description = req.body.description;
-        const productPicture = req.file.filename;
 
-        // Assuming 'owner_id' is the foreign key column in 'pet_profile'
-        var sql = `INSERT INTO products (product_name, category, price, stock, rating, description, productPicture) 
-                    VALUES ('${pname}', '${category}', '${price}', '${stock}', '${rating}', '${description}', '${productPicture}')`;
-        connection.query(sql, function (err, results) {
-            if (err) {
-                console.error(err);
-                res.status(500).json({ error: 'Database error.' });
-            } else {
-                res.json(1);
-            }
-        });
+    const { customer_name, customer_email, products_list, quantity, amount_paid } = req.query;
+
+    const productNames = JSON.parse(decodeURIComponent(products_list));
+
+   
+    var sql = `INSERT INTO deliveries_order (customer_name, customer_email, products_list, quantity, amount_paid) 
+               VALUES ('${customer_name}', '${customer_email}', '${productNames.join(', ')}', ${quantity}, ${amount_paid})`;
+    
+    connection.query(sql, function (err, results) {
+        if (err) {
+            console.error(err);
+            res.status(500).json({ error: 'Database error.' });
+        } else {
+            res.json({ success: true, message: 'Order details saved successfully.' });
+        }
     });
 };
 

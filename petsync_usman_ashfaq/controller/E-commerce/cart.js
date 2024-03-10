@@ -106,13 +106,13 @@ const handle_remove_from_cart = (req, res) => {
 handle_check_added_to_cart = (req, res) => {
     var item_id = req.query.item_id;
     var email = req.query.email_e;
-    
+
     console.log("Received request to check item_id:", item_id, "for email:", email);
-    
+
     var checkCartSql = `SELECT * FROM cart WHERE item_id = '${item_id}' AND email = '${email}'`;
-    
+
     console.log("Executing SQL query:", checkCartSql);
-    
+
     connection.query(checkCartSql, function (checkCartErr, checkCartResults) {
         if (checkCartErr) {
             console.error("Error executing SQL query:", checkCartErr);
@@ -133,7 +133,7 @@ handle_cart_item_number_quantity = (req, res) => {
     var email = req.query.email_e;
     var item_id = req.query.id;
 
-    console.log(item_id , ' ' , email );
+    console.log(item_id, ' ', email);
     var updateCartSql = `
     UPDATE cart 
     SET 
@@ -158,7 +158,7 @@ handle_cart_item_number_quantity = (req, res) => {
                     } else {
                         const itemCount = checkCartResults[0].count;
                         const total = checkCartResults[0].total;
-                        console.log(itemCount , ' ', total );
+                        console.log(itemCount, ' ', total);
                         res.json({ itemCount, total });
                     }
                 });
@@ -187,18 +187,26 @@ handle_and_load_item_cart = async (req, res) => {
                 const fileName = item.productPicture;
                 if (fileName) {
                     totalPrice += item.price; // Increment totalPrice here
-                    // Include product picture URL directly in each item object
-                    return { ...item };
+                    return {
+                        ...item,
+                    };
                 } else {
                     return item;
                 }
             });
             const key = process.env.STRIPE_PUBLISHABLE_KEY;
-            // Pass items directly to the template
-            res.render('item_cart', { items: items, totalPrice: totalPrice, key: key, userEmail: email , userName : name});
+            // Pass items directly to the template along with other data
+            res.render('item_cart', {
+                items: items,
+                totalPrice: totalPrice,
+                key: key,
+                userEmail: email,
+                userName: name,
+            });
         }
     });
 };
+
 
 
 
