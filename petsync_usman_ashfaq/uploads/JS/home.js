@@ -1,6 +1,6 @@
 $(document).ready(function(){
    
-
+// here checkibf the value and sending result to route and then controller to update db tables
     $('#likeImage').click(function(){
        //setting flag here
         let flag=1;  
@@ -17,7 +17,7 @@ $(document).ready(function(){
             $('#likeImage').attr('value',"like");
         }
         $.ajax({
-            url: "/profile/postFeed/"+1+"/likeImage/"+flag, 
+            url: "/profile/postFeed/"+1+"/likeImage/"+flag, //here hitting route 
             type:"POST",
             timeout:500,
             //dataType:'json',

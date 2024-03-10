@@ -15,7 +15,26 @@ class DisplayAccountController {
             return res.redirect('/profile');
         } else {
             const userData = await displayAccountModel.getUserData(req.params['username'], req.session.username);
-            
+            //checking if previous liked or not
+            if (userData && userData.feedResult) {
+                for (let i = 0; i < userData.feedResult.length; i++) {
+                    const feed = userData.feedResult[i];
+                    const isLikedQuery = `SELECT EXISTS(SELECT 1 FROM likeinfo WHERE (feedname = '${feed.feedname}' AND likedby = '${req.session.num}') LIMIT 1)`;
+                    connection.query(isLikedQuery, (error, isLikedResult) => {
+                        if (error) {
+                            console.error("Error:", error);
+                            throw error;
+                        }
+                        const R = JSON.stringify(isLikedResult[0]);
+                        if (R[R.length - 2] === '1') {
+                            userData.feedResult[i].isliked = "dislike";
+                        } else {
+                            userData.feedResult[i].isliked = "like";
+                        }
+                        console.log(userData.feedResult[i]);
+                    });
+                }
+            }
             console.log(req.params['username']);
             // Now let's handle following and follow count
             let sqlQuery1 = "SELECT id FROM users WHERE username='" + req.params['username'] + "'";
