@@ -1,4 +1,5 @@
 const express = require("express");
+const { isUserAuthenticated } = require('../middleware/authMiddleware');
 const router = express.Router();
 
 
@@ -27,7 +28,7 @@ const { handle_remove_from_cart } = require('../controller/E-commerce/cart')
 const { handle_E_commerce_login } = require('../controller/E-commerce/E-commerce_login')
 const { handle_get_product_detail_with_id } = require('../controller/E-commerce/product_detail')
 const { handle_cart_item_number_quantity } = require('../controller/E-commerce/cart')
-
+const { handle_check_added_to_cart } = require('../controller/E-commerce/cart')
 
 
 
@@ -73,9 +74,7 @@ router.get('/get_product_detail_with_id', handle_get_product_detail_with_id);
 
 router.get('/cart_item_number_quantity', handle_cart_item_number_quantity);
 
-
-
-
+router.get ('/check_added_to_cart', handle_check_added_to_cart);
 
 
 //single routes
@@ -93,15 +92,12 @@ router.get('/pc', (req, res) => {
     res.render('signup_new');
 });
 
-router.get('/cp', (req, res) => {
+router.get('/cp',isUserAuthenticated, (req, res) => {
     res.render('settingnew');
 });
 
-
-
-
-
-
-
+router.get('/nr',isUserAuthenticated, (req, res) => {
+    res.render('calculateNutrition');
+});
 
 module.exports = router;

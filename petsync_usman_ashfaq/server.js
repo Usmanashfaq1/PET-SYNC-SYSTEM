@@ -3,14 +3,31 @@ const bodyParser = require('body-parser');
 const path = require('path');
 const cors = require('cors');
 const fs = require('fs');
+var app = express();
 const helmet=require('helmet');
 const nocache=require('nocache');
-var app = express();
 const dotenv =require('dotenv');
 const nodemailer = require("nodemailer");
 const pool = require('nodemailer-smtp-pool');
 var flash = require("connect-flash");
-app.use(helmet());
+const { spawn } = require('child_process');
+const pythonScriptPath = path.join(__dirname, 'petfood_calculator.py');
+// Use helmet with CSP configuration
+// Use helmet with CSP configuration
+// app.use(
+//   helmet.contentSecurityPolicy({
+//     directives: {
+//       defaultSrc: ["'self'"],
+//       scriptSrc: ["'self'", "'unsafe-eval'", "'unsafe-inline'", "*"], // Allow all scripts from all URLs
+//       // Add other directives as needed
+//     },
+//   })
+// );
+
+
+
+
+
 
 // Use nocache middleware to disable caching
 app.use(nocache());
@@ -72,6 +89,114 @@ module.exports.session = session;
 app.use(flash());
 
 
+// 
+
+
+
+// // Define a route to handle pet nutrition calculation
+// app.post('/calculatePetNutrition', (req, res) => {
+//   // Extract pet information from the request body
+//   const { petName, weight, dietType } = req.body;
+//   console.log('Received request to calculate pet nutrition:', { petName, weight, dietType });
+
+//   // Spawn a child process to execute the Python script
+//   const pythonProcess = spawn('python', [pythonScriptPath, petName, weight, dietType]);
+
+//   console.log('Spawned Python process');
+
+//   // Capture output from the Python script
+//   let output = '';
+//   pythonProcess.stdout.on('data', (data) => {
+//       output += data.toString();
+//       console.log('Received data from Python script:', data.toString());
+//   });
+
+//   // Handle completion of the Python script
+//   pythonProcess.on('close', (code) => {
+//       console.log('Python script exited with code:', code);
+//       if (code !== 0) {
+//           console.error(`Python script exited with code ${code}`);
+//           return res.status(500).json({ error: 'Internal server error' });
+//       }
+
+//       // Parse the output from the Python script
+//       let nutritionData;
+//       try {
+//           nutritionData = JSON.parse(output);
+//           console.log('Parsed nutrition data:', nutritionData);
+//       } catch (error) {
+//           console.error('Error parsing JSON output:', error);
+//           return res.status(500).json({ error: 'Internal server error' });
+//       }
+
+//       // Send the parsed nutrition data back to the client
+//       res.json(nutritionData);
+//   });
+
+//   // Handle errors, if any
+//   pythonProcess.on('error', (err) => {
+//       console.error('Error executing Python script:', err);
+//       res.status(500).json({ error: 'Internal server error' });
+//   });
+// });
+
+
+// Define a route to handle pet nutrition calculation
+app.post('/calculatePetNutrition', isUserAuthenticated,(req, res) => {
+  // Extract pet information from the request body
+  const { age, weight, dietType, restrictionType, restrictionAmount } = req.body;
+  console.log('Received request to calculate pet nutrition:', { age, weight, dietType });
+
+  // Spawn a child process to execute the Python script
+  const pythonProcess = spawn('python', [pythonScriptPath, age, weight, dietType]);
+
+  console.log('Spawned Python process');
+
+  // Capture output from the Python script
+  let output = '';
+  pythonProcess.stdout.on('data', (data) => {
+      output += data.toString();
+      console.log('Received data from Python script:', data.toString());
+  });
+
+  // Handle completion of the Python script
+  pythonProcess.on('close', (code) => {
+      console.log('Python script exited with code:', code);
+      if (code !== 0) {
+          console.error(`Python script exited with code ${code}`);
+          return res.status(500).json({ error: 'Internal server error' });
+      }
+
+      // Parse the output from the Python script
+      let nutritionData;
+      try {
+          nutritionData = JSON.parse(output);
+          console.log('Parsed nutrition data:', nutritionData);
+      } catch (error) {
+          console.error('Error parsing JSON output:', error);
+          return res.status(500).json({ error: 'Internal server error' });
+      }
+
+      // Render the EJS template with nutrition data
+      res.render('shown', { nutritionData: nutritionData });
+  });
+
+  // Handle errors, if any
+  pythonProcess.on('error', (err) => {
+      console.error('Error executing Python script:', err);
+      res.status(500).json({ error: 'Internal server error' });
+  });
+});
+
+
+
+// Start the server
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
+});
+
+
 
 const authRoutes = require('./routes/auth');
 app.use('/', authRoutes);
@@ -123,24 +248,27 @@ const appointment=require('./routes/appointment_schedulingRoute');
 app.use('/',appointment);
 
 
+const feedshow=require('./routes/showFeedRoute');
+app.use('/',feedshow);
+
 const report=require('./routes/reportRoute');
 app.use('/',report);
 
 
 
-// app.get('/community',(req,res)=>{
-//   res.render('community');
-//  });
+app.get('/community',(req,res)=>{
+  res.render('community');
+ });
 
 
-// //  dummy views
-//  app.get('/pc',(req,res)=>{
-//   res.render('signup_new');
-//  });
+//  dummy views
+ app.get('/pc',(req,res)=>{
+  res.render('signup_new');
+ });
 
-//  app.get('/cp',(req,res)=>{
-//   res.render('settingnew');
-//  });
+ app.get('/cp',(req,res)=>{
+  res.render('settingnew');
+ });
 
 // end dummy views
 
@@ -151,6 +279,34 @@ const router = require('./routes/route');
 
 app.use('/', router);
 
+
+// Assuming you have Express and a database connection set up
+
+// Endpoint to fetch pet details by ID
+app.get('/api/pets/:id', (req, res) => {
+  const petId = req.params.id;
+  console.log('Received request for pet ID:', petId); // Log the received pet ID
+
+  // Query the database to get pet details by ID
+  connection.query('SELECT * FROM pet_profile WHERE id = ?', [petId], (error, results) => {
+      if (error) {
+          console.error('Error fetching pet details:', error);
+          res.status(500).json({ error: 'Error fetching pet details' });
+          return;
+      }
+      console.log('Query results:', results); // Log the query results
+
+      if (results.length === 0) {
+          console.warn('No pet found with ID:', petId); // Log a warning if no pet is found
+          res.status(404).json({ error: 'Pet not found' });
+          return;
+      }
+
+      // Send the pet details as JSON response
+      console.log('Sending pet details:', results[0]);
+      res.json(results[0]);
+  });
+});
 
 
 
@@ -440,6 +596,24 @@ app.use(express.static('public'));
 // Set the views directory
 app.set('views', path.join(__dirname, 'views'));
 
+
+
+//for nutrtition pets
+app.get('/feedn',isUserAuthenticated , (req, res) => {
+  const userEmail = req.query.email; // Retrieve the email from the query string
+
+  // Fetching pets belonging to the user with the given email
+  connection.query('SELECT * FROM pet_profile JOIN users ON pet_profile.owner_id = users.id WHERE users.email = ?', [userEmail], (error, pets) => {
+      if (error) {
+          console.error('Error fetching pets:', error);
+          res.status(500).send('Error fetching pets.');
+          return;
+      }
+      
+      res.render('calculateNutrition', { pets: pets });
+  });
+});
+//
 // Route handler for the root URL
 // Route handler for the root URL
 app.get('/feed',isUserAuthenticated , (req, res) => {

@@ -1,23 +1,19 @@
 $(document).ready(function(){
-    $('input.typeahead').typeahead({
-        name: 'countries',
-        remote: 'http://localhost:3000/profile/search?key=%QUERY',
-        limit: 10
-    });
+   
 
     $('#likeImage').click(function(){
-        //alert('Hii');
+       //setting flag here
         let flag=1;  
         if($('#likeImage').val()=='dislike')
         flag=0;
 
 
         if($('#likeImage').val()=='like'){
-            //$('#likeImage').html('dislike');
+            //dislike
             $('#likeImage').attr('value',"dislike");
         }
         else{
-            //$('#likeImage').html('like');
+            //like
             $('#likeImage').attr('value',"like");
         }
         $.ajax({
@@ -35,17 +31,8 @@ $(document).ready(function(){
         });
     });
     
-    /*$(window).scroll(function() {
-        if($(window).scrollTop() == $(document).height() - $(window).height()) {
-        // ajax call get data from server and append to the div
-            ('#add-data').append('<li>Main<li>')
-        }
-    });*/
-    $('#search-user-form').submit(function(){
-        let username = $('#search-text').val();
-        //alert(username);
-        $(this).attr('action', "/account/" + username);
-    });
+   
+    
 });
 function showFeed(id){
     window.location='/showfeed/'+id;
@@ -65,22 +52,22 @@ function likeImage(feedname,data){
 
 
         if($(data).val()=='like'){
-            //$(data).html('dislike');
+            //('dislike');
             $(data).attr('value',"dislike");
         }
         else{
-            //$(data).html('like');
+            //('like');
             $(data).attr('value',"like");
         }
         $.ajax({
             url: "/profile/postFeed/"+feedname+"/likeImage/"+flag, 
             type:"POST",
             timeout:500,
-            //dataType:'json',
+           
             success: function(){
-                //
+              
                 alert(url);
-                //alert('Liked!');
+                
             },
             error:function(error){
                 throw error;

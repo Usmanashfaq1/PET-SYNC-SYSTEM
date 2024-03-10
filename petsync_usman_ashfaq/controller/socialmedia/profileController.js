@@ -1,6 +1,7 @@
 const profileModel = require('../../model/profileModel');
 const PostModel=require('../../model/postModel');
 const connection = require('../../config');
+const moment = require('moment');
 
 class ProfileController {
     async displayPage(req, res) {
@@ -40,12 +41,34 @@ class ProfileController {
                     note='not set';
                  }
                  const feedResult = await PostModel.getUserFeed(req.session.num);
-                 let followQuery="SELECT followers,following FROM followcount WHERE username='"+req.session.username+"'";
-                        connection.query(followQuery,(error,followResult)=>{
-                            if(error) throw error;
-                            console.log(followResult);
-                            return res.render('userProfileView',{data: userInfo[0], feedResult: feedResult,dpName: imageName, name,note,location,birthdate,bio,followResult:followResult[0]});
-                        });
+
+if (feedResult) {
+    for (let i = 0; i < feedResult.length; i++) {
+        const feed = feedResult[i];
+        const isLikedQuery = `SELECT EXISTS(SELECT 1 FROM likeinfo WHERE (feedname = '${feed.feedname}' AND likedby = '${req.session.num}') LIMIT 1)`;
+        connection.query(isLikedQuery, (error, isLikedResult) => {
+            if (error) {
+                console.error("Error:", error);
+                throw error;
+            }
+            const R = JSON.stringify(isLikedResult[0]);
+            if (R[R.length - 2] === '1') {
+                feedResult[i].isliked = "dislike";
+            } else {
+                feedResult[i].isliked = "like";
+            }
+            console.log(feedResult[i]);
+        });
+    }
+}
+
+let followQuery="SELECT followers,following FROM followcount WHERE username='"+req.session.username+"'";
+connection.query(followQuery,(error,followResult)=>{
+    if(error) throw error;
+    console.log(followResult);
+    return res.render('userProfileView',{data: userInfo[0], feedResult: feedResult,dpName: imageName, name,note,location,birthdate,bio,followResult:followResult[0],moment:moment});
+});
+
 
               //  return res.render('userProfileView', { data: userInfo[0], feedResult: feedResult,dpName: imageName, name,note,location,birthdate,bio });
             } 

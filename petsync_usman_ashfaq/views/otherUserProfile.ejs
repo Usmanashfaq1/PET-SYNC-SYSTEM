@@ -14,6 +14,10 @@
     <!-- Place favicon.ico in the root directory -->
     <link rel="icon" href="../../../../favicon.ico">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script type="text/javascript" src="../uploads/JS/home.js"></script>
+        <link rel="stylesheet" href="../uploads/assets/css/home.css">
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
  
 
     <!-- Font Awesome -->
@@ -785,36 +789,41 @@ body.sidebar-open {
       <h2>Post Timeline</h2>
       <div class="gallery">
         <!-- here added the check if no post is psoted or user dont have any post show this.... -->
-        <% if (userData.feedResult.length === 0) { %>
-          <p>Nothing to show here!</p>
-        <% } else { %>
-          <% for(var i=0; i < userData.feedResult.length; i++) { %>
-            <div class="facebook-post">
-              <div class="post-header">
-                <img src="/profilepics/<%=userData.feedResult[i].feedname%>" class="profile-pic" alt="">
-                <div class="post-info">
-                  <h3 class="post-author"> <a href="/account/<%=userData.feedResult[i].username%>"><%=userData.feedResult[i].username%></a></h3>
-                  <p class="post-time"><%=userData.feedResult[i].timestamp%></p>
+        
+        <div id="load-feed-new" style="display: flex; flex-wrap: wrap; justify-content: center;">
+            <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+            <% for(var i=0; i < userData.feedResult.length; i++) { %>
+            <div class="container bootstrap snippets bootdey" style="margin: 10px;">
+                <div class="col-md-8">
+                    <div class="box box-widget" style="max-width: 600px;">
+                        <div class="box-header with-border" style="padding: 10px;">
+                            <div class="user-block" style="display: flex; align-items: center;">
+                                <img class="img-circle" src="/profilepics/<%=userData.feedResult[i].feedname%>" alt="User Image" style="width: 40px; height: 40px; border-radius: 50%;">
+                                <!-- ADD PROFILE PIC OF USER WHO POSTED IT -->
+                                <span class="username" style="margin-left: 10px;"><a href="/account/<%=userData.feedResult[i].username%>"><%=userData.feedResult[i].username%></a></span>
+                                <span class="description" style="margin-left: auto;"><%= moment(userData.feedResult[i].created_at).fromNow() %></span>
+                                <!-- IN ABOVE LINE, ADD HREF TO USER'S ACCOUNT -->
+                            </div>
+                        </div>
+        
+                        <div class="box-body" style="padding: 0;">
+                            <img class="img-responsive pad" id="<%=userData.feedResult[i].feedname%>" onclick="showFeed(this.id);return false;" src="/profilepics/<%=userData.feedResult[i].feedname%>" alt="Photo" style="width: 100%; height: auto;">
+                            <!-- INSERT SRC -->
+                            <div class="box-footer" style="padding: 10px;">
+                                <div class="btn btn-default btn-sm" style="position: relative;">
+                                    <i class="fa fa-heart-o fa-2x" id="like-icon-<%=userData.feedResult[i].feedname%>" style="color: black;"></i>
+                                    <input type="button" style="border: none; position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0;" id="like-btn-<%=userData.feedResult[i].feedname%>" onclick="likeImage('<%=userData.feedResult[i].feedname%>', this)" value="<%=userData.feedResult[i].isliked%>" />
+                                    <!-- Hiding the text inside the button -->
+                                </div>
+                                <span class="pull-right text-muted"><%=userData.feedResult[i].likes %> likes <!--[Number] comments--></span>
+                                <!-- ADD LIKE, COMMENT COUNT -->
+                            </div>
+                        </div>
+                    </div>
                 </div>
-              </div>
-              <div class="post-content">
-                <img src="/profilepics/<%=userData.feedResult[i].feedname%>" class="post-image" alt="">
-                <div class="post-caption">
-                  <h5><%=userData.feedResult[i].caption%></h5>
-                </div>
-                <div class="post-stats">
-                  <ul>
-                    <li><i class="fas fa-heart" aria-hidden="true"></i><span class="likes-count">2</span></li>
-                    <li><i class="fas fa-comment" aria-hidden="true"></i><span class="comments-count">2</span></li>
-                  </ul>
-                </div>
-              </div>
             </div>
-          <% } %>
-        <% } %>
-      </div>
-    </div>
-    
+            <% } %>
+        </div>
   
     
           <!-- End of gallery -->

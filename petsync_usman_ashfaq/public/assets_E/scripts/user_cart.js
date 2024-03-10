@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', function () {
     email_e = localStorage.getItem('email_e');
     $.ajax({
-        url: 'http://localhost:3001/get_cart_items?email_e=' + email_e,
+        url: 'http://localhost:3001/get_cart_items?email_e=' + email_e, // Adjust the URL as per your server endpoint
         method: 'GET',
         success: function (data) {
             // Clear existing table rows
@@ -16,13 +16,10 @@ document.addEventListener('DOMContentLoaded', function () {
                         <td style="font-weight: 700">${result.product_name}</td>
                         <td style="font-weight: 700">${result.category}</td>
                         <td style="font-weight: 700">${result.price}</td>
-                        <td style="font-weight: 700">
-                            <span id="quantity${result.p_id}">1</span>
-                            <button class="btn btn-success" onclick="increaseQuantity(${result.p_id}, ${result.stock})">+</button>
-                        </td>
+                        <td style="font-weight: 700">${result.quantity}</td>
                         <td style="font-weight: 700">${result.description}</td>
                         <td>
-                            <button class="btn btn-danger" onclick="removeFromCart(${result.p_id})">Remove from Cart</button>
+                            <button class="btn btn-danger" onclick="removeFromCart(${result.item_id})">Remove from Cart</button>
                         </td>
                     `);
                     // Append the row to the table
@@ -30,11 +27,8 @@ document.addEventListener('DOMContentLoaded', function () {
                 });
             } else {
                 // Product details not found
-                $('#Data_table').append('<tr><td colspan="9">No Items found in Cart</td></tr>');
+                $('#Data_table').append('<tr><td colspan="7">No Items found in Cart</td></tr>');
             }
-
-            // Calculate and display the total
-            calculateAndDisplayTotal(data);
         },
         error: function (error) {
             console.error('Error fetching product details:', error);
@@ -44,27 +38,28 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 });
 
-function calculateAndDisplayTotal(cartItems) {
-    // Calculate the total based on the product details
-    var total = cartItems.reduce(function (acc, item) {
-        return acc + item.price * parseInt($('#quantity' + item.p_id).text());
-    }, 0);
 
-    // Update the total element
-    document.getElementById('total').innerText = 'Total: $' + total.toFixed(2);
-}
+// function calculateAndDisplayTotal(cartItems) {
+//     // Calculate the total based on the product details
+//     var total = cartItems.reduce(function (acc, item) {
+//         return acc + item.price * parseInt($('#quantity' + item.p_id).text());
+//     }, 0);
 
-function increaseQuantity(productId, stock) {
-    var quantityElement = $('#quantity' + productId);
-    var currentQuantity = parseInt(quantityElement.text());
+//     // Update the total element
+//     document.getElementById('total').innerText = 'Total: $' + total.toFixed(2);
+// }
 
-    if (currentQuantity < stock) {
-        quantityElement.text(currentQuantity + 1);
-    } else {
-        document.getElementById('message').innerText = 'Product quantity cannot exceed stock!';
-        showDialog_donot_reload();
-    }
-}
+// function increaseQuantity(productId, stock) {
+//     var quantityElement = $('#quantity' + productId);
+//     var currentQuantity = parseInt(quantityElement.text());
+
+//     if (currentQuantity < stock) {
+//         quantityElement.text(currentQuantity + 1);
+//     } else {
+//         document.getElementById('message').innerText = 'Product quantity cannot exceed stock!';
+//         showDialog_donot_reload();
+//     }
+// }
 
 
 function removeFromCart(id) {
@@ -80,7 +75,7 @@ function removeFromCart(id) {
                 document.getElementById('message').innerText = 'Item Removed from Cart!';
                 showDialog();
                 
-                //window.location.href="/item_cart";
+                window.location.href="/item_cart";
             } else {
                 document.getElementById('message').innerText = 'Item not found in Cart!';
                 showDialog();

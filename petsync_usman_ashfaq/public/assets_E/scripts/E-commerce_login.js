@@ -18,9 +18,10 @@ document.getElementById('login').addEventListener('submit', function (event) {
         .then(response => response.json())
         .then(data => {
             if (data.email) {
+               
                 localStorage.setItem('email_e', data.email);
                 localStorage.setItem('name', data.name);
-                window.location.href = "/Load_shop_page";
+               window.location.href = "/Load_shop_page";
             } else {
                 document.getElementById('message').innerText = 'Login Failed! Incorrect Email or Password!';
                 showDialog_donot_reload();

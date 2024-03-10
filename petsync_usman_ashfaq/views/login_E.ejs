@@ -379,49 +379,11 @@
     <script>
         SVGInject(document.querySelectorAll("img.injectable"));
     </script>
-     <script src="../public/assets_E/"></script> 
+     <script src="../public/assets_E/scripts/E-commerce_login.js"></script> 
     <link rel="stylesheet" href="../public/assets_E/css/dialogbox.css">
     <script src="../public/assets_E/js/dialog.js"></script>
 
 </body>
-
-<script>
-    document.getElementById('login').addEventListener('submit', function (event) {
-    event.preventDefault();
-
-    var formData = new FormData(this);
-    var jsonData = {};
-
-    Array.from(formData.entries()).forEach(([key, value]) => {
-        jsonData[key] = value;
-    });
-
-    fetch('/login_E', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(jsonData),
-    })
-        .then(response => response.json())
-        .then(data => {
-            if (data.email) {
-                localStorage.setItem('email', data.email);
-                localStorage.setItem('name', data.name);
-                window.location.href = "/Load_shop_page";
-            } else {
-                document.getElementById('message').innerText = 'Login Failed! Incorrect Email or Password!';
-                showDialog_donot_reload();
-            }
-        })
-        .catch(error => {
-            console.error('Error:', error);
-            document.getElementById('message').innerText = 'Internal failure at backend!';
-            showDialog();
-        });
-});
-
-</script>
 
 
 <!-- Mirrored from themedox.com/demo/petpal/contact.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 13 Feb 2024 09:42:28 GMT -->

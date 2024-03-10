@@ -2,6 +2,8 @@ const displayAccountModel = require("../../model/displayAccountModel");
 const connection = require("../../config");
 const util = require('util');
 
+const moment = require('moment');
+
 // Promisify the connection query method
 const queryAsync = util.promisify(connection.query).bind(connection);
 class DisplayAccountController {
@@ -13,6 +15,7 @@ class DisplayAccountController {
             return res.redirect('/profile');
         } else {
             const userData = await displayAccountModel.getUserData(req.params['username'], req.session.username);
+            
             console.log(req.params['username']);
             // Now let's handle following and follow count
             let sqlQuery1 = "SELECT id FROM users WHERE username='" + req.params['username'] + "'";
@@ -30,13 +33,15 @@ class DisplayAccountController {
                         let followQuery = "SELECT followers, following FROM followcount WHERE username = ?";
                         connection.query(followQuery, [req.params['username']], (error, followResult) => {
                             if (error) throw error;
+
+
                             // Your code to handle the followResult
                         
                         
                         // Combine all data and render once
                         // Combine all data and render once
-                        console.log("Data before rendering:", { userData: userData, initialFollowedUnfollowed: initialFollowedUnfollowed, followResult: followResult[0] });
-                          return res.render('otherUserProfile', {userData: userData, initialFollowedUnfollowed: initialFollowedUnfollowed, followResult: followResult[0]});
+                        console.log("Data before rendering:", { moment: moment,userData: userData, initialFollowedUnfollowed: initialFollowedUnfollowed, followResult: followResult[0] });
+                          return res.render('otherUserProfile', {moment: moment,userData: userData, initialFollowedUnfollowed: initialFollowedUnfollowed, followResult: followResult[0]});
 
                     });
                 });

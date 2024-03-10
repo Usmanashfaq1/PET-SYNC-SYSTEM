@@ -238,7 +238,6 @@ function addToCart(item_id, price) {
 
 
 
-
 function open_details(id) {
     localStorage.setItem('id_detail_of_item', id);
     window.location.href = "/product-details";
