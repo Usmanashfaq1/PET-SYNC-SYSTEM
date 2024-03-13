@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Your existing head content remains unchanged -->
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>PETSYNC VET REGISTERATION</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+  <!-- Favicons -->
+  <link href="../public/assets_E/img/favicon.png" rel="icon">
+  <link href="../public/assets_E/img/apple-touch-icon.png" rel="apple-touch-icon">
+  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+  <!-- Google Fonts -->
+  <link
+    href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+    rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="../public/assets_E/vendor/fontawesome-free/css/all.min.css" rel="stylesheet">
+  <link href="../public/assets_E/vendor/animate.css/animate.min.css" rel="stylesheet">
+  <link href="../public/assets_E/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="../public/assets_E/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="../public/assets_E/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+  <link href="../public/assets_E/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+  <link href="../public/assets_E/vendor/remixicon/remixicon.css" rel="stylesheet">
+  <link href="../public/assets_E/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+
+  <link href="../public/assets_E/css/style.css" rel="stylesheet">
+  <!-- Add the following link for the font-awesome icons -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+
+  <style>
+    /* Your existing styles remain unchanged */
+    /* Timeline holder */
+    ul.timeline {
+      list-style-type: none;
+      position: relative;
+      padding-left: 1.5rem;
+    }
+
+    /* Timeline vertical line */
+    ul.timeline:before {
+      content: ' ';
+      background: #fff;
+      display: inline-block;
+      position: absolute;
+      left: 16px;
+      width: 4px;
+      height: 100%;
+      z-index: 400;
+      border-radius: 1rem;
+    }
+
+    li.timeline-item {
+      margin: 20px 0;
+    }
+
+    /* Timeline item arrow */
+    .timeline-arrow {
+      border-top: 0.5rem solid transparent;
+      border-right: 0.5rem solid #fff;
+      border-bottom: 0.5rem solid transparent;
+      display: block;
+      position: absolute;
+      left: 2rem;
+    }
+
+    /* Timeline item circle marker */
+    li.timeline-item::before {
+      content: ' ';
+      background: #ddd;
+      display: inline-block;
+      position: absolute;
+      border-radius: 50%;
+      border: 3px solid #fff;
+      left: 11px;
+      width: 14px;
+      height: 14px;
+      z-index: 400;
+      box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+    }
+
+    /*
+    *
+    * ==========================================
+    * FOR DEMO PURPOSES
+    * ==========================================
+    *
+    */
+    body {
+      background: #E8CBC0;
+      background: -webkit-linear-gradient(to right, #E8CBC0, #636FA4);
+      background: linear-gradient(to right, #E8CBC0, #636FA4);
+      min-height: 100vh;
+    }
+
+    .text-gray {
+      color: #999;
+    }
+
+    /* Additional styles for pet pictures */
+    .pet-picture {
+      max-width: 100%;
+      height: auto;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Your existing body content remains unchanged -->
+
+  <div class="container py-5">
+    <!-- Your existing container content remains unchanged -->
+    <!-- For demo purpose -->
+    <div class="row text-center text-white mb-5">
+      <div class="col-lg-8 mx-auto">
+        <h1 class="display-4">Pet-Memories-Timeline</h1>
+        <p class="lead mb-0"></p>
+        <p class="lead">PETSYNC<a href="" class="text-white">
+            <u></u></a></p>
+      </div>
+    </div><!-- End -->
+    <div class="row">
+      <div class="col-lg-7 mx-auto">
+        <!-- Timeline -->
+        <ul class="timeline">
+          <!-- Timeline items will be dynamically added here using JavaScript -->
+        </ul><!-- End -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Add jQuery library -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.0/js/bootstrap.bundle.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+  <!-- Your existing script tags remain unchanged -->
+
+  <script>
+    //integration of api
+    const username = localStorage.getItem('name');
+    const petname=localStorage.getItem('petname');
+    // jQuery AJAX call
+    $.ajax({
+      url: '/api/pet-profiles/' + username + '/' + petname,// Update with your actual API endpoint
+      type: 'GET',
+      dataType: 'json',
+      success: function (data) {
+        // Clear existing timeline items
+        $('.timeline').empty();
+
+        if (data && data.length > 0) {
+          // Iterate through pet profiles and add them to the timeline
+          data.forEach(function (profile) {
+            const date = new Date(profile.date);
+
+            // Add a new timeline item
+            // Add a new timeline item
+        const timelineItem = `
+          <li class="timeline-item bg-white rounded ml-3 p-4 shadow">
+            <div class="timeline-arrow"></div>
+            <h2 class="h5 mb-0">${petname}</h2>
+            <span class="small text-gray">
+              <i class="fa fa-clock-o mr-1"></i>
+              <span class="pet-picture-date">${date.toDateString()}</span>
+            </span>
+            <p class="text-small mt-2 font-weight-light">${profile.about}</p>
+            <img class="pet-picture" src="data:image/jpeg;base64,${profile.petPicture}" alt="Pet Picture">
+          </li>
+        `;
+
+            // Append the timeline item to the timeline
+            $('.timeline').append(timelineItem);
+          });
+        } else {
+          // Pet details not found
+          $('.timeline').append('<li class="timeline-item bg-white rounded ml-3 p-4 shadow"><p class="text-small mt-2 font-weight-light">No pet profiles found</p></li>');
+        }
+      },
+      error: function (error) {
+        console.error('Error fetching pet profiles:', error);
+      }
+    });
+  </script>
+</body>
+
+</html>
