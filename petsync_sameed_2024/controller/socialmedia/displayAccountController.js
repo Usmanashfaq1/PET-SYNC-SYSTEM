@@ -69,6 +69,7 @@ connection.query(petQuery, [petOwner], (error, results) => {
     if (error) {
         console.error("Error fetching pet details:", error);
         // Handle error appropriately
+        
     }
     console.log(followResult);
     console.log("Pet details:", results);

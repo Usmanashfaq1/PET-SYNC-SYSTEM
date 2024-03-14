@@ -65,6 +65,15 @@ if (feedResult) {
 let followQuery="SELECT followers,following FROM followcount WHERE username='"+req.session.username+"'";
 connection.query(followQuery,(error,followResult)=>{
     if(error) throw error;
+
+
+    let feedCreaterQuery = "SELECT profilepic FROM userinfo WHERE username = ?";
+                            connection.query(feedCreaterQuery, [req.session.username], (error, profilePicResult) => {
+                                if (error) 
+                                {
+                                    // Handle the error
+                                    throw error;
+                                }
     const petOwner = req.session.username;
 
 // SQL query to fetch pet details
@@ -78,10 +87,13 @@ connection.query(petQuery, [petOwner], (error, results) => {
     }
     console.log(followResult);
     console.log("Pet details:", results);
-    return res.render('userProfileView',{data: userInfo[0],results:results, feedResult: feedResult,dpName: imageName, name,note,location,birthdate,bio,followResult:followResult[0],moment:moment});
+    let imageName=profilePicResult[0].profilepic;
+    if(typeof imageName=='object'){ imageName = "default_profilepic.png"; }
+    console.log(imageName);
+    return res.render('userProfileView',{data: userInfo[0],results:results,profilePic:imageName, feedResult: feedResult,dpName: imageName, name,note,location,birthdate,bio,followResult:followResult[0],moment:moment});
 });
 });
-
+});
               //  return res.render('userProfileView', { data: userInfo[0], feedResult: feedResult,dpName: imageName, name,note,location,birthdate,bio });
             } 
             else 
