@@ -51,19 +51,46 @@ class DisplayAccountController {
                         let followQuery = "SELECT followers, following FROM followcount WHERE username = ?";
                         connection.query(followQuery, [req.params['username']], (error, followResult) => {
                             if (error) throw error;
+                            
+                            let feedCreaterQuery = "SELECT profilepic FROM userinfo WHERE username = ?";
+                            connection.query(feedCreaterQuery, [req.params['username']], (error, profilePicResult) => {
+                                if (error) 
+                                {
+                                    // Handle the error
+                                    throw error;
+                                }
+                                const petOwner =req.params['username'];
 
+// SQL query to fetch pet details
+const petQuery = "SELECT * FROM pet_profile WHERE pet_owner = ?";
+
+// Execute the query
+connection.query(petQuery, [petOwner], (error, results) => {
+    if (error) {
+        console.error("Error fetching pet details:", error);
+        // Handle error appropriately
+    }
+    console.log(followResult);
+    console.log("Pet details:", results);
+                           
+                                //console.log(profilePicResult[0]);
+                                let imageName=profilePicResult[0].profilepic;
+                                if(typeof imageName=='object'){ imageName = "default_profilepic.png"; }
+                                console.log(imageName);
 
                             // Your code to handle the followResult
                         
                         
                         // Combine all data and render once
                         // Combine all data and render once
-                        console.log("Data before rendering:", { moment: moment,userData: userData, initialFollowedUnfollowed: initialFollowedUnfollowed, followResult: followResult[0] });
-                          return res.render('otherUserProfile', {moment: moment,userData: userData, initialFollowedUnfollowed: initialFollowedUnfollowed, followResult: followResult[0]});
+                        console.log("Data before rendering:", { moment: moment,results:results,userData: userData, initialFollowedUnfollowed: initialFollowedUnfollowed, followResult: followResult[0] });
+                          return res.render('otherUserProfile', {moment: moment,results:results,profilePic:imageName,userData: userData, initialFollowedUnfollowed: initialFollowedUnfollowed, followResult: followResult[0]});
 
                     });
                 });
             });
+        });
+    });
         }
     } catch (error) {
         console.error("Error in displaying account:", error);

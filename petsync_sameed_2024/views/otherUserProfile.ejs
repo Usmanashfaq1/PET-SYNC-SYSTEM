@@ -647,7 +647,7 @@ body.sidebar-open {
                 <div class="card-header p-2">
                   <ul class="nav nav-pills">
                     
-                  
+                    <li class="nav-item"><a class="nav-link active" href="#activity" data-toggle="tab">Pets</a></li>
                     
                     <li class="nav-item"><a class="nav-link" href="#post" data-toggle="tab">Photos</a></li>
                   </ul>
@@ -658,7 +658,35 @@ body.sidebar-open {
                     <!-- /.tab-pane -->
                    
   
-                    
+                    <div class="active tab-pane" id="activity">
+                        <!-- Post -->
+                        <% results.forEach(pet => { %>
+                          <!-- Post -->
+                          <div class="card mb-4">
+                              <!-- Pet Picture -->
+                              <div class="card-body text-center">
+                                <img class="img-thumbnail" src="/upload1/<%= pet.petPicture %>" alt="Pet Picture" style="width: 150px; height: 150px; object-fit: cover;">
+                            </div>
+                              <!-- /.card-body -->
+                              
+                              <!-- Pet Details -->
+                              <div class="card-footer">
+                                  <h4 class="text-center"><%= pet.petname %></h4>
+                                  <ul class="list-unstyled">
+                                      <li><strong>Species:</strong> <%= pet.species %></li>
+                                      <li><strong>Age:</strong> <%= pet.age %> years</li>
+                                      <li><strong>Weight:</strong> <%= pet.weight %> lbs</li>
+                                      <!-- Add more pet details here as needed -->
+                                  </ul>
+                              </div>
+                              <!-- /.card-footer -->
+                          </div>
+                          <!-- /.card -->
+                      <% }); %>
+                      
+                          
+                        <!-- /.post -->
+                      </div>
   
                     <div class="tab-pane" id="post">
                       <!-- post views -->
@@ -706,7 +734,7 @@ body.sidebar-open {
                     <div class="box box-widget" style="max-width: 600px;">
                         <div class="box-header with-border" style="padding: 10px;">
                             <div class="user-block" style="display: flex; align-items: center;">
-                                <img class="img-circle" src="/profilepics/<%=userData.feedResult[i].feedname%>" alt="User Image" style="width: 40px; height: 40px; border-radius: 50%;">
+                                <img class="img-circle" src="/profilepics/<%=profilePic%>" alt="User Image" width="40" height="40">
                                 <!-- ADD PROFILE PIC OF USER WHO POSTED IT -->
                                 <span class="username" style="margin-left: 10px;"><a href="/account/<%=userData.feedResult[i].username%>"><%=userData.feedResult[i].username%></a></span>
                                 <span class="description" style="margin-left: auto;"><%= moment(userData.feedResult[i].created_at).fromNow() %></span>

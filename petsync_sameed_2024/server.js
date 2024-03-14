@@ -58,9 +58,14 @@ const upload = multer({ storage: multer_storage }); //old fyp1
 app.use(express.static(__dirname + "/uploads" ) );
 
 
+
+
 //const upload=require('./middleware/multerSetup').single("uploadFile"); // commented latests 
 
 app.use('/public', express.static('public'));
+
+app.use('/upload1', express.static('upload'));
+
 
 
 
@@ -143,6 +148,8 @@ app.use(flash());
 // });
 const feedbackRoutes = require('./routes/feedbackroute');
 app.use('/api/feedback', feedbackRoutes);
+const comment = require('./routes/commentRoute');
+app.use('', comment);
 
 
 // Define a route to handle pet nutrition calculation

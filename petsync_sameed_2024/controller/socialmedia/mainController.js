@@ -1,132 +1,83 @@
-
-// const homeModel = require('../../model/homeModel');
-// const moment = require('moment');
-
-// class mainController {
-//   async displayPage(req, res) {
-//     try {
-//       if (req.session.num != null && typeof req.session.num != 'undefined') {
-//         console.log('User is Logged in Successfully!' + req.session.num);
-//         var name=req.session.username;
-//         const followerUsername = req.session.username;
-//         const feedResult = await homeModel.getFeedData(followerUsername);
-
-//         console.log(feedResult);
-//         console.log('Number of posts:', feedResult.length);
-
-//         if (feedResult.length === 0) {
-//           return res.render('mainView', { moment, feedResult,name });
-//         }
-
-//         for (let i = 0; i < feedResult.length; i++) {
-//           const fdname = feedResult[i].feedname;
-//           const userId = req.session.num;
-
-//           //const isLikedResult = await homeModel.checkIsLiked(fdname, userId);
-
-//           //const R = JSON.stringify(isLikedResult[0]);
-
-//           // if (R[R.length - 2] === '1') {
-//           //   feedResult[i].isliked = 'dislike';
-//           // } else {
-//           //   feedResult[i].isliked = 'like';
-//           // }
-
-//           console.log(feedResult[i]);
-
-//           if (i === feedResult.length - 1) {
-//             return res.render('mainView', { moment, feedResult,name });
-//           }
-//         }
-//       } else {
-//         console.log('Not loggedIn ' + req.session.num);
-//         return res.redirect('/login');
-//       }
-//     } catch (error) {
-//       console.error(error);
-//       res.json({ msg: error, data: [] });
-//     }
-//   }
-// }
-
-// module.exports = mainController;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 const connection = require('../../config');
-
-
 const moment = require('moment');
-class mainController{
-    displayPage (req,res){
-        //console.log(req.session.num);
-        
-        if(req.session.num!=null && typeof req.session.num!="undefined"){//If user has logged in
-            console.log("LoggedIn "+req.session.num);
-            var name=req.session.username;
-            //followinfo.following AS username,userfeed.feedname AS feedname
-            let feedQuery="SELECT * FROM userfeed INNER JOIN followinfo "+ 
-             " ON userfeed.username = followinfo.following WHERE followinfo.follower= '"+req.session.username+"' ORDER BY created_at DESC"; 
-            //WHERE userid!="+req.session.num;
-            //console.log(feedQuery);
-             connection.query(feedQuery,(error,feedResult)=>{
-                if(error) throw error;
+
+class mainController {
+    displayPage(req, res) {
+        if (req.session.num && typeof req.session.num !== "undefined") {
+            console.log("LoggedIn " + req.session.num);
+            const name = req.session.username;
+
+            // Query to retrieve user feed data
+            let feedQuery = "SELECT * FROM userfeed INNER JOIN followinfo " +
+                " ON userfeed.username = followinfo.following WHERE followinfo.follower = '" + req.session.username + "' ORDER BY created_at DESC";
+
+            connection.query(feedQuery, (error, feedResult) => {
+                if (error) {
+                    console.error("Error retrieving user feed:", error);
+                    return res.status(500).send("An error occurred while retrieving user feed data.");
+                }
+
                 console.log(feedResult);
-                if(feedResult.length==0)
-                return res.render('mainView',{moment:moment,feedResult:feedResult,name});
-                for(let i=0;i<feedResult.length;i++){
-                    let fdname=feedResult[i].feedname;
-                    let userId=req.session.num;
-                    //console.log(req.body)
-                    //feedname+="1";
-                    let isLikedQuery="SELECT EXISTS(SELECT 1 FROM likeinfo WHERE (feedname = '"+fdname+"' AND likedby = '"+userId+"') LIMIT 1)"
-                    
-                    connection.query(isLikedQuery,(error,isLikedResult)=>{
-                        if(error) throw error;
-                        let R=JSON.stringify(isLikedResult[0]);
-                        //console.log(R);
-                        if(R[R.length-2]=='1'){
-                            feedResult[i].isliked="dislike";
+
+                if (feedResult.length == 0) {
+                    // If feedResult is empty, render the main view with an empty feed
+                    return res.render('mainView', { moment: moment, feedResult: feedResult, name: name });
+                }
+
+                // Array to store profile pictures for each user
+                let profilePics = [];
+
+                // Loop through feedResult to get profile pics
+                for (let i = 0; i < feedResult.length; i++) {
+                    let fdname = feedResult[i].feedname;
+                    let userId = req.session.num;
+
+                    // Query to check if the current user has liked the feed
+                    let isLikedQuery = "SELECT EXISTS(SELECT 1 FROM likeinfo WHERE (feedname = '" + fdname + "' AND likedby = '" + userId + "') LIMIT 1)";
+
+                    connection.query(isLikedQuery, (error, isLikedResult) => {
+                        if (error) {
+                            console.error("Error checking if feed is liked:", error);
+                            return res.status(500).send("An error occurred while checking if the feed is liked.");
                         }
-                        else
-                        feedResult[i].isliked="like";
-                        console.log(feedResult[i]);
-                        
-                        if(i==feedResult.length-1){
-                            return res.render('mainView',{moment:moment,feedResult:feedResult,name});
+
+                        let R = JSON.stringify(isLikedResult[0]);
+
+                        if (R[R.length - 2] == '1') {
+                            feedResult[i].isliked = "dislike";
+                        } else {
+                            feedResult[i].isliked = "like";
                         }
+
+                        // Query to get the profile picture for the user who created the feed
+                        let feedCreaterQuery = "SELECT profilepic FROM userinfo WHERE username = '" + feedResult[i].username + "'";
+
+                        connection.query(feedCreaterQuery, (error, profilePicResult) => {
+                            if (error) {
+                                console.error("Error retrieving profile picture:", error);
+                                return res.status(500).send("An error occurred while retrieving the profile picture.");
+                            }
+
+                            // Check if profilePicResult is empty or not
+                            let imageName = (profilePicResult.length > 0) ? profilePicResult[0].profilepic : "default_profilepic.png";
+
+                            // Push profile picture to profilePics array
+                            profilePics.push(imageName);
+
+                            // Check if all profile pictures have been retrieved
+                            if (profilePics.length === feedResult.length) {
+                                // Render the view with feedResult and profilePics
+                                return res.render('mainView', { moment: moment, feedResult: feedResult, name: name, profilePics: profilePics });
+                            }
+                        });
                     });
                 }
-                // for(let i=0;i<feedResult.length;i++){
-                //     console.log(feedResult[i]);
-                // }
-
-             });
-        }
-        else{  
-            console.log("Not loggedIn "+req.session.num);
+            });
+        } else {
+            console.log("Not loggedIn " + req.session.num);
             return res.redirect('/login');
         }
     }
-    /*
-    //Yet to be done
-    enterInfo (req,res){
-        homeModel.enterInfo(req,res);
-        //console.log("contMsg=> "+msg);
-    } 
-    */
 }
-module.exports =  mainController;
 
+module.exports = mainController;

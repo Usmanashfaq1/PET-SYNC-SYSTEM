@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const Controller = require('../controller/socialmedia/showFeedController');
+const Controller = require('../controller/socialmedia/postController');
 const showFeedController = new Controller();
 
 

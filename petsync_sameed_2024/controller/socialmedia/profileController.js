@@ -65,10 +65,22 @@ if (feedResult) {
 let followQuery="SELECT followers,following FROM followcount WHERE username='"+req.session.username+"'";
 connection.query(followQuery,(error,followResult)=>{
     if(error) throw error;
-    console.log(followResult);
-    return res.render('userProfileView',{data: userInfo[0], feedResult: feedResult,dpName: imageName, name,note,location,birthdate,bio,followResult:followResult[0],moment:moment});
-});
+    const petOwner = req.session.username;
 
+// SQL query to fetch pet details
+const petQuery = "SELECT * FROM pet_profile WHERE pet_owner = ?";
+
+// Execute the query
+connection.query(petQuery, [petOwner], (error, results) => {
+    if (error) {
+        console.error("Error fetching pet details:", error);
+        // Handle error appropriately
+    }
+    console.log(followResult);
+    console.log("Pet details:", results);
+    return res.render('userProfileView',{data: userInfo[0],results:results, feedResult: feedResult,dpName: imageName, name,note,location,birthdate,bio,followResult:followResult[0],moment:moment});
+});
+});
 
               //  return res.render('userProfileView', { data: userInfo[0], feedResult: feedResult,dpName: imageName, name,note,location,birthdate,bio });
             } 

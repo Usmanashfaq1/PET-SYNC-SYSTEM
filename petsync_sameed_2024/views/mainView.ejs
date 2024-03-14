@@ -594,7 +594,7 @@
                 <div class="box box-widget" style="max-width: 600px;">
                     <div class="box-header with-border" style="padding: 10px;">
                         <div class="user-block" style="display: flex; align-items: center;">
-                            <img class="img-circle" src="/profilepics/<%=feedResult[i].feedname%>" alt="User Image" style="width: 40px; height: 40px; border-radius: 50%;">
+                            <img class="img-circle" src="/profilepics/<%= profilePics[i] %>" alt="User Image" width="40" height="40">
                             <!-- ADD PROFILE PIC OF USER WHO POSTED IT -->
                             <span class="username" style="margin-left: 10px;"><a href="/account/<%=feedResult[i].username%>"><%=feedResult[i].username%></a></span>
                             <span class="description" style="margin-left: auto;"><%= moment(feedResult[i].created_at).fromNow() %></span>
