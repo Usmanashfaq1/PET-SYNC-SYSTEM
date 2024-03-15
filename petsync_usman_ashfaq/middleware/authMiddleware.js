@@ -18,3 +18,13 @@ exports.isUserAuthenticated = (req, res, next) => {
         return res.redirect('/'); // User is not authenticated, redirect to front page
     }
 };
+
+
+exports.isEcommerceAuthenticated = (req, res, next) => {
+    if (req.session && req.session.ecommerce) {
+        return next(); // User is authenticated, proceed to the next middleware
+    } else {
+        return res.redirect('/'); // User is not authenticated, redirect to front page
+    }
+};
+

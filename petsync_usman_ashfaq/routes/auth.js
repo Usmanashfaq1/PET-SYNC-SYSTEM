@@ -9,6 +9,6 @@ router.get('/logout', authMiddleware.isAuthenticated, authController.logout);
 
 router.get('/logout_user',authMiddleware.isUserAuthenticated,authController.logout);
 
-
+router.get('/logoutE', authMiddleware.isEcommerceAuthenticated, authController.logout);
 
 module.exports = router;

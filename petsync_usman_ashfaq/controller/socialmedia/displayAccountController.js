@@ -2,6 +2,8 @@ const displayAccountModel = require("../../model/displayAccountModel");
 const connection = require("../../config");
 const util = require('util');
 
+const moment = require('moment');
+
 // Promisify the connection query method
 const queryAsync = util.promisify(connection.query).bind(connection);
 class DisplayAccountController {
@@ -13,6 +15,25 @@ class DisplayAccountController {
             return res.redirect('/profile');
         } else {
             const userData = await displayAccountModel.getUserData(req.params['username'], req.session.username);
+            if (userData && userData.feedResult) {
+                for (let i = 0; i < userData.feedResult.length; i++) {
+                    const feed = userData.feedResult[i];
+                    const isLikedQuery = `SELECT EXISTS(SELECT 1 FROM likeinfo WHERE (feedname = '${feed.feedname}' AND likedby = '${req.session.num}') LIMIT 1)`;
+                    connection.query(isLikedQuery, (error, isLikedResult) => {
+                        if (error) {
+                            console.error("Error:", error);
+                            throw error;
+                        }
+                        const R = JSON.stringify(isLikedResult[0]);
+                        if (R[R.length - 2] === '1') {
+                            userData.feedResult[i].isliked = "dislike";
+                        } else {
+                            userData.feedResult[i].isliked = "like";
+                        }
+                        console.log(userData.feedResult[i]);
+                    });
+                }
+            }
             console.log(req.params['username']);
             // Now let's handle following and follow count
             let sqlQuery1 = "SELECT id FROM users WHERE username='" + req.params['username'] + "'";
@@ -30,17 +51,47 @@ class DisplayAccountController {
                         let followQuery = "SELECT followers, following FROM followcount WHERE username = ?";
                         connection.query(followQuery, [req.params['username']], (error, followResult) => {
                             if (error) throw error;
+                            
+                            let feedCreaterQuery = "SELECT profilepic FROM userinfo WHERE username = ?";
+                            connection.query(feedCreaterQuery, [req.params['username']], (error, profilePicResult) => {
+                                if (error) 
+                                {
+                                    // Handle the error
+                                    throw error;
+                                }
+                                const petOwner =req.params['username'];
+
+// SQL query to fetch pet details
+const petQuery = "SELECT * FROM pet_profile WHERE pet_owner = ?";
+
+// Execute the query
+connection.query(petQuery, [petOwner], (error, results) => {
+    if (error) {
+        console.error("Error fetching pet details:", error);
+        // Handle error appropriately
+        
+    }
+    console.log(followResult);
+    console.log("Pet details:", results);
+                           
+                                //console.log(profilePicResult[0]);
+                                let imageName=profilePicResult[0].profilepic;
+                                if(typeof imageName=='object'){ imageName = "default_profilepic.png"; }
+                                console.log(imageName);
+
                             // Your code to handle the followResult
                         
                         
                         // Combine all data and render once
                         // Combine all data and render once
-                        console.log("Data before rendering:", { userData: userData, initialFollowedUnfollowed: initialFollowedUnfollowed, followResult: followResult[0] });
-                          return res.render('otherUserProfile', {userData: userData, initialFollowedUnfollowed: initialFollowedUnfollowed, followResult: followResult[0]});
+                        console.log("Data before rendering:", { moment: moment,results:results,userData: userData, initialFollowedUnfollowed: initialFollowedUnfollowed, followResult: followResult[0] });
+                          return res.render('otherUserProfile', {moment: moment,results:results,profilePic:imageName,userData: userData, initialFollowedUnfollowed: initialFollowedUnfollowed, followResult: followResult[0]});
 
                     });
                 });
             });
+        });
+    });
         }
     } catch (error) {
         console.error("Error in displaying account:", error);
@@ -110,7 +161,8 @@ async  followUser(req, res) {
             await queryAsync(followingUpdateSql, [followData.following]);
 
             // Respond with success message or redirect as needed
-            res.send("Operation completed successfully");
+            res.status(200).send("success");
+
         } else {
             return res.redirect('/login');
         }

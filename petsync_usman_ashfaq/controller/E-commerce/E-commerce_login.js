@@ -13,6 +13,7 @@ handle_E_commerce_login = (req, res) => {
             results.forEach(element => {
                 if ((element.password == password) && !found) {
                     found = true;
+                    req.session.ecommerce = element.username;
                     const user = {
                         email: element.email,
                         name: element.username

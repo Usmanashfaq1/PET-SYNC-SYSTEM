@@ -14,6 +14,10 @@
     <!-- Place favicon.ico in the root directory -->
     <link rel="icon" href="../../../../favicon.ico">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script type="text/javascript" src="../uploads/JS/home.js"></script>
+        <link rel="stylesheet" href="../uploads/assets/css/home.css">
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
  
 
     <!-- Font Awesome -->
@@ -273,7 +277,7 @@ body.sidebar-open {
                 <button><i class="far fa-window-close"></i></button>
             </div>
             <div class="offCanvas__logo mb-30">
-                <a href="index-2.html"><img src="../public/assets/img/logo/logo.png" alt="Logo"></a>
+                <a><img src="../public/assets/img/logo/logo.png" alt="Logo"></a>
             </div>
             <div class="offCanvas__side-info mb-30">
                 <div class="contact-list mb-30">
@@ -357,44 +361,31 @@ body.sidebar-open {
                                 <div class="col-xl-5">
                                     <div class="tgmenu__navbar-wrap tgmenu__main-menu d-none d-xl-flex">
                                         <ul class="navigation">
+                                            <li><a href="/main" class="active">Newsfeed</a></li>
                                             <li class="menu-item-has-children"><a href="#">Home</a>
                                                 <ul class="sub-menu">
-                                                    <li><a href="animal.html">All Pets</a></li>
+                                                    
                                                     <li><a href="/profile">Profile</a></li>
-                                                    <li><a href=/create">Create</a></li>
-                                                    <li><a href="/users">Find People</a></li>
+                                                    <li><a href="/create">Create</a></li>
+                                                    
                                                     <li><a href="/profile/edit">Setting</a></li>
                                                     <li><a href="/gallery">Gallery</a></li>
                                                     
                                                 </ul>
                                             </li>
-                                            <li><a href="about.html">About</a></li>
-                                            <li class="menu-item-has-children"><a href="#">Shop</a>
-                                                <ul class="sub-menu">
-                                                    <li><a href="product.html">Our Shop</a></li>
-                                                    <li><a href="product-details.html">Shop Details</a></li>
-                                                </ul>
-                                            </li>
-                                            <li class="menu-item-has-children"><a href="#">Pages</a>
-                                                <ul class="sub-menu">
-                                                    
-                                                    <li><a href="team.html">Our Team</a></li>
-                                                    <li><a href="team-details.html">Team Details</a></li>
-                                                    <li><a href="blog.html">Our Blog</a></li>
-                                                    <li><a href="blog-details.html">Blog Details</a></li>
-                                                    <li><a href="error.html">404 Error Page</a></li>
-                                                </ul>
-                                            </li>
-                                            <li class="active"><a href="#">PetCommunity</a></li>
+                                            <li><a href="/users">Find People</a></li>
+                                            
+                                            
+                                            
                                         </ul>
                                     </div>
                                 </div>
                                 <div class="col-xl-2 col-md-4">
-                                    <div class="logo text-center">
-                                        <a href="index-2.html"><img src="../public/assets/img/logo/w_logo.png" alt="Logo"></a>
+                                    <div class="logo text-center" >
+                                        <a><img src="../public/assets/img/logo/w_logo.png" alt="Logo"></a>
                                     </div>
                                 </div>
-                                <div class="col-xl-5 col-md-8">
+                                <div class="col-xl-5 col-md-8" >
                                     <div class="tgmenu__action tgmenu__action-two d-none d-md-block">
                                         <ul class="list-wrap">
                                             <li class="header-search">
@@ -402,6 +393,7 @@ body.sidebar-open {
                                                     <i class="flaticon-loupe"></i>
                                                 </a>
                                             </li>
+                                           
                                             <li class="header-cart">
                                                 <a href="javascript:void(0)">
                                                     <i class="flaticon-shopping-bag"></i>
@@ -437,7 +429,7 @@ body.sidebar-open {
                             <nav class="tgmobile__menu-box">
                                 <div class="close-btn"><i class="fas fa-times"></i></div>
                                 <div class="nav-logo">
-                                    <a href="index-2.html"><img src="../public/assets/img/logo/logo.png" alt="Logo"></a>
+                                    <a><img src="../public/assets/img/logo/logo.png" alt="Logo"></a>
                                 </div>
                                 <div class="tgmobile__search">
                                     <form action="#">
@@ -481,11 +473,11 @@ body.sidebar-open {
                                 </button>
                             </div>
                             <div class="search__form">
-                                <form action="#">
+                                <form method="GET" id="search-user-form" class="form-inline my-2 my-lg-0">
                                     <div class="search__input">
-                                        <input class="search-input-field" type="text" placeholder="Type keywords here">
+                                        <input class="form-control mr-sm-2 search-input-field" type="search" id="search-text" name="typeahead" autocomplete="off" spellcheck="false" placeholder="Type keywords here" style="height: 40px; border-radius: 5px 0 0 0; background-color: aliceblue; border-color: transparent; flex: 1;">
                                         <span class="search-focus-border"></span>
-                                        <button>
+                                        <button class="btn btn-outline-success my-2 my-sm-0" type="submit" style="height: 40px; width: 50px; border-radius: 0 5px 0 0;">
                                             <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                 <path d="M9.55 18.1C14.272 18.1 18.1 14.272 18.1 9.55C18.1 4.82797 14.272 1 9.55 1C4.82797 1 1 4.82797 1 9.55C1 14.272 4.82797 18.1 9.55 18.1Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
                                                 <path d="M19.0002 19.0002L17.2002 17.2002" stroke="currentcolor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
@@ -514,87 +506,7 @@ body.sidebar-open {
         
         
       <section>
-        <nav class="navbar navbar-expand-lg navbar-dark bg-purple">
-            <div class="container-fluid">
-                <a class="navbar-brand" href="#">Your Brand</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
-                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav mr-auto">
-                        <li class="nav-item ">
-                            <a class="nav-link" href="/main"><i class="fas fa-bolt"></i> Newsfeed</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/profile"><i class="fas fa-user"></i> Profile</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/users"><i class="fas fa-search"></i> Find People</a>
-                        </li>
-                        <li class="nav-item ">
-                            <a class="nav-link" href="/gallery"><i class="fas fa-image"></i> Gallery</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/create"><i class="fas fa-edit"></i> Create</a>
-                        </li>
-                    </ul>
-                    <!-- SEARCH FORM -->
-     
-
-
-    <form method="GET" id="search-user-form" class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-2" type="search" id="search-text" name="typeahead" autocomplete="off" spellcheck="false" placeholder="Username" style="height: 40px; border-radius: 5px 0 0 0; background-color: aliceblue; border-color: transparent;">
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit" style="height: 40px; border-radius: 0 5px 0 0;">Search</button>
-  </form>
-                    
-                    <ul class="navbar-nav ml-auto">
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="far fa-comments"></i>
-                                <span class="badge badge-danger navbar-badge">3</span>
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                <!-- Dropdown menu content -->
-                            </div>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="far fa-bell"></i>
-                                <span class="badge badge-warning navbar-badge">15</span>
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                <!-- Dropdown menu content -->
-                            </div>
-                        </li>
-
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="fas fa-th-large"></i></a>
-                                <span class="badge badge-warning navbar-badge">15</span>
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="profile.html"><i class="icofont-user-alt-3"></i> Your Profile</a>
-                                <a class="dropdown-item" href="add-new-course.html"><i class="icofont-plus"></i> New Course</a>
-                                <a class="dropdown-item" href="#" title><i class="icofont-brand-slideshare"></i> Invite Collegue</a>
-                                <a class="dropdown-item" href="pay-out.html"><i class="icofont-price"></i> Payout</a>
-                                <a class="dropdown-item" href="price-plan.html"><i class="icofont-flash"></i> Upgrade</a>
-                                <a class="dropdown-item" href="help-faq.html"><i class="icofont-question-circle"></i> Help</a>
-                                <a class="dropdown-item" href="/profile/edit"><i class="icofont-gear"></i> Setting</a>
-                                <a class="dropdown-item" href="privacy-n-policy.html"><i class="icofont-notepad"></i> Privacy</a>
-                                <a class="dropdown-item" href="#"><i class="icofont-moon"></i> Dark Mode</a>
-                                <a class="dropdown-item" href="/logout"><i class="icofont-power"></i> Logout</a>
-                            </div>
-                            
-                        </li>
-                       
-                    </ul>
-                </div>
-            </div>
-        </nav>
+        
         <div class="container-fluid mt-3">
             <!-- Your content goes here -->
         </div>
@@ -735,7 +647,7 @@ body.sidebar-open {
                 <div class="card-header p-2">
                   <ul class="nav nav-pills">
                     
-                  
+                    <li class="nav-item"><a class="nav-link active" href="#activity" data-toggle="tab">Pets</a></li>
                     
                     <li class="nav-item"><a class="nav-link" href="#post" data-toggle="tab">Photos</a></li>
                   </ul>
@@ -746,20 +658,55 @@ body.sidebar-open {
                     <!-- /.tab-pane -->
                    
   
-                    
+                    <div class="active tab-pane" id="activity">
+                        <!-- Post -->
+                        <% results.forEach(pet => { %>
+                          <!-- Post -->
+                          <div class="card mb-4">
+                              <!-- Pet Picture -->
+                              <div class="card-body text-center">
+                                <img class="img-thumbnail" src="/upload1/<%= pet.petPicture %>" alt="Pet Picture" style="width: 150px; height: 150px; object-fit: cover;">
+                            </div>
+                              <!-- /.card-body -->
+                              
+                              <!-- Pet Details -->
+                              <div class="card-footer">
+                                  <h4 class="text-center"><%= pet.petname %></h4>
+                                  <ul class="list-unstyled">
+                                      <li><strong>Species:</strong> <%= pet.species %></li>
+                                      <li><strong>Age:</strong> <%= pet.age %> years</li>
+                                      <li><strong>Weight:</strong> <%= pet.weight %> lbs</li>
+                                      <!-- Add more pet details here as needed -->
+                                  </ul>
+                              </div>
+                              <!-- /.card-footer -->
+                          </div>
+                          <!-- /.card -->
+                      <% }); %>
+                      
+                          
+                        <!-- /.post -->
+                      </div>
   
                     <div class="tab-pane" id="post">
                       <!-- post views -->
                       <div class="container123">
                         <div class="gallery123">
-                          <% for(var i=0; i < userData.feedResult.length; i++) { %>
-                            <div class="card1" onclick="openImage('profilepics/<%=userData.feedResult[i].feedname%>')">
-                              <img src="/profilepics/<%=userData.feedResult[i].feedname%>" class="card-image" alt="">
-  
-                            </div>
-                          <% } %>
+                        <!-- here added the check if no post is psoted or user dont have any post show this.... -->
+                        
+                        <div id="load-feed-new" style="display: flex; flex-wrap: wrap; justify-content: center;">
+                            <% for(var i=0; i < userData.feedResult.length; i++) { %>
+                                <div class="card1" onclick="openImage('/profilepics/<%=userData.feedResult[i].feedname%>')">
+                                  <img src="/profilepics/<%=userData.feedResult[i].feedname%>" class="card-image" alt="">
+      
+                                </div>
+                              <% } %>
                         </div>
+                      
+                       
+                       
                       </div>
+                    </div>
                       
                        
                        
@@ -785,36 +732,51 @@ body.sidebar-open {
       <h2>Post Timeline</h2>
       <div class="gallery">
         <!-- here added the check if no post is psoted or user dont have any post show this.... -->
-        <% if (userData.feedResult.length === 0) { %>
-          <p>Nothing to show here!</p>
-        <% } else { %>
-          <% for(var i=0; i < userData.feedResult.length; i++) { %>
-            <div class="facebook-post">
-              <div class="post-header">
-                <img src="/profilepics/<%=userData.feedResult[i].feedname%>" class="profile-pic" alt="">
-                <div class="post-info">
-                  <h3 class="post-author"> <a href="/account/<%=userData.feedResult[i].username%>"><%=userData.feedResult[i].username%></a></h3>
-                  <p class="post-time"><%=userData.feedResult[i].timestamp%></p>
+        
+        <div id="load-feed-new" style="display: flex; flex-wrap: wrap; justify-content: center;">
+            <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+            <% for (var i = 0; i < userData.feedResult.length; i++) { %>
+                <div class="container bootstrap snippets bootdey" style="margin: 10px;">
+                    <div class="col-md-8">
+                        <div class="card">
+                            <div class="card-header">
+                                <div class="user-block" style="display: flex; align-items: center;">
+                                    <img class="img-circle" src="/profilepics/<%=profilePic%>" alt="User Image" width="40" height="40"></img>
+                                    <!-- ADD PROFILE PIC OF USER WHO POSTED IT -->
+                                    <span class="username" style="margin-left: 10px;"><a href="/account/<%=userData.feedResult[i].username%>"><%=userData.feedResult[i].username%></a></span>
+                                    <span class="description" style="margin-left: auto;"><%= moment(userData.feedResult[i].created_at).fromNow() %></span>
+                                    <!-- IN ABOVE LINE, ADD HREF TO USER'S ACCOUNT -->
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <img class="img-responsive pad" id="<%=userData.feedResult[i].feedname%>" onclick="showFeed(this.id);return false;" src="/profilepics/<%=userData.feedResult[i].feedname%>" alt="Photo" style="width: 100%; height: auto;">
+                                <!-- INSERT SRC -->
+                            </div>
+                            <div class="card-footer">
+                                <div class="btn btn-default btn-sm" style="position: relative;">
+                                    <% if (userData.feedResult[i].isliked === 'dislike') { %>
+                                    <i class="fa fa-heart fa-2x" id="like-icon-<%=userData.feedResult[i].feedname%>" style="color: red;"></i>
+                                    <% } else { %>
+                                    <i class="fa fa-heart-o fa-2x" id="like-icon-<%=userData.feedResult[i].feedname%>" style="color: black;"></i>
+                                    <% } %>
+                                    <input type="button" style="border: none; position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0;" id="like-btn-<%=userData.feedResult[i].feedname%>" onclick="likeImage('<%=userData.feedResult[i].feedname%>', this)" value="<%=userData.feedResult[i].isliked%>" />
+                                    <!-- Hiding the text inside the button -->
+                                </div>
+                               
+                                <span class="pull-right text-muted">
+                                    <i class="fa fa-heart" style="color: red;"></i> <%=userData.feedResult[i].likes %> likes 
+                                    <button class="btn btn-link btn-comment" style="color: black;" onmouseover="this.style.color='blue'" onmouseout="this.style.color='black'" id="<%=userData.feedResult[i].feedname%>" onclick="showFeed(this.id);return false;"  >Add Comment</button>
+                                </span>
+                                
+                                
+                                <!-- ADD LIKE, COMMENT COUNT -->
+                            </div>
+                            <p class="card-text caption" style="margin: 10px; padding-left: 8px;"><%= userData.feedResult[i].caption %></p>
+                        </div>
+                    </div>
                 </div>
-              </div>
-              <div class="post-content">
-                <img src="/profilepics/<%=userData.feedResult[i].feedname%>" class="post-image" alt="">
-                <div class="post-caption">
-                  <h5><%=userData.feedResult[i].caption%></h5>
-                </div>
-                <div class="post-stats">
-                  <ul>
-                    <li><i class="fas fa-heart" aria-hidden="true"></i><span class="likes-count">2</span></li>
-                    <li><i class="fas fa-comment" aria-hidden="true"></i><span class="comments-count">2</span></li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-          <% } %>
-        <% } %>
-      </div>
-    </div>
-    
+                <% } %>
+        </div>
   
     
           <!-- End of gallery -->
@@ -881,7 +843,7 @@ body.sidebar-open {
                         <div class="col-xl-3 col-lg-4 col-md-6">
                             <div class="footer__widget">
                                 <div class="footer__logo">
-                                    <a href="index-2.html"><img src="../public/assets/img/logo/w_logo.png" alt=""></a>
+                                    <a><img src="../public/assets/img/logo/w_logo.png" alt=""></a>
                                 </div>
                                 <div class="footer__content footer__content-two">
                                     <p>Duis aute irure dolor in repreerit in voluptate velitesse We understand that your furry friend tred member</p>
@@ -990,50 +952,9 @@ body.sidebar-open {
 
     <!-- Graphs -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"></script>
+   
     <script>
-      var ctx = document.getElementById("myChart");
-      var myChart = new Chart(ctx, {
-        type: 'line',
-        data: {
-          labels: ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
-          datasets: [{
-            data: [15339, 21345, 18483, 24003, 23489, 24092, 12034],
-            lineTension: 0,
-            backgroundColor: 'transparent',
-            borderColor: '#007bff',
-            borderWidth: 4,
-            pointBackgroundColor: '#007bff'
-          }]
-        },
-        options: {
-          scales: {
-            yAxes: [{
-              ticks: {
-                beginAtZero: false
-              }
-            }]
-          },
-          legend: {
-            display: false,
-          }
-        }
-      });
-    </script>
-    <script>
-      function openImage(imageSrc) {
-  // Create a new element to display the enlarged image
-  var enlargedImage = document.createElement('img');
-  enlargedImage.src = imageSrc;
-  enlargedImage.classList.add('enlarged-image');
-
-  // Append the enlarged image to the body
-  document.body.appendChild(enlargedImage);
-
-  // Add an event listener to remove the enlarged image when clicked
-  enlargedImage.addEventListener('click', function() {
-    document.body.removeChild(enlargedImage);
-  });
-}
+     
     </script>
     <script>
       document.getElementById("search-user-form").addEventListener("submit", function(event) {
@@ -1046,35 +967,33 @@ body.sidebar-open {
           window.location.href = "/account/" + username;
       });
 
-      $(document).ready(function(){
-            /*$('#follow-form').submit(function() {
-            $(this).ajaxSubmit({
-                error: function(xhr) {
-                status('Error: ' + xhr.status);
-                },
-                success: function(response) {
-                    console.log(response);
-                }
-            });
-            //Very important line, it disables the page refresh.
-            return false;
-            });*/
-            $('#follow-btn').click(function() {
-                let flag=1;
-                if($('#follow-btn').val()=='Unfollow'){
-                    flag=0;
-                    $('#follow-btn').attr('value',"Follow");
-                }
-                else{
-                    $('#follow-btn').attr('value',"Unfollow");
-                }
+    $(document).ready(function() {
+    $('#follow-btn').click(function() {
+        let flag = 1;
+        // Toggle the button text between Follow and Unfollow
+        if ($('#follow-btn').val() == 'Unfollow') {
+            flag = 0;
+            $('#follow-btn').val("Follow");
+        } else {
+            $('#follow-btn').val("Unfollow");
+        }
 
-            $.post('/follow', {following:'<%=userData.data.username%>',flag:flag}, function(result) {
-               
-                return false;
-            });  
-            });  
-        }); 
+        // Make an AJAX POST request to your Node.js backend
+        $.post('/follow', { following: '<%= userData.data.username %>', flag: flag }, function(result) {
+            // Check if the operation was successful
+            if (result === "success") {
+                // Update the page content here (if needed)
+                // For example, you can update a counter or display a message
+                location.reload();
+            } else {
+                // Handle errors if necessary
+            }
+        });
+        // Prevent the default form submission behavior
+        return false;
+    });
+});
+
   </script>
 
 
@@ -1117,7 +1036,20 @@ function closeReportModal() {
     document.getElementById('reportUserModal').style.display = 'none';
 }
 
+function openImage(imageSrc) {
+  // Create a new element to display the enlarged image
+  var enlargedImage = document.createElement('img');
+  enlargedImage.src = imageSrc;
+  enlargedImage.classList.add('enlarged-image');
 
+  // Append the enlarged image to the body
+  document.body.appendChild(enlargedImage);
+
+  // Add an event listener to remove the enlarged image when clicked
+  enlargedImage.addEventListener('click', function() {
+    document.body.removeChild(enlargedImage);
+  });
+}
     </script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     

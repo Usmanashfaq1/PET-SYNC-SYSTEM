@@ -1,39 +1,33 @@
-require("dotenv").config();
-const axios = require('axios');
 const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path');
 const cors = require('cors');
 const fs = require('fs');
 var app = express();
-// const helmet=require('helmet');
-const nocache = require('nocache');
-const dotenv = require('dotenv');
+const helmet=require('helmet');
+const nocache=require('nocache');
+const dotenv =require('dotenv');
 const nodemailer = require("nodemailer");
 const pool = require('nodemailer-smtp-pool');
 var flash = require("connect-flash");
+const { spawn } = require('child_process');
+const pythonScriptPath = path.join(__dirname, 'petfood_calculator.py');
+const { isEcommerceAuthenticated } = require('./middleware/authMiddleware');
 
-
-var http = require('http').Server(app);
-
-// // Use helmet with CSP configuration
+// Use helmet with CSP configuration
+// Use helmet with CSP configuration
 // app.use(
 //   helmet.contentSecurityPolicy({
 //     directives: {
 //       defaultSrc: ["'self'"],
-//       scriptSrcAttr: ["'unsafe-inline'"],
-//       scriptSrc: ["'self'", "https://js.stripe.com"],
-//       objectSrc: ["'none'"],
-//       styleSrc: ["'self'"],
-//       imgSrc: ["'self'", 'data:'],
-//       mediaSrc: ["'none'"],
-//       frameAncestors: ["'none'"],
-//       frameSrc: ["'self'", "https://js.stripe.com"], // Corrected domain
-//       fontSrc: ["'self'"],
-//       connectSrc: ["'self'"],
+//       scriptSrc: ["'self'", "'unsafe-eval'", "'unsafe-inline'", "*"], // Allow all scripts from all URLs
+//       // Add other directives as needed
 //     },
 //   })
 // );
+
+
+
 
 
 
@@ -61,19 +55,24 @@ const upload = multer({ storage: multer_storage }); //old fyp1
 
 
 
-app.use(express.static(__dirname + "/uploads"));
+app.use(express.static(__dirname + "/uploads" ) );
+
+
 
 
 //const upload=require('./middleware/multerSetup').single("uploadFile"); // commented latests 
 
 app.use('/public', express.static('public'));
 
+app.use('/upload1', express.static('upload'));
 
 
-// all statics files in /public
+
+
+ // all statics files in /public
 app.set("views", path.join(__dirname, "views"));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({extended:true}));
 app.set('view engine', 'ejs');
 
 
@@ -81,101 +80,244 @@ app.set('view engine', 'ejs');
 const conn = require('./config');
 
 const connection = require('./config');
-
+ 
 //SESSION
 const session = require('express-session');
 
 app.use(
-  session({
-    secret: 'your-secret-key',
-    resave: false,
-    saveUninitialized: true,
-    cookie: { maxAge: 600000 } // Set session expiration time to 10 minutes (in milliseconds)
-  })
-)
+    session({
+      secret: 'your-secret-key', 
+      resave: false,
+      saveUninitialized: true,
+      cookie: { maxAge: 600000 } // Set session expiration time to 10 minutes (in milliseconds)
+    })
+  )
 module.exports.session = session;
 app.use(flash());
+
+
+// 
+
+
+
+// // Define a route to handle pet nutrition calculation
+// app.post('/calculatePetNutrition', (req, res) => {
+//   // Extract pet information from the request body
+//   const { petName, weight, dietType } = req.body;
+//   console.log('Received request to calculate pet nutrition:', { petName, weight, dietType });
+
+//   // Spawn a child process to execute the Python script
+//   const pythonProcess = spawn('python', [pythonScriptPath, petName, weight, dietType]);
+
+//   console.log('Spawned Python process');
+
+//   // Capture output from the Python script
+//   let output = '';
+//   pythonProcess.stdout.on('data', (data) => {
+//       output += data.toString();
+//       console.log('Received data from Python script:', data.toString());
+//   });
+
+//   // Handle completion of the Python script
+//   pythonProcess.on('close', (code) => {
+//       console.log('Python script exited with code:', code);
+//       if (code !== 0) {
+//           console.error(`Python script exited with code ${code}`);
+//           return res.status(500).json({ error: 'Internal server error' });
+//       }
+
+//       // Parse the output from the Python script
+//       let nutritionData;
+//       try {
+//           nutritionData = JSON.parse(output);
+//           console.log('Parsed nutrition data:', nutritionData);
+//       } catch (error) {
+//           console.error('Error parsing JSON output:', error);
+//           return res.status(500).json({ error: 'Internal server error' });
+//       }
+
+//       // Send the parsed nutrition data back to the client
+//       res.json(nutritionData);
+//   });
+
+//   // Handle errors, if any
+//   pythonProcess.on('error', (err) => {
+//       console.error('Error executing Python script:', err);
+//       res.status(500).json({ error: 'Internal server error' });
+//   });
+// });
+const feedbackRoutes = require('./routes/feedbackroute');
+app.use('/api/feedback', feedbackRoutes);
+const comment = require('./routes/commentRoute');
+app.use('', comment);
+
+
+// Define a route to handle pet nutrition calculation
+app.post('/calculatePetNutrition', isUserAuthenticated,(req, res) => {
+  // Extract pet information from the request body
+  const { age, weight, dietType, restrictionType, restrictionAmount } = req.body;
+  console.log('Received request to calculate pet nutrition:', { age, weight, dietType });
+
+  // Spawn a child process to execute the Python script
+  const pythonProcess = spawn('python', [pythonScriptPath, age, weight, dietType]);
+
+  console.log('Spawned Python process');
+
+  // Capture output from the Python script
+  let output = '';
+  pythonProcess.stdout.on('data', (data) => {
+      output += data.toString();
+      console.log('Received data from Python script:', data.toString());
+  });
+
+  // Handle completion of the Python script
+  pythonProcess.on('close', (code) => {
+      console.log('Python script exited with code:', code);
+      if (code !== 0) {
+          console.error(`Python script exited with code ${code}`);
+          return res.status(500).json({ error: 'Internal server error' });
+      }
+
+      // Parse the output from the Python script
+      let nutritionData;
+      try {
+          nutritionData = JSON.parse(output);
+          console.log('Parsed nutrition data:', nutritionData);
+      } catch (error) {
+          console.error('Error parsing JSON output:', error);
+          return res.status(500).json({ error: 'Internal server error' });
+      }
+
+      // Render the EJS template with nutrition data
+      res.render('shown', { nutritionData: nutritionData });
+  });
+
+  // Handle errors, if any
+  pythonProcess.on('error', (err) => {
+      console.error('Error executing Python script:', err);
+      res.status(500).json({ error: 'Internal server error' });
+  });
+});
+
+
+
+// Start the server
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
+});
 
 
 
 const authRoutes = require('./routes/auth');
 app.use('/', authRoutes);
 
-const loginRoute = require('./routes/loginRoute');
-app.use('/', loginRoute);
-const signupRoute = require('./routes/signupRoute');
-app.use('/', signupRoute);
+const loginRoute=require('./routes/loginRoute');
+app.use('/',loginRoute);
+const signupRoute=require('./routes/signupRoute');
+app.use('/',signupRoute);
 
 
-const front = require('./routes/frontRoute');
-app.use('/', front);
+const front=require('./routes/frontRoute');
+app.use('/',front);
 
-const mainRoute1 = require('./routes/mainRoute');
-app.use('/', mainRoute1);
+const mainRoute1=require('./routes/mainRoute');
+app.use('/',mainRoute1);
 
-const findUser = require('./routes/findUserRoutes');
-app.use('/', findUser);
+const findUser=require('./routes/findUserRoutes');
+app.use('/',findUser);
 
 
 const userRequestRoutes = require('./routes/userRequestRoutes');
 app.use('/', userRequestRoutes);
 
 // USER PROFILE ROUTE ADDED HERE
-const userProfileRoute = require('./routes/profileRoute');
-app.use('/', userProfileRoute);
+const userProfileRoute=require('./routes/profileRoute');
+app.use('/',userProfileRoute);
 
 // USER PROFILE ROUTE ADDED HERE
-const createRoute = require('./routes/create');
-app.use('/', createRoute);
+const createRoute=require('./routes/create');
+app.use('/',createRoute);
 
-const galleryRoute = require('./routes/gallery');
-app.use('/', galleryRoute);
+const galleryRoute=require('./routes/gallery');
+app.use('/',galleryRoute);
 
-const animalRoute = require('./routes/animalRoute');
-app.use('/', animalRoute);
+const animalRoute=require('./routes/animalRoute');
+app.use('/',animalRoute);
 
-const profileEditRoute = require('./routes/userSetting');
+const profileEditRoute=require('./routes/userSetting');
 const { stringify } = require('querystring');
-app.use('/profile', profileEditRoute);
+app.use('/profile',profileEditRoute);
 
-const displayAccountRoute = require('./routes/displayAccountRoute');
-app.use('/', displayAccountRoute);
+const displayAccountRoute=require('./routes/displayAccountRoute');
+app.use('/',displayAccountRoute);
 
-const userin = require('./routes/useInRoute');
-app.use('/', userin);
+const userin=require('./routes/useInRoute');
+app.use('/',userin);
 
-const appointment = require('./routes/appointment_schedulingRoute');
-app.use('/', appointment);
-
-
-const report = require('./routes/reportRoute');
-app.use('/', report);
+const appointment=require('./routes/appointment_schedulingRoute');
+app.use('/',appointment);
 
 
+const feedshow=require('./routes/showFeedRoute');
+app.use('/',feedshow);
 
-app.get('/community', (req, res) => {
+const report=require('./routes/reportRoute');
+app.use('/',report);
+
+
+
+app.get('/community',(req,res)=>{
   res.render('community');
-});
+ });
 
 
 //  dummy views
-app.get('/pc', (req, res) => {
+ app.get('/pc',(req,res)=>{
   res.render('signup_new');
-});
+ });
 
-app.get('/cp', (req, res) => {
+ app.get('/cp',(req,res)=>{
   res.render('settingnew');
-});
+ });
 
 // end dummy views
 
 
-//E-commerce
+ //E-commerce
 // const productsRouter = require('./routes/route');
 const router = require('./routes/route');
 
 app.use('/', router);
 
+
+// Assuming you have Express and a database connection set up
+
+// Endpoint to fetch pet details by ID
+app.get('/api/pets/:id', (req, res) => {
+  const petId = req.params.id;
+  console.log('Received request for pet ID:', petId); // Log the received pet ID
+
+  // Query the database to get pet details by ID
+  connection.query('SELECT * FROM pet_profile WHERE id = ?', [petId], (error, results) => {
+      if (error) {
+          console.error('Error fetching pet details:', error);
+          res.status(500).json({ error: 'Error fetching pet details' });
+          return;
+      }
+      console.log('Query results:', results); // Log the query results
+
+      if (results.length === 0) {
+          console.warn('No pet found with ID:', petId); // Log a warning if no pet is found
+          res.status(404).json({ error: 'Pet not found' });
+          return;
+      }
+
+      // Send the pet details as JSON response
+      console.log('Sending pet details:', results[0]);
+      res.json(results[0]);
+  });
+});
 
 
 
@@ -238,29 +380,29 @@ app.post("/insert_users", function (req, res) {
     else
       res.json(1);
   });
-  conn.query('SELECT * FROM users WHERE username = ?', username, (error, result, feild) => {
-    if (error) {
-      res.send({
-        "code": 400,
-        "failed": "error ocurred"
-      })
+  conn.query('SELECT * FROM users WHERE username = ?',username,(error,result,feild)=>{
+    if(error){
+        res.send({
+            "code":400,
+            "failed":"error ocurred"
+          })
     }
-    else {
-      //console.log(result);
-      var userData = {
-        "id": result[0].id,
-        "username": username,
-        "profilepic": null,
-        "fullname": null,
-        "birthdate": null,
-        "bio": null
-      };
-      //console.log(userData);
-      //res.send(userData.profilepic);
-      conn.query('INSERT INTO userinfo SET ?', userData);
-
+    else{
+    //console.log(result);
+    var userData = {
+        "id":result[0].id,
+        "username":username,
+        "profilepic":null,
+        "fullname":null,
+        "birthdate":null,
+        "bio":null
+    };
+    //console.log(userData);
+    //res.send(userData.profilepic);
+    conn.query('INSERT INTO userinfo SET ?',userData);
+    
     }
-  });
+});
 });
 
 
@@ -411,7 +553,7 @@ app.post('/api/appointments', (req, res) => {
 
       // Insert appointment data with obtained user_id and vet_id
       const insertAppointmentQuery = 'INSERT INTO appointment (date,user_name,user_email,vet_name,vet_email, user_id, vet_id, type, slot, subject, status) VALUES (?, ?, ?, ?, ?, ?, ?,?,?,?,?)';
-      const appointmentValues = [date, user_name, user_email, vet_name, vet_email, user_id, vet_id, type, slot, subject, status];
+      const appointmentValues = [date,user_name,user_email,vet_name,vet_email, user_id, vet_id, type, slot, subject, status];
 
       conn.query(insertAppointmentQuery, appointmentValues, (err, result) => {
         if (err) {
@@ -442,16 +584,16 @@ app.post('/api/appointments', (req, res) => {
 app.use(express.static(path.join(__dirname, 'public')));
 // Connect to the database
 connection.connect((err) => {
-  if (err) {
-    console.error('Error connecting to database:', err);
-    return;
-  }
-  console.log('Connected to database successfully!');
+    if (err) {
+        console.error('Error connecting to database:', err);
+        return;
+    }
+    console.log('Connected to database successfully!');
 });
 
 // Handle database connection errors
 connection.on('error', (err) => {
-  console.error('Database connection error:', err);
+    console.error('Database connection error:', err);
 });
 
 
@@ -465,145 +607,163 @@ app.use(express.static('public'));
 // Set the views directory
 app.set('views', path.join(__dirname, 'views'));
 
-// Route handler for the root URL
-// Route handler for the root URL
-app.get('/feed', isUserAuthenticated, (req, res) => {
+
+
+//for nutrtition pets
+app.get('/feedn',isUserAuthenticated , (req, res) => {
   const userEmail = req.query.email; // Retrieve the email from the query string
 
   // Fetching pets belonging to the user with the given email
   connection.query('SELECT * FROM pet_profile JOIN users ON pet_profile.owner_id = users.id WHERE users.email = ?', [userEmail], (error, pets) => {
-    if (error) {
-      console.error('Error fetching pets:', error);
-      res.status(500).send('Error fetching pets.');
-      return;
-    }
-    const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
-    res.render('view', { pets: pets, days: days });
+      if (error) {
+          console.error('Error fetching pets:', error);
+          res.status(500).send('Error fetching pets.');
+          return;
+      }
+      
+      res.render('calculateNutrition', { pets: pets });
+  });
+});
+//
+// Route handler for the root URL
+// Route handler for the root URL
+app.get('/feed',isUserAuthenticated , (req, res) => {
+  const userEmail = req.query.email; // Retrieve the email from the query string
+
+  // Fetching pets belonging to the user with the given email
+  connection.query('SELECT * FROM pet_profile JOIN users ON pet_profile.owner_id = users.id WHERE users.email = ?', [userEmail], (error, pets) => {
+      if (error) {
+          console.error('Error fetching pets:', error);
+          res.status(500).send('Error fetching pets.');
+          return;
+      }
+      const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+      res.render('view', { pets: pets, days: days });
   });
 });
 
 // Route to view all schedule details
-app.get('/view-schedule', isUserAuthenticated, (req, res) => {
-  connection.query('SELECT * FROM pet_schedule', (error, scheduleDetails) => {
-    if (error) {
-      console.error('Error fetching schedule details:', error);
-      res.status(500).send('Error fetching schedule details.');
-      return;
-    }
-    res.render('view-schedule', { scheduleDetails: scheduleDetails });
-  });
+app.get('/view-schedule',isUserAuthenticated ,(req, res) => {
+    connection.query('SELECT * FROM pet_schedule', (error, scheduleDetails) => {
+        if (error) {
+            console.error('Error fetching schedule details:', error);
+            res.status(500).send('Error fetching schedule details.');
+            return;
+        }
+        res.render('view-schedule', { scheduleDetails: scheduleDetails });
+    });
 });
 
 // Route to render the edit schedule page for a specific schedule detail
 app.get('/edit-schedule/:id', (req, res) => {
   const scheduleId = req.params.id;
   connection.query('SELECT * FROM pet_schedule WHERE id = ?', scheduleId, (error, results) => {
-    if (error) {
-      console.error('Error fetching schedule detail:', error);
-      res.status(500).send('Error fetching schedule detail.');
-      return;
-    }
-
-    // Extract the schedule detail from the results
-    const scheduleDetail = results[0]; // Assuming only one schedule detail is returned
-
-    // Render the edit-schedule template with the scheduleDetail data
-    res.render('edit-schedule', { scheduleDetail: scheduleDetail });
+      if (error) {
+          console.error('Error fetching schedule detail:', error);
+          res.status(500).send('Error fetching schedule detail.');
+          return;
+      }
+      
+      // Extract the schedule detail from the results
+      const scheduleDetail = results[0]; // Assuming only one schedule detail is returned
+      
+      // Render the edit-schedule template with the scheduleDetail data
+      res.render('edit-schedule', { scheduleDetail: scheduleDetail });
   });
 });
 
 
 // Route to update a schedule detail
 app.post('/update-schedule/:id', (req, res) => {
-  const scheduleId = req.params.id;
-  const updatedSchedule = req.body;
-  connection.query('UPDATE pet_schedule SET ? WHERE id = ?', [updatedSchedule, scheduleId], (error, result) => {
-    if (error) {
-      console.error('Error updating schedule detail:', error);
-      res.status(500).send('Error updating schedule detail.');
-      return;
-    }
-    console.log('Schedule detail updated successfully.');
-    res.redirect('/view-schedule');
-  });
+    const scheduleId = req.params.id;
+    const updatedSchedule = req.body;
+    connection.query('UPDATE pet_schedule SET ? WHERE id = ?', [updatedSchedule, scheduleId], (error, result) => {
+        if (error) {
+            console.error('Error updating schedule detail:', error);
+            res.status(500).send('Error updating schedule detail.');
+            return;
+        }
+        console.log('Schedule detail updated successfully.');
+        res.redirect('/view-schedule');
+    });
 });
 
 // Route to delete a schedule detail
 app.post('/delete-schedule/:id', (req, res) => {
-  const scheduleId = req.params.id;
-  connection.query('DELETE FROM pet_schedule WHERE id = ?', scheduleId, (error, result) => {
-    if (error) {
-      console.error('Error deleting schedule detail:', error);
-      res.status(500).send('Error deleting schedule detail.');
-      return;
-    }
-    console.log('Schedule detail deleted successfully.');
-    res.redirect('/view-schedule');
-  });
+    const scheduleId = req.params.id;
+    connection.query('DELETE FROM pet_schedule WHERE id = ?', scheduleId, (error, result) => {
+        if (error) {
+            console.error('Error deleting schedule detail:', error);
+            res.status(500).send('Error deleting schedule detail.');
+            return;
+        }
+        console.log('Schedule detail deleted successfully.');
+        res.redirect('/view-schedule');
+    });
 });
 
 // Route to render the feeding schedule page
 app.get('/feeding-schedule', (req, res) => {
-  const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
-  connection.query('SELECT * FROM pet_profile', (error, pets) => {
-    if (error) {
-      console.error('Error fetching pets:', error);
-      res.status(500).send('Error fetching pets.');
-      return;
-    }
-    res.render('view', { pets: pets, days: days });
-  });
+    const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+    connection.query('SELECT * FROM pet_profile', (error, pets) => {
+        if (error) {
+            console.error('Error fetching pets:', error);
+            res.status(500).send('Error fetching pets.');
+            return;
+        }
+        res.render('view', { pets: pets, days: days });
+    });
 });
 
 
 // Route to save the feeding schedule data
 app.post('/save-schedule', (req, res) => {
-  const scheduleData = req.body;
-  const sql = 'INSERT INTO pet_schedule (pet_id, day_of_week, meal_name, portion_size) VALUES ?';
-  const values = scheduleData.map(schedule => [
-    schedule.pet_id,
-    schedule.day_of_week,
-    schedule.meal_name,
-    schedule.portion_size
-  ]);
+    const scheduleData = req.body;
+    const sql = 'INSERT INTO pet_schedule (pet_id, day_of_week, meal_name, portion_size) VALUES ?';
+    const values = scheduleData.map(schedule => [
+        schedule.pet_id, 
+        schedule.day_of_week, 
+        schedule.meal_name, 
+        schedule.portion_size
+    ]);
 
-  connection.query(sql, [values], (error, results) => {
-    if (error) {
-      console.error('Error saving schedule:', error);
-      res.status(500).send('Error saving schedule.');
-      return;
-    }
-    console.log('Feeding schedule saved successfully.');
-    res.sendStatus(200);
-  });
+    connection.query(sql, [values], (error, results) => {
+        if (error) {
+            console.error('Error saving schedule:', error);
+            res.status(500).send('Error saving schedule.');
+            return;
+        }
+        console.log('Feeding schedule saved successfully.');
+        res.sendStatus(200);
+    });
 });
-
+// minahil post vet feedback
 // Route handler for the feedback page
 app.get('/feedback', (req, res) => {
-  res.render('feedback'); // Assuming you have a feedback.ejs file in your views folder
+    res.render('feedback'); // Assuming you have a feedback.ejs file in your views folder
 });
 
 app.post('/submit-feedback', (req, res) => {
-  const { name, email, website, message } = req.body;
+    const { name, email, website, message } = req.body;
 
-  const feedbackData = {
-    name: name,
-    email: email,
-    website: website,
-    message: message
-  };
+    const feedbackData = {
+        name: name,
+        email: email,
+        website: website,
+        message: message
+    };
 
-  const sql = 'INSERT INTO feedback SET ?';
+    const sql = 'INSERT INTO feedback SET ?';
 
-  connection.query(sql, feedbackData, (error, results) => {
-    if (error) {
-      console.error('Error saving feedback:', error);
-      res.status(500).send('Error saving feedback.');
-      return;
-    }
-    console.log('Feedback saved successfully.');
-    res.sendStatus(200);
-  });
+    connection.query(sql, feedbackData, (error, results) => {
+        if (error) {
+            console.error('Error saving feedback:', error);
+            res.status(500).send('Error saving feedback.');
+            return;
+        }
+        console.log('Feedback saved successfully.');
+        res.sendStatus(200);
+    });
 });
 
 
@@ -613,21 +773,24 @@ app.post('/submit-feedback', (req, res) => {
 
 
 //sameed e-comerce start
-app.get('/login_E', (req, res) => {
+app.get('/login_E',(req,res)=>{
   res.render('login_E');
-});
+ });
 
-app.get('/our-shop', (req, res) => {
+ app.get('/our-shop',(req,res)=>{
   res.render('our-shop');
-});
+ });
 
-app.get('/product-details', (req, res) => {
+ app.get('/product-details',isEcommerceAuthenticated,(req,res)=>{
   res.render('product-details');
-});
+ });
 
 
+ app.get('/item_cart',isEcommerceAuthenticated,(req,res)=>{
+  res.render('item_cart');
+ });
 
-
+//ens
 
 //fyp1
 // pet profile apis
@@ -642,8 +805,8 @@ app.post('/create_pet_profile', upload.single('petPicture'), (req, res) => {
   var species = req.body.species;
   var about = req.body.about;
   const petPicture = req.file.filename;
-  // Assuming 'owner_id' is the foreign key column in 'pet_profile'
-  var sql = `INSERT INTO pet_profile (pet_owner, petname, gender, age, breed, species, weight, color, petPicture, about, owner_id) 
+ // Assuming 'owner_id' is the foreign key column in 'pet_profile'
+ var sql = `INSERT INTO pet_profile (pet_owner, petname, gender, age, breed, species, weight, color, petPicture, about, owner_id) 
  VALUES ('${username}', '${petname}', '${gender}', '${age}', '${breed}', '${species}', '${weight}', '${color}', '${petPicture}', '${about}', 
          (SELECT id FROM users WHERE username = '${username}'))`;
 
@@ -1148,8 +1311,8 @@ app.put('/api/update-health-information/:recordId', (req, res) => {
 //end fyp1 pet 
 
 
-http.listen(3001, (err) => {
-  if (err) throw err;
-
-  console.log('Server is running on localhost:3001');
+app.listen(3001,(err) =>{
+    if(err) throw err;
+   
+    console.log('Server is running on localhost:3001');
 });

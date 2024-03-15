@@ -1,6 +1,8 @@
 const express = require("express");
 const router = express.Router();
-
+const { isEcommerceAuthenticated } = require('../middleware/authMiddleware');
+const controller = require('./../controller/encryption/playfair');
+const controllerF = require('./../controller/user/feedbackController');
 
 const { load_products_page } = require('../controller/E-commerce/products')
 const { load_admin_page } = require('../controller/E-commerce/admin')
@@ -38,57 +40,57 @@ const { handle_order_details } = require('../controller/E-commerce/admin')
 
 
 
-router.get('/update_product', load_update_product_page);
+router.get('/update_product',isEcommerceAuthenticated, load_update_product_page);
 
-router.get('/open_cart_page', load_open_cart_page);
+router.get('/open_cart_page', isEcommerceAuthenticated , load_open_cart_page);
 
-router.get('/get_products', handle_get_products);
+router.get('/get_products', isEcommerceAuthenticated ,handle_get_products);
 
-router.get('/get_specific_product/:category', handle_get_specific_product);
+router.get('/get_specific_product/:category',isEcommerceAuthenticated , handle_get_specific_product);
 
-router.get('/E-commerce', load_products_page);
+router.get('/E-commerce', isEcommerceAuthenticated , load_products_page);
 
-router.get('/admin_dashboard', load_admin_page);
+router.get('/admin_dashboard', isEcommerceAuthenticated, load_admin_page);
 
-router.get('/admin_products', load_admin_products_page);
+router.get('/admin_products', isEcommerceAuthenticated , load_admin_products_page);
 
-router.post('/add_product', handle_add_product);
+router.post('/add_product', isEcommerceAuthenticated , handle_add_product);
 
-router.get('/edit_product', load_edit_product_page);
+router.get('/edit_product', isEcommerceAuthenticated , load_edit_product_page);
 
-router.delete('/delete_product/:id', handle_delete_product);
+router.delete('/delete_product/:id', isEcommerceAuthenticated , handle_delete_product);
 
-router.get('/load_update_product/:id', handle_load_update_product);
+router.get('/load_update_product/:id', isEcommerceAuthenticated , handle_load_update_product);
 
-router.post('/updated_product_data', handle_updated_product_data);
+router.post('/updated_product_data', isEcommerceAuthenticated , handle_updated_product_data);
 
-router.post('/add_to_cart', handle_add_to_cart);
+router.post('/add_to_cart', isEcommerceAuthenticated, handle_add_to_cart);
 
-router.get('/cart_item_number', handle_cart_item_number);
+router.get('/cart_item_number', isEcommerceAuthenticated , handle_cart_item_number);
 
-router.get('/get_cart_items', handle_get_cart_items);
+router.get('/get_cart_items', isEcommerceAuthenticated , handle_get_cart_items);
 
-router.delete('/remove_from_cart/:id', handle_remove_from_cart);
+router.delete('/remove_from_cart/:id', isEcommerceAuthenticated , handle_remove_from_cart);
 
-router.get('/Load_shop_page', Load_shop_page);
+router.get('/Load_shop_page', isEcommerceAuthenticated ,Load_shop_page);
 
 router.post('/login_E', handle_E_commerce_login);
 
-router.get('/get_product_detail_with_id', handle_get_product_detail_with_id);
+router.get('/get_product_detail_with_id',isEcommerceAuthenticated, handle_get_product_detail_with_id);
 
-router.get('/cart_item_number_quantity', handle_cart_item_number_quantity);
+router.get('/cart_item_number_quantity', isEcommerceAuthenticated , handle_cart_item_number_quantity);
 
-router.get ('/check_added_to_cart', handle_check_added_to_cart);
-
-
-router.get('/item_cart', handle_and_load_item_cart);
-
-router.get('/order_details', handle_order_details);
+router.get ('/check_added_to_cart', isEcommerceAuthenticated , handle_check_added_to_cart);
 
 
+router.get('/item_cart', isEcommerceAuthenticated , handle_and_load_item_cart);
 
-router.post('/payment', payment);
-router.get('/failure', failure);
+router.get('/order_details',isEcommerceAuthenticated , handle_order_details);
+
+
+
+router.post('/payment', isEcommerceAuthenticated , payment);
+router.get('/failure', isEcommerceAuthenticated , failure);
 
 //single routes
 
@@ -112,5 +114,14 @@ router.get('/cp', (req, res) => {
 // router.get('/payment', (req, res) => {
 //     res.render('payment');
 // });
+
+
+// Route for submitting feedback
+
+
+
+
+// // Route for decryption
+// router.post('/decrypt', controller.decrypt);
 
 module.exports = router;

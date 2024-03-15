@@ -28,6 +28,7 @@ class DisplayAccountModel {
       userData.data = userInfo;
       userData.dpName = userInfo.profilepic || "images.jpg";
       userData.feedResult = await this.getUserFeedById(searchId.id);
+      userData.likeResult = await this.getDistinctLikesByUserId(searchId.id);
      
       
 
@@ -52,6 +53,11 @@ class DisplayAccountModel {
   async getUserFeedById(id) {
     const feedQuery = "SELECT * FROM userfeed WHERE userid=?";
     return await promise_connection(feedQuery, [id]);
+  }
+
+  async getDistinctLikesByUserId(id) {
+    const likeQuery = "SELECT DISTINCT feedname FROM likeinfo WHERE likedby=?";
+    return await promise_connection(likeQuery, [id]);
   }
 
   

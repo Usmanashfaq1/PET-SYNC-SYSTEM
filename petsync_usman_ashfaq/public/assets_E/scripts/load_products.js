@@ -13,7 +13,6 @@ document.addEventListener('DOMContentLoaded', function () {
             var currentCount = parseInt(cartCount.text());
             var newCartCount = currentCount + parseInt(data.itemCount);
             cartCount.text(newCartCount);
-            alert(data.total);
             var totalPrice = data.total;
             $('.price_of_total').text('$' + totalPrice.toFixed(2));
         }

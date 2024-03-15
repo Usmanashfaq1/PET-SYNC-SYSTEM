@@ -6,7 +6,7 @@ const stripe = require('stripe')(STRIPE_SECRET_KEY);
 
 
 const payment = async (req, res) => {
- 
+
     try {
         const amount = parseFloat(req.body.amount);
         if (!isNaN(amount) && Array.isArray(req.body.items) && req.body.items.length > 0) {
@@ -16,7 +16,7 @@ const payment = async (req, res) => {
                     const productName = req.body.items[index + 1] || '';
                     const quantity = parseInt(req.body.items[index + 2]);
                     const description = req.body.items[index + 3] || '';
-                    
+
 
                     if (!isNaN(quantity) && quantity > 0) {
                         acc.push({
@@ -45,12 +45,13 @@ const payment = async (req, res) => {
                     name: name1
                 });
 
-                const totalQuantity = lineItems.reduce((sum, item) => sum + item.quantity, 0);
+                // const totalQuantity = lineItems.reduce((sum, item) => sum + item.quantity, 0);
 
-                const productsList = lineItems.map(item => item.price_data.product_data.name);
+                // const productsList = lineItems.map(item => item.price_data.product_data.name);
 
                 // Construct success URL with necessary data
-                const successUrl = `http://localhost:3001/order_details?customer_name=${encodeURIComponent(name1)}&customer_email=${encodeURIComponent(email)}&products_list=${encodeURIComponent(JSON.stringify(productsList))}&quantity=${totalQuantity}&amount_paid=${amount}`;
+                // Construct success URL with necessary data including quantities
+                const successUrl = `http://localhost:3001/order_details?customer_name=${encodeURIComponent(name1)}&customer_email=${encodeURIComponent(email)}&products_list=${encodeURIComponent(JSON.stringify(lineItems))}&amount_paid=${amount}`;
 
                 // Create Checkout Session
                 const session = await stripe.checkout.sessions.create({
