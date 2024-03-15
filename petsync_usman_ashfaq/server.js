@@ -89,7 +89,7 @@ app.use(
       secret: 'your-secret-key', 
       resave: false,
       saveUninitialized: true,
-      cookie: { maxAge: 600000 } // Set session expiration time to 10 minutes (in milliseconds)
+      cookie: { maxAge: 1200000000 } // Set session expiration time to 10 minutes (in milliseconds)
     })
   )
 module.exports.session = session;

@@ -1,9 +1,6 @@
 <!doctype html>
 <html class="no-js" lang="en">
 
-
-<!-- Mirrored from themedox.com/demo/petpal/product.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 13 Feb 2024 09:42:13 GMT -->
-
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -15,6 +12,7 @@
     <!-- Place favicon.ico in the root directory -->
     <!-- CSS here -->
     <link rel="stylesheet" href="../public/assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="../public/assets/css/animate.min.css">
     <link rel="stylesheet" href="../public/assets/css/magnific-popup.css">
     <link rel="stylesheet" href="../public/assets/css/fontawesome-all.min.css">
@@ -26,6 +24,7 @@
     <link rel="stylesheet" href="../public/assets/css/aos.css">
     <link rel="stylesheet" href="../public/assets/css/default.css">
     <link rel="stylesheet" href="../public/assets/css/main.css">
+
 </head>
 
 <body>
@@ -82,9 +81,17 @@
                                         <li class="header-login">
                                             <a href=""><i class="flaticon-user" style="color: white;"></i></a>
                                         </li>
-                                        <li class="header-wishlist">
-                                            <a id="" href="javascript:void(0)"><i class="flaticon-love" style="color: white;"></i></a>
+     
+
+
+                                        <li class="header-cart header-wishlist-two">
+                                            <a id="wishlist" href="javascript:void(0)" onclick="wishlistpage()">
+                                                <i class="flaticon-love" style="color: white;"></i>
+                                                <span style="color: white;">0</span>
+                                            </a>
                                         </li>
+
+
                                         <li class="header-cart header-cart-two">
                                             <strong class="price_of_total" style="color: white;">$0.00</strong>
                                             <a id="itemCartLink" href="javascript:void(0)" onclick="itemcartpage()">
@@ -96,7 +103,8 @@
                                 </div>
                             </div>
                             <div class="col-md-auto"> <!-- Modified -->
-                                <div class="header-btn login-btn"><a href="/logoutE" class="btn" ><i class="flaticon-locked" ></i>Logout</a></div> 
+                                <div class="header-btn login-btn"><a href="/logoutE" class="btn"><i
+                                            class="flaticon-locked"></i>Logout</a></div>
                             </div>
                         </div>
                     </div>
@@ -104,7 +112,7 @@
             </div>
         </div>
     </header>
-    
+
     <!-- header-area-end -->
     <div class="overlay" id="overlay">
         <div class="dialog-box">
@@ -114,7 +122,7 @@
     </div>
 
 
-    
+
     <!-- main-area -->
     <main class="fix">
 
@@ -134,40 +142,42 @@
                             </nav>
                         </div>
                     </div>
-            
+
                     <div class="col-lg-4 d-flex justify-content-end align-items-start"> <!-- Modified -->
                         <div class="breadcrumb__img">
                             <img src="../public/assets/img/images/breadcrumb_img.png" alt="img" data-aos="fade-left"
                                 data-aos-delay="800">
                         </div>
                         <div class="col-md-3 ml-3"> <!-- Modified -->
-                       
+
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="breadcrumb__shape-wrap">
-                <img src="../public/assets/img/images/breadcrumb_shape01.png" alt="img" data-aos="fade-down-right"
-                    data-aos-delay="400">
-                <img src="../public/assets/img/images/breadcrumb_shape02.png" alt="img" data-aos="fade-up-left"
-                    data-aos-delay="400">
-            </div>
+                <div class="breadcrumb__shape-wrap">
+                    <img src="../public/assets/img/images/breadcrumb_shape01.png" alt="img" data-aos="fade-down-right"
+                        data-aos-delay="400">
+                    <img src="../public/assets/img/images/breadcrumb_shape02.png" alt="img" data-aos="fade-up-left"
+                        data-aos-delay="400">
+                </div>
         </section>
         <!-- breadcrumb-area-end -->
 
         <div class="select-grp" style="text-align: right;">
             <label for="course-cat" style="font-weight: bold; margin-right: 10px;">Select Category:</label>
-            <select class="form-select" id="course-cat" aria-label="Default select example" onchange="selectCategory(this.value)" style="width: 130px; border: 1px solid #ff0000; border-radius: 20px; outline: none; color: rgb(0, 0, 0); background-color: #ffffff; padding: 8px 15px; box-sizing: border-box; cursor: pointer;">
+            <select class="form-select" id="course-cat" aria-label="Default select example"
+                onchange="selectCategory(this.value)"
+                style="width: 130px; border: 1px solid #ff0000; border-radius: 20px; outline: none; color: rgb(0, 0, 0); background-color: #ffffff; padding: 8px 15px; box-sizing: border-box; cursor: pointer;">
                 <option value="All" style="color: black;">All</option>
                 <option value="Pet" style="color: black;">Pet</option>
                 <option value="Pet Food" style="color: black;">Food</option>
                 <option value="Pet Medicine" style="color: black;">Medicine</option>
             </select>
         </div>
-        
-        
-        
-        
-        
+
+
+
+
+
 
         <!-- product-area -->
         <section class="product__area-four">
@@ -211,11 +221,11 @@
                 </div>
                 <nav class="pagination__wrap mt-50">
                     <ul class="list-wrap">
-                        <li class="link-arrow"><a href="#"><img src="../public/assets/img/icon/pagination_icon01.svg"
-                                    alt="" class="injectable"></a></li>
-                        <li class="active"><a href="#">1</a></li>
-                        <li class="link-arrow"><a href="#"><img src="../public/assets/img/icon/pagination_icon02.svg"
-                                    alt="" class="injectable"></a></li>
+                        <li class="link-arrow"><img src="../public/assets/img/icon/pagination_icon01.svg" alt=""
+                                class="injectable"></a></li>
+                        <li class="active"><a href="">1</a></li>
+                        <li class="link-arrow"><img src="../public/assets/img/icon/pagination_icon02.svg" alt=""
+                                class="injectable"></a></li>
                     </ul>
                 </nav>
             </div>
@@ -375,6 +385,5 @@
 </body>
 
 
-<!-- Mirrored from themedox.com/demo/petpal/product.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 13 Feb 2024 09:42:16 GMT -->
 
 </html>

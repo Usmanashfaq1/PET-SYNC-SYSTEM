@@ -11,7 +11,11 @@ const { load_edit_product_page } = require('../controller/E-commerce/edit_produc
 const { load_update_product_page } = require('../controller/E-commerce/edit_products')
 const { load_open_cart_page } = require('../controller/E-commerce/cart')
 const { Load_shop_page } = require('../controller/E-commerce/products')
- 
+const { load_wishlist_page } = require('../controller/E-commerce/wishlist')
+
+
+
+
 //payment
 const {payment} = require('../controller/E-commerce/paymentController');
 const {failure} = require('../controller/E-commerce/paymentController');
@@ -26,9 +30,21 @@ const { handle_get_specific_product } = require('../controller/E-commerce/edit_p
 const { handle_load_update_product } = require('../controller/E-commerce/edit_products')
 const { handle_updated_product_data } = require('../controller/E-commerce/edit_products')
 const { handle_add_to_cart } = require('../controller/E-commerce/cart')
+const { handle_add_to_wishlist } = require('../controller/E-commerce/wishlist')
 const { handle_cart_item_number } = require('../controller/E-commerce/cart')
+
+ const { handle_wishlist_item_number } = require('../controller/E-commerce/wishlist')
+
+
 const { handle_get_cart_items } = require('../controller/E-commerce/cart')
+const { handle_get_wishlist_items } = require('../controller/E-commerce/wishlist')
+
+
+
 const { handle_remove_from_cart } = require('../controller/E-commerce/cart')
+const { handle_remove_from_wishlist } = require('../controller/E-commerce/wishlist')
+
+
 const { handle_E_commerce_login } = require('../controller/E-commerce/E-commerce_login')
 const { handle_get_product_detail_with_id } = require('../controller/E-commerce/product_detail')
 const { handle_cart_item_number_quantity } = require('../controller/E-commerce/cart')
@@ -66,11 +82,24 @@ router.post('/updated_product_data', isEcommerceAuthenticated , handle_updated_p
 
 router.post('/add_to_cart', isEcommerceAuthenticated, handle_add_to_cart);
 
+router.post('/add_to_wishlist', isEcommerceAuthenticated, handle_add_to_wishlist);
+
+
 router.get('/cart_item_number', isEcommerceAuthenticated , handle_cart_item_number);
+
+
+ router.get('/wishlist_item_number', isEcommerceAuthenticated , handle_wishlist_item_number);
+
 
 router.get('/get_cart_items', isEcommerceAuthenticated , handle_get_cart_items);
 
+router.get('/get_wishlist_items', isEcommerceAuthenticated , handle_get_wishlist_items);
+
+
 router.delete('/remove_from_cart/:id', isEcommerceAuthenticated , handle_remove_from_cart);
+
+router.delete('/remove_from_wishlist/:id', isEcommerceAuthenticated , handle_remove_from_wishlist);
+
 
 router.get('/Load_shop_page', isEcommerceAuthenticated ,Load_shop_page);
 
@@ -86,6 +115,9 @@ router.get ('/check_added_to_cart', isEcommerceAuthenticated , handle_check_adde
 router.get('/item_cart', isEcommerceAuthenticated , handle_and_load_item_cart);
 
 router.get('/order_details',isEcommerceAuthenticated , handle_order_details);
+
+router.get('/wishlist', isEcommerceAuthenticated , load_wishlist_page);
+
 
 
 

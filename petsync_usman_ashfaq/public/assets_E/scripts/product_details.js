@@ -1,9 +1,7 @@
 let cart_list = [];
 document.addEventListener('DOMContentLoaded', function () {
     cart_list = [-1];
-    //all_products();
     email_e = localStorage.getItem('email_e');
-    //document.getElementById('user').textContent = email_e;
 
     $.ajax({
         url: 'http://localhost:3001/cart_item_number?email_e=' + email_e,
@@ -16,6 +14,20 @@ document.addEventListener('DOMContentLoaded', function () {
 
             var totalPrice = data.total;
             $('.price_of_total').text('$' + totalPrice.toFixed(2));
+            
+            $.ajax({
+                url: 'http://localhost:3001/wishlist_item_number?email_e=' + email_e,
+                method: 'GET',
+                success: function (data) {
+                    $('.header-wishlist-two span').text(data.total);
+                }
+                ,
+                error: function (error) {
+                    console.error('Error adding item to cart:', error);
+                    alert('Error adding item to cart. Please try again.');
+                }
+            });
+            
         }
         ,
         error: function (error) {
@@ -316,3 +328,26 @@ function decreaseQuantity(productId, stock, price) {
 
 
 
+function itemcartpage() {
+    var email_e = localStorage.getItem('email_e');
+    var name = localStorage.getItem('name');
+
+    var itemCartLink = document.getElementById('itemCartLink');
+    if (itemCartLink) {
+        itemCartLink.href = '/item_cart?email_e=' + email_e + '&name=' + name;
+    } else {
+        console.error("Element with id 'itemCartLink' not found.");
+    }
+}
+
+
+
+function wishlistpage() {
+
+    var wishlist = document.getElementById('wishlist');
+    if (itemCartLink) {
+        wishlist.href = '/wishlist'
+    } else {
+        console.error("Element with id 'itemCartLink' not found.");
+    }
+}

@@ -3,7 +3,6 @@ document.addEventListener('DOMContentLoaded', function () {
     cart_list = [-1];
     all_products();
     email_e = localStorage.getItem('email_e');
-    //document.getElementById('user').textContent = email_e;
 
     $.ajax({
         url: 'http://localhost:3001/cart_item_number?email_e=' + email_e,
@@ -14,7 +13,22 @@ document.addEventListener('DOMContentLoaded', function () {
             var newCartCount = currentCount + parseInt(data.itemCount);
             cartCount.text(newCartCount);
             var totalPrice = data.total;
+
             $('.price_of_total').text('$' + totalPrice.toFixed(2));
+
+
+            $.ajax({
+                url: 'http://localhost:3001/wishlist_item_number?email_e=' + email_e,
+                method: 'GET',
+                success: function (data) {
+                    $('.header-wishlist-two span').text(data.total);
+                }
+                ,
+                error: function (error) {
+                    console.error('Error adding item to cart:', error);
+                    alert('Error adding item to cart. Please try again.');
+                }
+            });
         }
         ,
         error: function (error) {
@@ -58,7 +72,9 @@ function all_products() {
                             <div class="product__thumb" style="height: 200px; position: relative;">
                                 <img src="data:image/jpeg;base64,${result.productPicture}" alt="Product Image" style="width: 100%; height: 100%; object-fit: cover;">
                                 <div class="product__action" style="position: absolute; top: 15px; right: 15px;">
-                                    <a href="#" style="margin-right: 5px;"><i class="flaticon-love"></i></a>
+
+                                    <a  style="margin-right: 5px;"><i class="fa fa-heart" style="font-size:24px;" id="wishlistIcon" onclick="addTowishlist(${result.p_id})"></i>
+                                    </a>
                                     <a onclick="open_details(${result.p_id})" style="margin-right: 5px;"><i class="flaticon-loupe"></i></a>
                                 </div>
                                 <div class="sale-wrap" style="background-color: #ff0000; color: #fff; padding: 5px; position: absolute; top: 0; left: 0;">
@@ -143,7 +159,8 @@ function selectCategory(value) {
                                 <div class="product__thumb" style="height: 200px; position: relative;">
                                     <img src="data:image/jpeg;base64,${result.productPicture}" alt="Product Image" style="width: 100%; height: 100%; object-fit: cover;">
                                     <div class="product__action" style="position: absolute; top: 15px; right: 15px;">
-                                        <a href="#" style="margin-right: 5px;"><i class="flaticon-love"></i></a>
+                                        <a  style="margin-right: 5px;"><i class="fa fa-heart" style="font-size:24px;" id="wishlistIcon" onclick="addTowishlist(${result.p_id})"></i>
+                                        </a>
                                         <a onclick="open_details(${result.p_id})" style="margin-right: 5px;"><i class="flaticon-loupe"></i></a>
                                     </div>
                                     <div class="sale-wrap" style="background-color: #ff0000; color: #fff; padding: 5px; position: absolute; top: 0; left: 0;">
@@ -219,7 +236,7 @@ function addToCart(item_id, price) {
                     cartCount.text(newCartCount);
 
                     var totalPrice = data.total;
-                    $('.price_of_total').text('$' + totalPrice.toFixed(2));
+                    $('.price_of_total').text('$' + totalPrice);
                 },
                 error: function (error) {
                     console.error('Error getting cart item number:', error);
@@ -242,6 +259,53 @@ function open_details(id) {
     window.location.href = "/product-details";
 }
 
+
+
+function addTowishlist(productId) {
+
+    var email_e = localStorage.getItem('email_e');
+
+    $.ajax({
+        url: 'http://localhost:3001/add_to_wishlist?item_id=' + productId + '&email_e=' + email_e,
+        method: 'POST',
+        success: function (data) {
+            if (data === 1) {
+                document.getElementById('message').innerText = 'Item Added to wishlist!';
+                showDialog_donot_reload();
+            } else {
+                document.getElementById('message').innerText = 'Item Already Added to wishlist!';
+                showDialog();
+            }
+
+            // Check count of wishlist from DB
+            $.ajax({
+                url: 'http://localhost:3001/wishlist_item_number?email_e=' + email_e,
+                method: 'GET',
+                success: function (data) {
+                    var cartCount = $('.header-wishlist-two span');
+                    var currentCount = parseInt(cartCount.text());
+                    var newCartCount = (currentCount * 0) + parseInt(data.total);
+                    cartCount.text(newCartCount);
+
+                },
+                error: function (error) {
+                    console.error('Error getting cart item number:', error);
+                    alert('Error getting cart item number. Please try again.');
+                }
+            });
+        },
+        error: function (error) {
+            console.error('Error adding item to cart:', error);
+            alert('Error adding item to cart. Please try again.');
+        }
+    });
+
+
+
+}
+
+
+
 function itemcartpage() {
     var email_e = localStorage.getItem('email_e');
     var name = localStorage.getItem('name');
@@ -249,6 +313,18 @@ function itemcartpage() {
     var itemCartLink = document.getElementById('itemCartLink');
     if (itemCartLink) {
         itemCartLink.href = '/item_cart?email_e=' + email_e + '&name=' + name;
+    } else {
+        console.error("Element with id 'itemCartLink' not found.");
+    }
+}
+
+
+
+function wishlistpage() {
+
+    var wishlist = document.getElementById('wishlist');
+    if (itemCartLink) {
+        wishlist.href = '/wishlist'
     } else {
         console.error("Element with id 'itemCartLink' not found.");
     }

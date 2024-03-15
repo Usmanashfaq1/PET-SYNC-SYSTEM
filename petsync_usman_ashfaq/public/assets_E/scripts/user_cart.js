@@ -1,5 +1,6 @@
 document.addEventListener('DOMContentLoaded', function () {
     email_e = localStorage.getItem('email_e');
+    name = localStorage.getItem('name');
     $.ajax({
         url: 'http://localhost:3001/get_cart_items?email_e=' + email_e, // Adjust the URL as per your server endpoint
         method: 'GET',
@@ -69,3 +70,26 @@ function removeFromCart(id) {
 }
 
 
+function itemcartpage() {
+    var email_e = localStorage.getItem('email_e');
+    var name = localStorage.getItem('name');
+
+    var itemCartLink = document.getElementById('itemCartLink');
+    if (itemCartLink) {
+        itemCartLink.href = '/item_cart?email_e=' + email_e + '&name=' + name;
+    } else {
+        console.error("Element with id 'itemCartLink' not found.");
+    }
+}
+
+
+
+function wishlistpage() {
+
+    var wishlist = document.getElementById('wishlist');
+    if (itemCartLink) {
+        wishlist.href = '/wishlist'
+    } else {
+        console.error("Element with id 'itemCartLink' not found.");
+    }
+}
