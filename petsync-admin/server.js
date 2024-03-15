@@ -4,10 +4,16 @@ const path = require('path');
 const cors = require('cors');
 const fs = require('fs');
 var app = express();
+const helmet=require('helmet');
+const nocache=require('nocache');
 const dotenv =require('dotenv');
 const nodemailer = require("nodemailer");
 const pool = require('nodemailer-smtp-pool');
 var flash = require("connect-flash");
+// app.use(helmet());
+
+// Use nocache middleware to disable caching
+app.use(nocache());
 dotenv.config();
 app.use(cors());
 const net = require('net');
@@ -73,26 +79,17 @@ app.use('/',mainRoute1);
 const findUser=require('./routes/findUserRoutes');
 app.use('/',findUser);
 
-// USER PROFILE ROUTE ADDED HERE
-const userProfileRoute=require('./routes/profileRoute');
-app.use('/',userProfileRoute);
+
 
 // USER PROFILE ROUTE ADDED HERE
-const createRoute=require('./routes/create');
-app.use('/',createRoute);
 
-const galleryRoute=require('./routes/gallery');
-app.use('/',galleryRoute);
 
-const animalRoute=require('./routes/animalRoute');
-app.use('/',animalRoute);
 
-const profileEditRoute=require('./routes/userSetting');
-const { stringify } = require('querystring');
-app.use('/profile',profileEditRoute);
 
-const displayAccountRoute=require('./routes/displayAccountRoute');
-app.use('/',displayAccountRoute);
+
+
+
+
 
 const userin=require('./routes/useInRoute');
 app.use('/',userin);
