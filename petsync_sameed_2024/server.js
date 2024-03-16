@@ -147,7 +147,7 @@ app.use(flash());
 //   });
 // });
 const feedbackRoutes = require('./routes/feedbackroute');
-app.use('/api/feedback', feedbackRoutes);
+app.use('', feedbackRoutes);
 const comment = require('./routes/commentRoute');
 app.use('', comment);
 const explore = require('./routes/exploreRoute');
@@ -740,9 +740,7 @@ app.post('/save-schedule', (req, res) => {
 });
 // minahil post vet feedback
 // Route handler for the feedback page
-app.get('/feedback', (req, res) => {
-    res.render('feedback'); // Assuming you have a feedback.ejs file in your views folder
-});
+
 
 app.post('/submit-feedback', (req, res) => {
     const { name, email, website, message } = req.body;

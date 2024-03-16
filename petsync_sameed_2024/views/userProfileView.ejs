@@ -608,37 +608,27 @@ body.sidebar-open {
                         <li class="nav-item"><a class="nav-link" href="#post" data-toggle="tab">Post</a></li>
                       </ul>
                     </div><!-- /.card-header -->
-                    <div class="card-body" style=" background-color: #7E5BEF">
+                    <div class="card-body" >
                       <div class="tab-content">
                         <div class="active tab-pane" id="activity">
-                          <!-- Post -->
-                          <% results.forEach(pet => { %>
-                            <!-- Post -->
-                            <div class="card mb-4" style="background-color: #4EA8DE;">
-                                <!-- Pet Picture -->
-                                <div class="card-body text-center">
-                                  <img class="img-thumbnail" src="/upload1/<%= pet.petPicture %>" alt="Pet Picture" style="width: 150px; height: 150px; object-fit: cover;">
-                              </div>
-                                <!-- /.card-body -->
-                                
-                                <!-- Pet Details -->
-                                <div class="card-footer">
-                                    <h4 class="text-center"><%= pet.petname %></h4>
-                                    <ul class="list-unstyled">
-                                        <li><strong>Species:</strong> <%= pet.species %></li>
-                                        <li><strong>Age:</strong> <%= pet.age %> years</li>
-                                        <li><strong>Weight:</strong> <%= pet.weight %> lbs</li>
-                                        <!-- Add more pet details here as needed -->
-                                    </ul>
+                            <% results.forEach(pet => { %>
+                                <div class="card mb-3" style="max-width: 400px;"> <!-- Adjust max-width as needed -->
+                                    <div class="card-body text-center">
+                                        <img class="img-thumbnail" src="/upload1/<%= pet.petPicture %>" alt="Pet Picture" style="width: 150px; height: 150px; object-fit: cover;"> <!-- Adjust width and height as needed -->
+                                    </div>
+                                    <div class="card-footer">
+                                        <h4 class="text-center"><%= pet.petname %></h4>
+                                        <ul class="list-unstyled">
+                                            <li><strong>Species:</strong> <%= pet.species %></li>
+                                            <li><strong>Age:</strong> <%= pet.age %> years</li>
+                                            <li><strong>Weight:</strong> <%= pet.weight %> lbs</li>
+                                            <!-- Add more pet details here as needed -->
+                                        </ul>
+                                    </div>
                                 </div>
-                                <!-- /.card-footer -->
-                            </div>
-                            <!-- /.card -->
-                        <% }); %>
-                        
-                            
-                          <!-- /.post -->
+                            <% }); %>
                         </div>
+                        
                         <!-- /.tab-pane -->
                        
                         <!-- /.tab-pane -->

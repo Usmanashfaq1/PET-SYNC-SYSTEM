@@ -13,7 +13,7 @@ class DisplayAccountModel {
         return { redirect: '/profile' };
       }
 
-     try {
+   
     const searchId = await this.getUserIdByUsername(username);
 
     if (!searchId) {
@@ -24,12 +24,7 @@ class DisplayAccountModel {
     // Continue with your code here
     // ...
 
-} catch (error) {
-    // Handle the error
-    console.error("Error:", error.message);
 
-    // You can choose to send an error response to the client, redirect the user, or any other appropriate action.
-}
 
       const userInfo = await this.getUserInfoById(searchId.id);
 
