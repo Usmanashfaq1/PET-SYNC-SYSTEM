@@ -4,242 +4,304 @@
 
 <!-- Mirrored from themedox.com/demo/petpal/contact.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 13 Feb 2024 09:42:28 GMT -->
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Petpal - Pet Care and Pet Shop HTML Template</title>
-    <meta name="description" content="Petpal - Pet Care and Pet Shop HTML Template">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <link rel="shortcut icon" type="image/x-icon" href="../public/assets/img/favicon.png">
-    <!-- Place favicon.ico in the root directory -->
-    <link rel="icon" href="../../../../favicon.ico">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
- 
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>Petpal - Pet Care and Pet Shop HTML Template</title>
+        <meta name="description" content="Petpal - Pet Care and Pet Shop HTML Template">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+        <link rel="shortcut icon" type="image/x-icon" href="../public/assets/img/favicon.png">
+        <!-- Place favicon.ico in the root directory -->
+        <link rel="icon" href="../../../../favicon.ico">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script type="text/javascript" src="../uploads/JS/home.js"></script>
+        <link rel="stylesheet" href="../uploads/assets/css/home.css">
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 
-    <!-- Font Awesome -->
-  <link rel="stylesheet" href="../public/static/assets/plugins/fontawesome-free/css/all.min.css">
-  <!-- Ionicons -->
-  <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
-  <!-- Theme style -->
-  <link rel="stylesheet" href="../public/static/assets/dist/css/adminlte.min.css">
-  <!-- Google Font: Source Sans Pro -->
-  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
-
-    <script  type="text/javascript" src="../JS/typeahead.min.js"></script>
-    <script type="text/javascript" src="../JS/home.js"></script>
-    <!-- CSS here -->
-    <link rel="stylesheet" href="../public/assets/css/bootstrap.min.css">
-    <link rel="stylesheet" href="../public/assets/css/animate.min.css">
-    <link rel="stylesheet" href="../public/assets/css/magnific-popup.css">
-    <link rel="stylesheet" href="../public/assets/css/fontawesome-all.min.css">
-    <link rel="stylesheet" href="../public/assets/css/flaticon_pet_care.css">
-    <link rel="stylesheet" href="../public/assets/css/odometer.css">
-    <link rel="stylesheet" href="../public/assets/css/swiper-bundle.min.css">
-    <link rel="stylesheet" href="../public/assets/css/select2.min.css">
-    <link rel="stylesheet" href="../public/assets/css/jquery-ui.css">
-    <link rel="stylesheet" href="../public/assets/css/aos.css">
-    <link rel="stylesheet" href="../public/assets/css/default.css">
-    <link rel="stylesheet" href="../public/assets/css/main.css">
-
-
-
-    <!-- Bootstrap core CSS -->
-    <link href="../public/static/assets/dist/css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Custom styles for this template -->
-    <link href="../public/static/assets/css/board.css" rel="stylesheet">
-</head>
-<style>
-
-/* profile */
-.light-purple-bg {
+     
+    
+        <!-- Font Awesome -->
+      <link rel="stylesheet" href="../public/static/assets/plugins/fontawesome-free/css/all.min.css">
+      <!-- Ionicons -->
+      <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+      <!-- Theme style -->
+      <link rel="stylesheet" href="../public/static/assets/dist/css/adminlte.min.css">
+      <!-- Google Font: Source Sans Pro -->
+      <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+    
+        <script  type="text/javascript" src="../JS/typeahead.min.js"></script>
+        <script type="text/javascript" src="../JS/home.js"></script>
+        <!-- CSS here -->
+        <link rel="stylesheet" href="../public/assets/css/bootstrap.min.css">
+        <link rel="stylesheet" href="../public/assets/css/animate.min.css">
+        <link rel="stylesheet" href="../public/assets/css/magnific-popup.css">
+        <link rel="stylesheet" href="../public/assets/css/fontawesome-all.min.css">
+        <link rel="stylesheet" href="../public/assets/css/flaticon_pet_care.css">
+        <link rel="stylesheet" href="../public/assets/css/odometer.css">
+        <link rel="stylesheet" href="../public/assets/css/swiper-bundle.min.css">
+        <link rel="stylesheet" href="../public/assets/css/select2.min.css">
+        <link rel="stylesheet" href="../public/assets/css/jquery-ui.css">
+        <link rel="stylesheet" href="../public/assets/css/aos.css">
+        <link rel="stylesheet" href="../public/assets/css/default.css">
+        <link rel="stylesheet" href="../public/assets/css/main.css">
+    
+    
+    
+        <!-- Bootstrap core CSS -->
+        <link href="../public/static/assets/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+        <!-- Custom styles for this template -->
+        <link href="../public/static/assets/css/board.css" rel="stylesheet">
+    </head>
+    <style>
+    
+    .light-purple-bg {
     background-color: #8585c9; /* Light Purple Color */
 }
+    /* profile */
+    
+    .container123 {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    
+    .card1 {
+      flex: 1;
+      aspect-ratio: 1 / 1; /* Set aspect ratio to 1:1 for square images */
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    
+    .card-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+     
+    
+    .gallery123 {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      grid-gap: 20px;
+    }
+    
+    
+    .enlarged-image {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: contain; /* Ensure the image fits within the viewport */
+      background-color: rgba(0, 0, 0, 0.8); /* Semi-transparent background */
+      z-index: 1000; /* Ensure the enlarged image is above other content */
+      cursor: pointer; /* Show pointer cursor when hovering over the image */
+    }
+    
+    
+    
+    
+    
+    
+    .post-header {
+      display: flex;
+      align-items: center;
+      padding: 10px;
+    }
+    
+    .profile-pic {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      margin-right: 10px;
+    }
+    
+    .post-info {
+      flex-grow: 1;
+    }
+    
+    .post-content {
+      padding: 10px;
+    }
+    
+    .post-image {
+      width: 100%;
+      height: auto;
+      margin-bottom: 10px;
+    }
+    
+    .post-stats ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    
+    .post-stats ul li {
+      display: inline-block;
+      margin-right: 10px;
+    }
+    
+    .post-stats ul li i {
+      margin-right: 5px;
+    }
 
-.container123 {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
+    .gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    grid-gap: 20px;
 }
-
-.card1 {
-  flex: 1;
-  aspect-ratio: 1 / 1; /* Set aspect ratio to 1:1 for square images */
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  overflow: hidden;
-}
-
-.card-image {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
- 
-
-.gallery123 {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  grid-gap: 20px;
-}
-
-
-.enlarged-image {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: contain; /* Ensure the image fits within the viewport */
-  background-color: rgba(0, 0, 0, 0.8); /* Semi-transparent background */
-  z-index: 1000; /* Ensure the enlarged image is above other content */
-  cursor: pointer; /* Show pointer cursor when hovering over the image */
-}
-
-
-
 
 .facebook-post {
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  margin-bottom: 20px;
-}
-
-.post-header {
-  display: flex;
-  align-items: center;
-  padding: 10px;
-}
-
-.profile-pic {
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  margin-right: 10px;
-}
-
-.post-info {
-  flex-grow: 1;
-}
-
-.post-content {
-  padding: 10px;
-}
-
-.post-image {
-  width: 100%;
-  height: auto;
-  margin-bottom: 10px;
-}
-
-.post-stats ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.post-stats ul li {
-  display: inline-block;
-  margin-right: 10px;
-}
-
-.post-stats ul li i {
-  margin-right: 5px;
-}
-
-/* end profile */
-
-
-
-
-    .nav-link:hover {
-        color: #007bff; /* Change color on hover */
-    }
-
-    .list-inline-item a:hover {
-        color: #007bff; /* Change color of social media icons on hover */
-    }
-
-
-.menu-slide {
+    background-color: #fff;
+    border: 1px solid #eaeaea;
+    border-radius: 5px;
     padding: 20px;
 }
 
-.menu-slide a {
-    display: block;
-    padding: 10px 0;
-    color: #333;
-    text-decoration: none;
-}
-
-.menu-slide a:hover {
-    background-color: #f0f0f0;
-}
-
-/* Menu icon styles */
-#menu-toggle {
-    cursor: pointer;
-}
-
-/* Hide scrollbar */
-body {
-    overflow-y: auto;
-}
-
-/* Show scrollbar when sidebar is open */
-body.sidebar-open {
-    overflow-y: hidden;
-}
-
-
-/* bar */
-.link-items-container {
+.facebook-post .post-header {
     display: flex;
-    flex-direction: row;
-    justify-content: space-between; /* Adjust spacing between items */
-    align-items: center; /* Align items vertically if needed */
+    align-items: center;
+    margin-bottom: 15px;
 }
 
-.link-item {
-    /* Adjust styles for individual link items if needed */
-    margin-right: 20px; /* Adjust spacing between items */
+.facebook-post .profile-pic {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-right: 10px;
 }
 
-.link-item:last-child {
-    margin-right: 0; /* Remove margin from the last item */
+.facebook-post .post-info {
+    flex-grow: 1;
 }
 
-/* gallery styles */
-.gallery-item {
-    margin-bottom: 20px;
-    position: relative;
-}
-
-.gallery-item:hover .gallery-item-info {
-    opacity: 1;
-    transition: opacity 0.3s ease-in-out;
-}
-
-.gallery-item-info {
-    position: absolute;
-    bottom: 10px;
-    left: 50%;
-    transform: translateX(-50%);
-    background-color: rgba(0, 0, 0, 0.7);
-    color: #fff;
-    padding: 5px 10px;
-    border-radius: 5px;
-    opacity: 0;
-}
-
-.gallery-item-info ul {
-    list-style-type: none;
-    padding: 0;
+.facebook-post .post-author {
     margin: 0;
+    font-size: 18px;
+}
+
+.facebook-post .post-time {
+    margin: 0;
+    color: #999;
+    font-size: 14px;
+}
+
+.facebook-post .post-content {
+    margin-bottom: 15px;
+}
+
+.facebook-post .post-image {
+    width: 100%;
+    height: auto;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+.facebook-post .post-caption {
+    margin-bottom: 10px;
+}
+
+.facebook-post .post-caption h5 {
+    margin: 0;
+    font-size: 16px;
+}
+
+.facebook-post .post-stats {
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+}
+
+.facebook-post .post-stats ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.facebook-post .post-stats ul li {
+    margin-right: 20px;
+}
+
+.facebook-post .post-stats ul li:last-child {
+    margin-right: 0;
 }
 
     
-</style>
+    /* end profile */
+    
+    
+    
+    
+        .nav-link:hover {
+            color: #007bff; /* Change color on hover */
+        }
+    
+        .list-inline-item a:hover {
+            color: #007bff; /* Change color of social media icons on hover */
+        }
+    
+    
+    .menu-slide {
+        padding: 20px;
+    }
+    
+    .menu-slide a {
+        display: block;
+        padding: 10px 0;
+        color: #333;
+        text-decoration: none;
+    }
+    
+    .menu-slide a:hover {
+        background-color: #f0f0f0;
+    }
+    
+    /* Menu icon styles */
+    #menu-toggle {
+        cursor: pointer;
+    }
+    
+    /* Hide scrollbar */
+    body {
+        overflow-y: auto;
+    }
+    
+    /* Show scrollbar when sidebar is open */
+    body.sidebar-open {
+        overflow-y: hidden;
+    }
+    
+    
+    /* bar */
+    .link-items-container {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between; /* Adjust spacing between items */
+        align-items: center; /* Align items vertically if needed */
+    }
+    
+    .link-item {
+        /* Adjust styles for individual link items if needed */
+        margin-right: 20px; /* Adjust spacing between items */
+    }
+    
+    .link-item:last-child {
+        margin-right: 0; /* Remove margin from the last item */
+    }
+    
+    .container-center {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding-left: 320px;
+        }
+        
+    </style>
 <body class="light-purple-bg">
 
     <!--Preloader-->
@@ -271,6 +333,7 @@ body.sidebar-open {
             <div class="offCanvas__side-info mb-30">
                 <div class="contact-list mb-30">
                     <h4>Office Address</h4>
+                    <%= name %>
                     <p>123/A, Miranda City Likaoli <br> Prikano, Dope</p>
                 </div>
                 <div class="contact-list mb-30">
@@ -292,52 +355,7 @@ body.sidebar-open {
             </div>
         </div>
         <div class="offCanvas__overly"></div>
-        <!-- offCanvas-menu-end -->
-    <!--  -->
-  
-    <!-- <div class="offcanvas offcanvas-start" id="demo">
-        <div class="offcanvas-header">
-            <h1 class="offcanvas-title">Navigation</h1>
-            <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
-            
-        </div>
-        <div class="offcanvas-body">
-            <ul class="nav flex-column">
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Home</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Profile</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Create</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Find People</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Explore</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Settings</a>
-                </li>
-                <li class="nav-item">
-                    <span class="nav-link">Follow Us:</span>
-                    <ul class="list-inline">
-                        <li class="list-inline-item">
-                            <a href="#"><i class="fab fa-facebook-f"></i></a>
-                        </li>
-                        <li class="list-inline-item">
-                            <a href="#"><i class="fab fa-twitter"></i></a>
-                        </li>
-                        <li class="list-inline-item">
-                            <a href="#"><i class="fab fa-instagram"></i></a>
-                        </li>
-                    </ul>
-                </li>
-            </ul>
-        </div>
-    </div> -->
+       
     <!-- header-area -->
     <header>
         <div id="header-fixed-height"></div>
@@ -384,12 +402,16 @@ body.sidebar-open {
                                                 </a>
                                             </li>
                                            
-                                            <li class="header-cart">
-                                                <a href="javascript:void(0)">
-                                                    <i class="flaticon-shopping-bag"></i>
-                                                    <span>0</span>
-                                                </a>
-                                            </li>
+                                            <div class="tgmenu__action tgmenu__action-three d-none d-md-block">
+                                                <ul class="list-wrap">
+                                                    <li class="header-login">
+                                                        <a href="/profile">
+                                                            <i class="flaticon-user" style="color: white;"></i>
+                                                        </a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                            
                                             <li class="header-btn login-btn"><a href="/logout" class="btn"><i
                                                         class="flaticon-locked"></i>Logout</a></li>
                                                         <li class="offCanvas-menu">
@@ -491,219 +513,209 @@ body.sidebar-open {
     <!-- header-area-end -->
 
     <!-- main-area -->
-    <main class="fix">
+    <main >
 
         
-        
-      <section>
        
-        <div class="container-fluid mt-3">
-            <!-- Your content goes here -->
-        </div>
-    </section>
-    
+      
         
 
         <!-- breadcrumb-area -->
-        <!-- Main content -->
-    
-        <section class="content">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-md-3">
-                        <!-- Profile Image -->
-                        <div class="card card-primary card-outline">
-                            <div class="card-body box-profile">
-                                <div class="text-center">
-                                    <img class="profile-user-img img-fluid img-circle" style="width: 120px;height: 135px;" src="/profilepics/<%= userInfo.profilepic %>" alt="User profile picture">
-                                </div>
-                                <h3 class="profile-username text-center"><%= userInfo.username %></h3>
-                                <!-- <p class="text-muted text-center">Software Engineer</p>
-                                <ul class="list-group list-group-unbordered mb-3">
-                                    <li class="list-group-item">
-                                        <b>Followers</b> <a class="float-right">1,322</a>
-                                    </li>
-                                    <li class="list-group-item">
-                                        <b>Following</b> <a class="float-right">543</a>
-                                    </li>
-                                    <li class="list-group-item">
-                                        <b>Friends</b> <a class="float-right">13,287</a>
-                                    </li>
-                                </ul>
-                                <a href="#" class="btn btn-primary btn-block"><b>Follow</b></a> -->
-                            </div>
-                            <!-- /.card-body -->
-                        </div>
-                        <!-- /.card -->
-                        <!-- About Me Box -->
-                        <div class="card card-primary">
-                            <div class="card-header">
-                                <h3 class="card-title">About Me</h3>
-                            </div>
-                            <!-- /.card-header -->
-                            <div class="card-body">
-                                <strong><i class="fas fa-book mr-1"></i> Bio</strong>
-                                <p class="text-muted"><%= userInfo.bio %></p>
-                                <hr>
-                                <strong><i class="fas fa-map-marker-alt mr-1"></i> Location</strong>
-                                <p class="text-muted"><%= userInfo.location %></p>
-                                <hr>
-                                <strong><i class="fas fa-pencil-alt mr-1"></i> Skills</strong>
-                                <p class="text-muted">
-                                    <span class="tag tag-danger">UI Design</span>
-                                    <span class="tag tag-success">Coding</span>
-                                    <span class="tag tag-info">Javascript</span>
-                                    <span class="tag tag-warning">PHP</span>
-                                    <span class="tag tag-primary">Node.js</span>
-                                </p>
-                                <hr>
-                                <strong><i class="far fa-file-alt mr-1"></i> BirthDate</strong>
-                                <p class="text-muted"><%= userInfo.birthdate %></p>
-                                <strong><i class="far fa-file-alt mr-1"></i> Notes</strong>
-                                <p class="text-muted"><%= userInfo.note %></p>
-                            </div>
-                            <!-- /.card-body -->
-                        </div>
-                        <!-- /.card -->
+<section class="breadcrumb__area fix">
+    <div class="container">
+        <div class="row align-items-end">
+            <div class="col-lg-8">
+                <!-- <div class="breadcrumb__content">
+                    <h3 class="title">Newsfeed</h3>
+                    <nav class="breadcrumb">
+                        <span property="itemListElement" typeof="ListItem">
+                            <a>Welcome</a>
+                        </span>
+                        <span class="breadcrumb-separator"><i class="flaticon-right-arrow-angle"></i></span>
+                        <span property="itemListElement" typeof="ListItem"><%=name%></span>
+                    </nav>
+                </div> -->
+            </div>
+            <!-- <div class="col-lg-4">
+                <div class="breadcrumb__img">
+                    <img src="../public/assets/img/images/cta_img.png" alt="img" data-aos="fade-left" data-aos-delay="800">
+                </div>
+            </div> -->
+        </div>
+    </div>
+    <div class="breadcrumb__shape-wrap">
+        <img src="../public/assets/img/images/breadcrumb_shape01.png" alt="img" data-aos="fade-down-right" data-aos-delay="400">
+        <img src="../public/assets/img/images/breadcrumb_shape02.png" alt="img" data-aos="fade-up-left" data-aos-delay="400">
+    </div>
+</section>
+<br>
+<!-- <div style="display: flex; justify-content: center; align-items: center; height: 35vh;">
+    <div style="width: 46.5%;">
+        <div class="card bg-light">
+            <div class="card-body">
+                <h5 class="card-title text-center">Create Post</h5>
+                <form>
+                    <div class="form-group">
+                        <label for="postContent">Post Content</label>
+                        <textarea class="form-control" id="postContent" rows="3"></textarea>
                     </div>
-                    <!-- /.col -->
-                    <div class="col-md-9">
-                        <div class="card">
-                            <div class="card-header p-2">
-                                <ul class="nav nav-pills">
-                                    <!-- Removed data-toggle="tab" attribute -->
-                                    <li class="nav-item"><a class="nav-link active" href="#settings">Settings</a></li>
+                    <button type="submit" class="btn btn-primary btn-block">Post</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div> -->
+
+
+
+<div class="container-center">
+<section>
+    
+    <div id="load-feed-new" style="display: flex; flex-wrap: wrap; justify-content: center;">
+        
+        <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+        <% for (var i = 0; i < feedResult.length; i++) { %>
+            <div class="container bootstrap snippets bootdey" style="margin: 10px;">
+                <div class="col-md-8">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="user-block" style="display: flex; align-items: center;">
+                                <img class="img-circle" src="/profilepics/<%= profilePics[i] %>" alt="User Image" width="40" height="40">
+                                <!-- ADD PROFILE PIC OF USER WHO POSTED IT -->
+                                <span class="username" style="margin-left: 10px;"><a href="/account/<%=feedResult[i].username%>"><%=feedResult[i].username%></a></span>
+                                <span class="description" style="margin-left: auto;"><%= moment(feedResult[i].created_at).fromNow() %></span>
+                                <!-- IN ABOVE LINE, ADD HREF TO USER'S ACCOUNT -->
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <img class="img-responsive pad" id="<%=feedResult[i].feedname%>" onclick="showFeed(this.id);return false;" src="/profilepics/<%=feedResult[i].feedname%>" alt="Photo" style="width: 100%; height: auto;">
+                            <!-- INSERT SRC -->
+                        </div>
+                        <div class="card-footer">
+                            <div class="btn btn-default btn-sm" style="position: relative;">
+                                <% if (feedResult[i].isliked === 'dislike') { %>
+                                <i class="fa fa-heart fa-2x" id="like-icon-<%=feedResult[i].feedname%>" style="color: red;"></i>
+                                <% } else { %>
+                                <i class="fa fa-heart-o fa-2x" id="like-icon-<%=feedResult[i].feedname%>" style="color: black;"></i>
+                                <% } %>
+                                <input type="button" style="border: none; position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0;" id="like-btn-<%=feedResult[i].feedname%>" onclick="likeImage('<%=feedResult[i].feedname%>', this)" value="<%=feedResult[i].isliked%>" />
+                                <!-- Hiding the text inside the button -->
+                            </div>
+                           
+                            <span class="pull-right text-muted">
+                                <i class="fa fa-heart" style="color: red;"></i> <%=feedResult[i].likes %> likes 
+                                <i class="fa fa-comment" style="color: red;"></i> <%=feedResult[i].comment_count %> comments
+
+                                <button class="btn btn-link btn-comment" style="color: black;" onmouseover="this.style.color='blue'" onmouseout="this.style.color='black'" id="<%=feedResult[i].feedname%>" onclick="showFeed(this.id);return false;"  >Add Comment</button>
+                            </span>
+                            
+                            
+                            <!-- ADD LIKE, COMMENT COUNT -->
+                        </div>
+                        <p class="card-text caption" style="margin: 10px; padding-left: 8px;"><%= feedResult[i].caption %></p>
+                    </div>
+                </div>
+            </div>
+            <% } %>
+            
+    </div>
+    
+    
+</section>
+</div>
+
+        <!-- breadcrumb-area-end -->
+
+        <!-- contact-area -->
+        <section class="contact__area">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-5">
+                        <div class="contact__content">
+                            <div class="section__title mb-30">
+                                <h2 class="title">We Are Always Available For You & Your Pets</h2>
+                                <p>Maecenas quis viverra metus, et efficitur ligula. Nam coueaugue  congue sed luctus lectus conIn onondimentum .</p>
+                            </div>
+                            <div class="contact__info-wrap">
+                                <h6 class="title">Information:</h6>
+                                <ul class="list-wrap">
+                                    <li>
+                                        <div class="icon">
+                                            <i class="flaticon-phone"></i>
+                                        </div>
+                                        <a href="tel:0123456789">+123 8989 444</a>
+                                    </li>
+                                    <li>
+                                        <div class="icon">
+                                            <i class="flaticon-placeholder"></i>
+                                        </div>
+                                        256 Avenue, Newyork City
+                                    </li>
+                                    <li>
+                                        <div class="icon">
+                                            <i class="flaticon-mail"></i>
+                                        </div>
+                                        <a href="mailto:info@gmail.com">info@gmail.com</a>
+                                    </li>
+                                    <li>
+                                        <div class="icon">
+                                            <i class="fas fa-share-alt"></i>
+                                        </div>
+                                        <ul class="list-wrap contact__social">
+                                            <li><a href="https://www.facebook.com/" target="_blank"><i class="fab fa-facebook-f"></i></a></li>
+                                            <li><a href="https://twitter.com/" target="_blank"><i class="fab fa-twitter"></i></a></li>
+                                            <li><a href="https://www.whatsapp.com/" target="_blank"><i class="fab fa-whatsapp"></i></a></li>
+                                            <li><a href="https://www.instagram.com/" target="_blank"><i class="fab fa-instagram"></i></a></li>
+                                            <li><a href="https://www.youtube.com/" target="_blank"><i class="fab fa-youtube"></i></a></li>
+                                        </ul>
+                                    </li>
                                 </ul>
-                            </div><!-- /.card-header -->
-                            <div class="card-body">
-                                <div class="tab-content">
-                                    <div class="tab-pane active" id="settings">
-                                        <div class="col">
-                                            <div class="row">
-                                                <div class="col mb-3">
-                                                    <div class="card">
-                                                        <div class="card-body">
-                                                            <div class="e-profile">
-                                                                <form class="form" novalidate="" action="/profile/edit" method="POST" enctype="multipart/form-data">
-                                                                    <div class="row">
-                                                                        <div class="col d-flex flex-column flex-sm-row justify-content-between mb-3">
-                                                                            <div class="text-center text-sm-left mb-2 mb-sm-0">
-                                                                                <h4 class="pt-sm-2 pb-1 mb-0 text-nowrap"><%= userInfo.fullname %></h4>
-                                                                                <div class="mt-2">
-                                                                                    <label for="file-upload" class="custom-profile-pic-upload">
-                                                                                        <i class="fa fa-fw fa-camera"></i> Change Photo
-                                                                                    </label>
-                                                                                    <br>
-                                                                                    <input id="file-upload" type="file" name="profilePic">
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                    <ul class="nav nav-tabs">
-                                                                        <li class="nav-item"><a href="" class="active nav-link">Settings</a></li>
-                                                                    </ul>
-                                                                    <div class="tab-content pt-3">
-                                                                        <div class="tab-pane active">
-                                                                            <div class="row">
-                                                                                <div class="col">
-                                                                                    <div class="row">
-                                                                                        <div class="col">
-                                                                                            <div class="form-group">
-                                                                                                <label>Full Name</label>
-                                                                                                <input class="form-control" type="text" name="fullName" placeholder="Name" value="<%= userInfo.fullname %>">
-                                                                                            </div>
-                                                                                        </div>
-                                                                                        <div class="col">
-                                                                                            <div class="form-group">
-                                                                                                <label>Username</label>
-                                                                                                <input class="form-control" type="text" name="userName" placeholder="Username" value="<%= userInfo.username %>">
-                                                                                            </div>
-                                                                                        </div>
-                                                                                        <div class="col">
-                                                                                            <div class="form-group">
-                                                                                                <label>Location</label>
-                                                                                                <input class="form-control" type="text" name="location" placeholder="Location" value="<%= userInfo.location %>">
-                                                                                            </div>
-                                                                                        </div>
-                                                                                        <div class="col">
-                                                                                            <div class="form-group">
-                                                                                                <label>Note</label>
-                                                                                                <input class="form-control" type="text" name="note" placeholder="Note" value="<%= userInfo.note %>">
-                                                                                            </div>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                    <div class="row">
-                                                                                        <div class="col">
-                                                                                            <div class="form-group">
-                                                                                                <label>BirthDate</label>
-                                                                                                <input class="form-control" type="date" name="DOB" placeholder="DOB" value="<%= userInfo.birthdate %>">
-                                                                                            </div>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                    <div class="row">
-                                                                                        <div class="col mb-3">
-                                                                                            <div class="form-group">
-                                                                                                <label>Bio</label>
-                                                                                                <textarea class="form-control" name="Bio" rows="5" placeholder="My Bio"><%= userInfo.bio %></textarea>
-                                                                                            </div>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div>
-                                                                            <div class="row">
-                                                                                <div class="col d-flex justify-content-end">
-                                                                                    <% if (msg != 'null') { %>
-                                                                                    <span><pre><%= msg %></pre></span>
-                                                                                    <% } %>
-                                                                                    <input class="btn btn-primary" type="submit" value="Save Changes">
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </form>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-7">
+                        <div class="contact__form-wrap">
+                            <form action="https://themedox.com/demo/petpal/../public/assets/mail.php" method="POST" id="contact-form" class="contact__form">
+                                <h2 class="title">Post a comment</h2>
+                                <span>Your email address will not be published. Required fields are marked *</span>
+                                <div class="row gutter-20">
+                                    <div class="col-md-6">
+                                        <div class="form-grp">
+                                            <input name="name" type="text" placeholder="Name">
                                         </div>
                                     </div>
-                                    <!-- Other tab panes -->
+                                    <div class="col-md-6">
+                                        <div class="form-grp">
+                                            <input name="email" type="email" placeholder="E-mail">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="form-grp">
+                                            <input name="website" type="url" placeholder="Website">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="form-grp">
+                                            <textarea name="message" placeholder="Message"></textarea>
+                                        </div>
+                                    </div>
                                 </div>
-                                <!-- /.tab-content -->
-                            </div><!-- /.card-body -->
+                                <button type="submit" class="btn">Send Us Message <img src="../public/assets/img/icon/right_arrow.svg" alt="" class="injectable"></button>
+                            </form>
+                            <p class="ajax-response mb-0"></p>
                         </div>
-                        <!-- /.card -->
                     </div>
-                    <!-- /.col -->
                 </div>
-                <!-- /.row -->
-            </div><!-- /.container-fluid -->
+                <!-- contact-map -->
+                <div class="contact-map">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d48409.69813174607!2d-74.05163325136718!3d40.68264649999998!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c25bae694479a3%3A0xb9949385da52e69e!2sBarclays%20Center!5e0!3m2!1sen!2sbd!4v1684309529719!5m2!1sen!2sbd" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
+                <!-- contact-map-end -->
+            </div>
         </section>
-        
-       
-   
-        
-        
-        <div class="container-fluid" style="padding-right: 500px;">
-          <div class="row">
-              <div class="col-lg-12">
-                  
-              </div>
-          </div>
-      </div>
-      
-          
-      
-      
-      
-         
-      
-              
-                
-      
-      
-               
+        <!-- contact-area-end -->
+
+    </main>
     <!-- main-area-end -->
 
 
@@ -820,9 +832,10 @@ body.sidebar-open {
             </div>
         </div>
     </footer>
-
     <!-- footer-area-end -->
-<!-- jQuery -->
+
+
+    <!-- jQuery -->
 <script src="../public/static/assets/plugins/jquery/jquery.min.js"></script>
 <!-- Bootstrap 4 -->
 <script src="../public/static/assets/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -898,7 +911,6 @@ body.sidebar-open {
           window.location.href = "/account/" + username;
       });
   </script>
-
 
 
     <!-- JS here -->

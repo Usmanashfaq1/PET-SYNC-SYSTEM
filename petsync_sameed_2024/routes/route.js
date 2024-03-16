@@ -3,6 +3,8 @@ const router = express.Router();
 const { isEcommerceAuthenticated } = require('../middleware/authMiddleware');
 const controller = require('./../controller/encryption/playfair');
 const controllerF = require('./../controller/user/feedbackController');
+// just this added new//
+const authMiddleware = require('../middleware/authMiddleware');
 
 const { load_products_page } = require('../controller/E-commerce/products')
 const { load_admin_page } = require('../controller/E-commerce/admin')
@@ -96,6 +98,11 @@ router.get('/failure', isEcommerceAuthenticated , failure);
 
 router.get('/error', (req, res) => {
     res.render('error');
+});
+
+// this added new 
+router.get('/error_community',authMiddleware.isAuthenticated , (req, res) => {
+    res.render('error_community');
 });
 
 router.get('/community', (req, res) => {

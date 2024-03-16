@@ -150,7 +150,8 @@ const feedbackRoutes = require('./routes/feedbackroute');
 app.use('/api/feedback', feedbackRoutes);
 const comment = require('./routes/commentRoute');
 app.use('', comment);
-
+const explore = require('./routes/exploreRoute');
+app.use('', explore);
 
 // Define a route to handle pet nutrition calculation
 app.post('/calculatePetNutrition', isUserAuthenticated,(req, res) => {
