@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', function () {
     email_e = localStorage.getItem('email_e');
     name = localStorage.getItem('name');
     $.ajax({
-        url: 'http://localhost:3001/get_cart_items?email_e=' + email_e, // Adjust the URL as per your server endpoint
+        url: 'http://localhost:3001/get_wishlist_items?email_e=' + email_e, // Adjust the URL as per your server endpoint
         method: 'GET',
         success: function (data) {
             // Clear existing table rows
@@ -17,10 +17,9 @@ document.addEventListener('DOMContentLoaded', function () {
                         <td style="font-weight: 700">${result.product_name}</td>
                         <td style="font-weight: 700">${result.category}</td>
                         <td style="font-weight: 700">${result.price}</td>
-                        <td style="font-weight: 700">${result.quantity}</td>
                         <td style="font-weight: 700">${result.description}</td>
                         <td>
-                            <button class="btn btn-danger" onclick="removeFromCart(${result.item_id})">Remove from Cart</button>
+                            <button class="btn btn-danger" onclick="removeFromwishlist(${result.item_id})">Remove from wishlist</button>
                         </td>
                     `);
                     // Append the row to the table
@@ -28,7 +27,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 });
             } else {
                 // Product details not found
-                $('#Data_table').append('<tr><td colspan="7">No Items found in Cart</td></tr>');
+                $('#Data_table').append('<tr><td colspan="7">No Items found in Wishlist</td></tr>');
             }
         },
         error: function (error) {
@@ -43,9 +42,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
 
-function removeFromCart(id) {
+function removeFromwishlist(id) {
     $.ajax({
-        url: 'http://localhost:3001/remove_from_cart/' + id,
+        url: 'http://localhost:3001/remove_from_wishlist/' + id,
         method: 'DELETE',
         success: function (data) {
             var cartCount = $('#cartId');
@@ -53,13 +52,13 @@ function removeFromCart(id) {
             cartCount.text(currentCount - 1);
 
             if (data === 1) {
-                document.getElementById('message').innerText = 'Item Removed from Cart!';
+                document.getElementById('message').innerText = 'Item Removed from wishlist!';
                 showDialog();
 
                 window.location.reload();
             } else {
-                document.getElementById('message').innerText = 'Item not found in Cart!';
-                showDialog();
+                document.getElementById('message').innerText = 'Item cant be deleted from wishlist! server error';
+                showDialog(); 
             }
         },
         error: function (error) {
@@ -68,6 +67,8 @@ function removeFromCart(id) {
         }
     });
 }
+
+
 
 
 function itemcartpage() {
