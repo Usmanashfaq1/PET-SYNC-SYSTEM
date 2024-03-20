@@ -233,29 +233,29 @@ function generateOTP() {
 app.post('/check-otp', (req, res) => {
   console.log("heyyy i am in");
   const receiver_email = req.body.email;
-  //const otp = generateOTP();
-  const otp=123;
+  const otp = generateOTP();
+ 
 
-  // const mailOptions = {
-  //   from: 'chusmanjutt.129@gmail.com',
-  //   to: receiver_email,
-  //   subject: 'Verfication Code',
-  //   text: `Your Verification code is : ${otp}`
-  // };
+  const mailOptions = {
+    from: 'chusmanjutt.129@gmail.com',
+    to: receiver_email,
+    subject: 'Verfication Code',
+    text: `Your Verification code is : ${otp}`
+  };
 
-  // transporter.sendMail(mailOptions, (error, info) => {
-  //   if (error) {
-  //     console.error(error);
-  //     res.json({ success: false, message: 'Error sending verification' });
-  //   } else {
+  transporter.sendMail(mailOptions, (error, info) => {
+    if (error) {
+      console.error(error);
+      res.json({ success: false, message: 'Error sending verification' });
+    } else {
 
-  //     console.log('Email sent: ' + info.response);
-  //     res.send(otp);
-  //   }
+      console.log('Email sent: ' + info.response);
+      res.send(otp);
+    }
     
 
 
-  // });
+  });
   res.json(otp);// sending hard code opt
 
 });

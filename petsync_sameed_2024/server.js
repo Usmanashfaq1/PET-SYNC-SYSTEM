@@ -266,6 +266,9 @@ app.use('/',feedshow);
 const report=require('./routes/reportRoute');
 app.use('/',report);
 
+const rating=require('./routes/ratingRoute');
+app.use('/',rating);
+
 const record_behavior=require('./routes/routes_behavior');
 app.use('/',record_behavior);
 
@@ -616,7 +619,7 @@ app.set('views', path.join(__dirname, 'views'));
 
 //for nutrtition pets
 app.get('/feedn',isUserAuthenticated , (req, res) => {
-  const userEmail = req.query.email; // Retrieve the email from the query string
+  const userEmail = req.session.email; // Retrieve the email from the query string
 
   // Fetching pets belonging to the user with the given email
   connection.query('SELECT * FROM pet_profile JOIN users ON pet_profile.owner_id = users.id WHERE users.email = ?', [userEmail], (error, pets) => {
@@ -654,7 +657,7 @@ app.get('/feedn',isUserAuthenticated , (req, res) => {
 // Route handler for the root URL
 // Route handler for the root URL
 app.get('/feed',isUserAuthenticated , (req, res) => {
-  const userEmail = req.query.email; // Retrieve the email from the query string
+  const userEmail = req.session.email; // Retrieve the email from the query string
 
   // Fetching pets belonging to the user with the given email
   connection.query('SELECT * FROM pet_profile JOIN users ON pet_profile.owner_id = users.id WHERE users.email = ?', [userEmail], (error, pets) => {
