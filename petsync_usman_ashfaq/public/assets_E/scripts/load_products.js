@@ -5,40 +5,6 @@ document.addEventListener('DOMContentLoaded', function () {
     email_e = localStorage.getItem('email_e');
     countOfItemsInWishList();
     countOfItemsInCart();
-    // $.ajax({
-    //     url: 'http://localhost:3001/cart_item_number?email_e=' + email_e,
-    //     method: 'GET',
-    //     success: function (data) {
-    //         var cartCount = $('.header-cart-two span');
-    //         var currentCount = parseInt(cartCount.text());
-    //         var newCartCount = currentCount + parseInt(data.itemCount);
-    //         cartCount.text(newCartCount);
-    //         var totalPrice = data.total;
-
-    //         $('.price_of_total').text('$' + totalPrice.toFixed(2));
-
-
-    //         $.ajax({
-    //             url: 'http://localhost:3001/wishlist_item_number?email_e=' + email_e,
-    //             method: 'GET',
-    //             success: function (data) {
-    //                 alert(data.total);
-    //                 $('.header-wishlist-two span').text(data.total);
-    //             }
-    //             ,
-    //             error: function (error) {
-    //                 console.error('Error adding item to cart:', error);
-    //                 alert('Error adding item to cart. Please try again.');
-    //             }
-    //         });
-    //     }
-    //     ,
-    //     error: function (error) {
-    //         console.error('Error adding item to cart:', error);
-    //         alert('Error adding item to cart. Please try again.');
-    //     }
-    // });
-
 
 });
 
@@ -75,7 +41,9 @@ function all_products() {
                                 <img src="data:image/jpeg;base64,${result.productPicture}" alt="Product Image" style="width: 100%; height: 100%; object-fit: cover;">
                                 <div class="product__action" style="position: absolute; top: 15px; right: 15px;">
 
-                                    <a  style="margin-right: 5px;"><i class="fa fa-heart" style="font-size:24px;" id="wishlistIcon" onclick="addTowishlist(${result.p_id})"></i>
+                                
+                        
+                                    <a  style=""><i class="fa fa-heart-o fa-1x" style="font-size:25px;margin-bottom: 25px;" id="wishlistIcon" onclick="addTowishlist(${result.p_id})">&#x2764;&#xFE0F;</i>
                                     </a>
                                     <a onclick="open_details(${result.p_id})" style="margin-right: 5px;"><i class="flaticon-loupe"></i></a>
                                 </div>

@@ -28,7 +28,7 @@ function displayCartItems()
                         <td style="font-weight: 700">${result.quantity}</td>
                         <td style="font-weight: 700">${result.description}</td>
                         <td>
-                            <button class="btn btn-danger" onclick="removeFromCart(${result.item_id})">Remove from Cart</button>
+                            <button class="btn btn-danger" onclick="removeFromCart(${result.item_id})">&#x2716;</button>
                         </td>
                     `);
                     // Append the row to the table

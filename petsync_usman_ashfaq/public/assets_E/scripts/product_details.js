@@ -84,10 +84,10 @@ function productDetail() {
 
                     // Generate the product wishlist and compare options HTML
                     var productOptions = `
-                    <div class="product__wishlist-wrap">
-                        <i class="fa fa-heart-o fa-3x" style="margin-right: 5px;"></i>&#x2764;&#xFE0F;
-                        <a href=""> Add to wishlist</a>
-                    </div>
+                    <div>
+    <i class="fa fa-heart-o" style="font-size: 24px; margin-right: 5px; cursor: pointer;" onclick="addTowishlist(${result.p_id})">&#x2764;&#xFE0F; Add to wishlist</i>
+</div>
+
                 `;
                 
                 
@@ -135,6 +135,38 @@ function productDetail() {
 }
 
 
+function addTowishlist(productId) {
+
+    var email_e = localStorage.getItem('email_e');
+
+    $.ajax({
+        url: 'http://localhost:3001/add_to_wishlist?item_id=' + productId + '&email_e=' + email_e,
+        method: 'POST',
+        success: function (data) {
+            if (data === 1) {
+                document.getElementById('message').innerText = 'Item Added to wishlist!';
+                showDialog_donot_reload();
+            } else {
+                document.getElementById('message').innerText = 'Item Already Added to wishlist!';
+                showDialog();
+            }
+
+            // Check count of wishlist from DB
+            countOfItemsInWishList();
+
+        },
+        error: function (error) {
+            console.error('Error adding item to cart:', error);
+            alert('Error adding item to cart. Please try again.');
+        }
+    });
+
+
+
+}
+
+
+
 
 
 function addToCart(item_id, price) {
@@ -153,7 +185,6 @@ function addToCart(item_id, price) {
             }
 
             countOfItemsInCart();
-            productDetail();
         },
         error: function (error) {
             console.error('Error adding item to cart:', error);

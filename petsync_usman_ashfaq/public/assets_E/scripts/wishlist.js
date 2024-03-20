@@ -23,7 +23,7 @@ function displayWishlistList()
                         <td style="font-weight: 700">${result.price}</td>
                         <td style="font-weight: 700">${result.description}</td>
                         <td>
-                            <button class="btn btn-danger" onclick="removeFromwishlist(${result.item_id})">Remove from wishlist</button>
+                        <button class="btn btn-danger" onclick="removeFromwishlist(${result.item_id})">&#x2716;</button>
                         </td>
                     `);
                     $('#Data_table').append(row);
