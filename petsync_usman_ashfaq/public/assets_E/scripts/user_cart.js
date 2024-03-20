@@ -1,4 +1,12 @@
 document.addEventListener('DOMContentLoaded', function () {
+    displayCartItems();
+    countOfItemsInWishList();
+    countOfItemsInCart();
+});
+
+
+function displayCartItems()
+{
     email_e = localStorage.getItem('email_e');
     name = localStorage.getItem('name');
     $.ajax({
@@ -37,9 +45,51 @@ document.addEventListener('DOMContentLoaded', function () {
             $('#Data_table').empty();
         }
     });
-});
+}
 
+function countOfItemsInWishList() {
+    $.ajax({
+        url: 'http://localhost:3001/wishlist_item_number?email_e=' + email_e,
+        method: 'GET',
+        success: function (data) {
+            var cartCount = $('.header-wishlist-two span');
+            var currentCount = parseInt(cartCount.text());
+            var newCartCount = (currentCount * 0) + parseInt(data.total);
+            cartCount.text(newCartCount);
 
+        },
+        error: function (error) {
+            console.error('Error getting cart item number:', error);
+            alert('Error getting cart item number. Please try again.');
+        }
+    });
+}
+
+function countOfItemsInCart() {
+    // Check count of cart from DB
+    $.ajax({
+        url: 'http://localhost:3001/cart_item_number?email_e=' + email_e,
+        method: 'GET',
+        success: function (data) {
+            var cartCount = $('.header-cart-two span');
+            var currentCount = parseInt(cartCount.text());
+            var newCartCount = (currentCount * 0) + parseInt(data.itemCount);
+            cartCount.text(newCartCount);
+
+           
+            var totalPrice = data.total;
+            if (data.total == null)
+            {
+                totalPrice = 0.00;
+            }
+            $('.price_of_total').text('$' + totalPrice.toFixed(2));
+        },
+        error: function (error) {
+            console.error('Error getting cart item number:', error);
+            alert('Error getting cart item number. Please try again.');
+        }
+    });
+}
 
 
 
@@ -55,8 +105,9 @@ function removeFromCart(id) {
             if (data === 1) {
                 document.getElementById('message').innerText = 'Item Removed from Cart!';
                 showDialog();
+                displayCartItems();
+                countOfItemsInCart();
 
-                window.location.reload();
             } else {
                 document.getElementById('message').innerText = 'Item not found in Cart!';
                 showDialog();

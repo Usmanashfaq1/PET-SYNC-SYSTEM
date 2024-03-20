@@ -535,7 +535,7 @@
     var data = { username: username, email: email, password: password, confirm_password: repeat_password };
     let post = JSON.stringify(data);
     $.ajax({
-      url: 'http://localhost:3001/insert_sign_up',
+      url: 'http://localhost:3001/insert_users',
       headers: {
         'Content-Type': 'application/json'
       },
@@ -597,7 +597,7 @@
     var data = { username: username, email: email };
     let post = JSON.stringify(data);
     $.ajax({
-      url: 'http://localhost:3001/unique_check_sign_up',
+      url: 'http://localhost:3001/unique_check_users',
       headers: {
         'Content-Type': 'application/json'
       },

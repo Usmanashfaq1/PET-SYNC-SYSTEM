@@ -128,43 +128,83 @@ handle_check_added_to_cart = (req, res) => {
     });
 }
 
+handle_cart_item_number_quantity_delete = (req, res) => {
+    const email = req.query.email_e;
+    const item_id = req.query.id;
+
+    const updateCartSql = `
+    UPDATE cart 
+    SET 
+        quantity = quantity - 1, 
+        price = (SELECT (price / quantity) * (quantity - 1) FROM cart WHERE email = ? AND item_id = ?)
+    WHERE 
+        email = ? 
+        AND item_id = ?
+    `;
+
+    connection.query(updateCartSql, [email, item_id, email, item_id], function (updateCartErr, updateCartResults) {
+        if (updateCartErr) {
+            console.error('Error updating cart:', updateCartErr);
+            return res.status(500).json({ error: 'Database error.' });
+        }
+
+        if (updateCartResults.affectedRows > 0) {
+            const checkCartSql = `SELECT COUNT(*) AS count, SUM(price) AS total FROM cart WHERE email = ?`;
+            connection.query(checkCartSql, [email], function (checkCartErr, checkCartResults) {
+                if (checkCartErr) {
+                    console.error('Error checking cart:', checkCartErr);
+                    return res.status(500).json({ error: 'Database error.' });
+                }
+
+                const itemCount = checkCartResults[0].count;
+                const total = checkCartResults[0].total;
+                console.log(itemCount, ' ', total);
+                return res.json({ itemCount, total });
+            });
+        } else {
+            return res.status(404).json({ error: 'Item not found in the cart.' });
+        }
+    });
+}
+
+
+
 
 handle_cart_item_number_quantity = (req, res) => {
-    var email = req.query.email_e;
-    var item_id = req.query.id;
+    const email = req.query.email_e;
+    const item_id = req.query.id;
 
-    console.log(item_id, ' ', email);
-    var updateCartSql = `
+    const updateCartSql = `
     UPDATE cart 
     SET 
         quantity = quantity + 1, 
-        price = (SELECT (price / quantity) * (quantity + 1) FROM cart WHERE email = '${email}' AND item_id = '${item_id}')
+        price = (SELECT (price / quantity) * (quantity + 1) FROM cart WHERE email = ? AND item_id = ?)
     WHERE 
-        email = '${email}' 
-        AND item_id = '${item_id}'
+        email = ? 
+        AND item_id = ?
     `;
 
-    connection.query(updateCartSql, function (updateCartErr, updateCartResults) {
+    connection.query(updateCartSql, [email, item_id, email, item_id], function (updateCartErr, updateCartResults) {
         if (updateCartErr) {
-            console.error(updateCartErr);
-            res.status(500).json({ error: 'Database error.' });
+            console.error('Error updating cart:', updateCartErr);
+            return res.status(500).json({ error: 'Database error.' });
+        }
+        
+        if (updateCartResults.affectedRows > 0) {
+            const checkCartSql = `SELECT COUNT(*) AS count, SUM(price) AS total FROM cart WHERE email = ?`;
+            connection.query(checkCartSql, [email], function (checkCartErr, checkCartResults) {
+                if (checkCartErr) {
+                    console.error('Error checking cart:', checkCartErr);
+                    return res.status(500).json({ error: 'Database error.' });
+                }
+
+                const itemCount = checkCartResults[0].count;
+                const total = checkCartResults[0].total;
+                console.log(itemCount, ' ', total);
+                return res.json({ itemCount, total });
+            });
         } else {
-            if (updateCartResults.affectedRows > 0) {
-                var checkCartSql = `SELECT COUNT(*) AS count, SUM(price) AS total FROM cart WHERE email = '${email}'`;
-                connection.query(checkCartSql, function (checkCartErr, checkCartResults) {
-                    if (checkCartErr) {
-                        console.error(checkCartErr);
-                        res.status(500).json({ error: 'Database error.' });
-                    } else {
-                        const itemCount = checkCartResults[0].count;
-                        const total = checkCartResults[0].total;
-                        console.log(itemCount, ' ', total);
-                        res.json({ itemCount, total });
-                    }
-                });
-            } else {
-                res.status(404).json({ error: 'Item not found in the cart.' });
-            }
+            return res.status(404).json({ error: 'Item not found in the cart.' });
         }
     });
 }
@@ -222,5 +262,6 @@ module.exports = {
     handle_remove_from_cart,
     handle_cart_item_number_quantity,
     handle_check_added_to_cart,
-    handle_and_load_item_cart
+    handle_and_load_item_cart,
+    handle_cart_item_number_quantity_delete
 }

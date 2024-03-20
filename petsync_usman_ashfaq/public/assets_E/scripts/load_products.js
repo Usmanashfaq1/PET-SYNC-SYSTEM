@@ -3,39 +3,41 @@ document.addEventListener('DOMContentLoaded', function () {
     cart_list = [-1];
     all_products();
     email_e = localStorage.getItem('email_e');
+    countOfItemsInWishList();
+    countOfItemsInCart();
+    // $.ajax({
+    //     url: 'http://localhost:3001/cart_item_number?email_e=' + email_e,
+    //     method: 'GET',
+    //     success: function (data) {
+    //         var cartCount = $('.header-cart-two span');
+    //         var currentCount = parseInt(cartCount.text());
+    //         var newCartCount = currentCount + parseInt(data.itemCount);
+    //         cartCount.text(newCartCount);
+    //         var totalPrice = data.total;
 
-    $.ajax({
-        url: 'http://localhost:3001/cart_item_number?email_e=' + email_e,
-        method: 'GET',
-        success: function (data) {
-            var cartCount = $('.header-cart-two span');
-            var currentCount = parseInt(cartCount.text());
-            var newCartCount = currentCount + parseInt(data.itemCount);
-            cartCount.text(newCartCount);
-            var totalPrice = data.total;
-
-            $('.price_of_total').text('$' + totalPrice.toFixed(2));
+    //         $('.price_of_total').text('$' + totalPrice.toFixed(2));
 
 
-            $.ajax({
-                url: 'http://localhost:3001/wishlist_item_number?email_e=' + email_e,
-                method: 'GET',
-                success: function (data) {
-                    $('.header-wishlist-two span').text(data.total);
-                }
-                ,
-                error: function (error) {
-                    console.error('Error adding item to cart:', error);
-                    alert('Error adding item to cart. Please try again.');
-                }
-            });
-        }
-        ,
-        error: function (error) {
-            console.error('Error adding item to cart:', error);
-            alert('Error adding item to cart. Please try again.');
-        }
-    });
+    //         $.ajax({
+    //             url: 'http://localhost:3001/wishlist_item_number?email_e=' + email_e,
+    //             method: 'GET',
+    //             success: function (data) {
+    //                 alert(data.total);
+    //                 $('.header-wishlist-two span').text(data.total);
+    //             }
+    //             ,
+    //             error: function (error) {
+    //                 console.error('Error adding item to cart:', error);
+    //                 alert('Error adding item to cart. Please try again.');
+    //             }
+    //         });
+    //     }
+    //     ,
+    //     error: function (error) {
+    //         console.error('Error adding item to cart:', error);
+    //         alert('Error adding item to cart. Please try again.');
+    //     }
+    // });
 
 
 });
@@ -224,29 +226,39 @@ function addToCart(item_id, price) {
                 document.getElementById('message').innerText = 'Item Already Added to Cart!';
                 showDialog();
             }
-
             // Check count of cart from DB
-            $.ajax({
-                url: 'http://localhost:3001/cart_item_number?email_e=' + email_e,
-                method: 'GET',
-                success: function (data) {
-                    var cartCount = $('.header-cart-two span');
-                    var currentCount = parseInt(cartCount.text());
-                    var newCartCount = (currentCount * 0) + parseInt(data.itemCount);
-                    cartCount.text(newCartCount);
-
-                    var totalPrice = data.total;
-                    $('.price_of_total').text('$' + totalPrice);
-                },
-                error: function (error) {
-                    console.error('Error getting cart item number:', error);
-                    alert('Error getting cart item number. Please try again.');
-                }
-            });
+            countOfItemsInCart();
         },
         error: function (error) {
             console.error('Error adding item to cart:', error);
             alert('Error adding item to cart. Please try again.');
+        }
+    });
+}
+
+
+function countOfItemsInCart() {
+    // Check count of cart from DB
+    $.ajax({
+        url: 'http://localhost:3001/cart_item_number?email_e=' + email_e,
+        method: 'GET',
+        success: function (data) {
+            var cartCount = $('.header-cart-two span');
+            var currentCount = parseInt(cartCount.text());
+            var newCartCount = (currentCount * 0) + parseInt(data.itemCount);
+            cartCount.text(newCartCount);
+
+           
+            var totalPrice = data.total;
+            if (data.total == null)
+            {
+                totalPrice = 0.00;
+            }
+            $('.price_of_total').text('$' + totalPrice.toFixed(2));
+        },
+        error: function (error) {
+            console.error('Error getting cart item number:', error);
+            alert('Error getting cart item number. Please try again.');
         }
     });
 }
@@ -278,21 +290,8 @@ function addTowishlist(productId) {
             }
 
             // Check count of wishlist from DB
-            $.ajax({
-                url: 'http://localhost:3001/wishlist_item_number?email_e=' + email_e,
-                method: 'GET',
-                success: function (data) {
-                    var cartCount = $('.header-wishlist-two span');
-                    var currentCount = parseInt(cartCount.text());
-                    var newCartCount = (currentCount * 0) + parseInt(data.total);
-                    cartCount.text(newCartCount);
+            countOfItemsInWishList();
 
-                },
-                error: function (error) {
-                    console.error('Error getting cart item number:', error);
-                    alert('Error getting cart item number. Please try again.');
-                }
-            });
         },
         error: function (error) {
             console.error('Error adding item to cart:', error);
@@ -303,6 +302,27 @@ function addTowishlist(productId) {
 
 
 }
+
+
+function countOfItemsInWishList() {
+    $.ajax({
+        url: 'http://localhost:3001/wishlist_item_number?email_e=' + email_e,
+        method: 'GET',
+        success: function (data) {
+            var cartCount = $('.header-wishlist-two span');
+            var currentCount = parseInt(cartCount.text());
+            var newCartCount = (currentCount * 0) + parseInt(data.total);
+            cartCount.text(newCartCount);
+
+        },
+        error: function (error) {
+            console.error('Error getting cart item number:', error);
+            alert('Error getting cart item number. Please try again.');
+        }
+    });
+}
+
+
 
 
 

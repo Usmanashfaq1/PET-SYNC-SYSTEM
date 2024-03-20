@@ -33,7 +33,7 @@ class DisplayAccountController {
                         console.log(userData.feedResult[i]);
                     });
                 }
-            }
+            
             console.log(req.params['username']);
             // Now let's handle following and follow count
             let sqlQuery1 = "SELECT id FROM users WHERE username='" + req.params['username'] + "'";
@@ -92,11 +92,16 @@ connection.query(petQuery, [petOwner], (error, results) => {
             });
         });
     });
+}
+else{
+    return res.redirect('/error_community');
+}
         }
     } catch (error) {
         console.error("Error in displaying account:", error);
         return res.status(500).send("Internal server error");
     }
+
 }
 
 

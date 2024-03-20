@@ -13,11 +13,18 @@ class DisplayAccountModel {
         return { redirect: '/profile' };
       }
 
-      const searchId = await this.getUserIdByUsername(username);
+   
+    const searchId = await this.getUserIdByUsername(username);
 
-      if (!searchId) {
+    if (!searchId) {
+      return null;
         throw new Error("User not found");
-      }
+    }
+
+    // Continue with your code here
+    // ...
+
+
 
       const userInfo = await this.getUserInfoById(searchId.id);
 

@@ -1,45 +1,25 @@
 let cart_list = [];
 document.addEventListener('DOMContentLoaded', function () {
+    productDetail();
     cart_list = [-1];
+    email_e = localStorage.getItem('email_e');
+    countOfItemsInCart();
+    countOfItemsInWishList();
+
+
+
+
+});
+
+
+
+function productDetail() {
+    var id = localStorage.getItem('id_detail_of_item');
     email_e = localStorage.getItem('email_e');
 
     $.ajax({
-        url: 'http://localhost:3001/cart_item_number?email_e=' + email_e,
-        method: 'GET',
-        success: function (data) {
-            var cartCount = $('.header-cart-two span');
-            var currentCount = parseInt(cartCount.text());
-            var newCartCount = currentCount + parseInt(data.itemCount);
-            cartCount.text(newCartCount);
+       url: 'http://localhost:3001/get_product_detail_with_id?id=' + id + '&email_e=' + email_e,
 
-            var totalPrice = data.total;
-            $('.price_of_total').text('$' + totalPrice.toFixed(2));
-            
-            $.ajax({
-                url: 'http://localhost:3001/wishlist_item_number?email_e=' + email_e,
-                method: 'GET',
-                success: function (data) {
-                    $('.header-wishlist-two span').text(data.total);
-                }
-                ,
-                error: function (error) {
-                    console.error('Error adding item to cart:', error);
-                    alert('Error adding item to cart. Please try again.');
-                }
-            });
-            
-        }
-        ,
-        error: function (error) {
-            console.error('Error adding item to cart:', error);
-            alert('Error adding item to cart. Please try again.');
-        }
-    });
-
-    var id = localStorage.getItem('id_detail_of_item');
-
-    $.ajax({
-        url: 'http://localhost:3001/get_product_detail_with_id?id=' + id,
         method: 'GET',
         success: function (data) {
             var container0 = $('.tab-pane.show.active#itemOne-tab-pane');
@@ -84,9 +64,9 @@ document.addEventListener('DOMContentLoaded', function () {
                     var productQuantity = `
                     <div class="product__details-qty">
                     <div style="display: flex; align-items: center;">
-                        <button class="btn btn-secondary" onclick="decreaseQuantity(${result.p_id}, ${result.stock},${result.price})">-</button>
-                        <p id="quantity${result.p_id}" class="quantity" style="border: 1px solid #ccc; padding: 10px;">1</p>
-                        <button class="btn btn-success" onclick="increaseQuantity(${result.p_id}, ${result.stock},${result.price} )">+</button>
+                        <button class="btn btn-secondary" onclick="decreaseQuantity(${result.p_id}, ${result.currentItemQuantityInCart})">-</button>
+                        <p id="quantity${result.p_id}" class="quantity" style="border: 1px solid #ccc; padding: 10px;">${result.currentItemQuantityInCart}</p>
+                        <button class="btn btn-success" onclick="increaseQuantity(${result.p_id}, ${result.stock},${result.price}  ,${result.currentItemQuantityInCart})">+</button>
                     </div>
                     <a onclick="addToCart(${result.p_id})" class="add-btn">Add To Cart</a>
                 </div>
@@ -100,15 +80,17 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
                     // Generate the product buy button HTML
-                    var productBuyButton = `<a href="product-details.html" class="buy-btn">Buy it Now</a>`;
+                    var productBuyButton = `<a href="/item_cart" class="buy-btn">Buy it Now</a>`;
 
                     // Generate the product wishlist and compare options HTML
                     var productOptions = `
-                        <div class="product__wishlist-wrap">
-                            <a href="product-details.html"><i class="flaticon-love"></i>Add To Wishlist</a>
-                        </div>
-                    `;
-
+                    <div class="product__wishlist-wrap">
+                        <i class="fa fa-heart-o fa-3x" style="margin-right: 5px;"></i>&#x2764;&#xFE0F;
+                        <a href=""> Add to wishlist</a>
+                    </div>
+                `;
+                
+                
                     // Generate the product social sharing icons HTML
                     var productSocialIcons = `
                         <div class="product__details-bottom">
@@ -140,7 +122,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     container.append(productHTML);
                 });
             } else {
-                // No product items found, you might want to handle this case accordingly
+
             }
         }
 
@@ -150,8 +132,10 @@ document.addEventListener('DOMContentLoaded', function () {
 
         }
     });
+}
 
-});
+
+
 
 function addToCart(item_id, price) {
     var email_e = localStorage.getItem('email_e');
@@ -168,24 +152,8 @@ function addToCart(item_id, price) {
                 showDialog();
             }
 
-            // Check count of cart from DB
-            $.ajax({
-                url: 'http://localhost:3001/cart_item_number?email_e=' + email_e,
-                method: 'GET',
-                success: function (data) {
-                    var cartCount = $('.header-cart-two span');
-                    var currentCount = parseInt(cartCount.text());
-                    var newCartCount = (currentCount * 0) + parseInt(data.itemCount);
-                    cartCount.text(newCartCount);
-
-                    var totalPrice = data.total;
-                    $('.price_of_total').text('$' + totalPrice.toFixed(2));
-                },
-                error: function (error) {
-                    console.error('Error getting cart item number:', error);
-                    alert('Error getting cart item number. Please try again.');
-                }
-            });
+            countOfItemsInCart();
+            productDetail();
         },
         error: function (error) {
             console.error('Error adding item to cart:', error);
@@ -201,7 +169,7 @@ function addedtoCart(productId) {
         item_id = productId;
         $.ajax({
             url: 'http://localhost:3001/check_added_to_cart?item_id=' + item_id + '&email_e=' + email_e,
-            method: 'GET', 
+            method: 'GET',
             success: function (data) {
                 if (data === 1) {
                     resolve(true);
@@ -218,78 +186,30 @@ function addedtoCart(productId) {
     });
 }
 
-function increaseQuantity(productId, stock, price) {
-    addedtoCart(productId)
-        .then(function (isAdded) {
-            if (isAdded) {
-                var quantityElement = $('#quantity' + productId);
-                var currentQuantity = parseInt(quantityElement.text());
 
-                if (currentQuantity < stock) {
-                    quantityElement.text(currentQuantity + 1);
-
-                    var totalPrice = parseFloat($('.price_of_total').text().replace('$', ''));
-                    var totalWithQuantityPrice = totalPrice + price;
-                    $('.price_of_total').text('$' + totalWithQuantityPrice.toFixed(2));
-
-                    // Update cart count and total
-                    updateCartDetails(productId);
-                } else {
-                    $('#message').text('Product quantity cannot exceed stock!');
-                    showDialog_donot_reload();
-                }
-            } else {
-                var email_e = localStorage.getItem('email_e');
-
+function countOfItemsInWishList() {
     $.ajax({
-        url: 'http://localhost:3001/add_to_cart?item_id=' + item_id + '&email_e=' + email_e + '&price=' + price,
-        method: 'POST',
+        url: 'http://localhost:3001/wishlist_item_number?email_e=' + email_e,
+        method: 'GET',
         success: function (data) {
-            if (data === 1) {
-                document.getElementById('message').innerText = 'Item Added to Cart!';
-                showDialog_donot_reload();
-            } else {
-                document.getElementById('message').innerText = 'Item Already Added to Cart!';
-                showDialog();
-            }
+            var cartCount = $('.header-wishlist-two span');
+            var currentCount = parseInt(cartCount.text());
+            var newCartCount = (currentCount * 0) + parseInt(data.total);
+            cartCount.text(newCartCount);
 
-            // Check count of cart from DB
-            $.ajax({
-                url: 'http://localhost:3001/cart_item_number?email_e=' + email_e,
-                method: 'GET',
-                success: function (data) {
-                    var cartCount = $('.header-cart-two span');
-                    var currentCount = parseInt(cartCount.text());
-                    var newCartCount = (currentCount * 0) + parseInt(data.itemCount);
-                    cartCount.text(newCartCount);
-
-                    var totalPrice = data.total;
-                    $('.price_of_total').text('$' + totalPrice.toFixed(2));
-                },
-                error: function (error) {
-                    console.error('Error getting cart item number:', error);
-                    alert('Error getting cart item number. Please try again.');
-                }
-            });
         },
         error: function (error) {
-            console.error('Error adding item to cart:', error);
-            alert('Error adding item to cart. Please try again.');
+            console.error('Error getting cart item number:', error);
+            alert('Error getting cart item number. Please try again.');
         }
     });
-            }
-        })
-        .catch(function (error) {
-            console.error('Error:', error);
-            alert('Error adding item to cart. Please try again.');
-        });
 }
 
-function updateCartDetails(productId) {
-    // Retrieve email_e from localStorage
-    var email_e = localStorage.getItem('email_e');
+
+function countOfItemsInCart() {
+    // Check count of cart from DB
     $.ajax({
-        url: 'http://localhost:3001/cart_item_number_quantity?email_e=' + email_e + '&id=' + productId,
+        url: 'http://localhost:3001/cart_item_number?email_e=' + email_e,
         method: 'GET',
         success: function (data) {
             var cartCount = $('.header-cart-two span');
@@ -297,7 +217,11 @@ function updateCartDetails(productId) {
             var newCartCount = (currentCount * 0) + parseInt(data.itemCount);
             cartCount.text(newCartCount);
 
+
             var totalPrice = data.total;
+            if (data.total == null) {
+                totalPrice = 0.00;
+            }
             $('.price_of_total').text('$' + totalPrice.toFixed(2));
         },
         error: function (error) {
@@ -307,22 +231,79 @@ function updateCartDetails(productId) {
     });
 }
 
-function decreaseQuantity(productId, stock, price) {
-    var quantityElement = $('#quantity' + productId);
-    var currentQuantity = parseInt(quantityElement.text());
 
-    if (currentQuantity > 1) {
-        quantityElement.text(currentQuantity - 1);
-        var totalPrice = parseFloat($('.price_of_total').text().replace('$', ''));
 
-        var totalWithQuantityPrice = totalPrice - price;
+function increaseQuantity(productId, stock, price, currentItemQuantityInCart) {
+    addedtoCart(productId)
+        .then(function (isAdded) {
+            if (isAdded) {
+                // var quantityElement = $('#quantity' + productId);
+                // var currentQuantity = parseInt(quantityElement.text());
 
-        $('.price_of_total').text('$' + totalWithQuantityPrice.toFixed(2));
-    }
-    else {
+                if (currentItemQuantityInCart <= stock) {
+                    updateCartDetails(productId);
+
+                } else {
+                    $('#message').text('Product quantity cannot exceed stock!');
+                    showDialog_donot_reload();
+                }
+            } else {
+                addToCart(productId, price);
+            }
+        })
+        .catch(function (error) {
+            console.error('Error:', error);
+            alert('Error adding item to cart. Please try again.');
+        });
+}
+
+function decreaseQuantity(productId, currentItemQuantityInCart) {
+    // var quantityElement = $('#quantity' + productId);
+    // var currentQuantity = parseInt(quantityElement.text());
+
+    if (currentItemQuantityInCart > 1) {
+        // Decrease the quantity by calling the appropriate function
+        updateCartDetailsDeletion(productId);
+    } else {
         $('#message').text('Product quantity cannot be minimized!');
         showDialog_donot_reload();
     }
+}
+
+
+
+function updateCartDetails(productId) {
+    var id = productId;
+    var email_e = localStorage.getItem('email_e');
+    $.ajax({
+        url: 'http://localhost:3001/cart_item_number_quantity?email_e=' + email_e + '&id=' + id,
+        method: 'GET',
+        success: function (data) {
+            productDetail();
+            countOfItemsInCart();
+
+        },
+        error: function (error) {
+            console.error('Error getting cart item number:', error);
+            alert('Error getting cart item number. Please try again.');
+        }
+    });
+}
+
+function updateCartDetailsDeletion(productId) {
+    var email_e = localStorage.getItem('email_e');
+    $.ajax({
+        url: 'http://localhost:3001/cart_item_number_quantity_delete?email_e=' + email_e + '&id=' + productId,
+        method: 'GET',
+        success: function (data) {
+            productDetail();
+            countOfItemsInCart();
+        },
+        error: function (error) {
+            console.error('Error getting cart item number:', error);
+            alert('Error getting cart item number. Please try again.');
+        }
+    });
 }
 
 

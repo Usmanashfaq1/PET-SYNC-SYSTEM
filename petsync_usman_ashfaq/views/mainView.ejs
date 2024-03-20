@@ -302,7 +302,7 @@
         }
         
     </style>
-<body class="light-purple-bg">
+<body >
 
     <!--Preloader-->
     <div id="preloader">
@@ -381,6 +381,7 @@
                                                 </ul>
                                             </li>
                                             <li><a href="/users">Find People</a></li>
+                                            <li><a href="/explore">Explore</a></li>
                                             
                                             
                                             
@@ -636,6 +637,8 @@
                            
                             <span class="pull-right text-muted">
                                 <i class="fa fa-heart" style="color: red;"></i> <%=feedResult[i].likes %> likes 
+                                <i class="fa fa-comment" style="color: red;"></i> <%=feedResult[i].comment_count %> comments
+
                                 <button class="btn btn-link btn-comment" style="color: black;" onmouseover="this.style.color='blue'" onmouseout="this.style.color='black'" id="<%=feedResult[i].feedname%>" onclick="showFeed(this.id);return false;"  >Add Comment</button>
                             </span>
                             
@@ -932,14 +935,19 @@
     </script>
     <script>
       document.getElementById("search-user-form").addEventListener("submit", function(event) {
-          event.preventDefault(); // Prevent the default form submission
-  
-          // Get the value of the input field
-          var username = document.getElementById("search-text").value;
-  
-          // Redirect to the URL with the username as a parameter
-          window.location.href = "/account/" + username;
-      });
+    event.preventDefault(); // Prevent the default form submission
+
+    // Get the value of the input field
+    var username = document.getElementById("search-text").value.trim(); // Trim to remove leading and trailing spaces
+    if (username === "") {
+        // Reload the page if username is empty
+        window.location.reload();
+    } else {
+        // Redirect to the URL with the username as a parameter
+        window.location.href = "/account/" + username;
+    }
+});
+
   </script>
 
 

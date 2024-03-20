@@ -58,9 +58,26 @@ class commentController
         let sqlQuery="INSERT INTO commentinfo SET ? ";
         connection.query(sqlQuery,commentData,(error,result)=>{
             if(error) throw error;
+
+            
+            // Increment the comment_count in the userfeed table
+        let updateQuery = `
+        UPDATE userfeed
+        SET comment_count = comment_count + 1
+        WHERE feedname = '${commentData.feedname}';
+    `;
+
+    connection.query(updateQuery, (updateError, updateResult) => {
+        if (updateError) {
+            console.error("Error updating comment count:", updateError);
+            // Handle the error as needed
+        }
+
+        console.log("Comment added successfully:", commentData);
             console.log(commentData);
             return res.redirect('/showfeed/'+commentData.feedname);
         });
+    });
        
     };
 

@@ -89,7 +89,7 @@ app.use(
       secret: 'your-secret-key', 
       resave: false,
       saveUninitialized: true,
-      cookie: { maxAge: 1200000000 } // Set session expiration time to 10 minutes (in milliseconds)
+      cookie: { maxAge: 600000 } // Set session expiration time to 10 minutes (in milliseconds)
     })
   )
 module.exports.session = session;
@@ -147,10 +147,11 @@ app.use(flash());
 //   });
 // });
 const feedbackRoutes = require('./routes/feedbackroute');
-app.use('/api/feedback', feedbackRoutes);
+app.use('', feedbackRoutes);
 const comment = require('./routes/commentRoute');
 app.use('', comment);
-
+const explore = require('./routes/exploreRoute');
+app.use('', explore);
 
 // Define a route to handle pet nutrition calculation
 app.post('/calculatePetNutrition', isUserAuthenticated,(req, res) => {
@@ -264,6 +265,13 @@ app.use('/',feedshow);
 
 const report=require('./routes/reportRoute');
 app.use('/',report);
+
+const rating=require('./routes/ratingRoute');
+app.use('/',rating);
+
+const record_behavior=require('./routes/routes_behavior');
+app.use('/',record_behavior);
+
 
 
 
@@ -611,7 +619,7 @@ app.set('views', path.join(__dirname, 'views'));
 
 //for nutrtition pets
 app.get('/feedn',isUserAuthenticated , (req, res) => {
-  const userEmail = req.query.email; // Retrieve the email from the query string
+  const userEmail = req.session.email; // Retrieve the email from the query string
 
   // Fetching pets belonging to the user with the given email
   connection.query('SELECT * FROM pet_profile JOIN users ON pet_profile.owner_id = users.id WHERE users.email = ?', [userEmail], (error, pets) => {
@@ -624,11 +632,32 @@ app.get('/feedn',isUserAuthenticated , (req, res) => {
       res.render('calculateNutrition', { pets: pets });
   });
 });
+
+//
+//record behavior and training logs usman ashfaq
+//start
+// Route handler for the root URL
+// app.get('/feed',isUserAuthenticated , (req, res) => {
+//   const userEmail = req.query.email; // Retrieve the email from the query string
+
+//   // Fetching pets belonging to the user with the given email
+//   connection.query('SELECT * FROM pet_profile JOIN users ON pet_profile.owner_id = users.id WHERE users.email = ?', [userEmail], (error, pets) => {
+//       if (error) {
+//           console.error('Error fetching pets:', error);
+//           res.status(500).send('Error fetching pets.');
+//           return;
+//       }
+     
+//       res.render('record_behavior', { pets: pets, days: days });
+//   });
+// });
+
+//end
 //
 // Route handler for the root URL
 // Route handler for the root URL
 app.get('/feed',isUserAuthenticated , (req, res) => {
-  const userEmail = req.query.email; // Retrieve the email from the query string
+  const userEmail = req.session.email; // Retrieve the email from the query string
 
   // Fetching pets belonging to the user with the given email
   connection.query('SELECT * FROM pet_profile JOIN users ON pet_profile.owner_id = users.id WHERE users.email = ?', [userEmail], (error, pets) => {
@@ -739,32 +768,30 @@ app.post('/save-schedule', (req, res) => {
 });
 // minahil post vet feedback
 // Route handler for the feedback page
-app.get('/feedback', (req, res) => {
-    res.render('feedback'); // Assuming you have a feedback.ejs file in your views folder
-});
 
-app.post('/submit-feedback', (req, res) => {
-    const { name, email, website, message } = req.body;
 
-    const feedbackData = {
-        name: name,
-        email: email,
-        website: website,
-        message: message
-    };
+// app.post('/submit-feedback', (req, res) => {
+//     const { name, email, website, message } = req.body;
 
-    const sql = 'INSERT INTO feedback SET ?';
+//     const feedbackData = {
+//         name: name,
+//         email: email,
+//         website: website,
+//         message: message
+//     };
 
-    connection.query(sql, feedbackData, (error, results) => {
-        if (error) {
-            console.error('Error saving feedback:', error);
-            res.status(500).send('Error saving feedback.');
-            return;
-        }
-        console.log('Feedback saved successfully.');
-        res.sendStatus(200);
-    });
-});
+//     const sql = 'INSERT INTO feedback SET ?';
+
+//     connection.query(sql, feedbackData, (error, results) => {
+//         if (error) {
+//             console.error('Error saving feedback:', error);
+//             res.status(500).send('Error saving feedback.');
+//             return;
+//         }
+//         console.log('Feedback saved successfully.');
+//         res.sendStatus(200);
+//     });
+// });
 
 
 

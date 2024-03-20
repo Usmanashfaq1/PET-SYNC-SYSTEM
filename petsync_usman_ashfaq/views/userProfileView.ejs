@@ -210,7 +210,13 @@ body.sidebar-open {
     margin-right: 0; /* Remove margin from the last item */
 }
 
-    
+.container-center {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding-left: 320px;
+        }
+        
 </style>
 <body>
 
@@ -335,7 +341,7 @@ body.sidebar-open {
                                               </ul>
                                           </li>
                                           <li><a href="/users">Find People</a></li>
-                                          
+                                          <li><a href="/explore">Explore</a></li>
                                           
                                           
                                       </ul>
@@ -600,37 +606,27 @@ body.sidebar-open {
                         <li class="nav-item"><a class="nav-link" href="#post" data-toggle="tab">Post</a></li>
                       </ul>
                     </div><!-- /.card-header -->
-                    <div class="card-body">
+                    <div class="card-body" >
                       <div class="tab-content">
                         <div class="active tab-pane" id="activity">
-                          <!-- Post -->
-                          <% results.forEach(pet => { %>
-                            <!-- Post -->
-                            <div class="card mb-4">
-                                <!-- Pet Picture -->
-                                <div class="card-body text-center">
-                                  <img class="img-thumbnail" src="/upload1/<%= pet.petPicture %>" alt="Pet Picture" style="width: 150px; height: 150px; object-fit: cover;">
-                              </div>
-                                <!-- /.card-body -->
-                                
-                                <!-- Pet Details -->
-                                <div class="card-footer">
-                                    <h4 class="text-center"><%= pet.petname %></h4>
-                                    <ul class="list-unstyled">
-                                        <li><strong>Species:</strong> <%= pet.species %></li>
-                                        <li><strong>Age:</strong> <%= pet.age %> years</li>
-                                        <li><strong>Weight:</strong> <%= pet.weight %> lbs</li>
-                                        <!-- Add more pet details here as needed -->
-                                    </ul>
+                            <% results.forEach(pet => { %>
+                                <div class="card mb-3" style="max-width: 400px;"> <!-- Adjust max-width as needed -->
+                                    <div class="card-body text-center">
+                                        <img class="img-thumbnail" src="/upload1/<%= pet.petPicture %>" alt="Pet Picture" style="width: 150px; height: 150px; object-fit: cover;"> <!-- Adjust width and height as needed -->
+                                    </div>
+                                    <div class="card-footer">
+                                        <h4 class="text-center"><%= pet.petname %></h4>
+                                        <ul class="list-unstyled">
+                                            <li><strong>Species:</strong> <%= pet.species %></li>
+                                            <li><strong>Age:</strong> <%= pet.age %> years</li>
+                                            <li><strong>Weight:</strong> <%= pet.weight %> lbs</li>
+                                            <!-- Add more pet details here as needed -->
+                                        </ul>
+                                    </div>
                                 </div>
-                                <!-- /.card-footer -->
-                            </div>
-                            <!-- /.card -->
-                        <% }); %>
-                        
-                            
-                          <!-- /.post -->
+                            <% }); %>
                         </div>
+                        
                         <!-- /.tab-pane -->
                        
                         <!-- /.tab-pane -->
@@ -669,9 +665,11 @@ body.sidebar-open {
       
         
       <!-- /.content-wrapper -->
-      <div class="container" >
-        <h2>Post Timeline</h2>
+      
+      <div class="container-center">
+        
         <div class="gallery">
+            <h2>Post Timeline</h2>
           <!-- here added the check if no post is psoted or user dont have any post show this.... -->
           <% if (feedResult.length === 0) { %>
             <p>Nothing to show here!</p>
@@ -681,7 +679,7 @@ body.sidebar-open {
               <% for (var i = 0; i < feedResult.length; i++) { %>
                 <div class="container bootstrap snippets bootdey" style="margin: 10px;">
                     <div class="col-md-8">
-                        <div class="card">
+                        <div class="card" >
                             <div class="card-header">
                                 <div class="user-block" style="display: flex; align-items: center;">
                                     <img class="img-circle" src="/profilepics/<%=profilePic%>" alt="User Image" width="40" height="40"></img>
@@ -707,7 +705,9 @@ body.sidebar-open {
                                 </div>
                                
                                 <span class="pull-right text-muted">
-                                    <i class="fa fa-heart" style="color: red;"></i> <%=feedResult[i].likes %> likes 
+                                    <i class="fa fa-heart" style="color: red;"></i> <%=feedResult[i].likes %> likes
+                                    <i class="fa fa-comment" style="color: red;"></i> <%=feedResult[i].comment_count %> comments
+ 
                                     <button class="btn btn-link btn-comment" style="color: black;" onmouseover="this.style.color='blue'" onmouseout="this.style.color='black'" id="<%=feedResult[i].feedname%>" onclick="showFeed(this.id);return false;"  >Add Comment</button>
                                 </span>
                                 

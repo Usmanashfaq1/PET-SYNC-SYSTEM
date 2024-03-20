@@ -1,4 +1,3 @@
-
 <!doctype html>
 <html class="no-js" lang="en">
 
@@ -16,6 +15,12 @@
         <!-- Place favicon.ico in the root directory -->
         <link rel="icon" href="../../../../favicon.ico">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script type="text/javascript" src="../uploads/JS/home.js"></script>
+        <link rel="stylesheet" href="../uploads/assets/css/home.css">
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
      
     
         <!-- Font Awesome -->
@@ -53,6 +58,9 @@
     </head>
     <style>
     
+    .light-purple-bg {
+    background-color: #8585c9; /* Light Purple Color */
+}
     /* profile */
     
     .container123 {
@@ -98,11 +106,7 @@
     
     
     
-    .facebook-post {
-      border: 1px solid #ccc;
-      border-radius: 8px;
-      margin-bottom: 20px;
-    }
+    
     
     .post-header {
       display: flex;
@@ -145,6 +149,88 @@
     .post-stats ul li i {
       margin-right: 5px;
     }
+
+    .gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    grid-gap: 20px;
+}
+
+.facebook-post {
+    background-color: #fff;
+    border: 1px solid #eaeaea;
+    border-radius: 5px;
+    padding: 20px;
+}
+
+.facebook-post .post-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.facebook-post .profile-pic {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.facebook-post .post-info {
+    flex-grow: 1;
+}
+
+.facebook-post .post-author {
+    margin: 0;
+    font-size: 18px;
+}
+
+.facebook-post .post-time {
+    margin: 0;
+    color: #999;
+    font-size: 14px;
+}
+
+.facebook-post .post-content {
+    margin-bottom: 15px;
+}
+
+.facebook-post .post-image {
+    width: 100%;
+    height: auto;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+.facebook-post .post-caption {
+    margin-bottom: 10px;
+}
+
+.facebook-post .post-caption h5 {
+    margin: 0;
+    font-size: 16px;
+}
+
+.facebook-post .post-stats {
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+}
+
+.facebook-post .post-stats ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.facebook-post .post-stats ul li {
+    margin-right: 20px;
+}
+
+.facebook-post .post-stats ul li:last-child {
+    margin-right: 0;
+}
+
     
     /* end profile */
     
@@ -207,52 +293,16 @@
     .link-item:last-child {
         margin-right: 0; /* Remove margin from the last item */
     }
-
-
     
-    
+    .container-center {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding-left: 320px;
+        }
         
     </style>
-    <style>
-        /* Modal styles */
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 1;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            overflow: auto;
-            background-color: rgba(0,0,0,0.4);
-            padding-top: 60px;
-        }
-
-        .modal-content {
-            background-color: #fefefe;
-            margin: 5% auto;
-            padding: 20px;
-            border: 1px solid #888;
-            width: 80%;
-        }
-
-        .close {
-            color: #aaa;
-            float: right;
-            font-size: 28px;
-            font-weight: bold;
-        }
-
-        .close:hover,
-        .close:focus {
-            color: black;
-            text-decoration: none;
-            cursor: pointer;
-        }
-    </style>
-    
-
-<body>
+<body >
 
     <!--Preloader-->
     <div id="preloader">
@@ -283,6 +333,7 @@
             <div class="offCanvas__side-info mb-30">
                 <div class="contact-list mb-30">
                     <h4>Office Address</h4>
+                    <%= name %>
                     <p>123/A, Miranda City Likaoli <br> Prikano, Dope</p>
                 </div>
                 <div class="contact-list mb-30">
@@ -304,52 +355,7 @@
             </div>
         </div>
         <div class="offCanvas__overly"></div>
-        <!-- offCanvas-menu-end -->
-    <!--  -->
-  
-    <!-- <div class="offcanvas offcanvas-start" id="demo">
-        <div class="offcanvas-header">
-            <h1 class="offcanvas-title">Navigation</h1>
-            <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
-            
-        </div>
-        <div class="offcanvas-body">
-            <ul class="nav flex-column">
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Home</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Profile</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Create</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Find People</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Explore</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Settings</a>
-                </li>
-                <li class="nav-item">
-                    <span class="nav-link">Follow Us:</span>
-                    <ul class="list-inline">
-                        <li class="list-inline-item">
-                            <a href="#"><i class="fab fa-facebook-f"></i></a>
-                        </li>
-                        <li class="list-inline-item">
-                            <a href="#"><i class="fab fa-twitter"></i></a>
-                        </li>
-                        <li class="list-inline-item">
-                            <a href="#"><i class="fab fa-instagram"></i></a>
-                        </li>
-                    </ul>
-                </li>
-            </ul>
-        </div>
-    </div> -->
+       
     <!-- header-area -->
     <header>
         <div id="header-fixed-height"></div>
@@ -362,33 +368,32 @@
                                 <div class="col-xl-5">
                                     <div class="tgmenu__navbar-wrap tgmenu__main-menu d-none d-xl-flex">
                                         <ul class="navigation">
-                                            <li><a href="/user_dashboard">Home</a></li>
-                                            <li ><a href="/pet-profile">Pet Profile</a></li>
-                                            <li class="menu-item-has-children"><a href="#">Health-Care</a>
+                                            <li><a href="/main" class="active">Newsfeed</a></li>
+                                            <li class="menu-item-has-children"><a href="#">Home</a>
                                                 <ul class="sub-menu">
-                                                    <li><a href="/appointment_scheduling">Schedule Appointment</a></li>
-                                                    <li><a href="/feedn">Nutirition Recommendations</a></li>
-                                                    <li><a  href="feed"> Set Feeding Schedule</a></li>
-                                                    <li><a href="/view-schedule">View Feeding Schedule </a></li>
-                                                    <li><a href=" /feedback">Post Vet Feedback</a></li>
+                                                    
+                                                    <li><a href="/profile">Profile</a></li>
+                                                    <li><a href="/create">Create</a></li>
+                                                    
+                                                    <li><a href="/profile/edit">Setting</a></li>
+                                                    <li><a href="/gallery">Gallery</a></li>
+                                                    
                                                 </ul>
                                             </li>
-                                            <li ><a  href="/feedrbt" >Record Behavior</a></li>
-                                           
-                                            <!-- <li ><a  id="feedingScheduleLink3" >View Record Behavior</a></li> -->
-                                            <li ><a  href="/feedrbt_view" >View Record Behavior</a></li>
-                                           
+                                            <li><a href="/users">Find People</a></li>
+                                            <li><a href="/explore">Explore</a></li>
+                                            
                                             
                                             
                                         </ul>
                                     </div>
                                 </div>
                                 <div class="col-xl-2 col-md-4">
-                                    <div class="logo text-center">
+                                    <div class="logo text-center" >
                                         <a><img src="../public/assets/img/logo/w_logo.png" alt="Logo"></a>
                                     </div>
                                 </div>
-                                <div class="col-xl-5 col-md-8">
+                                <div class="col-xl-5 col-md-8" >
                                     <div class="tgmenu__action tgmenu__action-two d-none d-md-block">
                                         <ul class="list-wrap">
                                             <li class="header-search">
@@ -396,13 +401,18 @@
                                                     <i class="flaticon-loupe"></i>
                                                 </a>
                                             </li>
-                                            <li class="header-cart">
-                                                <a href="javascript:void(0)">
-                                                    <i class="flaticon-shopping-bag"></i>
-                                                    <span>0</span>
-                                                </a>
-                                            </li>
-                                            <li class="header-btn login-btn"><a href="/logout_user" class="btn"><i
+                                           
+                                            <div class="tgmenu__action tgmenu__action-three d-none d-md-block">
+                                                <ul class="list-wrap">
+                                                    <li class="header-login">
+                                                        <a href="/profile">
+                                                            <i class="flaticon-user" style="color: white;"></i>
+                                                        </a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                            
+                                            <li class="header-btn login-btn"><a href="/logout" class="btn"><i
                                                         class="flaticon-locked"></i>Logout</a></li>
                                                         <li class="offCanvas-menu">
                                                             <a href="javascript:void(0)" class="menu-tigger">
@@ -475,11 +485,11 @@
                                 </button>
                             </div>
                             <div class="search__form">
-                                <form action="#">
+                                <form method="GET" id="search-user-form" class="form-inline my-2 my-lg-0">
                                     <div class="search__input">
-                                        <input class="search-input-field" type="text" placeholder="Type keywords here">
+                                        <input class="form-control mr-sm-2 search-input-field" type="search" id="search-text" name="typeahead" autocomplete="off" spellcheck="false" placeholder="Type keywords here" style="height: 40px; border-radius: 5px 0 0 0; background-color: aliceblue; border-color: transparent; flex: 1;">
                                         <span class="search-focus-border"></span>
-                                        <button>
+                                        <button class="btn btn-outline-success my-2 my-sm-0" type="submit" style="height: 40px; width: 50px; border-radius: 0 5px 0 0;">
                                             <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                 <path d="M9.55 18.1C14.272 18.1 18.1 14.272 18.1 9.55C18.1 4.82797 14.272 1 9.55 1C4.82797 1 1 4.82797 1 9.55C1 14.272 4.82797 18.1 9.55 18.1Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
                                                 <path d="M19.0002 19.0002L17.2002 17.2002" stroke="currentcolor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
@@ -503,125 +513,117 @@
     <!-- header-area-end -->
 
     <!-- main-area -->
-    <main class="fix">
+    <main >
 
         
        
-       
+      
         
 
         <!-- breadcrumb-area -->
-        <section class="breadcrumb__area fix">
-            <div class="container">
-                <div class="row align-items-end">
-                    <div class="col-lg-8">
-                        <div class="breadcrumb__content">
-                            <h4 id="namePlaceholder"></h4>
-                            <nav class="breadcrumb">
-                                <span property="itemListElement" typeof="ListItem">
-                                    <a >Nutrition Recommendation </a>
-                                </span>
-                              
-                            </nav>
-                        </div>
-                    </div>
-                    <!-- <div class="col-lg-4">
-                        <div class="breadcrumb__img">
-                            
-                            <img src="../public/assets/img/images/breadcrumb_img.png" alt="img" data-aos="fade-left" data-aos-delay="800">
-                        </div>
-                    </div> -->
+<section class="breadcrumb__area fix">
+    <div class="container">
+        <div class="row align-items-end">
+            <div class="col-lg-8">
+                <!-- <div class="breadcrumb__content">
+                    <h3 class="title">Newsfeed</h3>
+                    <nav class="breadcrumb">
+                        <span property="itemListElement" typeof="ListItem">
+                            <a>Welcome</a>
+                        </span>
+                        <span class="breadcrumb-separator"><i class="flaticon-right-arrow-angle"></i></span>
+                        <span property="itemListElement" typeof="ListItem"><%=name%></span>
+                    </nav>
+                </div> -->
+            </div>
+            <!-- <div class="col-lg-4">
+                <div class="breadcrumb__img">
+                    <img src="../public/assets/img/images/cta_img.png" alt="img" data-aos="fade-left" data-aos-delay="800">
                 </div>
+            </div> -->
+        </div>
+    </div>
+    <div class="breadcrumb__shape-wrap">
+        <img src="../public/assets/img/images/breadcrumb_shape01.png" alt="img" data-aos="fade-down-right" data-aos-delay="400">
+        <img src="../public/assets/img/images/breadcrumb_shape02.png" alt="img" data-aos="fade-up-left" data-aos-delay="400">
+    </div>
+</section>
+<br>
+<!-- <div style="display: flex; justify-content: center; align-items: center; height: 35vh;">
+    <div style="width: 46.5%;">
+        <div class="card bg-light">
+            <div class="card-body">
+                <h5 class="card-title text-center">Create Post</h5>
+                <form>
+                    <div class="form-group">
+                        <label for="postContent">Post Content</label>
+                        <textarea class="form-control" id="postContent" rows="3"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block">Post</button>
+                </form>
             </div>
-            
-                            
-            
-            <div class="breadcrumb__shape-wrap">
-                <img src="../public/assets/img/images/breadcrumb_shape01.png" alt="img" data-aos="fade-down-right" data-aos-delay="400">
-                <img src="../public/assets/img/images/breadcrumb_shape02.png" alt="img" data-aos="fade-up-left" data-aos-delay="400">
-            </div>
-        </section>
-        <section class="breadcrumb__shape-wrap">
-            <div class="container">
-                <div class="row justify-content-center">
-                    <h1>Pet Nutrition Calculator</h1>
-                    <form id="feedingScheduleForm" class="needs-validation" novalidate>
-                        <div class="form-group">
-                            <label for="petSelect">Select Pet:</label>
-                            <select class="form-control" id="petSelect" name="petSelect" required>
-                                <option value="" selected disabled>Select Pet</option>
-                                <% pets.forEach(function(pet) { %>
-                                    <option value="<%= pet.id %>"><%= pet.petname %></option>
-                                <% }); %>
-                            </select>
-                            <div class="invalid-feedback">Please select a pet.</div>
-                        </div>
-                    </form>
-                    
-                    <div id="petCards" class="row">
-                        <% pets.forEach(function(pet) { %>
-                            <div class="col-md-4 mb-3">
-                                <div class="card">
-                                    <img src="<%= pet.petPicture %>" class="card-img-top" alt="<%= pet.petname %>">
-                                    <div class="card-body">
-                                        <h5 class="card-title"><%= pet.petname %></h5>
-                                        <p class="card-text">Owner: <%= pet.pet_owner %></p>
-                                        <p class="card-text">Gender: <%= pet.gender %></p>
-                                        <p class="card-text">Age: <%= pet.age %></p>
-                                        <p class="card-text">Breed: <%= pet.breed %></p>
-                                        <p class="card-text">Species: <%= pet.species %></p>
-                                        <p class="card-text">Weight: <%= pet.weight %> kg</p>
-                                        <p class="card-text">Color: <%= pet.color %></p>
-                                    </div>
-                                </div>
+        </div>
+    </div>
+</div> -->
+
+
+
+<div class="container-center">
+<section>
+    
+    <div id="load-feed-new" style="display: flex; flex-wrap: wrap; justify-content: center;">
+        
+        <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+        <% for (var i = 0; i < feedResult.length; i++) { %>
+            <div class="container bootstrap snippets bootdey" style="margin: 10px;">
+                <div class="col-md-8">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="user-block" style="display: flex; align-items: center;">
+                                <img class="img-circle" src="/profilepics/<%= profilePics[i] %>" alt="User Image" width="40" height="40">
+                                <!-- ADD PROFILE PIC OF USER WHO POSTED IT -->
+                                <span class="username" style="margin-left: 10px;"><a href="/account/<%=feedResult[i].username%>"><%=feedResult[i].username%></a></span>
+                                <span class="description" style="margin-left: auto;"><%= moment(feedResult[i].created_at).fromNow() %></span>
+                                <!-- IN ABOVE LINE, ADD HREF TO USER'S ACCOUNT -->
                             </div>
-                        <% }); %>
-                    </div>
-                    
-                    
-                    
-                    <form class="col-md-6" action="/calculatePetNutrition" method="post">
-                        <label for="age">Age (years):</label>
-                        <input type="number" id="age" name="age" class="form-control mb-3" required>
-                        
-                        <label for="weight">Weight (lbs):</label>
-                        <input type="number" id="weight" name="weight" class="form-control mb-3" required>
-                
-                        <label for="dietType">Diet Type:</label>
-                        <select id="dietType" name="dietType" class="form-control mb-3" required>
-                            <option value="dry only">Dry Only</option>
-                            <option value="wet only">Wet Only</option>
-                            <option value="combination">Combination</option>
-                        </select>
-                
-                        <div id="restrictionFields" style="display: none;">
-                            <label for="restrictionType">Restrict:</label>
-                            <select id="restrictionType" name="restrictionType" class="form-control mb-3">
-                                <option value="wet">Wet Food</option>
-                                <option value="dry">Dry Food</option>
-                            </select>
-                
-                            <label for="restrictionAmount">Limit:</label>
-                            <input type="number" id="restrictionAmount" name="restrictionAmount" class="form-control mb-3">
                         </div>
-                
-                        <button type="submit" class="btn btn-primary mb-3">Calculate Nutrition</button>
-                    </form>
+                        <div class="card-body">
+                            <img class="img-responsive pad" id="<%=feedResult[i].feedname%>" onclick="showFeed(this.id);return false;" src="/profilepics/<%=feedResult[i].feedname%>" alt="Photo" style="width: 100%; height: auto;">
+                            <!-- INSERT SRC -->
+                        </div>
+                        <div class="card-footer">
+                            <div class="btn btn-default btn-sm" style="position: relative;">
+                                <% if (feedResult[i].isliked === 'dislike') { %>
+                                <i class="fa fa-heart fa-2x" id="like-icon-<%=feedResult[i].feedname%>" style="color: red;"></i>
+                                <% } else { %>
+                                <i class="fa fa-heart-o fa-2x" id="like-icon-<%=feedResult[i].feedname%>" style="color: black;"></i>
+                                <% } %>
+                                <input type="button" style="border: none; position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0;" id="like-btn-<%=feedResult[i].feedname%>" onclick="likeImage('<%=feedResult[i].feedname%>', this)" value="<%=feedResult[i].isliked%>" />
+                                <!-- Hiding the text inside the button -->
+                            </div>
+                           
+                            <span class="pull-right text-muted">
+                                <i class="fa fa-heart" style="color: red;"></i> <%=feedResult[i].likes %> likes 
+                                <i class="fa fa-comment" style="color: red;"></i> <%=feedResult[i].comment_count %> comments
+
+                                <button class="btn btn-link btn-comment" style="color: black;" onmouseover="this.style.color='blue'" onmouseout="this.style.color='black'" id="<%=feedResult[i].feedname%>" onclick="showFeed(this.id);return false;"  >Add Comment</button>
+                            </span>
+                            
+                            
+                            <!-- ADD LIKE, COMMENT COUNT -->
+                        </div>
+                        <p class="card-text caption" style="margin: 10px; padding-left: 8px;"><%= feedResult[i].caption %></p>
+                    </div>
                 </div>
             </div>
+            <% } %>
             
-            <!-- Modal for displaying nutrition data -->
-            <div id="myModal" class="modal">
-                <div class="modal-content">
-                    <span class="close">&times;</span>
-                    <h2>Nutritional Requirements</h2>
-                    <p id="wetFoodAmount"></p>
-                    <p id="dryFoodAmount"></p>
-                </div>
-            </div>
-        </section>
-        
-        
+    </div>
+    
+    
+</section>
+</div>
+
         <!-- breadcrumb-area-end -->
 
         <!-- contact-area -->
@@ -899,7 +901,15 @@
 }
     </script>
     <script>
-     
+      document.getElementById("search-user-form").addEventListener("submit", function(event) {
+          event.preventDefault(); // Prevent the default form submission
+  
+          // Get the value of the input field
+          var username = document.getElementById("search-text").value;
+  
+          // Redirect to the URL with the username as a parameter
+          window.location.href = "/account/" + username;
+      });
   </script>
 
 
@@ -936,60 +946,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
     </script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script>
-        document.getElementById('dietType').addEventListener('change', function() {
-            if (this.value === 'combination') {
-                document.getElementById('restrictionFields').style.display = 'block';
-            } else {
-                document.getElementById('restrictionFields').style.display = 'none';
-            }
-        });
-
-        // Get the modal
-        var modal = document.getElementById("myModal");
-
-        // Get the <span> element that closes the modal
-        var span = document.getElementsByClassName("close")[0];
-
-        // When the user clicks the button, open the modal
-        document.getElementById('calculateBtn').addEventListener('click', function(event) {
-            event.preventDefault(); // Prevent form submission
-            modal.style.display = "block";
-        });
-
-        // When the user clicks on <span> (x), close the modal
-        span.onclick = function() {
-            modal.style.display = "none";
-        }
-
-        // When the user clicks anywhere outside of the modal, close it
-        window.onclick = function(event) {
-            if (event.target == modal) {
-                modal.style.display = "none";
-            }
-        }
-    </script>
-    <script>
-
-
-
-        $(document).ready(function () {
-// Get the value of email and name from the query parameters
-
-
-// Update the href attribute of the link with the email
-const feedingScheduleLink = document.getElementById('feedingScheduleLink');
-feedingScheduleLink.href = `/feed?email=${userEmail}`;
-        });
-
-
-        
-    // Get the email from local storage
-   
-
-      </script>
-      <script src="../public/custom/js/email_value.js"></script>
-      
     
 </body>
 
