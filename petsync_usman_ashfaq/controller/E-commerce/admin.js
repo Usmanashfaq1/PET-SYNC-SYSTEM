@@ -47,67 +47,93 @@ handle_order_details = (req, res) => {
     const { customer_name, customer_email, products_list, quantity, amount_paid } = req.query;
 
     const products = JSON.parse(decodeURIComponent(products_list));
-
     const productDetails = [];
 
-    products.forEach(product => {
+    // Use Promise.all to wait for all queries to finish
+    Promise.all(products.map(product => {
         const escapedProductName = connection.escape(product.price_data.product_data.name);
-
         const productSql = `SELECT p_id, price FROM products WHERE product_name = ${escapedProductName}`;
+        
+        return new Promise((resolve, reject) => {
+            connection.query(productSql, (err, results) => {
+                if (err) {
+                    console.error(err);
+                    reject(err);
+                } else {
+                    if (results.length > 0) {
+                        const { p_id, price } = results[0];
+                        productDetails.push({
+                            p_id,
+                            product_name: product.price_data.product_data.name,
+                            quantity: product.quantity,
+                            price
+                        });
+                        resolve();
+                    } else {
+                        console.error(`Product '${escapedProductName}' not found.`);
+                        reject(new Error(`Product '${escapedProductName}' not found.`));
+                    }
+                }
+            });
+        });
+    }))
+    .then(() => {
+        insertOrderDetails(customer_name, customer_email, amount_paid, productDetails, res);
+    })
+    .catch(err => {
+        res.status(500).json({ error: 'Database error.' });
+    });
+}
 
-        connection.query(productSql, (err, results) => {
-            if (err) {
-                console.error(err);
-                res.status(500).json({ error: 'Database error.' });
-            } else {
-                if (results.length > 0) {
-                    const { p_id, price } = results[0];
-                    productDetails.push({
-                        p_id,
-                        product_name: product.price_data.product_data.name,
-                        quantity: product.quantity,
-                        price
+
+
+
+function insertOrderDetails(customer_name, customer_email, amount_paid, productDetails, res) {
+    var orderSql = `INSERT INTO deliveries_order (customer_name, customer_email, amount_paid) 
+                    VALUES ('${customer_name}', '${customer_email}', ${amount_paid})`;
+
+    connection.query(orderSql, function (err, results) {
+        if (err) {
+            console.error(err);
+            res.status(500).json({ error: 'Database error.' });
+        } else {
+            const order_id = results.insertId;
+
+            const productQueries = productDetails.map(product => `(${order_id}, ${product.p_id}, '${product.product_name}', ${product.quantity}, ${product.price})`).join(',');
+
+            const productSql = `INSERT INTO order_products (order_id, product_id, product_name, quantity, price) VALUES ${productQueries}`;
+
+            connection.query(productSql, function (err, results) {
+                if (err) {
+                    console.error(err);
+                    res.status(500).json({ error: 'Database error.' });
+                } else {
+                    // Update product stock in the products table
+                    productDetails.forEach(product => {
+                        const updateSql = `UPDATE products SET stock = stock - ${product.quantity} WHERE p_id = ${product.p_id}`;
+                        connection.query(updateSql, function (err, results) {
+                            if (err) {
+                                console.error(err);
+                                res.status(500).json({ error: 'Database error.' });
+                            }
+                        });
                     });
 
-                    if (productDetails.length === products.length) {
-                        insertOrderDetails(customer_name, customer_email, amount_paid, productDetails);
-                    }
-                } else {
-                    console.error(`Product '${escapedProductName}' not found.`);
-                    res.status(404).json({ error: `Product '${escapedProductName}' not found.` });
+                    // Delete cart entries for the customer
+                    const deleteCartSql = `DELETE FROM cart WHERE email = '${customer_email}'`;
+                    connection.query(deleteCartSql, function (err, results) {
+                        if (err) {
+                            console.error(err);
+                            res.status(500).json({ error: 'Database error.' });
+                        } else {
+                            res.redirect('/Load_shop_page');
+                        }
+                    });
                 }
-            }
-        });
+            });
+        }
     });
-
-    function insertOrderDetails(customer_name, customer_email, amount_paid, productDetails) {
-        var orderSql = `INSERT INTO deliveries_order (customer_name, customer_email, amount_paid) 
-                        VALUES ('${customer_name}', '${customer_email}', ${amount_paid})`;
-
-        connection.query(orderSql, function (err, results) {
-            if (err) {
-                console.error(err);
-                res.status(500).json({ error: 'Database error.' });
-            } else {
-                const order_id = results.insertId;
-
-                const productQueries = productDetails.map(product => `(${order_id}, ${product.p_id}, '${product.product_name}', ${product.quantity}, ${product.price})`).join(',');
-
-                const productSql = `INSERT INTO order_products (order_id, product_id, product_name, quantity, price) VALUES ${productQueries}`;
-
-                connection.query(productSql, function (err, results) {
-                    if (err) {
-                        console.error(err);
-                        res.status(500).json({ error: 'Database error.' });
-                    } else {
-                        res.json({ success: true, message: 'Order details saved successfully.' });
-                    }
-                });
-            }
-        });
-    }
-};
-
+}
 
 
 
