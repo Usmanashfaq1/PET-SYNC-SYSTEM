@@ -126,7 +126,8 @@ function insertOrderDetails(customer_name, customer_email, amount_paid, productD
                             console.error(err);
                             res.status(500).json({ error: 'Database error.' });
                         } else {
-                            res.redirect('/Load_shop_page');
+                            // Redirect to order_placed page with order ID
+                            res.redirect(`/order_placed?order_id=${order_id}`);
                         }
                     });
                 }
@@ -136,12 +137,15 @@ function insertOrderDetails(customer_name, customer_email, amount_paid, productD
 }
 
 
-
 load_admin_products_page = (req, res) => {
     res.render('admin_products');
 }
 
 
+
+load_order_placed_page = (req, res) => {
+    res.render('order_placed');
+}
 
 load_admin_page = (req, res) => {
     res.render('admin_dashboard');
@@ -152,4 +156,5 @@ module.exports = {
     load_admin_products_page,
     handle_add_product,
     handle_order_details,
+    load_order_placed_page
 }

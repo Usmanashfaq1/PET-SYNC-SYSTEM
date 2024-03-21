@@ -68,7 +68,7 @@ function productDetail() {
                         <p id="quantity${result.p_id}" class="quantity" style="border: 1px solid #ccc; padding: 10px;">${result.currentItemQuantityInCart}</p>
                         <button class="btn btn-success" onclick="increaseQuantity(${result.p_id}, ${result.stock},${result.price}  ,${result.currentItemQuantityInCart})">+</button>
                     </div>
-                    <a onclick="addToCart(${result.p_id})" class="add-btn">Add To Cart</a>
+                    <a onclick="addToCart(${result.p_id}, ${result.price})" class="add-btn">Add To Cart</a>
                 </div>
                 
                 
@@ -185,6 +185,7 @@ function addToCart(item_id, price) {
             }
 
             countOfItemsInCart();
+            productDetail();
         },
         error: function (error) {
             console.error('Error adding item to cart:', error);

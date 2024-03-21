@@ -26,6 +26,9 @@ const {failure} = require('../controller/E-commerce/paymentController');
 
 
 const { handle_add_product } = require('../controller/E-commerce/admin')
+const { load_order_placed_page} = require('../controller/E-commerce/admin')
+
+
 const { handle_get_products } = require('../controller/E-commerce/products')
 const { handle_delete_product } = require('../controller/E-commerce/edit_products')
 const { handle_get_specific_product } = require('../controller/E-commerce/edit_products')
@@ -72,6 +75,8 @@ router.get('/get_specific_product/:category',isEcommerceAuthenticated , handle_g
 router.get('/E-commerce', isEcommerceAuthenticated , load_products_page);
 
 router.get('/admin_dashboard', isEcommerceAuthenticated, load_admin_page);
+
+
 
 router.get('/admin_products', isEcommerceAuthenticated , load_admin_products_page);
 
@@ -127,6 +132,10 @@ router.get('/order_details',isEcommerceAuthenticated , handle_order_details);
 
 router.get('/wishlist', isEcommerceAuthenticated , load_wishlist_page);
 
+router.get('/order_placed', isEcommerceAuthenticated , load_order_placed_page);
+
+
+
 
 
 
@@ -151,6 +160,9 @@ router.get('/pc', (req, res) => {
 router.get('/cp', (req, res) => {
     res.render('settingnew');
 });
+
+
+
 
 // router.get('/payment', (req, res) => {
 //     res.render('payment');
