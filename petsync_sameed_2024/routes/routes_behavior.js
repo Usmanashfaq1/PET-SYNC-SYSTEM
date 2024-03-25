@@ -9,4 +9,15 @@ router.get('/feedrbt', isUserAuthenticated, behaviorController.displayPage);
 router.post('/record_behavior', behaviorController.recordBehavior);
 
 router.get('/feedrbt_view', isUserAuthenticated, behaviorController.displayPage_records);
+
+
+
+// Route to display the behavior editing page
+router.get('/edit_behavior', isUserAuthenticated, behaviorController.displayEditPage);
+
+// Route to handle behavior update
+router.post('/update_behavior', isUserAuthenticated, behaviorController.updateBehavior);
+
+// Route to handle behavior deletion
+router.post('/delete_behavior', isUserAuthenticated, behaviorController.deleteBehavior);
 module.exports = router;

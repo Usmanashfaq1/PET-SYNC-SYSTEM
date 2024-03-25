@@ -19,24 +19,42 @@ exports.recordBehavior = (req, res) => {
 };
   
 
-
 // Function to display the behavior recording page
 exports.displayPage = (req, res) => {
-    const userEmail = req.session.email; // Retrieve the email from the query string
-    
-    // Fetching pets belonging to the user with the given email
-    connection.query('SELECT * FROM pet_profile JOIN users ON pet_profile.owner_id = users.id WHERE users.email = ?', [userEmail], (error, pets) => {
+  const userEmail = req.session.email; // Retrieve the email from the session
+
+  // Fetch the pet owner ID using the userEmail
+  connection.query('SELECT id FROM users WHERE email = ?', [userEmail], (error, results) => {
       if (error) {
-        console.error('Error fetching pets:', error);
-        res.status(500).send('Error fetching pets.');
-        return;
+          console.error('Error fetching user ID:', error);
+          res.status(500).send('Error fetching user ID.');
+          return;
       }
-      console.log(pets);
-     
-      // Assuming you have another variable `days` defined somewhere
-      res.render('record_behavior', { pets });
-    });
-  };
+
+      if (results.length === 0) {
+          console.error('User not found for email:', userEmail);
+          res.status(404).send('User not found.');
+          return;
+      }
+
+      const ownerId = results[0].id;
+
+      // Fetching pets belonging to the user with the given email
+      connection.query('SELECT * FROM pet_profile WHERE owner_id = ?', [ownerId], (error, pets) => {
+          if (error) {
+              console.error('Error fetching pets:', error);
+              res.status(500).send('Error fetching pets.');
+              return;
+          }
+          console.log(pets);
+
+          // Assuming you have another variable `days` defined somewhere
+          res.render('record_behavior', { pets });
+      });
+  });
+};
+
+
 
 
   exports.displayPage_records = (req, res) => {
@@ -55,4 +73,51 @@ exports.displayPage = (req, res) => {
      
       res.render('view_record_behavior', { behaviorRecords });
     });
+};
+
+
+
+//
+exports.displayEditPage = (req, res) => {
+  const petId = req.query.petId;
+  
+  // Fetch behavior record by petId
+  PetBehavior.getBehaviorRecordById(petId)
+      .then((record) => {
+          res.render('edit_behavior', { record });
+      })
+      .catch((error) => {
+          console.error('Error fetching behavior record:', error);
+          res.status(500).send('Error fetching behavior record.');
+      });
+};
+
+// Update behavior record
+exports.updateBehavior = (req, res) => {
+  const { petId, dateTime, description, category } = req.body;
+  
+  // Update behavior record in the database
+  PetBehavior.updateBehaviorRecord(petId, dateTime, description, category)
+      .then(() => {
+          res.redirect('/feedrbt_view'); // Redirect to view behavior records
+      })
+      .catch((error) => {
+          console.error('Error updating behavior record:', error);
+          res.status(500).send('Error updating behavior record.');
+      });
+};
+
+// Delete behavior record
+exports.deleteBehavior = (req, res) => {
+  const petId = req.body.petId;
+  
+  // Delete behavior record from the database
+  PetBehavior.deleteBehaviorRecord(petId)
+      .then(() => {
+          res.redirect('/feedrbt_view'); // Redirect to view behavior records
+      })
+      .catch((error) => {
+          console.error('Error deleting behavior record:', error);
+          res.status(500).send('Error deleting behavior record.');
+      });
 };

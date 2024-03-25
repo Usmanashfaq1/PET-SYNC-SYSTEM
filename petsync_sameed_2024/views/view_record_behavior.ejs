@@ -12,33 +12,29 @@
         <h1 class="mt-4">Behavior Records</h1>
 
         <!-- Display behavior records as cards -->
-        <div class="row mt-4">
+        <!-- <div class="row mt-4">
             <% behaviorRecords.forEach(record => { %>
             <div class="col-md-4 mb-4">
                 <div class="card">
                     <div class="card-body">
-                        <div class="card-body text-center">
-                            <img class="img-thumbnail" src="/upload1/<%= record.petPicture %>" alt="Pet Picture" style="width: 150px; height: 150px; object-fit: cover;"> <!-- Adjust width and height as needed -->
-                        </div>
                         <h5 class="card-title">Date & Time: <%= record.date_time %></h5>
                         <p class="card-text">Description: <%= record.description %></p>
-                        <p class="card-text">Petname:  <%= record.petname %></p>
-                        <p class="card-text">Category: <%= record.category %></p>
+                        <p class="card-text">Category: <%= record.category %></p> -->
                         <!-- Edit button to navigate to edit page -->
-                        <a href="/edit_behavior?petId=<%= record.pet_id %>" class="btn btn-primary">Edit</a>
+                        <!-- <a href="/edit_behavior?petId=<%= record.pet_id %>" class="btn btn-primary">Edit</a>
                     </div>
                 </div>
             </div>
-            <% }); %>
-        </div>
+            <% }); %> -->
+        <!-- </div> -->
 
         <!-- Display behavior records in a table (optional) -->
         <div class="mt-4">
             <table class="table">
                 <thead>
                     <tr>
-                        <th>PetPicture</th>
-                        <th>PetName</th>
+                        <th>Pet Picture</th>
+                        <th>Pet Name </th>
                         <th>Date & Time</th>
                         <th>Description</th>
                         <th>Category</th>
@@ -58,7 +54,6 @@
                             <!-- Edit button to navigate to edit page -->
                             <td><a href="/edit_behavior?petId=<%= record.pet_id %>" class="btn btn-primary">Edit</a></td>
                         </tr>
-                        
                     <% }); %>
                 </tbody>
             </table>
