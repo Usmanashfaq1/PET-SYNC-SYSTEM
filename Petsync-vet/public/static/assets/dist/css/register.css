@@ -1,0 +1,103 @@
+.overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+  }
+
+  /* Styles for the dialog box */
+  .dialog-box {
+    background: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    max-width: 400px;
+    text-align: center;
+  }
+
+  /* Close button style */
+  .close-btn {
+    background: #007BFF;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+
+
+
+
+
+
+  @media (min-width: 1025px) {
+    .h-custom {
+      height: 100vh !important;
+      overflow-y: auto;
+      /* Add this line to enable vertical scrollbar */
+    }
+  }
+
+
+  .is-invalid {
+    border-color: #dc3545;
+    background-color: #f8d7da;
+  }
+
+  /* You can add more styles for the error message if needed */
+  .error-message {
+    color: #ffffff;
+    margin-top: 2px;
+  }
+
+  #map {
+    height: 300px;
+    width: 600px;
+  }
+
+  input[type=radio] {
+    width: 15px;
+    height: 15px;
+
+  }
+
+  .card-registration .select-input.form-control[readonly]:not([disabled]) {
+    font-size: 1rem;
+    line-height: 2.15;
+    padding-left: .75em;
+    padding-right: .75em;
+  }
+
+  .card-registration .select-arrow {
+    top: 13px;
+  }
+
+ 
+
+  .bg-indigo {
+    background-color: #1b9cd8;
+  }
+
+  @media (min-width: 992px) {
+    .card-registration-2 .bg-indigo {
+      border-top-right-radius: 15px;
+      border-bottom-right-radius: 15px;
+    }
+  }
+
+  @media (max-width: 991px) {
+    .card-registration-2 .bg-indigo {
+      border-bottom-left-radius: 15px;
+      border-bottom-right-radius: 15px;
+    }
+
+
+
+  }
+
+  

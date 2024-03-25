@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vet Ratings</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .rating {
+            color: #ffc107;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="mt-5 mb-4">Vet Ratings</h1>
+        <div class="row">
+            <% vets.forEach(vet => { %>
+                <div class="col-md-4 mb-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title"><%= vet.fname %> <%= vet.lname %></h5>
+                            <p class="card-text">
+                                <strong>Specialization:</strong> <%= vet.specialization %><br>
+                                <strong>Qualification:</strong> <%= vet.qualification %><br>
+                                <strong>Rating:</strong> 
+                                <% const fullStars = Math.ceil(vet.rating / 5 * 5); %>
+                                <% for (let i = 0; i < 5; i++) { %>
+                                    <% if (i < fullStars) { %>
+                                        <span class="rating">&#9733;</span>
+                                    <% } else { %>
+                                        <span class="rating">&#9734;</span>
+                                    <% } %>
+                                <% } %>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            <% }) %>
+        </div>
+    </div>
+</body>
+</html>
