@@ -558,7 +558,9 @@
                                     <td><%= record.description %></td>
                                     <td><%= record.category %></td>
                                     <!-- Edit button to navigate to edit page -->
-                                    <td><a href="/edit_behavior?petId=<%= record.pet_id %>" class="btn btn-primary">Edit</a></td>
+                                    <!-- <td><a href="/edit_behavior?petId=<%= record.pet_id %>" class="btn btn-primary">Edit</a></td> -->
+                                    <td><a href="/edit_behavior?petId=<%= record.pet_id %>&behaviorId=<%= record.id %>" class="btn btn-primary">Edit</a></td>
+
                                 </tr>
                             <% }); %>
                         </tbody>

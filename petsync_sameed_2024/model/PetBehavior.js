@@ -38,10 +38,10 @@ class PetBehavior {
     }
 
 
-    static getBehaviorRecordById(petId) {
+    static getBehaviorRecordById(petId, behaviorId) {
         return new Promise((resolve, reject) => {
-            const query = 'SELECT * FROM behavior_records WHERE pet_id = ?';
-            connection.query(query, [petId], (error, results) => {
+            const query = 'SELECT * FROM behavior_records WHERE pet_id = ? AND id = ?'; // Modify query to include both petId and behaviorId
+            connection.query(query, [petId, behaviorId], (error, results) => {
                 if (error) {
                     reject(error);
                 } else {
@@ -54,11 +54,12 @@ class PetBehavior {
             });
         });
     }
+    
 
-    static updateBehaviorRecord(petId, dateTime, description, category) {
+    static updateBehaviorRecord(behaviorId, dateTime, description, category) {
         return new Promise((resolve, reject) => {
-            const query = 'UPDATE behavior_records SET date_time = ?, description = ?, category = ? WHERE pet_id = ?';
-            connection.query(query, [dateTime, description, category, petId], (error, results) => {
+            const query = 'UPDATE behavior_records SET date_time = ?, description = ?, category = ? WHERE  id = ?'; // Include behaviorId in the query
+            connection.query(query, [dateTime, description, category, behaviorId], (error, results) => {
                 if (error) {
                     reject(error);
                 } else {
@@ -67,11 +68,11 @@ class PetBehavior {
             });
         });
     }
-
-    static deleteBehaviorRecord(petId) {
+    
+    static deleteBehaviorRecord(behaviorId) {
         return new Promise((resolve, reject) => {
-            const query = 'DELETE FROM behavior_records WHERE pet_id = ?';
-            connection.query(query, [petId], (error, results) => {
+            const query = 'DELETE FROM behavior_records WHERE  id = ?'; // Include behaviorId in the query
+            connection.query(query, [behaviorId], (error, results) => {
                 if (error) {
                     reject(error);
                 } else {
@@ -80,6 +81,7 @@ class PetBehavior {
             });
         });
     }
+    
 }
 
 module.exports = PetBehavior;

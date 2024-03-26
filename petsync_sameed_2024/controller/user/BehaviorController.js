@@ -79,45 +79,50 @@ exports.displayPage = (req, res) => {
 
 //
 exports.displayEditPage = (req, res) => {
-  const petId = req.query.petId;
+    const petId = req.query.petId;
+    const behaviorId = req.query.behaviorId;
+    console.log(behaviorId); // Get behaviorId from query params
+    
+    // Fetch behavior record by petId and behaviorId
+    PetBehavior.getBehaviorRecordById(petId, behaviorId)
+        .then((record) => {
+            res.render('edit_behavior', { record });
+        })
+        .catch((error) => {
+            console.error('Error fetching behavior record:', error);
+            res.status(500).send('Error fetching behavior record.');
+        });
+  };
   
-  // Fetch behavior record by petId
-  PetBehavior.getBehaviorRecordById(petId)
-      .then((record) => {
-          res.render('edit_behavior', { record });
-      })
-      .catch((error) => {
-          console.error('Error fetching behavior record:', error);
-          res.status(500).send('Error fetching behavior record.');
-      });
-};
 
 // Update behavior record
 exports.updateBehavior = (req, res) => {
-  const { petId, dateTime, description, category } = req.body;
+    const { petId, behaviorId, dateTime, description, category } = req.body;
+    console.log(behaviorId);
+    
+    // Update behavior record in the database
+    PetBehavior.updateBehaviorRecord(behaviorId, dateTime, description, category)
+        .then(() => {
+            res.redirect('/feedrbt_view'); // Redirect to view behavior records
+        })
+        .catch((error) => {
+            console.error('Error updating behavior record:', error);
+            res.status(500).send('Error updating behavior record.');
+        });
+  };
   
-  // Update behavior record in the database
-  PetBehavior.updateBehaviorRecord(petId, dateTime, description, category)
-      .then(() => {
-          res.redirect('/feedrbt_view'); // Redirect to view behavior records
-      })
-      .catch((error) => {
-          console.error('Error updating behavior record:', error);
-          res.status(500).send('Error updating behavior record.');
-      });
-};
-
-// Delete behavior record
-exports.deleteBehavior = (req, res) => {
-  const petId = req.body.petId;
+  // Delete behavior record
+  exports.deleteBehavior = (req, res) => {
+    const { petId, behaviorId } = req.body;
+    
+    // Delete behavior record from the database
+    PetBehavior.deleteBehaviorRecord(behaviorId)
+        .then(() => {
+            res.redirect('/feedrbt_view'); // Redirect to view behavior records
+        })
+        .catch((error) => {
+            console.error('Error deleting behavior record:', error);
+            res.status(500).send('Error deleting behavior record.');
+        });
+  };
   
-  // Delete behavior record from the database
-  PetBehavior.deleteBehaviorRecord(petId)
-      .then(() => {
-          res.redirect('/feedrbt_view'); // Redirect to view behavior records
-      })
-      .catch((error) => {
-          console.error('Error deleting behavior record:', error);
-          res.status(500).send('Error deleting behavior record.');
-      });
-};

@@ -515,6 +515,7 @@
                     <h2>Edit Behavior Record</h2>
                     <form action="/update_behavior" method="POST">
                         <input type="hidden" name="petId" value="<%= record.pet_id %>">
+                        <input type="hidden" name="behaviorId" value="<%= record.id %>">
                         <div class="form-group">
                             <label for="dateTime">Date & Time:</label>
                             <input type="datetime-local" class="form-control" id="dateTime" name="dateTime" value="<%= record.date_time %>">
@@ -539,6 +540,7 @@
                     <!-- Delete button -->
                     <form action="/delete_behavior" method="POST" class="mt-3">
                         <input type="hidden" name="petId" value="<%= record.pet_id %>">
+                        <input type="hidden" name="behaviorId" value="<%= record.id %>">
                         <button type="submit" class="btn btn-danger">Delete</button>
                     </form>
                 </div>
