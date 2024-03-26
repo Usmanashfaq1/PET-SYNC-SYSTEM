@@ -16,7 +16,12 @@ async function loginUser(req, res) {
             return res.redirect(`/user_dashboard?email=${user.email}&name=${user.username}`);
         } else {
             console.log('Login failed for user:', email);
-            res.json(-1); // Login failed
+            
+                // Incorrect password
+              //  return { success: false, msg: "Username and password do not match" };
+                 return res.render('login_user', { msg: "Username and password do not match" });
+            
+            
         }
     } catch (error) {
         console.error('Error occurred during login:', error);

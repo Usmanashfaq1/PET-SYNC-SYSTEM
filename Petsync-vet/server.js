@@ -367,9 +367,9 @@ app.post('/recovery-otp', (req, res) => {
   });
 
 });
-const { isUserAuthenticated } = require('./middleware/authMiddleware');
 
-app.get('/code-reset-page',isUserAuthenticated, (req, res) => {
+
+app.get('/code-reset-page', (req, res) => {
   res.render('code_reset_page');
 });
 
