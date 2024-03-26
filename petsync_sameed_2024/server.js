@@ -288,6 +288,42 @@ app.get('/community',(req,res)=>{
   res.render('settingnew');
  });
 
+ app.get('/approved-app',isUserAuthenticated, (req, res) => {
+  res.render('approved_appointment');
+});
+
+app.get('/api/appointmentapp/:email', (req, res) => {
+  const email = req.params.email; // Taking email from the AJAX frontend
+  const status = 'approved';
+
+  // Optional: Get the selected year and month from the query parameters
+  const yearMonth = req.query.yearMonth;
+
+  // Query the database to fetch appointments for the specified user with status 'approved'
+  let query = 'SELECT * FROM appointment WHERE user_email = ? AND status = ?';
+  const queryParams = [email, status];
+
+  if (yearMonth) {
+    query += ' AND DATE_FORMAT(date, "%Y-%m") = ?';
+    queryParams.push(yearMonth);
+  }
+
+  conn.query(query, queryParams, (err, result) => {
+    if (err) {
+      console.error('Error fetching appointment details:', err);
+      res.status(500).json({ error: 'An error occurred while fetching appointment details' });
+      return;
+    }
+
+    if (result.length === 0) {
+      res.json(null); // No appointments found for the specified user and status 'approved'
+    } else {
+      res.json(result);
+    }
+  });
+});
+
+
 // end dummy views
 
 
