@@ -65,7 +65,8 @@ async uploadFeed(req, res) {
         };
 
         await createModel.uploadFeed(feedData);
-        res.end("File is uploaded");
+        res.json({ success: true, message: "File uploaded successfully", reloadPage: true });
+       // res.end("File is uploaded");
     } catch (error) {
         console.error(error);
         return res.status(500).send('Internal Server Error');

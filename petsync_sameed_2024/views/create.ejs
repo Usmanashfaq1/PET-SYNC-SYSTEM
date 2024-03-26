@@ -512,37 +512,40 @@ body.sidebar-open {
       
                
      <!-- general form elements -->
-<div class="card bg-light-purple">
-    <div class="card-header">
-        <h3 class="card-title">Create Post</h3>
-    </div>
-    <!-- /.card-header -->
-    <!-- form start -->
-    <form role="form" action="/profile/postFeed" method="POST" enctype="multipart/form-data">
-        <div class="card-body">
-            <div class="form-group">
-                <textarea class="form-control" rows="3" placeholder="What's on your mind?" name="caption"></textarea>
-            </div>
-            <div class="form-group">
-                <div class="input-group">
-                    <div class="custom-file">
-                        <input input id="upload-File" type="file" class="custom-file-input"  name="userFeed" required>
-                        <label class="custom-file-label" for="exampleInputFile">Choose file</label>
-                    </div>
-                    <div class="input-group-append">
-                        <span class="input-group-text">Upload</span>
+     <div class="card bg-light-purple">
+        <div class="card-header">
+            <h3 class="card-title">Create Post</h3>
+        </div>
+        <!-- /.card-header -->
+        <!-- form start -->
+        <form id="uploadForm" role="form"  enctype="multipart/form-data">
+            <div class="card-body">
+                <div class="form-group">
+                    <textarea class="form-control" rows="3" placeholder="What's on your mind?" name="caption"></textarea>
+                </div>
+                <div class="form-group">
+                    <div class="input-group">
+                        <div class="custom-file">
+                            <input id="upload-File" type="file" class="custom-file-input" name="userFeed" required>
+                            <label class="custom-file-label" for="upload-File">Choose file</label>
+                        </div>
+                        <div class="input-group-append">
+                            <span class="input-group-text">Upload</span>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <!-- /.card-body -->
-
-        <div class="card-footer">
-            <button type="submit" class="btn btn-primary">Post</button>
-            <span id="status"></span>
-        </div>
-    </form>
-</div>
+            <!-- /.card-body -->
+    
+            <div class="card-footer">
+                <button type="submit" class="btn btn-primary">Post</button>
+                <span id="status"></span>
+            </div>
+        </form>
+    </div>
+    
+   
+    
 <!-- /.card -->
 
                 
@@ -799,6 +802,35 @@ document.addEventListener("DOMContentLoaded", function () {
 
     </script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.getElementById('uploadForm');
+    
+            form.addEventListener('submit', async function(event) {
+                event.preventDefault();
+    
+                const formData = new FormData(this);
+    
+                try {
+                    const response = await fetch('/profile/postFeed', {
+                        method: 'POST',
+                        body: formData
+                    });
+    
+                    const data = await response.json();
+    
+                    if (data.success) {
+                        // If the upload was successful, reload the current page
+                        window.location.href = window.location.href;
+                    } else {
+                        console.error(data.message);
+                    }
+                } catch (error) {
+                    console.error(error);
+                }
+            });
+        });
+    </script>
     
 </body>
 
