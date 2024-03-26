@@ -10,7 +10,7 @@ const dotenv =require('dotenv');
 const nodemailer = require("nodemailer");
 const pool = require('nodemailer-smtp-pool');
 var flash = require("connect-flash");
-app.use(helmet());
+
 
 // Use nocache middleware to disable caching
 app.use(nocache());
@@ -148,7 +148,7 @@ app.post("/register_vet", function (req, res) {
 app.post("/check_user", function (req, res) {
 
   var email = req.body.email;
-  var sql = `SELECT email FROM sign_up WHERE email= '${email}'`;
+  var sql = `SELECT email FROM vet WHERE email= '${email}'`;
   conn.query(sql, function (err2, results) {
     if (err2) {
       console.error(err2);
@@ -341,21 +341,62 @@ app.post('/approved', (req, res) => {
 
 //vet end
 
-// const host = 'smtp.gmail.com'; // Replace 'example.com' with the hostname or IP address of the server
-// const port = 465; // Replace 80 with the port number you want to check
 
-// const checkPort = (host, port) => {
-//     const socket = net.connect(port, host, () => {
-//         console.log(`Port ${port} on ${host} is open`);
-//         socket.destroy(); // Close the socket after the connection is established
-//     });
+app.post('/recovery-otp', (req, res) => {
+  const receiver_email = req.body.email;
+  const otp = generateOTP();
 
-//     socket.on('error', (err) => {
-//         console.error(`Error connecting to port ${port} on ${host}: ${err.message}`);
-//     });
-// };
+  const mailOptions = {
+    from: 'chusmanjutt.129@gmail.com',
+    to: receiver_email,
+    subject: 'Your OTP',
+    text: `Your OTP is: ${otp}`
+  };
 
-// checkPort(host, port);
+  transporter.sendMail(mailOptions, (error, info) => {
+    if (error) {
+      console.error(error);
+      res.json({ success: false, message: 'Error sending OTP' });
+    } else {
+
+      console.log('Email sent: ' + info.response);
+      res.send(otp);
+    }
+
+
+  });
+
+});
+const { isUserAuthenticated } = require('./middleware/authMiddleware');
+
+app.get('/code-reset-page',isUserAuthenticated, (req, res) => {
+  res.render('code_reset_page');
+});
+
+app.get('/forget-code', (req, res) => {
+  res.render('forget_code');
+});
+
+
+app.post("/update_password", function (req, res) {
+
+  var password = req.body.password;
+  var email = req.body.email;
+  // const salt = bcrypt.genSaltSync(10);
+  // const hash = bcrypt.hashSync(password, salt);
+  var sql = `update vet set password = '${password}' where email  = '${email}'`;
+  conn.query(sql, function (err2, results) {
+    if (err2) {
+      console.error(err2);
+    }
+    else {
+
+      res.json(1);
+
+    }
+
+  });
+});
 
 
 // end 2

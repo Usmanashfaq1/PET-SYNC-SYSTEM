@@ -1,3 +1,4 @@
+
 <!doctype html>
 <html class="no-js" lang="en">
 
@@ -76,6 +77,48 @@
         border-radius: 5px;
         cursor: pointer;
     }
+    .overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    /* Adjust z-index to make sure it's above your content */
+  }
+
+  .dialog-box {
+    background: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    max-width: 400px;
+    text-align: center;
+  }
+
+  .close-btn {
+    background: #007BFF;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+
+
+  .is-invalid {
+    border-color: #dc3545;
+    background-color: #f8d7da;
+  }
+
+  /* You can add more styles for the error message if needed */
+  .error-message {
+    color: #dc3545;
+    margin-top: 2px;
+  }
 </style>
 
 <body>
@@ -247,39 +290,58 @@
 
     <!-- main-area -->
     <main class="fix">
+      <br>
+      <br>
+
+      <div class="container my-auto">
+        <div class="row">
+          <div class="col-lg-4 col-md-8 col-12 mx-auto">
+            <div class="card z-index-0 fadeIn3 fadeInBottom">
+              <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
+                <div >
+                  <h4 >Password Reset</h4>
+                  <h6 >Pet Sync</h6>
+                  
+                </div>
+              </div>
+              <div class="card-body">
+                <form id="forget_code" role="form" class="text-start">
+                  <div >
+                    <label >Enter Code</label>
+                    <input type="number" name="code" id="code" class="form-control" required>
+                  </div>
+
+                  <div >
+                    <label >Password</label>
+                    <input type="password" name="pcode" id="pcode" class="form-control" required>
+                  </div>
+                  <div class="text-center">
+                    <button type="submit" class="btn bg-gradient-primary w-100 my-4 mb-2">Verify and update</button>
+                  </div>
+                  <div class="text-center">
+                    <button type="button" onclick="backtosignin()" class="btn bg-gradient-primary w-100 my-4 mb-2">Back
+                      To Sign In</button>
+                  </div>
+                </form>
+                <div class="overlay" id="overlay">
+                  <div class="dialog-box">
+                      <p id = 'message' ></p>
+                      <button class="close-btn" onclick="closeDialog()">Close</button>
+                  </div>
+              </div>
+            </div>
+          </div>
+          </div>
 
         <!-- breadcrumb-area -->
-        <section class="breadcrumb__area fix">
+      
 <br>
 <br>
-<div class="login-page">
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-lg-6">
-                <div class="login-form-wrap">
-                    <h2 class="title">Login</h2>
-                    <form action="/login_user" method="POST" class="login-form" id="loginForm">
-                        <div class="form-group">
-                            <input type="email" name="email" id="email" class="form-control" placeholder="Email" required>
-                        </div>
-                        <div class="form-group">
-                            <input type="password" name="password" id="password" class="form-control" placeholder="Password" required>
-                        </div>
-                        <div class="form-group text-center">
-                            <button type="submit" class="btn btn-primary">Login</button>
-                        </div>
-                        <p class="mt-4 text-sm text-center">
-                            Don't have an account? <a href="/pc" class="text-primary font-weight-bold">Sign Up</a>
-                        </p>
-                        
-                            <a href="/forget-code" class="text-primary font-weight-bold">Forget Code</a>
-                       
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+
+ 
+    
+        
+
            
             <div class="breadcrumb__shape-wrap">
                 <img src="../public/assets/img/images/breadcrumb_shape01.png" alt="img" data-aos="fade-down-right" data-aos-delay="400">
@@ -438,98 +500,82 @@
         SVGInject(document.querySelectorAll("img.injectable"));
     </script>
 
-
-
-
 <script>
 
-
-    // $("#email").on("input", function () {
-
-    // });
-
-
-
-    function validateEmail() {
-      var emailInput = $("#email");
-      var emailError = $("#email-error");
-      var email = emailInput.val();
-      var emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-      if (!email.match(emailRegex)) {
-        emailInput.removeClass("is-valid").addClass("is-invalid");
-        emailError.text('Email is not valid');
-        return true;
-      } else {
-        emailInput.removeClass("is-invalid").addClass("is-valid");
-        emailError.text('');
-        return false;
+  $(document).ready(function () {
+    $('#forget_code').submit(function (e) {
+      e.preventDefault();
+      const otp = localStorage.getItem('otp-code');
+      if (otp === document.getElementById('code').value) {
+        updatePassword();
       }
-    }
+      else {
+        document.getElementById('message').innerText = "Verification Code not correct!";
 
+          showDialog();
+      }
 
+    });
 
+  });
 
+  function backtosignin() {
+    var newPageUrl = '/pc';
+    window.location.href = newPageUrl;
+  }
 
-    function login() {
-      var password = $("#password").val();
-      var email = $("#email").val();
-
-      var data = { email: email, password: password };
-      let post = JSON.stringify(data);
-
-      $.ajax({
-        url: '/login_user',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        type: 'POST',
-        contentType: 'application/json',
-        data: post,
-        success: function (data) {
-          var email = data;
-          if (email !== -1) {
-            var email = data.email;
-            var name = data.name;
-            localStorage.setItem('email', email);
-            localStorage.setItem('name', name);
-            // Set login status to finished
-            // Updated logic
-           
-           window.location.href="/user_dashboard";
-          } else {
-
-            document.getElementById('message').innerText = 'Login Failed! Incorrect Email or Password!';
-            showDialog();
-          }
-        },
-        error: function () {
-          alert('error');
-          // Set login status back to idle on error
+  function updatePassword() {
+    var password = $("#pcode").val();
+    var email = localStorage.getItem('email');
+    // if (email == '' || password == '') {
+    //   alert("Please Fill the Required Fields");
+    //   return;
+    // }
+    var data = { email: email, password: password };
+    let post = JSON.stringify(data);
+    $.ajax({
+      url: 'http://localhost:4001/update_password',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      type: 'POST',
+      contentType: 'application/json',
+      data: post,
+      success: function (data) {
+        if (data == 1) {
+          window.location.href = '/login_user';
         }
-      });
-    }
+        else {
+          document.getElementById('message').innerText = "Updation Failed";
 
+          showDialog();
+          
+        }
 
+      },
+      error: function () {
+        alert('error');
+      }
+    });
+  }
 
-
-
-  </script>
-
-  <script>
-
-
-    function showDialog() {
-      // if ((loginStatus === "idle") || (loginStatus === "finished"))
+</script>
+<script>
+  // Function to show the dialog box
+  function showDialog() {
       document.getElementById('overlay').style.display = 'flex';
-      // console.log('here');
-    }
+  }
 
-    function closeDialog() {
+  // Function to close the dialog box
+  function closeDialog() {
       document.getElementById('overlay').style.display = 'none';
-    }
+  }
 
+  // Check your condition here and call showDialog() if the condition is met
+  // For example, let's assume the condition is a variable named "isConditionMet"
 
-  </script>
+</script>
+
 </body>
 
 
