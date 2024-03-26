@@ -62,6 +62,10 @@ const { handle_and_load_item_cart } = require('../controller/E-commerce/cart')
 const { handle_order_details } = require('../controller/E-commerce/admin')
 
 
+const { handle_item_deleted_cart_refresh_checkout} = require('../controller/E-commerce/cart')
+
+
+
 
 
 router.get('/update_product',isEcommerceAuthenticated, load_update_product_page);
@@ -133,6 +137,8 @@ router.get('/order_details',isEcommerceAuthenticated , handle_order_details);
 router.get('/wishlist', isEcommerceAuthenticated , load_wishlist_page);
 
 router.get('/order_placed', isEcommerceAuthenticated , load_order_placed_page);
+
+router.get('/refresh_cart', isEcommerceAuthenticated , handle_item_deleted_cart_refresh_checkout);
 
 
 

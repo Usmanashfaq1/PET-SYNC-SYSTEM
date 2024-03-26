@@ -176,10 +176,15 @@ function addToCart(item_id, price) {
         url: 'http://localhost:3001/add_to_cart?item_id=' + item_id + '&email_e=' + email_e + '&price=' + price,
         method: 'POST',
         success: function (data) {
-            if (data === 1) {
+            if (data === -99) {
+                document.getElementById('message').innerText = 'Item out of Stock!';
+                showDialog_donot_reload();
+            } 
+            else if (data === 1) {
                 document.getElementById('message').innerText = 'Item Added to Cart!';
                 showDialog_donot_reload();
-            } else {
+            }
+            else {
                 document.getElementById('message').innerText = 'Item Already Added to Cart!';
                 showDialog();
             }
@@ -269,10 +274,8 @@ function increaseQuantity(productId, stock, price, currentItemQuantityInCart) {
     addedtoCart(productId)
         .then(function (isAdded) {
             if (isAdded) {
-                // var quantityElement = $('#quantity' + productId);
-                // var currentQuantity = parseInt(quantityElement.text());
 
-                if (currentItemQuantityInCart <= stock) {
+               if (currentItemQuantityInCart < stock) {
                     updateCartDetails(productId);
 
                 } else {

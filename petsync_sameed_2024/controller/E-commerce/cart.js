@@ -2,33 +2,48 @@ const path = require('path');
 const fs = require('fs');
 const connection = require('../../config');
 
+
 handle_add_to_cart = (req, res) => {
     var item_id = req.query.item_id;
     var email = req.query.email_e;
     var price = req.query.price;
     var quantity = 1;
     var checkCartSql = `SELECT * FROM cart WHERE item_id = '${item_id}' AND email = '${email}'`;
-    connection.query(checkCartSql, function (checkCartErr, checkCartResults) {
-        if (checkCartErr) {
-            console.error(checkCartErr);
+    var checkStockSql = `SELECT stock FROM products WHERE p_id = '${item_id}'`;
+    
+    connection.query(checkStockSql, function(stockErr, stockResults) {
+        if(stockErr) {
+            console.error(stockErr);
             res.status(500).json({ error: 'Database error.' });
         } else {
-            if (checkCartResults.length > 0) {
-                res.json(-1);
+            if(stockResults.length > 0 && stockResults[0].stock === 0) {
+                res.json(-99);
             } else {
-                var insertCartSql = `INSERT INTO cart (item_id, price , quantity, email) VALUES ('${item_id}', '${price}' , '${quantity}' ,'${email}')`;
-                connection.query(insertCartSql, function (insertCartErr, insertCartResults) {
-                    if (insertCartErr) {
-                        console.error(insertCartErr);
+                connection.query(checkCartSql, function(checkCartErr, checkCartResults) {
+                    if(checkCartErr) {
+                        console.error(checkCartErr);
                         res.status(500).json({ error: 'Database error.' });
                     } else {
-                        res.json(1);
+                        if(checkCartResults.length > 0) {
+                            res.json(-1);
+                        } else {
+                            var insertCartSql = `INSERT INTO cart (item_id, price, quantity, email) VALUES ('${item_id}', '${price}', '${quantity}', '${email}')`;
+                            connection.query(insertCartSql, function(insertCartErr, insertCartResults) {
+                                if(insertCartErr) {
+                                    console.error(insertCartErr);
+                                    res.status(500).json({ error: 'Database error.' });
+                                } else {
+                                    res.json(1); // Item added to cart successfully
+                                }
+                            });
+                        }
                     }
                 });
             }
         }
     });
-}
+};
+
 
 const handle_cart_item_number = (req, res) => {
     var email = req.query.email_e;
@@ -235,7 +250,6 @@ handle_and_load_item_cart = async (req, res) => {
                 }
             });
             const key = process.env.STRIPE_PUBLISHABLE_KEY;
-            // Pass items directly to the template along with other data
             res.render('item_cart', {
                 items: items,
                 totalPrice: totalPrice,
@@ -245,6 +259,50 @@ handle_and_load_item_cart = async (req, res) => {
             });
         }
     });
+};
+
+
+
+
+
+handle_item_deleted_cart_refresh_checkout = async (req, res) => {
+
+    //issue resolved using widows.location.reload()
+
+    
+    // console.log('Refresh Called');
+    // const email = req.query.email_e;
+    // const name = req.query.name;
+    // var sql = `SELECT  cart.price, cart.quantity, products.product_name, products.category, products.productPicture, products.description 
+    // FROM cart 
+    // INNER JOIN products ON cart.item_id = products.p_id 
+    // WHERE cart.email = '${email}'`;
+
+    // connection.query(sql, function (err, results) {
+    //     if (err) {
+    //         console.error('Error retrieving cart items:', err);
+    //         res.status(500).json({ error: 'Database error.' });
+    //     } else {
+    //         let totalPrice = 0; 
+    //         const items = results.map(item => {
+    //             const fileName = item.productPicture;
+    //             if (fileName) {
+    //                 totalPrice += item.price; 
+    //                 return {
+    //                     ...item,
+    //                 };
+    //             } else {
+    //                 return item;
+    //             }
+    //         });
+    //         res.json({
+    //             items: items,
+    //             totalPrice: totalPrice,
+    //             userEmail: email,
+    //             userName: name,
+    //         });
+    //     }
+    // });
 };
 
 
@@ -263,5 +321,6 @@ module.exports = {
     handle_cart_item_number_quantity,
     handle_check_added_to_cart,
     handle_and_load_item_cart,
-    handle_cart_item_number_quantity_delete
+    handle_cart_item_number_quantity_delete,
+    handle_item_deleted_cart_refresh_checkout
 }
