@@ -2,7 +2,7 @@ const multer = require("multer");
 const connection = require('../../config');
 
 const storage = multer.diskStorage({
-    destination: '../upload',
+    destination: './upload',
     filename: (req, file, callback) => {
         callback(null, `${Date.now()}-${file.originalname}`);
     }

@@ -537,10 +537,16 @@ body.sidebar-open {
                   <div class="card card-primary card-outline">
                     <div class="card-body box-profile">
                       <div class="text-center">
-                        <img  class="profile-user-img img-fluid img-circle" style="width: 120px;height: 135px;"
-                         src="profilepics/<%=dpName%>"
-                             alt="User profile picture">
-                      </div>
+                        <% if (dpName) { %>
+                            <img class="profile-user-img img-fluid img-circle" style="width: 120px;height: 135px;"
+                                 src="profilepics/<%= dpName %>"
+                                 alt="User profile picture">
+                        <% } else { %>
+                            <!-- Show default profile picture if dpName is not provided -->
+                            <img class="profile-user-img img-fluid img-circle" style="width: 120px;height: 135px;"
+                                 src="/profilepics/d.png"
+                                 alt="Default profile picture">
+                        <% } %>
       
                       <h3 class="profile-username text-center"><%= name %></h3>
       

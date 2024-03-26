@@ -88,7 +88,7 @@ connection.query(petQuery, [petOwner], (error, results) => {
     console.log(followResult);
     console.log("Pet details:", results);
     let imageName=profilePicResult[0].profilepic;
-    if(typeof imageName=='object'){ imageName = "default_profilepic.png"; }
+    if(typeof imageName=='object'){ imageName = "d.png"; }
     console.log(imageName);
     return res.render('userProfileView',{data: userInfo[0],results:results,profilePic:imageName, feedResult: feedResult,dpName: imageName, name,note,location,birthdate,bio,followResult:followResult[0],moment:moment});
 });
