@@ -68,10 +68,8 @@
                                         <li><a href="/login_user">Feeding Schedule</a></li>
                                     </ul>
                                 </li>
-                                <li class=""><a href="">Shop</a></li>
+                                <li class="menu-item active"><a href="">Shop</a></li>
                                 <li class=""><a href="/rs" style="color: white;">contacts</a></li> <!-- Modified -->
-                                <li class="menu-item active"><a href="">Orders</a></li>
-
                             </ul>
                         </div>
                     </div>
@@ -104,9 +102,6 @@
                                     </ul>
                                 </div>
                             </div>
-                            <div class="col-md-auto"> <!-- Modified -->
-                                <div class="header-btn login-btn"><a href="/logoutE" class="btn" ><i class="flaticon-locked" ></i>Logout</a></div> 
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -123,7 +118,7 @@
                 <div class="row align-items-end">
                     <div class="col-lg-8">
                         <div class="breadcrumb__content">
-                            <h3 class="title">Order history</h3>
+                            <h3 class="title">Order Details</h3>
                             <nav class="breadcrumb">
                                 <span property="itemListElement" typeof="ListItem">
                                     <a>Home</a>
@@ -141,38 +136,7 @@
                     </div>
                 </div>
             </div>
-            <!-- <h1>Order has been Placed with order ID : <span id="orderID"></span></h1> -->
-            
-        <!-- product-details-area -->
-        <div class="carousel-item active">
-            <div class="container py-5">
-                <div class="row justify-content-center">
-                    <div class="col-lg-10">
-                        <div class="table-container">
-                            <div class="mb-3">
-
-                                <table class="table">
-                                    <thead>
-                                        <tr>
-                                            <th>Order id</th>
-                                            <th>Customer name</th>
-                                            <th>Customer email</th>
-                                            <th>status</th>
-                                            <th>Amount Paid</th>
-                                            <th>Date</th>
-                                            <th>Track Current Status</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody id="Data_table">
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-        </div>
+            <h1>Page Under Development</h1>
             <div class="breadcrumb__shape-wrap">
                 <img src="../public/assets/img/images/breadcrumb_shape01.png" alt="img" data-aos="fade-down-right"
                     data-aos-delay="400">
@@ -180,23 +144,10 @@
                     data-aos-delay="400">
             </div>
         </section>
-        <!-- breadcrumb-area-end -->
 
     </main>
 
-
-    
-
-
-
-
-
-
-
-
-
     </form>
-    <!-- footer-area -->
     <footer>
         <div class="footer__area">
             <div class="footer__newsletter-three">
@@ -295,12 +246,6 @@
                         data-aos-delay="400">
                 </div>
             </div>
-            <div class="overlay" id="overlay">
-                <div class="dialog-box">
-                    <p id='message'></p>
-                    <button class="close-btn" onclick="closeDialog_donot_reload()">Close</button>
-                </div>
-            </div>
             <div class="footer__bottom footer__bottom-two">
                 <div class="container">
                     <div class="row align-items-center">
@@ -324,7 +269,6 @@
             </div>
         </div>
     </footer>
-    <!-- footer-area-end -->
 
 
     <!-- JS here -->
@@ -349,19 +293,6 @@
     <link rel="stylesheet" href="../public/assets_E/css/dialogbox.css">
     <script src="../public/assets_E/js/dialog.js"></script>
     <script src="../public/assets_E/scripts/user_cart.js"></script>
-    <script src="../public/assets_E/scripts/order.js"></script>
-
-
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
-
-
-    <!-- <script>
-        const urlParams = new URLSearchParams(window.location.search);
-        const orderID = urlParams.get('order_id');
-
-        document.getElementById('orderID').textContent = orderID;
-    </script> -->
 
 </body>
 

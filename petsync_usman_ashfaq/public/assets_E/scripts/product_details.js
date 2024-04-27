@@ -5,12 +5,68 @@ document.addEventListener('DOMContentLoaded', function () {
     email_e = localStorage.getItem('email_e');
     countOfItemsInCart();
     countOfItemsInWishList();
-
+    getReviews();
 
 
 
 });
 
+function getReviews() {
+    const email = localStorage.getItem('email_e');
+    const product_id = localStorage.getItem('id_detail_of_item');
+    $.ajax({
+        url: 'http://localhost:3001/getReviews?product_id=' + product_id,
+        method: 'GET',
+        success: function (data) {
+            // Check if data.reviews exists and it's an array
+            if (data.reviews && Array.isArray(data.reviews)) {
+                var reviews = data.reviews;
+
+                var reviewCount = reviews.length;
+                $('#reviewCount').text(reviewCount);
+
+                $('#reviewsList').empty();
+
+                if (reviewCount > 0) {
+                    reviews.forEach((review, index) => {
+                        const date = new Date(review.date);
+                        const dateString = date.toLocaleString();
+
+                        const reviewHTML = `
+                            <div class="review-item">
+                                <div class="review-header">
+                                    <h6 class="name">${review.name}</h6>
+                                    <div class="rating">
+                                        ${getStarRatingHTML(review.rating)}
+                                    </div>
+                                    <p class="date">${dateString}</p>
+                                </div>
+                                <p class="comment" style="padding-bottom: 30px;">${review.description}</p>
+                            </div>
+                        `;
+                        $('#reviewsList').append(reviewHTML);
+                    });
+                } else {
+                    $('#reviewsList').html('<p>No reviews yet.</p>');
+                }
+            } else {
+                console.error('Error: No reviews data found or it is not an array.');
+                $('#reviewsList').html('<p>Error: No reviews data found or it is not an array.</p>');
+            }
+        },
+        error: function (error) {
+            console.error('Error getting reviews:', error);
+            alert('Error getting reviews. Please try again.');
+        }
+    });
+}
+
+
+function getStarRatingHTML(rating) {
+    const filledStars = '<i class="bx bxs-star"></i>'.repeat(rating);
+    const emptyStars = '<i class="bx bx-star"></i>'.repeat(5 - rating);
+    return filledStars + emptyStars;
+}
 
 
 function productDetail() {
@@ -44,7 +100,6 @@ function productDetail() {
                                     <i class="fas fa-star"></i>
                                     <i class="fas fa-star"></i>
                                 </div>
-                                <span>Rating : (${0} Reviews)</span>
                             </div>
                             <!-- <div class="product__code">
                                 <span>SKU: <strong>${result.sku}</strong></span>
@@ -363,4 +418,81 @@ function wishlistpage() {
     } else {
         console.error("Element with id 'itemCartLink' not found.");
     }
+}
+
+
+
+
+
+
+function setRating(value) {
+    const allStars = document.querySelectorAll('.rating .star');
+    const ratingInput = document.getElementById('ratingInput');
+
+    ratingInput.value = value;
+
+    allStars.forEach(star => {
+        const starValue = parseInt(star.dataset.value);
+        if (starValue <= value) {
+            star.classList.replace('bx-star', 'bxs-star');
+        } else {
+            star.classList.replace('bxs-star', 'bx-star');
+        }
+    });
+}
+
+function submitReview() {
+    const ratingInput = document.getElementById('ratingInput');
+    const opinionTextarea = document.getElementById('opinion');
+    const rating = parseInt(ratingInput.value);
+    const opinion = opinionTextarea.value;
+    const email = localStorage.getItem('email_e');
+    const product_id = localStorage.getItem('id_detail_of_item');
+
+    // Create an object with review data
+    const reviewData = {
+        rating: rating,
+        opinion: opinion,
+        email: email,
+        product_id: product_id
+    };
+
+    $.ajax({
+        url: 'http://localhost:3001/sendReview',
+        method: 'POST',
+        data: reviewData,
+        success: function (data) {
+            
+            console.log("Review submitted successfully");
+            getReviews();
+        },
+        error: function (error) {
+            console.error('Error submitting review:', error);
+            alert('Error submitting review. Please try again.');
+        }
+    });
+
+    ratingInput.value = '';
+    opinionTextarea.value = '';
+
+    // Reset star ratings
+    const allStars = document.querySelectorAll('.rating .star');
+    allStars.forEach(star => {
+        star.classList.replace('bxs-star', 'bx-star');
+    });
+}
+
+
+function cancelReview() {
+    const ratingInput = document.getElementById('ratingInput');
+    const opinionTextarea = document.getElementById('opinion');
+
+    ratingInput.value = '';
+    opinionTextarea.value = '';
+
+    // Reset star ratings
+    const allStars = document.querySelectorAll('.rating .star');
+    allStars.forEach(star => {
+        star.classList.replace('bxs-star', 'bx-star');
+    });
 }

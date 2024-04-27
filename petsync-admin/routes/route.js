@@ -22,8 +22,19 @@ const { handle_load_update_product } = require('../controller/E-commerce/edit_pr
 const { handle_updated_product_data } = require('../controller/E-commerce/edit_products')
 const { handle_get_orders } = require('../controller/E-commerce/order')
 
+const { handle_get_orders_for_sales } = require('../controller/E-commerce/order')
 
 
+const { do_update_status } = require('../controller/E-commerce/order')
+
+
+
+
+
+
+
+
+router.post('/update_status',isUserAuthenticated, do_update_status);
 
 
 router.get('/update_product',isUserAuthenticated, load_update_product_page);
@@ -47,6 +58,9 @@ router.get('/load_update_product/:id',isUserAuthenticated, handle_load_update_pr
 router.get('/order',isUserAuthenticated, load_order_page);
 
 router.get('/get_orders',isUserAuthenticated, handle_get_orders);
+
+router.get('/get_orders_for_sales',isUserAuthenticated, handle_get_orders_for_sales);
+
 
 router.post('/updated_product_data',isUserAuthenticated, handle_updated_product_data);
 

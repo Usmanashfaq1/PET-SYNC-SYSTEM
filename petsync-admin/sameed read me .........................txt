@@ -1,0 +1,1 @@
+- pic didn't upload when add product current path in admin.js is -----------> (./upload) file gets uploaded but the cant access it in user end in pet-sync usman ashfaq folder

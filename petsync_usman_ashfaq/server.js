@@ -14,19 +14,6 @@ const { spawn } = require('child_process');
 const pythonScriptPath = path.join(__dirname, 'petfood_calculator.py');
 const { isEcommerceAuthenticated } = require('./middleware/authMiddleware');
 
-// Use helmet with CSP configuration
-// Use helmet with CSP configuration
-// app.use(
-//   helmet.contentSecurityPolicy({
-//     directives: {
-//       defaultSrc: ["'self'"],
-//       scriptSrc: ["'self'", "'unsafe-eval'", "'unsafe-inline'", "*"], // Allow all scripts from all URLs
-//       // Add other directives as needed
-//     },
-//   })
-// );
-
-
 
 
 
