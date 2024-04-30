@@ -4,16 +4,10 @@ const path = require('path');
 const cors = require('cors');
 const fs = require('fs');
 var app = express();
-const helmet=require('helmet');
-const nocache=require('nocache');
 const dotenv =require('dotenv');
 const nodemailer = require("nodemailer");
 const pool = require('nodemailer-smtp-pool');
 var flash = require("connect-flash");
-
-
-// Use nocache middleware to disable caching
-app.use(nocache());
 dotenv.config();
 app.use(cors());
 const net = require('net');
@@ -148,7 +142,7 @@ app.post("/register_vet", function (req, res) {
 app.post("/check_user", function (req, res) {
 
   var email = req.body.email;
-  var sql = `SELECT email FROM vet WHERE email= '${email}'`;
+  var sql = `SELECT email FROM sign_up WHERE email= '${email}'`;
   conn.query(sql, function (err2, results) {
     if (err2) {
       console.error(err2);
@@ -233,29 +227,29 @@ function generateOTP() {
 app.post('/check-otp', (req, res) => {
   console.log("heyyy i am in");
   const receiver_email = req.body.email;
-  const otp = generateOTP();
- 
+  //const otp = generateOTP();
+  const otp=123;
 
-  const mailOptions = {
-    from: 'chusmanjutt.129@gmail.com',
-    to: receiver_email,
-    subject: 'Verfication Code',
-    text: `Your Verification code is : ${otp}`
-  };
+  // const mailOptions = {
+  //   from: 'chusmanjutt.129@gmail.com',
+  //   to: receiver_email,
+  //   subject: 'Verfication Code',
+  //   text: `Your Verification code is : ${otp}`
+  // };
 
-  transporter.sendMail(mailOptions, (error, info) => {
-    if (error) {
-      console.error(error);
-      res.json({ success: false, message: 'Error sending verification' });
-    } else {
+  // transporter.sendMail(mailOptions, (error, info) => {
+  //   if (error) {
+  //     console.error(error);
+  //     res.json({ success: false, message: 'Error sending verification' });
+  //   } else {
 
-      console.log('Email sent: ' + info.response);
-      res.send(otp);
-    }
+  //     console.log('Email sent: ' + info.response);
+  //     res.send(otp);
+  //   }
     
 
 
-  });
+  // });
   res.json(otp);// sending hard code opt
 
 });
@@ -341,62 +335,21 @@ app.post('/approved', (req, res) => {
 
 //vet end
 
+// const host = 'smtp.gmail.com'; // Replace 'example.com' with the hostname or IP address of the server
+// const port = 465; // Replace 80 with the port number you want to check
 
-app.post('/recovery-otp', (req, res) => {
-  const receiver_email = req.body.email;
-  const otp = generateOTP();
+// const checkPort = (host, port) => {
+//     const socket = net.connect(port, host, () => {
+//         console.log(`Port ${port} on ${host} is open`);
+//         socket.destroy(); // Close the socket after the connection is established
+//     });
 
-  const mailOptions = {
-    from: 'chusmanjutt.129@gmail.com',
-    to: receiver_email,
-    subject: 'Your OTP',
-    text: `Your OTP is: ${otp}`
-  };
+//     socket.on('error', (err) => {
+//         console.error(`Error connecting to port ${port} on ${host}: ${err.message}`);
+//     });
+// };
 
-  transporter.sendMail(mailOptions, (error, info) => {
-    if (error) {
-      console.error(error);
-      res.json({ success: false, message: 'Error sending OTP' });
-    } else {
-
-      console.log('Email sent: ' + info.response);
-      res.send(otp);
-    }
-
-
-  });
-
-});
-
-
-app.get('/code-reset-page', (req, res) => {
-  res.render('code_reset_page');
-});
-
-app.get('/forget-code', (req, res) => {
-  res.render('forget_code');
-});
-
-
-app.post("/update_password", function (req, res) {
-
-  var password = req.body.password;
-  var email = req.body.email;
-  // const salt = bcrypt.genSaltSync(10);
-  // const hash = bcrypt.hashSync(password, salt);
-  var sql = `update vet set password = '${password}' where email  = '${email}'`;
-  conn.query(sql, function (err2, results) {
-    if (err2) {
-      console.error(err2);
-    }
-    else {
-
-      res.json(1);
-
-    }
-
-  });
-});
+// checkPort(host, port);
 
 
 // end 2

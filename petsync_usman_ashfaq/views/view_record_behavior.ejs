@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Behavior Records</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <h1 class="mt-4">Behavior Records</h1>
+
+        <!-- Display behavior records as cards -->
+        <div class="row mt-4">
+            <% behaviorRecords.forEach(record => { %>
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="card-body text-center">
+                            <img class="img-thumbnail" src="/upload1/<%= record.petPicture %>" alt="Pet Picture" style="width: 150px; height: 150px; object-fit: cover;"> <!-- Adjust width and height as needed -->
+                        </div>
+                        <h5 class="card-title">Date & Time: <%= record.date_time %></h5>
+                        <p class="card-text">Description: <%= record.description %></p>
+                        <p class="card-text">Petname:  <%= record.petname %></p>
+                        <p class="card-text">Category: <%= record.category %></p>
+                        <!-- Edit button to navigate to edit page -->
+                        <a href="/edit_behavior?petId=<%= record.pet_id %>" class="btn btn-primary">Edit</a>
+                    </div>
+                </div>
+            </div>
+            <% }); %>
+        </div>
+
+        <!-- Display behavior records in a table (optional) -->
+        <div class="mt-4">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>PetPicture</th>
+                        <th>PetName</th>
+                        <th>Date & Time</th>
+                        <th>Description</th>
+                        <th>Category</th>
+                        <th>Edit</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% behaviorRecords.forEach(record => { %>
+                        <tr>
+                            <!-- Display pet picture -->
+                            <td><img class="img-thumbnail" src="/upload1/<%= record.petPicture %>" alt="Pet Picture" style="width: 150px; height: 150px; object-fit: cover;"></td>
+                            <!-- Display other behavior record details -->
+                            <td><%= record.petname %></td>
+                            <td><%= record.date_time %></td>
+                            <td><%= record.description %></td>
+                            <td><%= record.category %></td>
+                            <!-- Edit button to navigate to edit page -->
+                            <td><a href="/edit_behavior?petId=<%= record.pet_id %>" class="btn btn-primary">Edit</a></td>
+                        </tr>
+                        
+                    <% }); %>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS (Optional - if needed) -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
