@@ -104,16 +104,14 @@ function removeFromCart(id) {
 
             if (data === 1) {
                 document.getElementById('message').innerText = 'Item Removed from Cart!';
-                // showDialog();
+                showDialog();
                 displayCartItems();
                 countOfItemsInCart();
-                window.location.reload();
+
             } else {
                 document.getElementById('message').innerText = 'Item not found in Cart!';
                 showDialog();
             }
-            
-            
         },
         error: function (error) {
             console.error('Error removing item from cart:', error);
@@ -121,9 +119,6 @@ function removeFromCart(id) {
         }
     });
 }
-
-
-
 
 
 function itemcartpage() {

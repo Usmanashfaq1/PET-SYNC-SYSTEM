@@ -68,7 +68,7 @@ function all_products() {
                                         <h3 class="price" style="font-size: 18px; font-weight: bold; color: #333;">
                                             $${result.price}
                                         </h3>
-                                        <span>(0 Reviews)</span>
+                                        <span>(${result.reviewCount} Reviews)</span>
                                     </div>
                                 </div>
                             </div>
@@ -111,6 +111,7 @@ function all_products() {
 }
 
 
+
 function selectCategory(value) {
     if (value == 'All') {
         all_products();
@@ -124,14 +125,14 @@ function selectCategory(value) {
             success: function (data) {
                 // Clear existing product items
                 $('.row.gutter-20.row-cols-1.row-cols-xl-5.row-cols-lg-4.row-cols-md-3.row-cols-sm-2.justify-content-center').empty();
-    
+
                 if (data && data.length > 0) {
                     data.forEach(function (result) {
                         var productItem;
                         if (result.stock > 0) {
                             // Ensure the rating is between 1 and 5
                             var rating = Math.min(5, Math.max(1, result.rating));
-    
+
                             // Generate star icons based on the rating
                             var starIcons = '';
                             for (var i = 0; i < 5; i++) {
@@ -143,7 +144,7 @@ function selectCategory(value) {
                                     starIcons += '<i class="far fa-star"></i>';
                                 }
                             }
-    
+
                             productItem = `
                                 <div class="col-md-4 col-lg-3 col-xl-2 product-item" style="margin-bottom: 20px;">
                                     <div class="product__item" style="border: 1px solid #ddd; border-radius: 5px; overflow: hidden; height: 100%;">
@@ -174,8 +175,8 @@ function selectCategory(value) {
                                             <h3 class="price" style="font-size: 18px; font-weight: bold; color: #333;">
                                                 $${result.price}
                                             </h3>
-                                            <span>(0 Reviews)</span>
-                                        </div>
+                                            <span>(${result.reviewCount} Reviews)</span>
+                                            </div>
                                     </div>
                                 </div>
                             `;
@@ -199,7 +200,7 @@ function selectCategory(value) {
                                 </div>
                             `;
                         }
-    
+
                         // Append the dynamically generated product item to the container
                         $('.row.gutter-20.row-cols-1.row-cols-xl-5.row-cols-lg-4.row-cols-md-3.row-cols-sm-2.justify-content-center').append(productItem);
                     });
@@ -255,10 +256,9 @@ function countOfItemsInCart() {
             var newCartCount = (currentCount * 0) + parseInt(data.itemCount);
             cartCount.text(newCartCount);
 
-           
+
             var totalPrice = data.total;
-            if (data.total == null)
-            {
+            if (data.total == null) {
                 totalPrice = 0.00;
             }
             $('.price_of_total').text('$' + totalPrice.toFixed(2));

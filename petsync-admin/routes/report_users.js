@@ -39,7 +39,7 @@ router.post('/neglect/:userId', async (req, res) => {
     const userId = req.params.userId;
     try {
         // Delete reports associated with the neglected user
-        await connection.execute('DELETE FROM reports WHERE reported_user_id = ?', [userId]);
+        await connection.execute('DELETE FROM reports WHERE id = ?', [userId]);
 
         res.send('Reports for the user neglected successfully');
     } catch (err) {

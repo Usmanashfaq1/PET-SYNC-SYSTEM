@@ -14,6 +14,8 @@ const { load_update_product_page } = require('../controller/E-commerce/edit_prod
 const { load_open_cart_page } = require('../controller/E-commerce/cart')
 const { Load_shop_page } = require('../controller/E-commerce/products')
 const { load_wishlist_page } = require('../controller/E-commerce/wishlist')
+const { load_order_tracking_page } = require('../controller/E-commerce/order')
+
 
 
 
@@ -60,10 +62,12 @@ const { handle_check_added_to_cart } = require('../controller/E-commerce/cart')
 const { handle_and_load_item_cart } = require('../controller/E-commerce/cart')
 
 const { handle_order_details } = require('../controller/E-commerce/admin')
+const { handle_get_order } = require('../controller/E-commerce/order')
 
+const { handle_get_track } = require('../controller/E-commerce/track')
 
-const { handle_item_deleted_cart_refresh_checkout} = require('../controller/E-commerce/cart')
-
+const { handle_send_review } = require('../controller/E-commerce/review')
+const { handle_get_reviews } = require('../controller/E-commerce/review')
 
 
 
@@ -134,14 +138,22 @@ router.get('/item_cart', isEcommerceAuthenticated , handle_and_load_item_cart);
 
 router.get('/order_details',isEcommerceAuthenticated , handle_order_details);
 
+router.get('/get_orders',isEcommerceAuthenticated , handle_get_order);
+
+router.get('/get_track',isEcommerceAuthenticated , handle_get_track);
+
+
 router.get('/wishlist', isEcommerceAuthenticated , load_wishlist_page);
 
 router.get('/order_placed', isEcommerceAuthenticated , load_order_placed_page);
 
-router.get('/refresh_cart', isEcommerceAuthenticated , handle_item_deleted_cart_refresh_checkout);
 
 
+router.get('/track', isEcommerceAuthenticated , load_order_tracking_page);
 
+router.post('/sendReview', isEcommerceAuthenticated, handle_send_review);
+
+router.get('/getReviews', isEcommerceAuthenticated , handle_get_reviews);
 
 
 

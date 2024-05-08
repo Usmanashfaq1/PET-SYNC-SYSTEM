@@ -4,7 +4,7 @@ const path = require('path');
 const cors = require('cors');
 const fs = require('fs');
 var app = express();
-// const helmet=require('helmet');
+
 const nocache=require('nocache');
 const dotenv =require('dotenv');
 const nodemailer = require("nodemailer");
@@ -14,17 +14,7 @@ const { spawn } = require('child_process');
 const pythonScriptPath = path.join(__dirname, 'petfood_calculator.py');
 const { isEcommerceAuthenticated } = require('./middleware/authMiddleware');
 
-// Use helmet with CSP configuration
-// Use helmet with CSP configuration
-// app.use(
-//   helmet.contentSecurityPolicy({
-//     directives: {
-//       defaultSrc: ["'self'"],
-//       scriptSrc: ["'self'", "'unsafe-eval'", "'unsafe-inline'", "*"], // Allow all scripts from all URLs
-//       // Add other directives as needed
-//     },
-//   })
-// );
+
 
 
 

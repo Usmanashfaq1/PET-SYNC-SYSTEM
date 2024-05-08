@@ -369,7 +369,7 @@
                             <div class="shape">
                                 <img src="../public/assets/img/images/registration_shape.svg" alt="">
                             </div>
-                            <form action="#">
+                            <form id="asform">
                                 <div class="row gutter-15">
                                     
                                     
@@ -417,6 +417,12 @@
                                 </div>
                                 <div class="row" id="party-details-body">
                                     <!-- Vet details will be dynamically added here -->
+                                  </div>
+                                  <div class="overlay" id="overlay">
+                                    <div class="dialog-box">
+                                      <p id='message'></p>
+                                      <button class="close-btn" onclick="closeDialog()">Close</button>
+                                    </div>
                                   </div>
                                 
                             </form>

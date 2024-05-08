@@ -61,10 +61,15 @@
       const userEmail = email1;
       var slot12 = new Date($("#preferredDateTime").val());
       var currentDate = new Date();
+     var flag=true;
+     const form = document.getElementById('asform');
   
       if (slot12 < currentDate) {
         document.getElementById('message').innerText = 'please Choose a valid date';
         showDialog();
+        form.reset();
+        falg=false;
+    
         //showMessage('Do not go in history!', 'warning');
         return;
       }
@@ -72,8 +77,14 @@
       if (!slot || !subject) {
         document.getElementById('message').innerText = 'please select both Slot and Reason';
         showDialog();
+        form.reset();
+        flag=false;
         return;
-      } else {
+
+      }
+
+      if(flag===true)
+      {
         const appointmentData = {
           user_name: userName,
           user_email: userEmail,
@@ -90,6 +101,9 @@
           contentType: 'application/json',
           data: JSON.stringify(appointmentData),
           success: function (response) {
+            
+            document.getElementById('message').innerText = 'Appointment Schedule Successfully!';
+            showDialog();
             // console.log('Appointment booked successfully:', response);
             // alert(`Appointment booked with ${fname} ${lname}, ${specialization}, ${qualification},${email}`);
            

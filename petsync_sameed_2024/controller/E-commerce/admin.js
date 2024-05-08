@@ -97,8 +97,11 @@ handle_order_details = (req, res) => {
 }
 
 function insertOrderDetails(customer_name, customer_email, amount_paid, productDetails, res) {
-  var orderSql = `INSERT INTO deliveries_order (customer_name, customer_email, amount_paid) 
-                    VALUES ('${customer_name}', '${customer_email}', ${amount_paid})`;
+  var currentDate = Date.now();
+
+  var orderSql = `INSERT INTO deliveries_order (customer_name, customer_email, amount_paid, Date) 
+                  VALUES ('${customer_name}', '${customer_email}', ${amount_paid}, '${new Date(currentDate).toISOString()}')`;
+  
 
   connection.query(orderSql, function (err, results) {
     if (err) {

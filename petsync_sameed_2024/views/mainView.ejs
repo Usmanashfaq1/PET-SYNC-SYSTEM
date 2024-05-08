@@ -55,253 +55,9 @@
     
         <!-- Custom styles for this template -->
         <link href="../public/static/assets/css/board.css" rel="stylesheet">
+        <link href="../public/custom/css/pet_community_style_main.css" rel="stylesheet">
     </head>
-    <style>
     
-    .light-purple-bg {
-    background-color: #8585c9; /* Light Purple Color */
-}
-    /* profile */
-    
-    .container123 {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-    }
-    
-    .card1 {
-      flex: 1;
-      aspect-ratio: 1 / 1; /* Set aspect ratio to 1:1 for square images */
-      border: 1px solid #ccc;
-      border-radius: 8px;
-      overflow: hidden;
-    }
-    
-    .card-image {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-     
-    
-    .gallery123 {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-      grid-gap: 20px;
-    }
-    
-    
-    .enlarged-image {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: contain; /* Ensure the image fits within the viewport */
-      background-color: rgba(0, 0, 0, 0.8); /* Semi-transparent background */
-      z-index: 1000; /* Ensure the enlarged image is above other content */
-      cursor: pointer; /* Show pointer cursor when hovering over the image */
-    }
-    
-    
-    
-    
-    
-    
-    .post-header {
-      display: flex;
-      align-items: center;
-      padding: 10px;
-    }
-    
-    .profile-pic {
-      width: 50px;
-      height: 50px;
-      border-radius: 50%;
-      margin-right: 10px;
-    }
-    
-    .post-info {
-      flex-grow: 1;
-    }
-    
-    .post-content {
-      padding: 10px;
-    }
-    
-    .post-image {
-      width: 100%;
-      height: auto;
-      margin-bottom: 10px;
-    }
-    
-    .post-stats ul {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-    }
-    
-    .post-stats ul li {
-      display: inline-block;
-      margin-right: 10px;
-    }
-    
-    .post-stats ul li i {
-      margin-right: 5px;
-    }
-
-    .gallery {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    grid-gap: 20px;
-}
-
-.facebook-post {
-    background-color: #fff;
-    border: 1px solid #eaeaea;
-    border-radius: 5px;
-    padding: 20px;
-}
-
-.facebook-post .post-header {
-    display: flex;
-    align-items: center;
-    margin-bottom: 15px;
-}
-
-.facebook-post .profile-pic {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    margin-right: 10px;
-}
-
-.facebook-post .post-info {
-    flex-grow: 1;
-}
-
-.facebook-post .post-author {
-    margin: 0;
-    font-size: 18px;
-}
-
-.facebook-post .post-time {
-    margin: 0;
-    color: #999;
-    font-size: 14px;
-}
-
-.facebook-post .post-content {
-    margin-bottom: 15px;
-}
-
-.facebook-post .post-image {
-    width: 100%;
-    height: auto;
-    border-radius: 5px;
-    margin-bottom: 10px;
-}
-
-.facebook-post .post-caption {
-    margin-bottom: 10px;
-}
-
-.facebook-post .post-caption h5 {
-    margin: 0;
-    font-size: 16px;
-}
-
-.facebook-post .post-stats {
-    display: flex;
-    align-items: center;
-    font-size: 14px;
-}
-
-.facebook-post .post-stats ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-}
-
-.facebook-post .post-stats ul li {
-    margin-right: 20px;
-}
-
-.facebook-post .post-stats ul li:last-child {
-    margin-right: 0;
-}
-
-    
-    /* end profile */
-    
-    
-    
-    
-        .nav-link:hover {
-            color: #007bff; /* Change color on hover */
-        }
-    
-        .list-inline-item a:hover {
-            color: #007bff; /* Change color of social media icons on hover */
-        }
-    
-    
-    .menu-slide {
-        padding: 20px;
-    }
-    
-    .menu-slide a {
-        display: block;
-        padding: 10px 0;
-        color: #333;
-        text-decoration: none;
-    }
-    
-    .menu-slide a:hover {
-        background-color: #f0f0f0;
-    }
-    
-    /* Menu icon styles */
-    #menu-toggle {
-        cursor: pointer;
-    }
-    
-    /* Hide scrollbar */
-    body {
-        overflow-y: auto;
-    }
-    
-    /* Show scrollbar when sidebar is open */
-    body.sidebar-open {
-        overflow-y: hidden;
-    }
-    
-    
-    /* bar */
-    .link-items-container {
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between; /* Adjust spacing between items */
-        align-items: center; /* Align items vertically if needed */
-    }
-    
-    .link-item {
-        /* Adjust styles for individual link items if needed */
-        margin-right: 20px; /* Adjust spacing between items */
-    }
-    
-    .link-item:last-child {
-        margin-right: 0; /* Remove margin from the last item */
-    }
-    
-    .container-center {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding-left: 320px;
-        }
-        
-    </style>
 <body >
 
     <!--Preloader-->
@@ -549,22 +305,7 @@
     </div>
 </section>
 <br>
-<!-- <div style="display: flex; justify-content: center; align-items: center; height: 35vh;">
-    <div style="width: 46.5%;">
-        <div class="card bg-light">
-            <div class="card-body">
-                <h5 class="card-title text-center">Create Post</h5>
-                <form>
-                    <div class="form-group">
-                        <label for="postContent">Post Content</label>
-                        <textarea class="form-control" id="postContent" rows="3"></textarea>
-                    </div>
-                    <button type="submit" class="btn btn-primary btn-block">Post</button>
-                </form>
-            </div>
-        </div>
-    </div>
-</div> -->
+
 <div class="container" style="max-width: 648px;">
     <div class="card bg-light-purple">
         <div class="card-header">
@@ -594,6 +335,13 @@
             <div class="card-footer">
                 <button type="submit" class="btn btn-primary">Post 🚀</button> <!-- Added rocket emoji -->
                 <span id="status"></span>
+            </div>
+
+            <div class="overlay" id="overlay" style="display: none;">
+                <div class="dialog-box">
+                    <p id="message"></p>
+                   
+                </div>
             </div>
         </form>
     </div>
@@ -888,67 +636,8 @@
 
     <!-- Graphs -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"></script>
-    <script>
-      var ctx = document.getElementById("myChart");
-      var myChart = new Chart(ctx, {
-        type: 'line',
-        data: {
-          labels: ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
-          datasets: [{
-            data: [15339, 21345, 18483, 24003, 23489, 24092, 12034],
-            lineTension: 0,
-            backgroundColor: 'transparent',
-            borderColor: '#007bff',
-            borderWidth: 4,
-            pointBackgroundColor: '#007bff'
-          }]
-        },
-        options: {
-          scales: {
-            yAxes: [{
-              ticks: {
-                beginAtZero: false
-              }
-            }]
-          },
-          legend: {
-            display: false,
-          }
-        }
-      });
-    </script>
-    <script>
-      function openImage(imageSrc) {
-  // Create a new element to display the enlarged image
-  var enlargedImage = document.createElement('img');
-  enlargedImage.src = imageSrc;
-  enlargedImage.classList.add('enlarged-image');
-
-  // Append the enlarged image to the body
-  document.body.appendChild(enlargedImage);
-
-  // Add an event listener to remove the enlarged image when clicked
-  enlargedImage.addEventListener('click', function() {
-    document.body.removeChild(enlargedImage);
-  });
-}
-    </script>
-    <script>
-      document.getElementById("search-user-form").addEventListener("submit", function(event) {
-    event.preventDefault(); // Prevent the default form submission
-
-    // Get the value of the input field
-    var username = document.getElementById("search-text").value.trim(); // Trim to remove leading and trailing spaces
-    if (username === "") {
-        // Reload the page if username is empty
-        window.location.reload();
-    } else {
-        // Redirect to the URL with the username as a parameter
-        window.location.href = "/account/" + username;
-    }
-});
-
-  </script>
+  
+   
 
 
     <!-- JS here -->
@@ -966,53 +655,9 @@
     <script src="../public/assets/js/wow.min.js"></script>
     <script src="../public/assets/js/aos.js"></script>
     <script src="../public/assets/js/main.js"></script>
-    <script>
-        SVGInject(document.querySelectorAll("img.injectable"));
-    </script>
-    <script>
-        // JavaScript to toggle sidebar
-document.addEventListener("DOMContentLoaded", function () {
-    const menuToggle = document.getElementById("menu-toggle");
-    const sidebar = document.getElementById("sidebar");
-    const body = document.body;
-
-    menuToggle.addEventListener("click", function () {
-        sidebar.classList.toggle("sidebar-open");
-        body.classList.toggle("sidebar-open");
-    });
-});
-
-    </script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const form = document.getElementById('uploadForm');
+    <script src="../public/custom/js/pet_community_main_view.js"></script>
     
-            form.addEventListener('submit', async function(event) {
-                event.preventDefault();
-    
-                const formData = new FormData(this);
-    
-                try {
-                    const response = await fetch('/profile/postFeed', {
-                        method: 'POST',
-                        body: formData
-                    });
-    
-                    const data = await response.json();
-    
-                    if (data.success) {
-                        // If the upload was successful, reload the current page
-                        window.location.href = window.location.href;
-                    } else {
-                        console.error(data.message);
-                    }
-                } catch (error) {
-                    console.error(error);
-                }
-            });
-        });
-    </script>
 </body>
 
 

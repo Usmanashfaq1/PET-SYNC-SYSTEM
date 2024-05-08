@@ -1,0 +1,138 @@
+
+   
+   .box-widget {
+    border: none;
+    position: relative;
+}
+
+.box {
+    position: relative;
+    border-radius: 0;
+    background: #ffffff;
+    border: 1px solid #eee;
+    margin-bottom: 20px;
+    width: 100%;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+}
+
+.box-header.with-border {
+    border-bottom: none;
+}
+
+.box-header {
+    color: #444;
+    display: flex;
+    align-items: center;
+    padding: 10px;
+}
+
+.user-block img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+
+.user-block .username {
+    font-size: 16px;
+    font-weight: 600;
+    margin-left: 10px;
+}
+
+.user-block .description {
+    color: #999;
+    font-size: 13px;
+    margin-left: 10px;
+}
+
+.box-header > .box-tools {
+    margin-left: auto;
+}
+
+.btn-box-tool {
+    padding: 5px;
+    font-size: 12px;
+    background: transparent;
+    color: #97a0b3;
+}
+
+.box-body {
+    padding: 0;
+}
+
+.pad {
+    padding: 10px;
+}
+
+.box .btn-default {
+    background-color: #f4f4f4;
+    color: #444;
+    border-color: #ddd;
+}
+
+.box-comments {
+    background: #f7f7f7 !important;
+    padding: 10px;
+}
+
+.box-footer {
+    padding: 10px;
+    background-color: #fff;
+}
+
+.box-comments .box-comment {
+    padding: 10px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.img-sm,
+.box-comments .box-comment img,
+.user-block.user-block-sm img {
+    width: 40px !important;
+    height: 40px !important;
+}
+
+.img-sm,
+.img-md,
+.img-lg,
+.box-comments .box-comment img,
+.user-block.user-block-sm img {
+    float: left;
+}
+
+.box-comments .comment-text {
+    margin-left: 50px;
+    color: #555;
+}
+
+.box-comments .username {
+    color: #444;
+    display: block;
+    font-weight: 600;
+}
+
+.box-comments .text-muted {
+    font-weight: 400;
+    font-size: 12px;
+}
+
+.img-sm + .img-push {
+    margin-left: 50px;
+}
+
+.box .form-control {
+    border-radius: 0;
+    box-shadow: none;
+    border-color: #d2d6de;
+}
+.close-link {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+}
+
+.close-link i {
+    color: #000;
+    font-size: 16px;
+}
+

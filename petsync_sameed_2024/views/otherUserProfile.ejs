@@ -52,205 +52,10 @@
 
     <!-- Custom styles for this template -->
     <link href="../public/static/assets/css/board.css" rel="stylesheet">
-</head>
-<style>
-
-/* profile */
-
-.container123 {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-}
-
-.card1 {
-  flex: 1;
-  aspect-ratio: 1 / 1; /* Set aspect ratio to 1:1 for square images */
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  overflow: hidden;
-}
-
-.card-image {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
- 
-
-.gallery123 {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  grid-gap: 20px;
-}
-
-
-.enlarged-image {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: contain; /* Ensure the image fits within the viewport */
-  background-color: rgba(0, 0, 0, 0.8); /* Semi-transparent background */
-  z-index: 1000; /* Ensure the enlarged image is above other content */
-  cursor: pointer; /* Show pointer cursor when hovering over the image */
-}
-
-
-
-
-.facebook-post {
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  margin-bottom: 20px;
-}
-
-.post-header {
-  display: flex;
-  align-items: center;
-  padding: 10px;
-}
-
-.profile-pic {
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  margin-right: 10px;
-}
-
-.post-info {
-  flex-grow: 1;
-}
-
-.post-content {
-  padding: 10px;
-}
-
-.post-image {
-  width: 100%;
-  height: auto;
-  margin-bottom: 10px;
-}
-
-.post-stats ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.post-stats ul li {
-  display: inline-block;
-  margin-right: 10px;
-}
-
-.post-stats ul li i {
-  margin-right: 5px;
-}
-
-/* end profile */
-
-
-
-
-    .nav-link:hover {
-        color: #007bff; /* Change color on hover */
-    }
-
-    .list-inline-item a:hover {
-        color: #007bff; /* Change color of social media icons on hover */
-    }
-
-
-.menu-slide {
-    padding: 20px;
-}
-
-.menu-slide a {
-    display: block;
-    padding: 10px 0;
-    color: #333;
-    text-decoration: none;
-}
-
-.menu-slide a:hover {
-    background-color: #f0f0f0;
-}
-
-/* Menu icon styles */
-#menu-toggle {
-    cursor: pointer;
-}
-
-/* Hide scrollbar */
-body {
-    overflow-y: auto;
-}
-
-/* Show scrollbar when sidebar is open */
-body.sidebar-open {
-    overflow-y: hidden;
-}
-
-
-/* bar */
-.link-items-container {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between; /* Adjust spacing between items */
-    align-items: center; /* Align items vertically if needed */
-}
-
-.link-item {
-    /* Adjust styles for individual link items if needed */
-    margin-right: 20px; /* Adjust spacing between items */
-}
-
-.link-item:last-child {
-    margin-right: 0; /* Remove margin from the last item */
-}
-
-/* gallery styles */
-.gallery-item {
-    margin-bottom: 20px;
-    position: relative;
-}
-
-.gallery-item:hover .gallery-item-info {
-    opacity: 1;
-    transition: opacity 0.3s ease-in-out;
-}
-
-.gallery-item-info {
-    position: absolute;
-    bottom: 10px;
-    left: 50%;
-    transform: translateX(-50%);
-    background-color: rgba(0, 0, 0, 0.7);
-    color: #fff;
-    padding: 5px 10px;
-    border-radius: 5px;
-    opacity: 0;
-}
-
-.gallery-item-info ul {
-    list-style-type: none;
-    padding: 0;
-    margin: 0;
-}
-
-.follow-btn {
-    font-size: 1.8rem;
-    line-height: 1.8;
-    border: 0.2rem solid white;
-    border-radius: 0.2rem;
-    padding: 0 2.4rem;
-    margin-left: 2rem;
-    background-color: #007BFF;
-    color: white;
-    }
+    <link href="../public/custom/css/other_user_profile_view.css" rel="stylesheet">
     
-</style>
+</head>
+
 <body >
 
     <!--Preloader-->
@@ -505,7 +310,7 @@ body.sidebar-open {
     <main class="fix">
 
         
-        
+
       <section>
         
         <div class="container-fluid mt-3">
@@ -580,13 +385,20 @@ body.sidebar-open {
 <div id="reportUserModal" class="modal">
     <div class="modal-content">
         <span class="close" onclick="closeReportModal()">&times;</span>
-        <form id="reportUserForm" action="/report/user/<%= userData.data.id %>" method="POST">
+        <form id="reportUserForm">  <!-- <form id="reportUserForm" action="/report/user/<%= userData.data.id %>" method="POST"> -->
 
             <div class="form-group">
                 <label for="reportReason">Reason for Reporting:</label>
                 <textarea class="form-control" id="reportReason" name="reason" rows="3" required></textarea>
             </div>
             <button type="submit" class="btn btn-primary">Submit Report</button>
+                    <!-- Dialog Box -->
+<div class="overlay" id="overlay" style="display: none;">
+    <div class="dialog-box">
+        <p id="message"></p>
+       
+    </div>
+</div>
         </form>
     </div>
 </div>
@@ -1018,6 +830,45 @@ body.sidebar-open {
     <script src="../public/assets/js/main.js"></script>
     <script>
         SVGInject(document.querySelectorAll("img.injectable"));
+    </script>
+    <script>
+        $(document).ready(function () {
+            $('#reportUserForm').submit(function (event) {
+                event.preventDefault(); // Prevent default form submission
+                var reportData = $(this).serialize(); // Serialize form data
+                
+                var form = this;
+
+                // AJAX request
+                $.ajax({
+                    url: '/report/user/<%= userData.data.id %>', // Replace with your backend API endpoint
+                    type: 'POST',
+                    data: reportData,
+                    success: function (response) {
+                        // Display success message in dialog box
+                        $('#message').text('User reported successfully');
+                        $('#overlay').show();
+
+                        // Automatically close the dialog box after 3-4 seconds
+                    setTimeout(function() {
+                        $('#overlay').hide();
+                    }, 3000); // Adjust the delay as needed (3000 milliseconds = 3 seconds)
+
+                    // Clear the form fields
+                    form.reset();
+                    },
+                    error: function (xhr, status, error) {
+                        // Display error message in dialog box
+                        $('#message').text('Error reporting user');
+                        $('#overlay').show();
+                    }
+                });
+            });
+        });
+    
+        function closeDialog() {
+            $('#overlay').hide(); // Close dialog box
+        }
     </script>
     <script>
         // JavaScript to toggle sidebar

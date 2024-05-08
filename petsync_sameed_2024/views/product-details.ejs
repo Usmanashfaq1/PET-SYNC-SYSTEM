@@ -4,17 +4,21 @@
 
 <!-- Mirrored from themedox.com/demo/petpal/product-details.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 13 Feb 2024 09:42:16 GMT -->
 <head>
+
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <title>Petpal - Pet Care and Pet Shop HTML Template</title>
     <meta name="description" content="Petpal - Pet Care and Pet Shop HTML Template">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
+    <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
     <link rel="shortcut icon" type="image/x-icon" href="../public/assets/img/favicon.png">
     <!-- Place favicon.ico in the root directory -->
 
     <!-- CSS here -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="../public/assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../public/assets_E/css/review.css">
     <link rel="stylesheet" href="../public/assets/css/animate.min.css">
     <link rel="stylesheet" href="../public/assets/css/magnific-popup.css">
     <link rel="stylesheet" href="../public/assets/css/fontawesome-all.min.css">
@@ -64,6 +68,8 @@
                                 </li>
                                 <li class="menu-item active"><a href="">Shop</a></li>
                                 <li class=""><a href="/rs" style="color: white;">contacts</a></li> <!-- Modified -->
+                                <li class=""><a href="/order_placed" style="color: white;">Orders</a></li> 
+
                             </ul>
                         </div>
                     </div>
@@ -239,14 +245,38 @@
                                 <div class="tab-pane fade" id="reviews-tab-pane" role="tabpanel" aria-labelledby="reviews-tab" tabindex="0">
                                     <div class="product-desc-review">
                                         <div class="product-desc-review-title mb-15">
-                                            <h5 class="title">Customer Reviews (0)</h5>
+                                            <h5 class="title">Customer Reviews (<span id="reviewCount">0</span>)</h5>
                                         </div>
-                                        <div class="left-rc">
-                                            <p>No reviews yet</p>
+                                        <div id="reviewsList">
+                                            <!-- Reviews will be appended here -->
                                         </div>
-                                        <div class="right-rc">
-                                            <a href="#">Write a review</a>
+                                        
+
+                                        <div class="wrapper">
+                                            <h3>Write a review</h3>
+                                            <div class="rating">
+                                                <input type="number" id="ratingInput" name="rating" hidden>
+                                                <i class='bx bx-star star' data-value="1" onclick="setRating(1)"></i>
+                                                <i class='bx bx-star star' data-value="2" onclick="setRating(2)"></i>
+                                                <i class='bx bx-star star' data-value="3" onclick="setRating(3)"></i>
+                                                <i class='bx bx-star star' data-value="4" onclick="setRating(4)"></i>
+                                                <i class='bx bx-star star' data-value="5" onclick="setRating(5)"></i>
+                                            </div>
+                                            <textarea id="opinion" name="opinion" cols="30" rows="5" placeholder="Your opinion..."></textarea>
+                                            <div class="btn-group">
+                                                <button type="button" class="btn submit" onclick="submitReview()">Submit</button>
+                                                <button type="button" class="btn cancel" onclick="cancelReview()">Cancel</button>
+                                            </div>
                                         </div>
+                                        
+                                        
+                                       
+
+
+
+
+
+                                        
                                     </div>
                                 </div>
                             </div>
@@ -405,8 +435,11 @@
     <script src="../public/assets_E/scripts/product_details.js"></script>
     <link rel="stylesheet" href="../public/assets_E/css/dialogbox.css">
     <script src="../public/assets_E/js/dialog.js"></script>
+
+
+
+
 </body>
 
 
-<!-- Mirrored from themedox.com/demo/petpal/product-details.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 13 Feb 2024 09:42:16 GMT -->
 </html>

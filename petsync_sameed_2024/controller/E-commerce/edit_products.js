@@ -47,29 +47,29 @@ handle_load_update_product = (req, res) => {
 //update api
 handle_updated_product_data = (req, res) => {
   upload(req, res, (err) => {
+    if (err) {
+      return res.status(500).json({ error: err.toString() });
+    }
+
+    var pid = req.body.update_id;
+    var pname = req.body.pname;
+    var category = req.body.category;
+    var price = req.body.price;
+    var stock = req.body.stock;
+    var rating = req.body.rating;
+    var description = req.body.description;
+    const productPicture = req.file.filename;
+
+    const sql = 'UPDATE products SET product_name = ?, category = ?, price = ?, stock = ?, rating = ?, description = ?, productPicture = ? WHERE p_id = ?';
+
+    connection.query(sql, [pname, category, price, stock, rating, description, productPicture, pid], (err, results) => {
       if (err) {
-          return res.status(500).json({ error: err.toString() });
+        console.error(err);
+        return res.status(500).json({ error: 'Database error.' });
+      } else {
+        res.json(1);
       }
-
-      var pid = req.body.update_id;
-      var pname = req.body.pname;
-      var category = req.body.category;
-      var price = req.body.price;
-      var stock = req.body.stock;
-      var rating = req.body.rating;
-      var description = req.body.description;
-      const productPicture = req.file.filename;
-
-      const sql = 'UPDATE products SET product_name = ?, category = ?, price = ?, stock = ?, rating = ?, description = ?, productPicture = ? WHERE p_id = ?';
-
-      connection.query(sql, [pname, category, price, stock, rating, description, productPicture, pid], (err, results) => {
-          if (err) {
-              console.error(err);
-              return res.status(500).json({ error: 'Database error.' });
-          } else {
-              res.json(1);
-          }
-      });
+    });
   });
 };
 
@@ -78,7 +78,12 @@ handle_updated_product_data = (req, res) => {
 handle_get_specific_product = (req, res) => {
   const category = req.params.category;
 
-  const sql = 'select * FROM products WHERE category = ?';
+  const sql = `SELECT p.*, COUNT(pr.product_id) AS reviewCount 
+  FROM products p 
+  LEFT JOIN product_review pr ON p.p_id = pr.product_id 
+  WHERE p.category = ?
+  GROUP BY p.p_id
+  `;
   connection.query(sql, [category], (err, result) => {
     if (err) {
       console.error('Error deleting product:', err);
@@ -94,7 +99,7 @@ handle_get_specific_product = (req, res) => {
       if (fileName) {
 
         //const filePath = path.join(__dirname, 'upload', fileName);
-        const uploadDirectory = path.join(__dirname, '..','..', 'upload');
+        const uploadDirectory = path.join(__dirname, '..', '..', 'upload');
         const filePath = path.join(uploadDirectory, fileName);
 
 
