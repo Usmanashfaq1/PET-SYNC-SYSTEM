@@ -111,7 +111,41 @@ app.get('/pc',(req,res)=>{
 
 
 // this is old codes from fyp1  without mvc   start
+app.get('/code-reset-page', (req, res) => {
+  res.render('code_reset_page');
+});
 
+app.get('/forget-code', (req, res) => {
+  res.render('forget_code');
+});
+
+//
+
+app.post('/recovery-otp', (req, res) => {
+  const receiver_email = req.body.email;
+  const otp = generateOTP();
+
+  const mailOptions = {
+    from: 'chusmanjutt.129@gmail.com',
+    to: receiver_email,
+    subject: 'Your OTP',
+    text: `Your OTP is: ${otp}`
+  };
+
+  transporter.sendMail(mailOptions, (error, info) => {
+    if (error) {
+      console.error(error);
+      res.json({ success: false, message: 'Error sending OTP' });
+    } else {
+
+      console.log('Email sent: ' + info.response);
+      res.send(otp);
+    }
+
+
+  });
+
+});
 
 
 //vet register
@@ -143,7 +177,7 @@ app.post("/register_vet", function (req, res) {
 app.post("/check_user", function (req, res) {
 
   var email = req.body.email;
-  var sql = `SELECT email FROM sign_up WHERE email= '${email}'`;
+  var sql = `SELECT email FROM vet WHERE email= '${email}'`;
   conn.query(sql, function (err2, results) {
     if (err2) {
       console.error(err2);
@@ -165,6 +199,30 @@ app.post("/check_user", function (req, res) {
 
   });
 });
+//
+
+app.post("/update_password", function (req, res) {
+
+  var password = req.body.password;
+  var email = req.body.email;
+  // const salt = bcrypt.genSaltSync(10);
+  // const hash = bcrypt.hashSync(password, salt);
+  var sql = `update vet set password = '${password}' where email  = '${email}'`;
+  conn.query(sql, function (err2, results) {
+    if (err2) {
+      console.error(err2);
+    }
+    else {
+
+      res.json(1);
+
+    }
+
+  });
+});
+
+
+//
 
 
 const transporter = nodemailer.createTransport(
