@@ -59,30 +59,11 @@
                                     <div class="tgmenu__navbar-wrap tgmenu__main-menu d-none d-xl-flex">
                                         <ul class="navigation">
                                             <li  class="menu-item-has-children active"><a href="#">Home</a>
-                                                <ul class="sub-menu">
-                                                    <li><a href="index-2.html">Pet Care & Veterinary</a></li>
-                                                    <li><a href="index-3.html">Pet Breed</a></li>
-                                                    <li><a href="index-4.html">Pet Adopt</a></li>
-                                                    <li><a href="index-5.html">pet Woocommerce</a></li>
-                                                </ul>
+                                                
                                             </li>
                                             <li><a href="/manage_appointment">Manage Appointment</a></li>
                                            
-                                            <li class="menu-item-has-children"><a href="#">Pages</a>
-                                                <ul class="sub-menu">
-                                                    <li><a href="animal.html">All Pets</a></li>
-                                                    <li><a href="animal-details.html">Pet Details</a></li>
-                                                    <li><a href="gallery.html">Gallery</a></li>
-                                                    <li><a href="faq.html">Faq Page</a></li>
-                                                    <li><a href="pricing.html">Pricing Page</a></li>
-                                                    <li><a href="reservation.html">Reservation Page</a></li>
-                                                    <li><a href="team.html">Our Team</a></li>
-                                                    <li><a href="team-details.html">Team Details</a></li>
-                                                    <li><a href="blog.html">Our Blog</a></li>
-                                                    <li><a href="blog-details.html">Blog Details</a></li>
-                                                    <li><a href="error.html">404 Error Page</a></li>
-                                                </ul>
-                                            </li>
+                                            
                                             <li ><a href="contact.html">contacts</a></li>
                                         </ul>
                                     </div>
@@ -437,30 +418,8 @@
 
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script>
-
-
-
-        $(document).ready(function () {
-// Get the value of email and name from the query parameters
-const params = new URLSearchParams(window.location.search);
-const email1 = params.get('email');
-        const name1 = params.get('name');
-
-        localStorage.setItem('email', email1);
-        localStorage.setItem('name', name1);
-
-
-        const name = localStorage.getItem('name');
-        
-        // Display the name in the h4 tag
-        const namePlaceholder = document.getElementById('namePlaceholder');
-        namePlaceholder.textContent = `Welcome ${name}`;
-    
-          const email = localStorage.getItem('email');
-          $('#email-link').attr('href', 'mailto:' + email).text(email);
-        });
-      </script>
+<script src="../public/custom/js/vet_dashboard.js"></script>
+   
 </body>
 
 

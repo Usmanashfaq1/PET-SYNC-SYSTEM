@@ -1,34 +1,6 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 <!doctype html>
 <html class="no-js" lang="en">
 
@@ -58,98 +30,8 @@
     <link rel="stylesheet" href="../public/assets/css/default.css">
     <link rel="stylesheet" href="../public/assets/css/main.css">
     <link rel="stylesheet" href="../public/custom/css/style.css">
+    <link rel="stylesheet" href="../public/custom/css/forget_code.css">
 </head>
-<style>
-    body {
-        font-family: Arial, sans-serif;
-        background-color: #f8f9fa;
-    }
-
-    .login-page {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100vh;
-    }
-
-    .login-form-wrap {
-        background-color: #ffffff;
-        padding: 30px;
-        border-radius: 10px;
-        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-    }
-
-    .login-form-wrap h2.title {
-        text-align: center;
-        margin-bottom: 30px;
-    }
-
-    .login-form-wrap .form-group {
-        margin-bottom: 20px;
-    }
-
-    .login-form-wrap input[type="text"],
-    .login-form-wrap input[type="password"] {
-        width: 100%;
-        padding: 10px;
-        border: 1px solid #ced4da;
-        border-radius: 5px;
-        box-sizing: border-box;
-    }
-
-    .login-form-wrap .form-group.text-center {
-        margin-bottom: 0;
-    }
-
-    .login-form-wrap .btn {
-        padding: 10px 20px;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-    }
-    .overlay {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.7);
-    justify-content: center;
-    align-items: center;
-    z-index: 9999;
-    /* Adjust z-index to make sure it's above your content */
-  }
-
-  .dialog-box {
-    background: #fff;
-    padding: 20px;
-    border-radius: 5px;
-    max-width: 400px;
-    text-align: center;
-  }
-
-  .close-btn {
-    background: #007BFF;
-    color: #fff;
-    border: none;
-    padding: 10px 20px;
-    cursor: pointer;
-    border-radius: 5px;
-  }
-
-
-  .is-invalid {
-    border-color: #dc3545;
-    background-color: #f8d7da;
-  }
-
-  /* You can add more styles for the error message if needed */
-  .error-message {
-    color: #dc3545;
-    margin-top: 2px;
-  }
-</style>
 
 <body>
 
@@ -543,100 +425,9 @@
 <script src="../assets/js/material-dashboard.min.js?v=3.1.0"></script>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
-
-<script>
-
-  function validateEmail() {
-    var emailInput = $("#email");
-    var emailError = $("#email-error");
-    var email = emailInput.val();
-    var emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-    if (!email.match(emailRegex)) {
-      emailInput.removeClass("is-valid").addClass("is-invalid");
-      emailError.text('Email is not valid');
-      return true;
-    } else {
-      emailInput.removeClass("is-invalid").addClass("is-valid");
-      emailError.text('');
-      return false;
-    }
-  }
+<script src="../public/custom/js/forget_code.js"></script>
 
 
-  $(document).ready(function () {
-    $('#forget_code').submit(function (e) {
-      e.preventDefault();
-      if (validateEmail() == true) {
-        return;
-      }
-      else {
-        check_user();
-      }
-    });
-
-  });
-
-  function check_user() {
-    var email = $("#email").val();
-    var data = { email: email };
-    let post = JSON.stringify(data);
-    $.ajax({
-      url: 'http://localhost:4001/check_user',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      type: 'POST',
-      contentType: 'application/json',
-      data: post,
-      success: function (data) {
-        if (data == 1) {
-          otp();
-
-
-        }
-
-        else {
-          document.getElementById('message').innerText = 'Email not found!';
-          showDialog();
-        }
-
-      },
-      error: function () {
-        alert('error');
-      }
-    });
-  }
-
-  function otp() {
-    var email = $("#email").val();
-    // if (email == '' || password == '') {
-    //   alert("Please Fill the Required Fields");
-    //   return;
-    // }
-    var data = { email: email };
-    let post = JSON.stringify(data);
-    $.ajax({
-      url: 'http://localhost:4001/recovery-otp',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      type: 'POST',
-      contentType: 'application/json',
-      data: post,
-      success: function (data) {
-        var otp = data;
-        localStorage.setItem('otp-code', otp);
-        localStorage.setItem('email', email);
-        var newPageUrl = '/code-reset-page'; // Replace this with the actual filename
-        window.location.href = newPageUrl;
-      },
-      error: function () {
-        alert('error');
-      }
-    });
-  }
-</script>
-</script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
   integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
   crossorigin="anonymous"></script>

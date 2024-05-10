@@ -3,6 +3,7 @@ const bodyParser = require('body-parser');
 const path = require('path');
 const cors = require('cors');
 const fs = require('fs');
+const nocache=require('nocache');
 var app = express();
 const dotenv =require('dotenv');
 const nodemailer = require("nodemailer");
@@ -15,7 +16,7 @@ const net = require('net');
 
 
 
-
+app.use(nocache());
 
 app.use(express.static(__dirname + "/uploads" ) );
 
