@@ -28,7 +28,7 @@
     cursor: pointer;
     border-radius: 5px;
   }
-
+/* 
   .table-container {
     max-width: 800px;
     margin: 0 auto;
@@ -36,4 +36,15 @@
     border-radius: 5px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     background-color: #f8f9fa;
-  }
+  } */
+
+  .table-container {
+    background-color: #007bff; /* Blue color */
+    color: #ffffff; /* Text color */
+    padding: 20px; /* Add some padding */
+}
+
+/* Make the table full width */
+.table {
+    width: 100%;
+}

@@ -164,6 +164,10 @@ app.use('/',signupRoute);
 const front=require('./routes/frontRoute');
 app.use('/',front);
 
+const userRoutes = require('./routes/messageRoute');
+app.use('/', userRoutes);
+
+
 const mainRoute1=require('./routes/mainRoute');
 app.use('/',mainRoute1);
 

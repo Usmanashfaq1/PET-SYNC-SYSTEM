@@ -1,15 +1,14 @@
 const express = require('express');
 const router = express.Router();
-const Controller = require('../controller/socialmedia/mainController');
+
 const authMiddleware = require('../middleware/authMiddleware');
-const mainController= new Controller();
+
 const UserController = require('../controller/socialmedia/displayAccountController');
 
 
-router.get('/main',authMiddleware.isAuthenticated ,(req,res)=>{  //here using middle ware to check session
-    mainController.displayPage(req,res); 
-});
 
+
+router.get('/inbox',authMiddleware.isAuthenticated, UserController.inbox);
 
 router.get('/direct-message/:username',authMiddleware.isAuthenticated, UserController.directMessagePage);
 router.post('/send-message',authMiddleware.isAuthenticated, UserController.sendMessage);

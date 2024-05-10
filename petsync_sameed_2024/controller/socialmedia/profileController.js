@@ -90,7 +90,23 @@ connection.query(petQuery, [petOwner], (error, results) => {
     let imageName=profilePicResult[0].profilepic;
     if(typeof imageName=='object'){ imageName = "d.png"; }
     console.log(imageName);
-    return res.render('userProfileView',{data: userInfo[0],results:results,profilePic:imageName, feedResult: feedResult,dpName: imageName, name,note,location,birthdate,bio,followResult:followResult[0],moment:moment});
+
+    const currentUser = req.session.username;
+        
+        // Query to retrieve only received messages
+        const query = 'SELECT COUNT(*) AS messageCount FROM messages WHERE recipient = ?';
+        
+        // Execute the query
+        connection.query(query, [currentUser], (error, receivedMessages) => {
+            if (error) {
+                console.error("Error in loading inbox:", error);
+                return res.status(500).send("Internal server error");
+            }
+
+            const messageCount = receivedMessages[0].messageCount;
+
+    return res.render('userProfileView',{data: userInfo[0],results:results,profilePic:imageName, feedResult: feedResult,dpName: imageName, name,note,location,birthdate,bio,followResult:followResult[0],moment:moment,messages:messageCount});
+});
 });
 });
 });

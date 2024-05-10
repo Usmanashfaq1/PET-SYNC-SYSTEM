@@ -363,6 +363,7 @@
                   <h3 class="profile-username text-center"><%= userData.data.username %></h3>
   
                   <p class="text-muted text-center">Software Engineer</p>
+                 
   
                   <ul class="list-group list-group-unbordered mb-3">
                     <li class="list-group-item">
@@ -376,6 +377,10 @@
                   <input type="button" id="follow-btn" class="btn btn-primary btn-block" value="<%=initialFollowedUnfollowed%>" name="followUser">
                 
                   <br>
+                  <a href="/direct-message/<%= userData.data.username %>">
+                    <button class="btn btn-primary btn-block">Send Message</button>
+                </a>
+                <br>
                   <!-- User Profile View -->
 <div class="user-profile">
     

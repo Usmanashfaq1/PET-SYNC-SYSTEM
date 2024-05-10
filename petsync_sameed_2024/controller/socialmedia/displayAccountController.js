@@ -178,9 +178,96 @@ async  followUser(req, res) {
 }
 
 
+ async directMessagePage  (req, res) {
+    try {
+        const recipientUsername = req.params.username;
+        return res.render('directMessage', { recipientUsername });
+    } catch (error) {
+        console.error("Error in loading direct message page:", error);
+        return res.status(500).send("Internal server error");
+    }
+}
 
+async sendMessage   (req, res) {
+    try {
+        const senderUsername = req.session.username;
+        const recipientUsername = req.body.recipient;
+        const message = req.body.message;
+
+        // Insert message into the database
+        const query = 'INSERT INTO messages (sender, recipient, message) VALUES (?, ?, ?)';
+        connection.query(query, [senderUsername, recipientUsername, message], (error, results) => {
+            if (error) {
+                console.error("Error in sending message:", error);
+                return res.status(500).send("Internal server error");
+            }
+            return res.redirect(`/users/direct-message/${recipientUsername}`);
+        });
+    } catch (error) {
+        console.error("Error in sending message:", error);
+        return res.status(500).send("Internal server error");
+    }
+}
+
+ async inbox  (req, res)  {
+    try {
+        const currentUser = req.session.username;
+        const sentMessages = await getSentMessages(currentUser);
+        const receivedMessages = await getReceivedMessages(currentUser);
+
+
+        // Format the created_at field for each message
+    sentMessages.forEach(message => {
+        message.created_at = formatTimestamp(message.created_at);
+    });
+
+    receivedMessages.forEach(message => {
+        message.created_at = formatTimestamp(message.created_at);
+    });
+    
+        return res.render('inbox', { currentUser, sentMessages, receivedMessages });
+    } catch (error) {
+        console.error("Error in loading inbox:", error);
+        return res.status(500).send("Internal server error");
+    }
+}
 
   
 }
+async function getSentMessages(username) {
+    return new Promise((resolve, reject) => {
+        const query = 'SELECT * FROM messages WHERE sender = ?';
+        connection.query(query, [username], (error, results) => {
+            if (error) {
+                reject(error);
+            } else {
+                resolve(results);
+            }
+        });
+    });
+}
+
+async function getReceivedMessages(username) {
+    return new Promise((resolve, reject) => {
+        const query = 'SELECT * FROM messages WHERE recipient = ?';
+        connection.query(query, [username], (error, results) => {
+            if (error) {
+                reject(error);
+            } else {
+                resolve(results);
+            }
+        });
+    });
+}
+
+// Function to format the timestamp
+function formatTimestamp(timestamp) {
+    return timestamp.toLocaleString(); // Format timestamp to locale string
+}
 
 module.exports = new DisplayAccountController();
+
+
+
+
+
