@@ -4,7 +4,6 @@ const path = require('path');
 const cors = require('cors');
 const fs = require('fs');
 var app = express();
-const helmet=require('helmet');
 const nocache=require('nocache');
 const dotenv =require('dotenv');
 const nodemailer = require("nodemailer");
@@ -16,7 +15,6 @@ var flash = require("connect-flash");
 app.use(nocache());
 dotenv.config();
 app.use(cors());
-const net = require('net');
 
 
 
