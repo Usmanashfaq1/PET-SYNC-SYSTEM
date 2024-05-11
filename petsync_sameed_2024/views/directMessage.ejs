@@ -233,7 +233,7 @@
                         <div class="card mt-5">
                             <div class="card-body">
                                 <h1 class="card-title">Send Direct Message to <%= recipientUsername %></h1>
-                                <form action="/users/send-message" method="post">
+                                <form action="/send-message" method="post">
                                     <input type="hidden" name="recipient" value="<%= recipientUsername %>">
                                     <div class="form-group">
                                         <label for="message">Message:</label>

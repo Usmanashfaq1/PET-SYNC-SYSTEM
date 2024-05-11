@@ -1,185 +1,225 @@
 <!doctype html>
-<html lang="en">
-  <head>
+<html class="no-js" lang="en">
+<head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <link rel="icon" href="../../../../favicon.ico">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <link rel="stylesheet" href="../public/assets_E/css/dialogbox.css">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="description" content="Petpal - Pet Care and Pet Shop HTML Template">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <link rel="shortcut icon" type="image/x-icon" href="../public/assets/img/favicon.png">
+    <!-- Place favicon.ico in the root directory -->
+    <link rel="stylesheet" href="/stylesheets/style.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-H+K7USCnX11h"> </script>
+    <script src="https://js.stripe.com/v3/"></script>
+    <!-- CSS here -->
+    <link rel="stylesheet" href="../public/assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../public/assets/css/animate.min.css">
+    <link rel="stylesheet" href="../public/assets/css/magnific-popup.css">
+    <link rel="stylesheet" href="../public/assets/css/fontawesome-all.min.css">
+    <link rel="stylesheet" href="../public/assets/css/flaticon_pet_care.css">
+    <link rel="stylesheet" href="../public/assets/css/odometer.css">
+    <link rel="stylesheet" href="../public/assets/css/swiper-bundle.min.css">
+    <link rel="stylesheet" href="../public/assets/css/select2.min.css">
+    <link rel="stylesheet" href="../public/assets/css/jquery-ui.css">
+    <link rel="stylesheet" href="../public/assets/css/aos.css">
+    <link rel="stylesheet" href="../public/assets/css/default.css">
+    <link rel="stylesheet" href="../public/assets/css/main.css">
 
-    <script  type="text/javascript" src="../JS/typeahead.min.js"></script>
-    <script type="text/javascript" src="../JS/home.js"></script>
-    <!-- Bootstrap core CSS -->
-    
 
-    <title>User Management</title>
+</head>
 
-    <!-- Bootstrap core CSS -->
-    <link href="../public/static/assets/dist/css/bootstrap.min.css" rel="stylesheet">
+<body>
 
-    <!-- Custom styles for this template -->
-    <link href="../public/static/assets/css/board.css" rel="stylesheet">
-  </head>
-<style>
-  
-</style>
-  <body>
-    <nav class="navbar navbar-primary sticky-top bg-info flex-md-nowrap p-0">
-      <a class="navbar-brand col-sm-3 col-md-2 mr-0 text-white" href="#">PetSync Community</a>
-      <ul class="navbar-nav px-3">
-          <form action="/logout_user" method="GET">
-              <button type="submit" class="btn btn-block btn-outline-light">Logout</button>
-          </form>
-      </ul>
-  </nav>
-  
-    
-
-    <div class="container-fluid">
-      <div class="row">
-        <nav class="col-md-2 d-none d-md-block bg-light sidebar">
-          <div class="sidebar-sticky">
-            <ul class="nav flex-column">
-              <li class="nav-item">
-                <a class="nav-link " href="/admin_dashboard">
-                  <span data-feather="home"></span>
-                  Main <span class="sr-only">(current)</span>
-                </a>
-              </li>
-              
-
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle " href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  Social media Control
-                </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                  <a class="dropdown-item" href="/admin">Reports</a>
-                  <a class="dropdown-item" href="/users_media">Users</a>
-                  <a class="dropdown-item" href="/requests">View Requests</a>
-                </div>
-              </li>
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  E-Commerce Control
-                </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                  <a class="dropdown-item" href="/admin_dashboard1">sales chart</a>
-                  <a class="dropdown-item" href="/order">Orders</a>
-                  <a class="dropdown-item" href="/admin_products">Add product</a>
-                  <a class="dropdown-item" href="/edit_product">Update or Delete</a>
-                </div>
-              </li>
-              
-              
-            </ul>
-
-            
-          </div>
-        </nav>
-
-        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
-          
-            <div
-            class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-            <h1 class="h2">Edit Products</h1>
-            <div class="mb-4 pb-2" style = "padding-top: 20px;">
-                <label class="form-label" for="form3Examplev4">Category:</label>
-                <select id="category" name="category" class="select" required>
-                  <option value="ALL">All</option>
-                  <option value="Pet">Pet</option>
-                  <option value="Pet Food">Pet Food</option>
-                  <option value="Pet Medicine">Pet Medicine</option>
-                </select>
-              </div>
+    <!--Preloader-->
+    <div id="preloader">
+        <div id="loader" class="loader">
+            <div class="loader-container">
+                <div class="loader-icon"><img src="../public/assets/img/logo/preloader.svg" alt="Preloader"></div>
+            </div>
         </div>
-        
+    </div>
+    <!--Preloader-end -->
 
-            <div class="d-flex justify-content-between align-items-center bg-primary">
+    <!-- Scroll-top -->
+    <button class="scroll__top scroll-to-target" data-target="html">
+        <i class="fas fa-angle-up"></i>
+    </button>
+    <!-- Scroll-top-end-->
 
-                <div class="carousel-item active">
-                    <div class="container py-5">
-                        <div class="row justify-content-center">
-                            <div class="col-lg-10">
-                                <div class="table-container">
-                                    <div class="mb-3">
+    <!-- header-area -->
+    <!-- header-area -->
+    <header>
+        <div id="header-fixed-height"></div>
+        <div id="sticky-header" class="tg-header__area tg-header__area-three">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-xl-5">
+                        <div class="tgmenu__navbar-wrap tgmenu__main-menu d-none d-xl-flex">
 
-                                        <table class="table">
-                                            <thead>
-                                                <tr>
-                                                    <th>Name</th>
-                                                    <th>Category</th>
-                                                    <th>Price</th>
-                                                    <th>Quantity</th>
-                                                    <th>Rating</th>
-                                                    <th>Description</th>
-                                                    <th>Picture</th>
-                                                    <th>Update</th>
-                                                    <th>Delete</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody id="Data_table">
 
-                                            </tbody>
-                                        </table>
-                                    </div>
+
+                          <ul class="navigation">
+                            <li class="menu-item-has-child">
+                                <a href="/admin_dashboard">Home</a>
+                            </li>
+                            <li class="menu-item-has-child active">
+                                <a href="">E-Commerce Control</a>
+                                <ul class="sub-menu">
+                                    <li><a href="/order" style="color: rgb(0, 0, 0);">Orders</a></li>
+                                    <li><a href="/admin_products" style="color: rgb(0, 0, 0);">Add Product</a></li>
+                                    <li><a href="/edit_product" style="color: rgb(0, 0, 0);">Edit Product</a></li>
+                                    <li><a href="/admin_dashboard1" style="color: rgb(0, 0, 0);">Sales Chart</a></li>
+                                </ul>
+                            </li>
+                            <li class="menu-item-has-child">
+                              <a href="">Social Media Control</a>
+                              <ul class="sub-menu">
+                                  <li><a href="/admin" style="color: rgb(0, 0, 0);">Report</a></li>
+                                  <li><a href="/users_media" style="color: rgb(0, 0, 0);">Users</a></li>
+                                  <li><a href="/requests" style="color: rgb(0, 0, 0);">Requests</a></li>
+                              </ul>
+                          </li>
+                        </ul>
+                        
+                        
+                        </div>
+                    </div>
+                    <div class="col-xl-2 col-md-4">
+                        <div class="logo">
+                            <a><img src="../public/assets/img/logo/w_logo.png" alt="Logo"></a>
+                        </div>
+                    </div>
+                    <div class="col-xl-5 col-md-8">
+                        <div class="row align-items-center justify-content-end"> <!-- Modified -->
+                            <div class="col-md-auto"> <!-- Modified -->
+                                <div class="tgmenu__action tgmenu__action-three d-none d-md-block justify-content-end">
+                                    <ul class="list-wrap" style="margin: 0;">
+                                        <li class="header-login">
+                                            <a href=""><i class="flaticon-user" style="color: white;"></i></a>
+                                        </li>
+                                            <label class="form-label" for="form3Examplev4">Category:</label>
+                                            <select id="category" name="category" class="select" required>
+                                              <option value="ALL">All</option>
+                                              <option value="Pet">Pet</option>
+                                              <option value="Pet Food">Pet Food</option>
+                                              <option value="Pet Medicine">Pet Medicine</option>
+                                            </select>
+                                    </ul>
                                 </div>
+                            </div>
+                            <div class="col-md-auto"> <!-- Modified -->
+                                <div class="header-btn login-btn"><a href="/logout_user" class="btn" ><i class="flaticon-locked" ></i>Logout</a></div> 
                             </div>
                         </div>
                     </div>
+                </div>
+            </div>
+        </div>
+    </header>
 
+    <main class="fix">
+
+        <section class="breadcrumb__area fix">
+            <div class="container">
+                <div class="row align-items-end">
+                    <div class="col-lg-8">
+                        <div class="breadcrumb__content">
+                            <h3 class="title">Update or Delete Product</h3>
+                            <nav class="breadcrumb">
+                                <span property="itemListElement" typeof="ListItem">
+                                    <a>Home</a>
+                                </span>
+                                <span class="breadcrumb-separator"><i class="flaticon-right-arrow-angle"></i></span>
+                                <span property="itemListElement" typeof="ListItem">All Products</span>
+                            </nav>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="breadcrumb__img">
+                            <img src="../public/assets/img/images/breadcrumb_img.png" alt="img" data-aos="fade-left"
+                                data-aos-delay="800">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="breadcrumb__shape-wrap">
+                <img src="../public/assets/img/images/breadcrumb_shape01.png" alt="img" data-aos="fade-down-right"
+                    data-aos-delay="400">
+                <img src="../public/assets/img/images/breadcrumb_shape02.png" alt="img" data-aos="fade-up-left"
+                    data-aos-delay="400">
+            </div>
+        </section>
+        <!-- breadcrumb-area-end -->
+
+        <!-- product-details-area -->
+        <div class="carousel-item active">
+            <div class="container py-5">
+                <div class="row justify-content-center">
+                    <div class="col-lg-10">
+                        <div class="table-container">
+                            <div class="mb-3">
+
+                              <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Category</th>
+                                        <th>Price</th>
+                                        <th>Quantity</th>
+                                        <th>Rating</th>
+                                        <th>Description</th>
+                                        <th>Picture</th>
+                                        <th>Update</th>
+                                        <th>Delete</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="Data_table">
+
+                                </tbody>
+                            </table>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="overlay" id="overlay">
                     <div class="dialog-box">
-                      <p id='message'></p>
-                      <button class="close-btn" onclick="closeDialog()">Close</button>
+                        <p id='message'></p>
+                        <button class="close-btn" onclick="closeDialog()">Close</button>
                     </div>
-                  </div>
+                </div>
             </div>
-      
-        </main>
-      </div>
-      
-      <footer class="main-footer">
-        <!-- To the right -->
-        <div class="float-right d-none d-sm-inline">
-          
-          <br>
+
         </div>
-        <!-- Default to the left -->
-      
-      </footer>
-    </div>
 
-    
+    </main>
 
-    <!-- Bootstrap core JavaScript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script>window.jQuery || document.write('<script src="../../../../assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
-    <script src="../../../../assets/js/vendor/popper.min.js"></script>
-    <script src="../../../../dist/js/bootstrap.min.js"></script>
 
-    <!-- Icons -->
-    <script src="https://unpkg.com/feather-icons/dist/feather.min.js"></script>
+
+
+
+
+
+    </form>
+
+
+    <script src="../public/assets/js/vendor/jquery-3.6.0.min.js"></script>
+    <script src="../public/assets/js/bootstrap.bundle.min.js"></script>
+    <script src="../public/assets/js/jquery.magnific-popup.min.js"></script>
+    <script src="../public/assets/js/jquery.odometer.min.js"></script>
+    <script src="../public/assets/js/jquery.appear.js"></script>
+    <script src="../public/assets/js/swiper-bundle.min.js"></script>
+    <script src="../public/assets/js/jquery.countdown.min.js"></script>
+    <script src="../public/assets/js/svg-inject.min.js"></script>
+    <script src="../public/assets/js/select2.min.js"></script>
+    <script src="../public/assets/js/jquery-ui.min.js"></script>
+    <script src="../public/assets/js/ajax-form.js"></script>
+    <script src="../public/assets/js/wow.min.js"></script>
+    <script src="../public/assets/js/aos.js"></script>
+    <script src="../public/assets/js/main.js"></script>
     <script>
-      feather.replace()
+        SVGInject(document.querySelectorAll("img.injectable"));
     </script>
 
-    
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"></script>
-    
-    <script src="../public/static/assets/plugins/jquery/jquery.min.js"></script>
-    <script src="../public/static/assets/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="../public/static/dist/js/adminlte.min.js"></script>
-    <script src="../public/static/dist/js/demo.js"></script> 
-
-    <script src="../public/assets_E/dist/js/bootstrap.bundle.min.js"></script>
     
 
 
@@ -187,6 +227,8 @@
     <script src ="../public/assets_E/scripts/edit_product.js"></script>
 
     <script src="../public/assets_E/js/dialog.js"></script>
+    <link rel="stylesheet" href="../public/assets_E/css/dialogbox.css">
+
     <script src="../public/assets_E/dist/js/bootstrap.bundle.min.js"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js"
@@ -199,7 +241,8 @@
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script src="../public/assets_E/dist/js/bootstrap.bundle.min.js"></script>
 
+</body>
 
 
-  </body>
+
 </html>

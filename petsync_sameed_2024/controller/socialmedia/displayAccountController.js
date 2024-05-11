@@ -201,7 +201,7 @@ async sendMessage   (req, res) {
                 console.error("Error in sending message:", error);
                 return res.status(500).send("Internal server error");
             }
-            return res.redirect(`/users/direct-message/${recipientUsername}`);
+            return res.redirect(`/direct-message/${recipientUsername}`);
         });
     } catch (error) {
         console.error("Error in sending message:", error);
