@@ -11,7 +11,7 @@ const nodemailer = require("nodemailer");
 const pool = require('nodemailer-smtp-pool');
 var flash = require("connect-flash");
 // app.use(helmet());
-
+const { isUserAuthenticated } = require('../petsync-admin/middleware/authMiddleware');
 // Use nocache middleware to disable caching
 app.use(nocache());
 dotenv.config();
@@ -21,6 +21,26 @@ const net = require('net');
 
 
 
+app.use((req, res, next) => {
+
+
+  if (req.url.includes('users_media')) {
+    return next(); // Skip redirection and proceed to the next middleware
+}
+  // Check if it's a GET request and the URL contains "neglect" or "block"
+  if (req.method === 'GET' && (req.url.includes('neglect') || req.url.includes('block'))) {
+      try {
+          const message = "Bad request";
+          return res.render('badreq', { message });
+      } catch (error) {
+          console.error('Error rendering bad request page:', error);
+          const errorMessage = 'Something is broken!';
+          return res.render('badreq', { message: errorMessage });
+      }
+  }
+  // If it's not a GET request or doesn't contain "neglect" or "block", proceed to the next middleware
+  next();
+});
 
 
 

@@ -50,7 +50,7 @@ const connection = mysql.createPool({
 
 
 // Route to block a user
-router.post('/block1/:userId', async (req, res) => {
+router.post('/block1/:userId',isUserAuthenticated, async (req, res) => {
     const userId = req.params.userId;
     try {
         await connection.execute('UPDATE users SET is_blocked = 1 WHERE id = ?', [userId]);
@@ -62,7 +62,7 @@ router.post('/block1/:userId', async (req, res) => {
 });
 
 // Route to unblock a user
-router.post('/unblock/:userId', async (req, res) => {
+router.post('/unblock/:userId',isUserAuthenticated, async (req, res) => {
     const userId = req.params.userId;
     try {
         await connection.execute('UPDATE users SET is_blocked = 0 WHERE id = ?', [userId]);
@@ -74,7 +74,7 @@ router.post('/unblock/:userId', async (req, res) => {
 });
 
 // Route to delete a user
-router.post('/delete/:userId', async (req, res) => {
+router.post('/delete/:userId',isUserAuthenticated, async (req, res) => {
     const userId = req.params.userId;
     try {
         await connection.execute('DELETE FROM users WHERE id = ?', [userId]);
