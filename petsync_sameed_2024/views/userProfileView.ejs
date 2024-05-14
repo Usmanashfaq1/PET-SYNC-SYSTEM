@@ -512,6 +512,7 @@
  
                                     <button class="btn btn-link btn-comment" style="color: black;" onmouseover="this.style.color='blue'" onmouseout="this.style.color='black'" id="<%=feedResult[i].feedname%>" onclick="showFeed(this.id);return false;"  >Add Comment</button>
                                 </span>
+                                <button class="btn btn-danger btn-sm delete-btn" onclick="deleteFeed('<%=feedResult[i].feedname%>');">Delete</button>
                                 
                                 
                                 <!-- ADD LIKE, COMMENT COUNT -->

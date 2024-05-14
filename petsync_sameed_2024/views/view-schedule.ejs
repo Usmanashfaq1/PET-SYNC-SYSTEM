@@ -313,6 +313,7 @@
                             <tr>
                                 <th>Id</th>
                                 <th>Pet Id</th>
+                                <th>Pet Name</th>
                                 <th>Day of Week</th>
                                 <th>Meal Name</th>
                                 <th>Portion Size</th>
@@ -325,10 +326,11 @@
                                 <tr>
                                     <td><%= detail.id %></td>
                                     <td><%= detail.pet_id %></td>
+                                    <td><%= detail.petname %></td>
                                     <td><%= detail.day_of_week %></td>
                                     <td><%= detail.meal_name %></td>
                                     <td><%= detail.portion_size %></td>
-                                    <td><%= detail.schedule_timestamp %></td>
+                                    <td><%= detail.formatted_timestamp %></td>
                                     <td>
                                         <a href="/edit-schedule/<%= detail.id %>" class="btn btn-primary">Edit</a>
                                     </td>

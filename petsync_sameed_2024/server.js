@@ -655,11 +655,11 @@ app.get('/feedn',isUserAuthenticated , (req, res) => {
 //
 // Route handler for the root URL
 // Route handler for the root URL
-app.get('/feed',isUserAuthenticated , (req, res) => {
+app.get('/feed', isUserAuthenticated, (req, res) => {
   const userEmail = req.session.email; // Retrieve the email from the query string
 
   // Fetching pets belonging to the user with the given email
-  connection.query('SELECT * FROM pet_profile JOIN users ON pet_profile.owner_id = users.id WHERE users.email = ?', [userEmail], (error, pets) => {
+  connection.query('SELECT pet_profile.id, pet_profile.petname FROM pet_profile JOIN users ON pet_profile.owner_id = users.id WHERE users.email = ?', [userEmail], (error, pets) => {
       if (error) {
           console.error('Error fetching pets:', error);
           res.status(500).send('Error fetching pets.');
@@ -670,17 +670,27 @@ app.get('/feed',isUserAuthenticated , (req, res) => {
   });
 });
 
-// Route to view all schedule details
-app.get('/view-schedule',isUserAuthenticated ,(req, res) => {
-    connection.query('SELECT * FROM pet_schedule', (error, scheduleDetails) => {
-        if (error) {
-            console.error('Error fetching schedule details:', error);
-            res.status(500).send('Error fetching schedule details.');
-            return;
-        }
-        res.render('view-schedule', { scheduleDetails: scheduleDetails });
-    });
+app.get('/view-schedule', isUserAuthenticated, (req, res) => {
+  const userEmail = req.session.email; // Assuming req.user.email holds the email of the current user
+  connection.query(
+      `SELECT ps.*, pp.petname, DATE_FORMAT(ps.schedule_timestamp, '%Y-%m-%d %H:%i:%s') AS formatted_timestamp
+      FROM pet_profile pp 
+      JOIN users u ON pp.owner_id = u.id 
+      JOIN pet_schedule ps ON pp.id = ps.pet_id 
+      WHERE u.email = ?`,
+      [userEmail],
+      (error, scheduleDetails) => {
+          if (error) {
+              console.error('Error fetching schedule details:', error);
+              res.status(500).send('Error fetching schedule details.');
+              return;
+          }
+          res.render('view-schedule', { scheduleDetails: scheduleDetails });
+      }
+  );
 });
+
+
 
 // Route to render the edit schedule page for a specific schedule detail
 app.get('/edit-schedule/:id',isUserAuthenticated, (req, res) => {
@@ -704,6 +714,7 @@ app.get('/edit-schedule/:id',isUserAuthenticated, (req, res) => {
 // Route to update a schedule detail
 app.post('/update-schedule/:id',isUserAuthenticated, (req, res) => {
     const scheduleId = req.params.id;
+    console.log("schedukle is: "+ scheduleId);
     const updatedSchedule = req.body;
     connection.query('UPDATE pet_schedule SET ? WHERE id = ?', [updatedSchedule, scheduleId], (error, result) => {
         if (error) {
@@ -1371,6 +1382,43 @@ app.get('/api/check-appointment', isUserAuthenticated, (req, res) => {
       res.json({ success: false, message: 'No appointment scheduled today' });
     }
   });
+});
+
+const authMiddleware = require('./middleware/authMiddleware');
+
+//delete post 
+// Assuming you have required necessary modules and set up MySQL connection
+
+// Express route handler for deleting a feed
+app.post('/delete_feed',authMiddleware.isAuthenticated, (req, res) => {
+  const { feedname } = req.body;
+  const username = req.session.username; // Assuming username is stored in session
+
+  // Check if feedname and username are provided
+  if (!feedname || !username) {
+      return res.status(400).json({ success: false, message: 'Missing parameters.' });
+  }
+
+  // Delete the feed from the database
+  connection.query(
+      'DELETE FROM userfeed WHERE feedname = ? AND username = ?',
+      [feedname, username],
+      (error, results) => {
+          if (error) {
+              console.error('Error deleting feed:', error);
+              return res.status(500).json({ success: false, message: 'Internal server error.' });
+          }
+
+          // Check if any rows were affected
+          if (results.affectedRows === 0) {
+              // No matching feed found for the provided feedname and username
+              return res.status(404).json({ success: false, message: 'Feed not found.' });
+          }
+
+          // Feed deleted successfully
+          return res.status(200).json({ success: true, message: 'Feed deleted successfully.' });
+      }
+  );
 });
 
 

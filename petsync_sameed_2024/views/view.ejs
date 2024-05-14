@@ -555,9 +555,13 @@
                     day_of_week: day,
                     meal_name: mealName,
                     portion_size: portionSize,
-                    pet_id: petId
                 });
             }
+        });
+
+        // Assign the petId to each entry in scheduleData
+        scheduleData.forEach(function(entry) {
+            entry.pet_id = petId;
         });
 
         // Sending the schedule data to the server
@@ -582,6 +586,7 @@
         });
     });
 </script>
+
 <script src="../public/custom/js/email_value.js"></script>
 </body>
 
