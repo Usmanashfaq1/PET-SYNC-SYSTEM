@@ -16,7 +16,8 @@ async function loginUser(req, res) {
             return res.redirect(`/vet_dashboard?email=${user.email}&name=${user.fname}`);
         } else {
             console.log('Login failed for user:', email);
-            res.json(-1); // Login failed
+            return res.render('login_user', { msg: "Incorrect email or password!"});
+           // res.json(-1); // Login failed
         }
     } catch (error) {
         console.error('Error occurred during login:', error);

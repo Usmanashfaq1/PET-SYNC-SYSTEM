@@ -10,7 +10,14 @@ exports.recordBehavior = (req, res) => {
     petBehavior.saveBehaviorRecord(petId, dateTime, description, category, petOwnerEmail)
         .then((recordId) => {
             console.log('Behavior record saved successfully. Record ID:', recordId);
-            res.json({ success: true, recordId });
+            try {
+                const message = "Behavior record saved successfully!";
+                res.render('showmessagepc', { message });
+            } catch (error) {
+                console.error('Error showing page:', error);
+                res.status(500).send('Internal Server Error');
+            }
+            //res.json({ success: true, recordId });
         })
         .catch((error) => {
             console.error('Error saving behavior record:', error);

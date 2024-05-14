@@ -6,7 +6,7 @@ const { isUserAuthenticated } = require('../middleware/authMiddleware');
 router.get('/feedrbt', isUserAuthenticated, behaviorController.displayPage);
 
 // Route to handle the form submission for recording behavior
-router.post('/record_behavior', behaviorController.recordBehavior);
+router.post('/record_behavior',isUserAuthenticated, behaviorController.recordBehavior);
 
 router.get('/feedrbt_view', isUserAuthenticated, behaviorController.displayPage_records);
 

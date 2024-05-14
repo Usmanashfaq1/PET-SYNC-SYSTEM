@@ -18,7 +18,7 @@ class PostModel
     }
 
     async getUserFeed(userId) {
-        const query = 'SELECT * FROM userfeed WHERE userid = ?';
+        const query = 'SELECT * FROM userfeed WHERE userid = ? ORDER BY created_at DESC';
         try {
             const result = await this.promiseConnectionQuery(query, [userId]);
             return result;
@@ -26,6 +26,7 @@ class PostModel
             throw new Error('Error fetching user feed from database');
         }
     }
+    
 
     
 }

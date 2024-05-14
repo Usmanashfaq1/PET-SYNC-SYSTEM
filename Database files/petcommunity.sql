@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 14, 2024 at 12:40 PM
+-- Generation Time: May 14, 2024 at 07:02 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -76,10 +76,10 @@ INSERT INTO `appointment` (`date`, `user_name`, `user_email`, `vet_name`, `vet_e
 ('2024-05-01 10:27:04.318', 'sameed3', 'f200116@cfd.nu.edu.pk', 'John Doe', 'john.doe@example.com', '(One Health Approach)', '2024-04-28T10:26', 'grooming', 'unapproved', 15, 123, 11),
 ('2024-05-01 11:08:30.733', 'sameed3', 'f200116@cfd.nu.edu.pk', 'John Doe', 'john.doe@example.com', '(One Health Approach)', '2024-05-08T11:10', 'dentalCare', 'unapproved', 16, 123, 11),
 ('2024-05-01 11:16:36.723', 'sameed3', 'f200116@cfd.nu.edu.pk', 'John Doe', 'john.doe@example.com', '(One Health Approach)', '2024-05-02T11:16', 'illness', 'unapproved', 17, 123, 11),
-('2024-05-01 11:18:17.532', 'sameed3', 'f200116@cfd.nu.edu.pk', 'Usman  Ashfaq', 'chusmanjutt.129@gmail.com', '(Emergency and Critical Care)', '2024-05-10T11:18', 'dentalCare', 'unapproved', 18, 124, 11),
+('2024-05-01 11:18:17.532', 'sameed3', 'f200116@cfd.nu.edu.pk', 'Usman  Ashfaq', 'chusmanjutt.129@gmail.com', '(Emergency and Critical Care)', '2024-05-10T11:18', 'dentalCare', 'approved', 18, 124, 11),
 ('2024-05-14 11:03:36.351', 'chaudhry1', 'f200115@cfd.nu.edu.pk', 'Usman  Ashfaq', 'chusmanjutt.129@gmail.com', '(Emergency and Critical Care)', '2024-05-22T03:07', 'vaccination', 'approved', 19, 124, 10),
 ('2024-05-14 11:05:25.651', 'chaudhry1', 'f200115@cfd.nu.edu.pk', 'Usman  Ashfaq', 'chusmanjutt.129@gmail.com', '(Emergency and Critical Care)', '2024-05-17T02:05', 'illness', 'approved', 20, 124, 10),
-('2024-05-14 11:11:31.882', 'chaudhry1', 'f200115@cfd.nu.edu.pk', 'Usman  Ashfaq', 'chusmanjutt.129@gmail.com', '(Emergency and Critical Care)', '2024-05-24T03:11', 'dentalCare', 'unapproved', 21, 124, 10),
+('2024-05-14 11:11:31.882', 'chaudhry1', 'f200115@cfd.nu.edu.pk', 'Usman  Ashfaq', 'chusmanjutt.129@gmail.com', '(Emergency and Critical Care)', '2024-05-24T03:11', 'dentalCare', 'approved', 21, 124, 10),
 ('2024-05-14 11:14:41.452', 'chaudhry1', 'f200115@cfd.nu.edu.pk', 'Usman  Ashfaq', 'chusmanjutt.129@gmail.com', '(Emergency and Critical Care)', '2024-05-15T03:18', 'grooming', 'unapproved', 22, 124, 10),
 ('2024-05-14 11:15:39.738', 'chaudhry1', 'f200115@cfd.nu.edu.pk', 'Usman  Ashfaq', 'chusmanjutt.129@gmail.com', '(Emergency and Critical Care)', '2024-06-06T03:15', 'illness', 'unapproved', 23, 124, 10),
 ('2024-05-14 11:26:03.906', 'chaudhry1', 'f200115@cfd.nu.edu.pk', 'Usman  Ashfaq', 'chusmanjutt.129@gmail.com', '(Emergency and Critical Care)', '2024-06-07T04:25', 'grooming', 'unapproved', 24, 124, 10),
@@ -87,7 +87,8 @@ INSERT INTO `appointment` (`date`, `user_name`, `user_email`, `vet_name`, `vet_e
 ('2024-05-14 12:00:54.353', 'chaudhry1', 'f200115@cfd.nu.edu.pk', 'Usman  Ashfaq', 'chusmanjutt.129@gmail.com', '(Emergency and Critical Care)', '2024-05-22T16:05', 'grooming', 'unapproved', 26, 124, 10),
 ('2024-05-14 12:13:38.608', 'chaudhry1', 'f200115@cfd.nu.edu.pk', 'Usman  Ashfaq', 'chusmanjutt.129@gmail.com', '(Emergency and Critical Care)', '2024-05-22T17:18', 'grooming', 'unapproved', 27, 124, 10),
 ('2024-05-14 12:16:24.686', 'chaudhry1', 'f200115@cfd.nu.edu.pk', 'Usman  Ashfaq', 'chusmanjutt.129@gmail.com', '(Emergency and Critical Care)', '2024-05-23T16:21', 'dentalCare', 'unapproved', 28, 124, 10),
-('2024-05-14 15:34:38.136', 'chaudhry1', 'f200115@cfd.nu.edu.pk', 'Ali Ahmad', 'usmanx458@gmail.com', '(Veterinary Medicine)', '2024-05-24T19:38', 'vaccination', 'unapproved', 29, 125, 10);
+('2024-05-14 15:34:38.136', 'chaudhry1', 'f200115@cfd.nu.edu.pk', 'Ali Ahmad', 'usmanx458@gmail.com', '(Veterinary Medicine)', '2024-05-24T19:38', 'vaccination', 'unapproved', 29, 125, 10),
+('2024-05-14 17:54:47.175', 'chaudhry1', 'f200115@cfd.nu.edu.pk', 'Ali Ahmad', 'usmanx458@gmail.com', '(Veterinary Medicine)', '2024-05-18T09:57', 'vaccination', 'unapproved', 30, 125, 10);
 
 -- --------------------------------------------------------
 
@@ -127,8 +128,14 @@ CREATE TABLE `behavior_records` (
 --
 
 INSERT INTO `behavior_records` (`id`, `pet_id`, `date_time`, `description`, `category`, `created_at`, `pet_owner_email`, `petname`, `petPicture`) VALUES
-(2, 10, '2024-03-22 16:45:00', 'gdfv', 'Training', '2024-03-16 07:45:19', 'f200115@cfd.nu.edu.pk', 'gshdga', '1710568993673-Untitled design.png'),
-(3, 10, '2024-03-18 19:49:00', 'lazy behaviour', 'Behavior', '2024-03-18 11:47:02', 'f200115@cfd.nu.edu.pk', 'gshdga', '1710568993673-Untitled design.png');
+(6, 10, '2024-05-23 17:58:00', 'this is dummy data1', 'Behavior', '2024-05-14 12:57:03', 'f200115@cfd.nu.edu.pk', 'puppy', '1715673618687-husky-puppy-on-dog-walk.webp'),
+(7, 8, '2024-05-25 21:01:00', 'this is dummy data ', 'Milestone', '2024-05-14 12:58:10', 'f200115@cfd.nu.edu.pk', 'Tommy', '1715691459900-puppy.jpeg'),
+(8, 8, '2024-05-17 21:00:00', 'this is dummy data', 'Training', '2024-05-14 13:00:22', 'f200115@cfd.nu.edu.pk', 'Tommy', '1715691459900-puppy.jpeg'),
+(9, 8, '2024-05-18 13:33:00', 'dummy ', 'Milestone', '2024-05-14 16:29:45', 'f200115@cfd.nu.edu.pk', 'Tommy', '1715691459900-puppy.jpeg'),
+(11, 8, '2024-05-17 13:36:00', 'test dummy', 'Training', '2024-05-14 16:32:40', 'f200115@cfd.nu.edu.pk', 'Tommy', '1715691459900-puppy.jpeg'),
+(12, 8, '2024-05-18 13:34:00', 'sfd', 'Training', '2024-05-14 16:34:06', 'f200115@cfd.nu.edu.pk', 'Tommy', '1715691459900-puppy.jpeg'),
+(13, 8, '2024-05-23 13:39:00', 'dsf', 'Behavior', '2024-05-14 16:35:34', 'f200115@cfd.nu.edu.pk', 'Tommy', '1715691459900-puppy.jpeg'),
+(14, 8, '2024-05-17 13:40:00', 'dummy', 'Training', '2024-05-14 16:36:52', 'f200115@cfd.nu.edu.pk', 'Tommy', '1715691459900-puppy.jpeg');
 
 -- --------------------------------------------------------
 
@@ -192,7 +199,10 @@ INSERT INTO `commentinfo` (`id`, `feedname`, `commenttext`, `commentby`, `commen
 (18, '1710415161136.jpg', 'wow', 'genny', '0', 0, '2024-05-14 13:39:51'),
 (19, '1708077704332.png', 'yes', 'chaudhry1', '0', 0, '2024-05-14 13:45:33'),
 (20, '1714538744515.jpg', 'asdijooszhudiajpodjsre', 'genny', '0', 0, '2024-05-14 15:24:09'),
-(21, '1715682696359.jpg', 'frasfd', 'genny', '0', 0, '2024-05-14 15:32:37');
+(21, '1715682696359.jpg', 'frasfd', 'genny', '0', 0, '2024-05-14 15:32:37'),
+(22, '1715691065205.jpeg', 'wow', 'chaudhry1', '0', 0, '2024-05-14 17:51:19'),
+(23, '1715703854542.jpg', 'test', 'genny', '0', 0, '2024-05-14 21:24:35'),
+(24, '1715691065205.jpeg', 'nice puppy', 'genny', '0', 0, '2024-05-14 21:56:06');
 
 -- --------------------------------------------------------
 
@@ -262,8 +272,8 @@ CREATE TABLE `followcount` (
 --
 
 INSERT INTO `followcount` (`id`, `username`, `followers`, `following`) VALUES
-(1, 'genny', 0, 2),
-(2, 'chaudhry1', 1, 0),
+(1, 'genny', 1, 2),
+(2, 'chaudhry1', 1, 1),
 (3, 'sameed3', 1, 0);
 
 -- --------------------------------------------------------
@@ -284,7 +294,8 @@ CREATE TABLE `followinfo` (
 
 INSERT INTO `followinfo` (`id`, `follower`, `following`) VALUES
 (1, 'genny', 'chaudhry1'),
-(2, 'genny', 'sameed3');
+(2, 'genny', 'sameed3'),
+(3, 'chaudhry1', 'genny');
 
 -- --------------------------------------------------------
 
@@ -307,7 +318,8 @@ CREATE TABLE `health_records` (
 --
 
 INSERT INTO `health_records` (`id`, `pet_id`, `vaccination`, `medication`, `allergies`, `surgeries`, `created_at`) VALUES
-(2, 4, 'distemper', 'anti-inflammatory', 'Flea Saliva And Bites', 'dental-cleaning', '2024-02-20 09:58:23');
+(2, 4, 'distemper', 'anti-inflammatory', 'Flea Saliva And Bites', 'dental-cleaning', '2024-02-20 09:58:23'),
+(3, 8, 'parvovirus', 'dewormer', 'Medications', 'tumor-removal', '2024-05-14 13:00:52');
 
 -- --------------------------------------------------------
 
@@ -342,7 +354,10 @@ INSERT INTO `likeinfo` (`id`, `feedname`, `likedby`) VALUES
 (30, '1715184448140.jpg', 4),
 (31, '1710254208710.png', 4),
 (32, '1708077704332.png', 10),
-(33, '1715682696359.jpg', 4);
+(33, '1715682696359.jpg', 4),
+(34, '1715691065205.jpeg', 10),
+(35, '1715703854542.jpg', 4),
+(36, '1715691065205.jpeg', 4);
 
 -- --------------------------------------------------------
 
@@ -365,7 +380,8 @@ CREATE TABLE `messages` (
 INSERT INTO `messages` (`id`, `sender`, `recipient`, `message`, `created_at`) VALUES
 (1, 'genny', 'chaudhry1', 'heyyy whats up?', '2024-05-11 14:44:08'),
 (2, 'chaudhry1', 'genny', 'yes i just saw your message?', '2024-05-11 14:45:30'),
-(3, 'genny', 'sameed3', 'hey\r\n', '2024-05-14 10:33:36');
+(3, 'genny', 'sameed3', 'hey\r\n', '2024-05-14 10:33:36'),
+(4, 'chaudhry1', 'genny', 'hey !', '2024-05-14 12:51:45');
 
 -- --------------------------------------------------------
 
@@ -462,7 +478,8 @@ CREATE TABLE `pet_memories` (
 
 INSERT INTO `pet_memories` (`date`, `pet_owner`, `petname`, `about`, `petPicture`, `id`) VALUES
 ('Tue Feb 20 2024 15:05:12 GMT+0500 (Pakistan Standard Time)', 'genny', 'abc', 'dgsbafv', '1708423512041-chen-FJXJ_ghi1tw-unsplash.jpg', 2),
-('Mon Mar 25 2024 19:20:10 GMT+0500 (Pakistan Standard Time)', 'genny', 'Tom', 'i love to make other animals my friends', '1711376410271-PET CARRIER.jpg', 3);
+('Mon Mar 25 2024 19:20:10 GMT+0500 (Pakistan Standard Time)', 'genny', 'Tom', 'i love to make other animals my friends', '1711376410271-PET CARRIER.jpg', 3),
+('Tue May 14 2024 18:01:19 GMT+0500 (Pakistan Standard Time)', 'chaudhry1', 'puppy', 'dummy post', '1715691679064-husky-puppy-on-dog-walk.webp', 4);
 
 -- --------------------------------------------------------
 
@@ -507,7 +524,7 @@ CREATE TABLE `pet_profile` (
 INSERT INTO `pet_profile` (`id`, `pet_owner`, `petname`, `gender`, `age`, `breed`, `species`, `weight`, `color`, `about`, `petPicture`, `owner_id`) VALUES
 (4, 'genny', 'Tom', 'female', 15, 'beagle', 'dog', '12', 'black', 'i love to make other animals my friends', '1708422961934-5ccf27a7a3b80d8ab01e145987630be9.jpg', 4),
 (7, 'genny', 'wow', 'female', 3, 'beagle', 'cat', '6', 'brown', 'cat1', '1709963438615-chen-FJXJ_ghi1tw-unsplash.jpg', 4),
-(8, 'chaudhry1', 'Tommy', 'male', 2, 'goldenRetriever', 'dog', '4', 'blue', 'dsf', '1709963771108-karlo-tottoc-ybZ5hRxaWS4-unsplash.jpg', 10),
+(8, 'chaudhry1', 'Tommy', 'male', 2, 'goldenRetriever', 'dog', '4', 'blue', 'dsf', '1715691459900-puppy.jpeg', 10),
 (9, 'sameed3', 'wowdsf', 'male', 3, 'poodle', 'dog', '6', 'dfsf', 'dsfsf', '1709963861193-chen-FJXJ_ghi1tw-unsplash.jpg', 11),
 (10, 'chaudhry1', 'puppy', 'other', 3, 'bulldog', 'dog', '32', 'white', 'dfzx', '1715673618687-husky-puppy-on-dog-walk.webp', 10),
 (11, 'genny', 'caspher34', 'male', 16, 'siamese', 'dog', '12', 'Black and white', 'i love to make other animals my friends', '1711364812077-DOG HARNESS-NEOPRENE.jpg', 4),
@@ -660,14 +677,15 @@ INSERT INTO `userfeed` (`id`, `userid`, `username`, `feedname`, `caption`, `crea
 (10, 2, 'rex', '1708060246605.jpg', 'feb 16', '2024-02-16 10:10:46', 1, 2),
 (11, 2, 'rex', '1708060412153.jpg', '#16febbbbb', '2024-02-16 10:13:32', 0, 0),
 (12, 10, 'chaudhry1', '1708077704332.png', 'frest start', '2024-02-16 15:01:44', 3, 2),
-(13, 4, 'genny', '1710254208710.png', 'nothing', '2024-03-12 19:36:48', 1, 2),
 (14, 10, 'chaudhry1', '1710415161136.jpg', 'nothingggg', '2024-03-14 16:19:21', 2, 7),
 (15, 4, 'genny', '1710425646708.jpg', 'hjvgchf', '2024-03-14 19:14:06', 1, 0),
 (16, 4, 'genny', '1710488168947.jpg', '', '2024-03-15 12:36:08', 2, 2),
 (19, 4, 'genny', '1714486932569.jpg', 'Star', '2024-04-30 19:22:12', 1, 1),
 (29, 3, 'anny', '1714919250452.jpg', 'hey ', '2024-05-05 19:27:30', 0, 0),
 (31, 4, 'genny', '1715682428273.png', 'test1', '2024-05-14 15:27:08', 0, 0),
-(33, 4, 'genny', '1715682696359.jpg', 'buttery flies', '2024-05-14 15:31:36', 1, 1);
+(33, 4, 'genny', '1715682696359.jpg', 'buttery flies', '2024-05-14 15:31:36', 1, 1),
+(35, 10, 'chaudhry1', '1715691065205.jpeg', '14th may', '2024-05-14 17:51:05', 2, 2),
+(36, 4, 'genny', '1715703854542.jpg', 'my new pet ', '2024-05-14 21:24:14', 1, 1);
 
 -- --------------------------------------------------------
 
@@ -695,7 +713,7 @@ INSERT INTO `userinfo` (`id`, `username`, `profilepic`, `fullname`, `birthdate`,
 (3, 'anny', NULL, NULL, NULL, NULL, '', ''),
 (4, 'genny', '1706333881914.jpg', NULL, NULL, 'star8', '', ''),
 (5, 'annie', NULL, NULL, NULL, NULL, '', ''),
-(10, 'chaudhry1', '1708077811031.JPG', '/////', '2024-03-21', 'hey there!bbbbbbbbbbb', 'hing', 'FSD'),
+(10, 'chaudhry1', '1715691183703.png', 'chaudhryusman', '2024-05-22', 'this is my bio!', 'noting it here', 'FSD'),
 (11, 'sameed3', NULL, NULL, NULL, NULL, '', ''),
 (12, 'ahsan1', NULL, NULL, NULL, NULL, '', ''),
 (13, 'mohinali', '1711439773794.jpg', NULL, NULL, 'no bio', '', '');
@@ -725,10 +743,10 @@ INSERT INTO `users` (`id`, `username`, `password`, `email`, `created_at`, `is_bl
 (4, 'genny', '12345', 'genny@gmail.com', '2024-01-27 10:37:13', 0),
 (5, 'annie', '12345', 'anny123@gmail.com', '2024-01-31 19:57:25', 0),
 (6, 'ben', '12345', 'ben@gmail.com', '2024-02-01 21:22:07', 0),
-(10, 'chaudhry1', '12345', 'f200115@cfd.nu.edu.pk', '2024-02-16 14:58:45', 0),
+(10, 'chaudhry1', '1234567890', 'f200115@cfd.nu.edu.pk', '2024-02-16 14:58:45', 0),
 (11, 'sameed3', '12345', 'f200116@cfd.nu.edu.pk', '2024-02-16 17:19:12', 0),
 (12, 'ahsan1', '12345', 'usmanx458@gmail.com', '2024-03-19 12:28:23', 0),
-(13, 'mohinali', '12345', 'f200343@cfd.nu.edu.pk', '2024-03-26 12:33:50', 1);
+(13, 'mohinali', '12345', 'f200343@cfd.nu.edu.pk', '2024-03-26 12:33:50', 0);
 
 -- --------------------------------------------------------
 
@@ -749,7 +767,6 @@ CREATE TABLE `user_requests` (
 
 INSERT INTO `user_requests` (`id`, `user_email`, `request_text`, `created_at`) VALUES
 (10, 'rex@gmail.com', 'someone blocked me kindly unblock me test 2', '2024-05-13 15:04:40'),
-(11, 'rex@gmail.com', 'someone blocked me kindly unblock me test 2', '2024-05-13 15:06:22'),
 (12, 'rex@gmail.com', 'kindly unblock me.....', '2024-05-13 15:07:52'),
 (14, 'rex@gmail.com', 'sfsdf', '2024-05-13 16:24:50');
 
@@ -986,7 +1003,7 @@ ALTER TABLE `admin_login`
 -- AUTO_INCREMENT for table `appointment`
 --
 ALTER TABLE `appointment`
-  MODIFY `id` int(244) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `id` int(244) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- AUTO_INCREMENT for table `articles`
@@ -998,13 +1015,13 @@ ALTER TABLE `articles`
 -- AUTO_INCREMENT for table `behavior_records`
 --
 ALTER TABLE `behavior_records`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `commentinfo`
 --
 ALTER TABLE `commentinfo`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT for table `deliveries_order`
@@ -1028,25 +1045,25 @@ ALTER TABLE `followcount`
 -- AUTO_INCREMENT for table `followinfo`
 --
 ALTER TABLE `followinfo`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `health_records`
 --
 ALTER TABLE `health_records`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `likeinfo`
 --
 ALTER TABLE `likeinfo`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
 
 --
 -- AUTO_INCREMENT for table `messages`
 --
 ALTER TABLE `messages`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `order_products`
@@ -1058,7 +1075,7 @@ ALTER TABLE `order_products`
 -- AUTO_INCREMENT for table `pet_memories`
 --
 ALTER TABLE `pet_memories`
-  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `pet_posts`
@@ -1100,7 +1117,7 @@ ALTER TABLE `reports`
 -- AUTO_INCREMENT for table `userfeed`
 --
 ALTER TABLE `userfeed`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
 
 --
 -- AUTO_INCREMENT for table `users`

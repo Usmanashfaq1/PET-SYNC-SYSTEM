@@ -58,9 +58,10 @@ class DisplayAccountModel {
   }
 
   async getUserFeedById(id) {
-    const feedQuery = "SELECT * FROM userfeed WHERE userid=?";
+    const feedQuery = "SELECT * FROM userfeed WHERE userid=? ORDER BY created_at DESC";
     return await promise_connection(feedQuery, [id]);
-  }
+}
+
 
   async getDistinctLikesByUserId(id) {
     const likeQuery = "SELECT DISTINCT feedname FROM likeinfo WHERE likedby=?";

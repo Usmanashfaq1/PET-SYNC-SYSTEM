@@ -192,6 +192,10 @@
                             Don't have an account? <a href="/pc" class="text-primary font-weight-bold">Sign Up</a>
                         </p>
                         <a href="/forget-code">Forget Password</a>
+                        <br>
+                        <% if (msg) { %>
+                            <%= msg %>
+                          <% } %>
                     </form>
                 </div>
             </div>
