@@ -4,10 +4,13 @@ const connection = require('../../config');
 const multer = require("multer");
 
 const storage = multer.diskStorage({
-  destination: './upload',
-  filename: (req, file, callback) => {
-    callback(null, `${Date.now()}-${file.originalname}`);
-  }
+    destination: (req, file, callback) => {
+      const uploadDirectory = path.join(__dirname, '..', '..', '..','petsync_sameed_2024', 'upload');
+      callback(null, uploadDirectory);
+    },
+    filename: (req, file, callback) => {
+        callback(null, `${Date.now()}-${file.originalname}`);
+    }
 });
 
 // Initialize uploader
@@ -94,7 +97,7 @@ handle_get_specific_product = (req, res) => {
       if (fileName) {
 
         //const filePath = path.join(__dirname, 'upload', fileName);
-        const uploadDirectory = path.join(__dirname, '..','..', 'upload');
+        const uploadDirectory = path.join(__dirname, '..', '..', '..', 'petsync_sameed_2024', 'upload');
         const filePath = path.join(uploadDirectory, fileName);
 
 

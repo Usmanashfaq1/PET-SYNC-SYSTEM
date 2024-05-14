@@ -581,9 +581,11 @@ app.post('/api/appointments', isUserAuthenticated,(req, res) => {
           res.status(500).json({ error: 'An error occurred while inserting appointment data' });
           return;
         }
+       
 
-        console.log('Appointment data inserted successfully');
-        res.json({ success: true });
+       // Send success response with message
+       res.status(200).json({ success: true, message: 'Appointment Schedule Successfully!' });
+      
       });
     });
   });
@@ -1338,6 +1340,40 @@ app.post("/update_password", function (req, res) {
 
   });
 });
+
+
+
+
+// checking appointment notification
+// Import necessary modules and setup your Express app
+
+// Define a route to check for new appointments created today
+app.get('/api/check-appointment', isUserAuthenticated, (req, res) => {
+  // Logic to check if there is a new appointment for the current user created today in the database
+  const userId = req.session.email; // Assuming you have stored the user ID in req.user
+  const currentDate = new Date().toISOString().split('T')[0]; // Get current date in YYYY-MM-DD format
+
+  // Query to check for appointments created today for the current user
+  const checkAppointmentQuery = 'SELECT * FROM appointment WHERE user_email = ? AND DATE(date) = ? AND status = "unapproved" ORDER BY date DESC LIMIT 1';
+  conn.query(checkAppointmentQuery, [userId, currentDate], (err, result) => {
+    if (err) {
+      console.error('Error checking for new appointment:', err);
+      res.status(500).json({ error: 'An error occurred while checking for new appointment' });
+      return;
+    }
+
+    if (result.length > 0) {
+      // If a new appointment is found created today, send a success response with the appointment data
+      const newAppointment = result[0];
+      res.json({ success: true, appointment: newAppointment });
+    } else {
+      // If no new appointment is found created today, send a response indicating that
+      res.json({ success: false, message: 'No appointment scheduled today' });
+    }
+  });
+});
+
+
 
 
 app.listen(3001,(err) =>{

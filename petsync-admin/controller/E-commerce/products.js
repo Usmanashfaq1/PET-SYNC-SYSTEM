@@ -25,8 +25,9 @@ const handle_get_products = (req, res) => {
       if (fileName) {
 
         //const filePath = path.join(__dirname, 'upload', fileName);
-        const uploadDirectory = path.join(__dirname, '..', '..', 'upload');
+        const uploadDirectory = path.join(__dirname, '..', '..', '..', 'petsync_sameed_2024', 'upload');
         const filePath = path.join(uploadDirectory, fileName);
+        
 
 
         try {

@@ -4,6 +4,7 @@
   
   
     $(document).ready(function () {
+      
       $('#party').change(function () {
         var selectedVetType = $(this).val();
         if (selectedVetType) {
@@ -85,6 +86,7 @@
 
       if(flag===true)
       {
+
         const appointmentData = {
           user_name: userName,
           user_email: userEmail,
@@ -100,20 +102,18 @@
           method: 'POST',
           contentType: 'application/json',
           data: JSON.stringify(appointmentData),
-          success: function (response) {
-            
-            document.getElementById('message').innerText = 'Appointment Schedule Successfully!';
-            showDialog();
-            // console.log('Appointment booked successfully:', response);
-            // alert(`Appointment booked with ${fname} ${lname}, ${specialization}, ${qualification},${email}`);
-           
-          },
+         success: function (response)
+          {
+    document.getElementById('message').innerText = response.message;
+    showDialog();
+},
           error: function (error) {
             console.error('Error booking appointment:', error);
             alert('Error booking appointment. Please try again.');
           }
         });
       }
+    
     }
 
   
@@ -156,3 +156,64 @@
   
       // Check your condition here and call showDialog() if the condition is met
       // For example, let's assume the condition is a variable named "isConditionMet"
+
+
+
+      $(document).ready(function () {
+
+        const userName = 'done';
+const existingValue = localStorage.getItem('as');
+
+if (!existingValue) {
+  localStorage.setItem('as', userName);
+}
+
+        // Function to periodically check for new appointments
+        function checkForNewAppointment() {
+          $.ajax({
+            url: '/api/check-appointment',
+            method: 'GET',
+            success: function(response) {
+              if (response.success) {
+                const newAppointment = response.appointment;
+                const appointmentDate = new Date(newAppointment.slot);
+                const formattedDate = appointmentDate.toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+                const formattedTime = appointmentDate.toLocaleTimeString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true });
+
+                const formattedCreationDate = new Date(newAppointment.date).toLocaleDateString();
+                // Format the creation time
+                const formattedCreationTime = new Date(newAppointment.date).toLocaleTimeString();
+
+                const message = `Alert ! : Appointment scheduled successfully for ${formattedDate} at ${formattedTime} with ${newAppointment.vet_name} scheduled at ${formattedCreationDate} at ${formattedCreationTime}`;
+                document.getElementById('message').innerText = message;
+                showDialog();
+              } else {
+                const message = response.message || 'No new appointment found';
+                console.log(message);
+              }
+            },
+            error: function(error) {
+              console.error('Error checking for new appointment:', error);
+              alert('Error checking for new appointment. Please try again.');
+            }
+          });
+        }
+        const as_val = localStorage.getItem('as');
+        if(as_val==="done")
+          {
+            checkForNewAppointment();
+            //localStorage.removeItem('as');
+          }
+    
+        // Call the function to check for new appointments every 30 seconds (adjust as needed)
+        setInterval(checkForNewAppointment, 30000); // 30 seconds
+    });
+    
+    // Function to display a message
+    function showMessage(message, type) {
+        // Implement your logic to display the message, e.g., using Bootstrap alerts or a custom dialog box
+        // Example:
+        document.getElementById('message').innerText = message;
+    showDialog(); // You can replace this with your preferred method
+    }
+    

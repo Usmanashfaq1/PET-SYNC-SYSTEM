@@ -1,12 +1,17 @@
 const multer = require("multer");
+const path = require('path');
 const connection = require('../../config');
 
 const storage = multer.diskStorage({
-    destination: './upload',
+    destination: (req, file, callback) => {
+        const uploadDirectory = path.join(__dirname, '..', '..', '..','petsync_sameed_2024', 'upload');
+        callback(null, uploadDirectory);
+    },
     filename: (req, file, callback) => {
         callback(null, `${Date.now()}-${file.originalname}`);
     }
 });
+
 
 const upload = multer({
     storage: storage,
