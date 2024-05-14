@@ -59,8 +59,25 @@ handle_get_reviews = (req, res) => {
 
 
 
+handle_delete_review = (req, res) => {
+    const { reviewId } = req.body; // Assuming the reviewId is sent in the request body
+
+    const sql = "DELETE FROM product_review WHERE id = ?";
+    connection.query(sql, [reviewId], (err, result) => {
+        if (err) {
+            console.error("Error deleting review:", err);
+            res.status(500).json({ error: "Internal Server Error" });
+        } else {
+            console.log("Review deleted successfully");
+            res.status(200).json({ message: "Review deleted successfully" });
+        }
+    });
+};
+
+
 
 module.exports  = {
     handle_send_review,
     handle_get_reviews,
+    handle_delete_review,
 }

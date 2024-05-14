@@ -11,8 +11,10 @@ document.addEventListener('DOMContentLoaded', function () {
 
 });
 
+
+
 function getReviews() {
-    const email = localStorage.getItem('email_e');
+    const name = localStorage.getItem('name');
     const product_id = localStorage.getItem('id_detail_of_item');
     $.ajax({
         url: 'http://localhost:3001/getReviews?product_id=' + product_id,
@@ -30,18 +32,31 @@ function getReviews() {
                 if (reviewCount > 0) {
                     reviews.forEach((review, index) => {
                         const date = new Date(review.date);
-                        const dateString = date.toLocaleString();
+                        const dateString = formatDate(date);
+                        const isOwner = (review.name === name);
 
                         const reviewHTML = `
-                            <div class="review-item">
-                                <div class="review-header">
-                                    <h6 class="name">${review.name}</h6>
-                                    <div class="rating">
+                            <div class="review-item" style="max-width: 600px; border-bottom: ${index !== reviewCount - 1 ? '1px solid #ccc' : 'none'}; padding-bottom: ${index !== reviewCount - 1 ? '20px' : '0'}; margin-bottom: ${index !== reviewCount - 1 ? '20px' : '0'};">
+                                <div class="review-header" style="display:flex; justify-content: space-between; align-items: center;">
+                                    <div>
+                                        <h6 class="name">${review.name}</h6>
+                                    </div>
+                                    <div class="rating" style="margin-left: 20px;">
                                         ${getStarRatingHTML(review.rating)}
                                     </div>
-                                    <p class="date">${dateString}</p>
                                 </div>
-                                <p class="comment" style="padding-bottom: 30px;">${review.description}</p>
+                                <p class="comment" style="padding-bottom: 10px;">${review.description}</p>
+                                
+                                <div class="btn-group" style="width: 50%; display: flex; justify-content: space-between; margin-top: 10px;">
+    <div style="display: flex; align-items: center;">
+        <p class="date">${dateString}</p>
+    </div>
+    <div style="display: flex; justify-content: flex-end;">
+        ${isOwner ? `<button class="btn btn-primary" style="width: 100px; height: 50px;" onclick="deleteReview('${review.id}')">Delete</button>` : ''}
+    </div>
+</div>
+
+                            
                             </div>
                         `;
                         $('#reviewsList').append(reviewHTML);
@@ -62,6 +77,14 @@ function getReviews() {
 }
 
 
+function formatDate(date) {
+    const options = { year: 'numeric', month: 'short', day: 'numeric', hour: 'numeric', minute: 'numeric' };
+    return date.toLocaleDateString('en-US', options);
+}
+
+
+
+
 function getStarRatingHTML(rating) {
     const filledStars = '<i class="bx bxs-star"></i>'.repeat(rating);
     const emptyStars = '<i class="bx bx-star"></i>'.repeat(5 - rating);
@@ -74,7 +97,7 @@ function productDetail() {
     email_e = localStorage.getItem('email_e');
 
     $.ajax({
-       url: 'http://localhost:3001/get_product_detail_with_id?id=' + id + '&email_e=' + email_e,
+        url: 'http://localhost:3001/get_product_detail_with_id?id=' + id + '&email_e=' + email_e,
 
         method: 'GET',
         success: function (data) {
@@ -144,8 +167,8 @@ function productDetail() {
 </div>
 
                 `;
-                
-                
+
+
                     // Generate the product social sharing icons HTML
                     var productSocialIcons = `
                         <div class="product__details-bottom">
@@ -462,7 +485,7 @@ function submitReview() {
         method: 'POST',
         data: reviewData,
         success: function (data) {
-            
+
             console.log("Review submitted successfully");
             getReviews();
         },
@@ -479,6 +502,23 @@ function submitReview() {
     const allStars = document.querySelectorAll('.rating .star');
     allStars.forEach(star => {
         star.classList.replace('bxs-star', 'bx-star');
+    });
+}
+
+
+function deleteReview(reviewId) {
+    $.ajax({
+        url: 'http://localhost:3001/deleteReview',
+        method: 'POST',
+        data: { reviewId: reviewId },
+        success: function (data) {
+            console.log("Review deleted successfully");
+            getReviews();
+        },
+        error: function (error) {
+            console.error('Error deleting review:', error);
+            alert('Error deleting review. Please try again.');
+        }
     });
 }
 

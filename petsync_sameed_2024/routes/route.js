@@ -68,6 +68,7 @@ const { handle_get_track } = require('../controller/E-commerce/track')
 
 const { handle_send_review } = require('../controller/E-commerce/review')
 const { handle_get_reviews } = require('../controller/E-commerce/review')
+const { handle_delete_review } = require('../controller/E-commerce/review')
 
 
 
@@ -152,6 +153,10 @@ router.get('/order_placed', isEcommerceAuthenticated , load_order_placed_page);
 router.get('/track', isEcommerceAuthenticated , load_order_tracking_page);
 
 router.post('/sendReview', isEcommerceAuthenticated, handle_send_review);
+
+router.post('/deleteReview', isEcommerceAuthenticated, handle_delete_review);
+
+
 
 router.get('/getReviews', isEcommerceAuthenticated , handle_get_reviews);
 

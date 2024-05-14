@@ -56,6 +56,9 @@ app.use(flash());
 const authRoutes = require('./routes/auth');
 app.use('/', authRoutes);
 
+const app1 = require('./controller/user/appointmentController');
+app.use('/', app1);
+
 const loginRoute=require('./routes/loginRoute');
 app.use('/',loginRoute);
 const signupRoute=require('./routes/signupRoute');

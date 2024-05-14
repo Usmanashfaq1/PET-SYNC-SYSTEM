@@ -1,3 +1,29 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <!doctype html>
 <html class="no-js" lang="en">
 
@@ -14,6 +40,7 @@
     <!-- Place favicon.ico in the root directory -->
 
     <!-- CSS here -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../public/assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="../public/assets/css/animate.min.css">
     <link rel="stylesheet" href="../public/assets/css/magnific-popup.css">
@@ -174,7 +201,42 @@
                 <div class="row align-items-end">
                     <div class="col-lg-8">
                         <div class="breadcrumb__content">
-                            <h4 >Appointment Management</h4>
+                           
+                            <div class="container">
+                                <h1>Appointments</h1>
+                                <div class="btn-group mb-2" role="group" aria-label="Sort Appointments">
+                                    <a href="?sortBy=date" class="btn btn-primary">Sort by Date</a>
+                                    <a href="?sortBy=approved" class="btn btn-primary">Sort by Approved</a>
+                                    
+                                </div>
+                                <table class="table table-striped">
+                                    <thead class="thead-dark">
+                                        <tr>
+                                            <th>Date</th>
+                                            <th>User Name</th>
+                                            <th>User Email</th>
+                                            <th>Type</th>
+                                            <th>Status</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <% appointments.forEach(appointment => { %>
+                                            <tr>
+                                                <td><%= appointment.date %></td>
+                                                <td><%= appointment.user_name %></td>
+                                                <td><%= appointment.user_email %></td>
+                                                <td><%= appointment.type %></td>
+                                                <td><% if (appointment.status === 'approved') { %>
+                                                        <span class="badge badge-success">Approved</span>
+                                                    <% } else { %>
+                                                        <span class="badge badge-warning">Unapproved</span>
+                                                    <% } %></td>
+                                            </tr>
+                                        <% }); %>
+                                    </tbody>
+                                </table>
+                            </div>
+                        
                            
                         </div>
                     </div>
@@ -200,41 +262,7 @@
 
         
 
-          <main id="main">
-            <div class="container-fluid py-5"> <!-- Added fluid class for full-width container -->
-                <div class="row justify-content-center">
-                    <div class="col-lg-8 mb-3">
-                        <label for="selectYearMonth">Select Year and Month:</label>
-                        <select id="selectYearMonth" class="form-control" onchange="fetchAppointmentsByYearMonth()">
-                            <!-- Options will be dynamically added in JavaScript -->
-                        </select>
-                    </div>
-                </div>
-                <div class="row justify-content-center">
-                    <div class="col-lg-12">
-                        <div class="table-container">
-                            <table class="table">
-                                <thead>
-                                    <tr>
-                                        <th>Date</th>
-                                        <th>Client Name</th>
-                                        <th>Client Email</th>
-                                        <th>Type</th>
-                                        <th>Scheduled Slot</th>
-                                        <th>Subject</th>
-                                        <th>Status</th>
-                                        <th>Action</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="party-details-body">
-                                    <!-- Vet details will be dynamically added here -->
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </main>
+         
                             
                             
                        
@@ -472,6 +500,8 @@
 
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>

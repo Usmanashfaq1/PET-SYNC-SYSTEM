@@ -1,31 +1,42 @@
 
         // Add this script after your existing scripts
-$(document).ready(function () {
-  const email = localStorage.getItem('email');
-  // Call this function when the document is ready to populate the dropdown
-  populateYearMonthDropdown();
-});
-
-function populateYearMonthDropdown() {
- 
-  const selectYearMonth = document.getElementById('selectYearMonth');
-
-// Generate options for the next 12 months
-for (let i = 0; i < 12; i++) {
-  const date = new Date();
-  date.setMonth(date.getMonth() + i);
-
-  // Check if the generated date is in the future
-  if (date >= new Date()) {
-    const option = document.createElement('option');
-    option.value = `${date.getFullYear()}-${(date.getMonth() + 1).toString().padStart(2, '0')}`;
-    option.text = `${date.toLocaleString('default', { month: 'long' })} ${date.getFullYear()}`;
-    selectYearMonth.add(option);
-  }
-}
-  // Fetch appointments when the page loads
-  fetchAppointmentsByYearMonth();
-}
+        $(document).ready(function () {
+          const email = localStorage.getItem('email');
+          // Call this function when the document is ready to populate the dropdown
+          populateYearMonthDropdown();
+        });
+        
+        function populateYearMonthDropdown() {
+          const selectYearMonth = document.getElementById('selectYearMonth');
+        
+          // Generate options for the previous three months
+          for (let i = -3; i < 0; i++) {
+            const date = new Date();
+            date.setMonth(date.getMonth() + i);
+        
+            const option = document.createElement('option');
+            option.value = `${date.getFullYear()}-${(date.getMonth() + 1).toString().padStart(2, '0')}`;
+            option.text = `${date.toLocaleString('default', { month: 'long' })} ${date.getFullYear()}`;
+            selectYearMonth.add(option);
+          }
+        
+          // Generate options for the next 12 months
+          for (let i = 0; i < 12; i++) {
+            const date = new Date();
+            date.setMonth(date.getMonth() + i);
+        
+            // Check if the generated date is in the future
+            if (date >= new Date()) {
+              const option = document.createElement('option');
+              option.value = `${date.getFullYear()}-${(date.getMonth() + 1).toString().padStart(2, '0')}`;
+              option.text = `${date.toLocaleString('default', { month: 'long' })} ${date.getFullYear()}`;
+              selectYearMonth.add(option);
+            }
+          }
+        
+          // Fetch appointments when the page loads
+          fetchAppointmentsByYearMonth();
+        }
 function fetchAppointmentsByYearMonth() {
   const selectedYearMonth = document.getElementById('selectYearMonth').value;
   const email = localStorage.getItem('email');
@@ -202,3 +213,7 @@ function handleEmailSending(email, slot) {
         // For example, let's assume the condition is a variable named "isConditionMet"
 
       
+
+        
+      
+    

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 11, 2024 at 04:54 PM
+-- Generation Time: May 14, 2024 at 12:40 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -76,7 +76,18 @@ INSERT INTO `appointment` (`date`, `user_name`, `user_email`, `vet_name`, `vet_e
 ('2024-05-01 10:27:04.318', 'sameed3', 'f200116@cfd.nu.edu.pk', 'John Doe', 'john.doe@example.com', '(One Health Approach)', '2024-04-28T10:26', 'grooming', 'unapproved', 15, 123, 11),
 ('2024-05-01 11:08:30.733', 'sameed3', 'f200116@cfd.nu.edu.pk', 'John Doe', 'john.doe@example.com', '(One Health Approach)', '2024-05-08T11:10', 'dentalCare', 'unapproved', 16, 123, 11),
 ('2024-05-01 11:16:36.723', 'sameed3', 'f200116@cfd.nu.edu.pk', 'John Doe', 'john.doe@example.com', '(One Health Approach)', '2024-05-02T11:16', 'illness', 'unapproved', 17, 123, 11),
-('2024-05-01 11:18:17.532', 'sameed3', 'f200116@cfd.nu.edu.pk', 'Usman  Ashfaq', 'chusmanjutt.129@gmail.com', '(Emergency and Critical Care)', '2024-05-10T11:18', 'dentalCare', 'unapproved', 18, 124, 11);
+('2024-05-01 11:18:17.532', 'sameed3', 'f200116@cfd.nu.edu.pk', 'Usman  Ashfaq', 'chusmanjutt.129@gmail.com', '(Emergency and Critical Care)', '2024-05-10T11:18', 'dentalCare', 'unapproved', 18, 124, 11),
+('2024-05-14 11:03:36.351', 'chaudhry1', 'f200115@cfd.nu.edu.pk', 'Usman  Ashfaq', 'chusmanjutt.129@gmail.com', '(Emergency and Critical Care)', '2024-05-22T03:07', 'vaccination', 'approved', 19, 124, 10),
+('2024-05-14 11:05:25.651', 'chaudhry1', 'f200115@cfd.nu.edu.pk', 'Usman  Ashfaq', 'chusmanjutt.129@gmail.com', '(Emergency and Critical Care)', '2024-05-17T02:05', 'illness', 'approved', 20, 124, 10),
+('2024-05-14 11:11:31.882', 'chaudhry1', 'f200115@cfd.nu.edu.pk', 'Usman  Ashfaq', 'chusmanjutt.129@gmail.com', '(Emergency and Critical Care)', '2024-05-24T03:11', 'dentalCare', 'unapproved', 21, 124, 10),
+('2024-05-14 11:14:41.452', 'chaudhry1', 'f200115@cfd.nu.edu.pk', 'Usman  Ashfaq', 'chusmanjutt.129@gmail.com', '(Emergency and Critical Care)', '2024-05-15T03:18', 'grooming', 'unapproved', 22, 124, 10),
+('2024-05-14 11:15:39.738', 'chaudhry1', 'f200115@cfd.nu.edu.pk', 'Usman  Ashfaq', 'chusmanjutt.129@gmail.com', '(Emergency and Critical Care)', '2024-06-06T03:15', 'illness', 'unapproved', 23, 124, 10),
+('2024-05-14 11:26:03.906', 'chaudhry1', 'f200115@cfd.nu.edu.pk', 'Usman  Ashfaq', 'chusmanjutt.129@gmail.com', '(Emergency and Critical Care)', '2024-06-07T04:25', 'grooming', 'unapproved', 24, 124, 10),
+('2024-05-14 11:32:23.357', 'chaudhry1', 'f200115@cfd.nu.edu.pk', 'Usman  Ashfaq', 'chusmanjutt.129@gmail.com', '(Emergency and Critical Care)', '2024-05-25T03:32', 'dentalCare', 'unapproved', 25, 124, 10),
+('2024-05-14 12:00:54.353', 'chaudhry1', 'f200115@cfd.nu.edu.pk', 'Usman  Ashfaq', 'chusmanjutt.129@gmail.com', '(Emergency and Critical Care)', '2024-05-22T16:05', 'grooming', 'unapproved', 26, 124, 10),
+('2024-05-14 12:13:38.608', 'chaudhry1', 'f200115@cfd.nu.edu.pk', 'Usman  Ashfaq', 'chusmanjutt.129@gmail.com', '(Emergency and Critical Care)', '2024-05-22T17:18', 'grooming', 'unapproved', 27, 124, 10),
+('2024-05-14 12:16:24.686', 'chaudhry1', 'f200115@cfd.nu.edu.pk', 'Usman  Ashfaq', 'chusmanjutt.129@gmail.com', '(Emergency and Critical Care)', '2024-05-23T16:21', 'dentalCare', 'unapproved', 28, 124, 10),
+('2024-05-14 15:34:38.136', 'chaudhry1', 'f200115@cfd.nu.edu.pk', 'Ali Ahmad', 'usmanx458@gmail.com', '(Veterinary Medicine)', '2024-05-24T19:38', 'vaccination', 'unapproved', 29, 125, 10);
 
 -- --------------------------------------------------------
 
@@ -177,7 +188,11 @@ INSERT INTO `commentinfo` (`id`, `feedname`, `commenttext`, `commentby`, `commen
 (14, '1708060246605.jpg', 'hmm', 'genny', '0', 0, '2024-05-08 20:37:03'),
 (15, '1710415161136.jpg', 'wow', 'genny', '0', 0, '2024-05-08 21:45:05'),
 (16, '1710415161136.jpg', 'wow testing ', 'genny', '0', 0, '2024-05-08 21:45:10'),
-(17, '1715184448140.jpg', 'wow', 'genny', '0', 0, '2024-05-08 21:45:34');
+(17, '1715184448140.jpg', 'wow', 'genny', '0', 0, '2024-05-08 21:45:34'),
+(18, '1710415161136.jpg', 'wow', 'genny', '0', 0, '2024-05-14 13:39:51'),
+(19, '1708077704332.png', 'yes', 'chaudhry1', '0', 0, '2024-05-14 13:45:33'),
+(20, '1714538744515.jpg', 'asdijooszhudiajpodjsre', 'genny', '0', 0, '2024-05-14 15:24:09'),
+(21, '1715682696359.jpg', 'frasfd', 'genny', '0', 0, '2024-05-14 15:32:37');
 
 -- --------------------------------------------------------
 
@@ -199,8 +214,10 @@ CREATE TABLE `deliveries_order` (
 --
 
 INSERT INTO `deliveries_order` (`order_id`, `customer_name`, `customer_email`, `status`, `amount_paid`, `Date`) VALUES
-(1, 'sameed3', 'f200116@cfd.nu.edu.pk', 'confirmed', 83, '2024-04-24'),
-(2, 'sameed3', 'f200116@cfd.nu.edu.pk', 'confirmed', 83, '2024-04-27');
+(1, 'sameed3', 'f200116@cfd.nu.edu.pk', 'shipped', 83, '2024-04-24'),
+(2, 'sameed3', 'f200116@cfd.nu.edu.pk', 'delivered', 83, '2024-04-27'),
+(3, 'sameed3', 'f200116@cfd.nu.edu.pk', 'shipped', 126, '2024-05-14T10:06:38.286Z'),
+(4, 'anny', 'anny@gmail.com', 'confirmed', 312, '2024-05-14T10:07:57.574Z');
 
 -- --------------------------------------------------------
 
@@ -224,7 +241,8 @@ CREATE TABLE `feedback` (
 
 INSERT INTO `feedback` (`id`, `vet_name`, `vet_email`, `feedback`, `satisfied_count`, `dissatisfied_count`, `total_count`) VALUES
 (2, 'John Doe', 'john.doe@example.com', 'dissatisfied', 3, 1, 4),
-(3, 'Usman  Ashfaq', 'chusmanjutt.129@gmail.com', 'dissatisfied', 0, 1, 1);
+(3, 'Usman  Ashfaq', 'chusmanjutt.129@gmail.com', 'dissatisfied', 0, 1, 1),
+(4, 'Ali Ahmad', 'usmanx458@gmail.com', 'dissatisfied', 0, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -244,12 +262,9 @@ CREATE TABLE `followcount` (
 --
 
 INSERT INTO `followcount` (`id`, `username`, `followers`, `following`) VALUES
-(1, 'genny', 1, -7),
-(2, 'chaudhry1', 2, 1),
-(3, 'rex', 1, 0),
-(4, 'ahsan1', 1, 0),
-(5, 'mohinali', 0, 1),
-(6, '<%= userData.data.username %>', -10, 0);
+(1, 'genny', 0, 2),
+(2, 'chaudhry1', 1, 0),
+(3, 'sameed3', 1, 0);
 
 -- --------------------------------------------------------
 
@@ -268,11 +283,8 @@ CREATE TABLE `followinfo` (
 --
 
 INSERT INTO `followinfo` (`id`, `follower`, `following`) VALUES
-(3, 'genny', 'rex'),
-(7, 'mohinali', 'chaudhry1'),
-(11, 'genny', 'ahsan1'),
-(14, 'chaudhry1', 'genny'),
-(16, 'genny', 'chaudhry1');
+(1, 'genny', 'chaudhry1'),
+(2, 'genny', 'sameed3');
 
 -- --------------------------------------------------------
 
@@ -325,10 +337,12 @@ INSERT INTO `likeinfo` (`id`, `feedname`, `likedby`) VALUES
 (22, '1710415161136.jpg', 4),
 (23, '1714543226553.jpg', 4),
 (25, '1707314466008.jpg', 4),
-(26, '1710254208710.png', 4),
 (27, '1715184448140.jpg', 10),
 (28, '1710488168947.jpg', 4),
-(30, '1715184448140.jpg', 4);
+(30, '1715184448140.jpg', 4),
+(31, '1710254208710.png', 4),
+(32, '1708077704332.png', 10),
+(33, '1715682696359.jpg', 4);
 
 -- --------------------------------------------------------
 
@@ -350,7 +364,8 @@ CREATE TABLE `messages` (
 
 INSERT INTO `messages` (`id`, `sender`, `recipient`, `message`, `created_at`) VALUES
 (1, 'genny', 'chaudhry1', 'heyyy whats up?', '2024-05-11 14:44:08'),
-(2, 'chaudhry1', 'genny', 'yes i just saw your message?', '2024-05-11 14:45:30');
+(2, 'chaudhry1', 'genny', 'yes i just saw your message?', '2024-05-11 14:45:30'),
+(3, 'genny', 'sameed3', 'hey\r\n', '2024-05-14 10:33:36');
 
 -- --------------------------------------------------------
 
@@ -415,7 +430,16 @@ INSERT INTO `order_products` (`id`, `order_id`, `product_id`, `product_name`, `q
 (45, 1, 7, 'Husky', 1, 58.00),
 (46, 1, 8, 'Puppy', 1, 25.00),
 (47, 2, 8, 'Puppy', 1, 25.00),
-(48, 2, 7, 'Husky', 1, 58.00);
+(48, 2, 7, 'Husky', 1, 58.00),
+(49, 3, 2, 'German Dog', 1, 40.00),
+(50, 3, 7, 'Husky', 1, 58.00),
+(51, 3, 12, 'Australian Parrot', 2, 10.00),
+(52, 4, 8, 'Puppy', 1, 25.00),
+(53, 4, 7, 'Husky', 1, 58.00),
+(54, 4, 5, 'Parrot Medicine', 2, 77.00),
+(55, 4, 13, 'Macaw Parrot', 1, 38.00),
+(56, 4, 12, 'Australian Parrot', 1, 10.00),
+(57, 4, 16, 'Tropical Fish', 1, 23.00);
 
 -- --------------------------------------------------------
 
@@ -483,9 +507,9 @@ CREATE TABLE `pet_profile` (
 INSERT INTO `pet_profile` (`id`, `pet_owner`, `petname`, `gender`, `age`, `breed`, `species`, `weight`, `color`, `about`, `petPicture`, `owner_id`) VALUES
 (4, 'genny', 'Tom', 'female', 15, 'beagle', 'dog', '12', 'black', 'i love to make other animals my friends', '1708422961934-5ccf27a7a3b80d8ab01e145987630be9.jpg', 4),
 (7, 'genny', 'wow', 'female', 3, 'beagle', 'cat', '6', 'brown', 'cat1', '1709963438615-chen-FJXJ_ghi1tw-unsplash.jpg', 4),
-(8, 'chaudhry1', 'sdafas', 'male', 2, 'goldenRetriever', 'dog', '4', 'sad', 'dsf', '1709963771108-karlo-tottoc-ybZ5hRxaWS4-unsplash.jpg', 10),
+(8, 'chaudhry1', 'Tommy', 'male', 2, 'goldenRetriever', 'dog', '4', 'blue', 'dsf', '1709963771108-karlo-tottoc-ybZ5hRxaWS4-unsplash.jpg', 10),
 (9, 'sameed3', 'wowdsf', 'male', 3, 'poodle', 'dog', '6', 'dfsf', 'dsfsf', '1709963861193-chen-FJXJ_ghi1tw-unsplash.jpg', 11),
-(10, 'chaudhry1', 'gshdga', 'other', 3, 'bulldog', 'dog', '32', 'fadgfz', 'dfzx', '1710568993673-Untitled design.png', 10),
+(10, 'chaudhry1', 'puppy', 'other', 3, 'bulldog', 'dog', '32', 'white', 'dfzx', '1715673618687-husky-puppy-on-dog-walk.webp', 10),
 (11, 'genny', 'caspher34', 'male', 16, 'siamese', 'dog', '12', 'Black and white', 'i love to make other animals my friends', '1711364812077-DOG HARNESS-NEOPRENE.jpg', 4),
 (12, 'sameed3', 'caspher34', 'male', 12, 'bulldog', 'dog', '12', 'Black and white', 'i love to make other animals my friends', '1711471398964-DOG PUZZLE TOYS.jpg', 11),
 (13, 'rex', 'Tommy', 'male', 23, 'goldenRetriever', 'dog', '5', 'black', 'Tommy 1', '1715309089842-taras-shypka-iFSvn82XfGo-unsplash.jpg', 2);
@@ -510,11 +534,7 @@ CREATE TABLE `pet_schedule` (
 --
 
 INSERT INTO `pet_schedule` (`id`, `pet_id`, `day_of_week`, `meal_name`, `portion_size`, `schedule_timestamp`) VALUES
-(0, 0, 'Monday', 'fish', '3', '2024-02-21 05:40:36'),
-(0, 4, 'Monday', 'fish', '3', '2024-02-21 05:44:09'),
-(0, 4, 'Tuesday', 'chicken', '8', '2024-02-21 05:44:09'),
-(0, 0, 'Monday', 'fish', '10', '2024-03-26 08:04:07'),
-(0, 11, 'Monday', 'fish', '12', '2024-03-26 08:04:21');
+(2, 10, 'Monday', 'food1', '23mg', '2024-05-14 08:16:14');
 
 -- --------------------------------------------------------
 
@@ -555,7 +575,8 @@ INSERT INTO `products` (`product_name`, `category`, `price`, `stock`, `p_id`, `r
 ('Pedigree Dog Food', 'Pet', 13, 10, 19, 3, 'Dogs love this food. Limited slot available. Do not miss this amazing opportunity', '1706892728934-pedigree.jpeg'),
 ('Petline Cat Food', 'Pet Food', 8, 14, 20, 2, 'Cat Food. Limited slot available. Do not miss this amazing opportunity', '1706892790317-petline.jpeg'),
 ('Zupreem Parrot food', 'Pet Food', 10, 18, 21, 2, 'Food for parrot. Limited slot available. Do not miss this amazing opportunity', '1706892872000-zupreem.jpeg'),
-('Tetra Fish Food', 'Pet Food', 9, 15, 22, 4, 'new Food of Fish High Grade. Limited slot available. Do not miss this amazing opportunity', '1706892963894-tetra.jpg');
+('Tetra Fish Food', 'Pet Food', 9, 15, 22, 4, 'new Food of Fish High Grade. Limited slot available. Do not miss this amazing opportunity', '1706892963894-tetra.jpg'),
+('dsf', 'Pet', 45, 23, 48, 2, 'fsd', '1715617428616-BuBkFSh4Z4F9YT2ZLuBUYo.jpg');
 
 -- --------------------------------------------------------
 
@@ -580,8 +601,10 @@ CREATE TABLE `product_review` (
 INSERT INTO `product_review` (`id`, `rating`, `description`, `date`, `product_id`, `email`, `name`) VALUES
 (1, 4, 'love it', '2024-04-27 16:35:40', 2, 'f200116@cfd.nu.edu.pk', 'sameed3'),
 (2, 4, 'also love it', '2024-04-27 16:36:00', 2, 'usmanx458@gmail.com', 'ahsan1'),
-(3, 0, '', '2024-05-01 11:01:47', 2, 'rex@gmail.com', 'rex'),
-(4, 0, 'yes good\n', '2024-05-05 19:25:40', 2, 'rex@gmail.com', 'rex');
+(5, 3, 'Dummy\n', '2024-05-13 13:05:58', 5, 'f200116@cfd.nu.edu.pk', 'sameed3'),
+(6, 2, 'dummy', '2024-05-13 13:06:07', 7, 'f200116@cfd.nu.edu.pk', 'sameed3'),
+(7, 3, 'dummy', '2024-05-13 13:06:17', 8, 'f200116@cfd.nu.edu.pk', 'sameed3'),
+(8, 0, 'retr\n', '2024-05-14 15:39:27', 48, 'rex@gmail.com', 'rex');
 
 -- --------------------------------------------------------
 
@@ -602,7 +625,7 @@ CREATE TABLE `reports` (
 --
 
 INSERT INTO `reports` (`id`, `reported_user_id`, `reporter_user_id`, `reason`, `created_at`) VALUES
-(31, 10, 4, 'bad test', '2024-05-08 21:37:07');
+(34, 13, 4, 'bad behaviour', '2024-05-13 20:23:21');
 
 -- --------------------------------------------------------
 
@@ -636,25 +659,15 @@ INSERT INTO `userfeed` (`id`, `userid`, `username`, `feedname`, `caption`, `crea
 (9, 2, 'rex', '1707314541471.jpg', 'faadfsgb', '2024-02-07 19:02:21', 0, 0),
 (10, 2, 'rex', '1708060246605.jpg', 'feb 16', '2024-02-16 10:10:46', 1, 2),
 (11, 2, 'rex', '1708060412153.jpg', '#16febbbbb', '2024-02-16 10:13:32', 0, 0),
-(12, 10, 'chaudhry1', '1708077704332.png', 'frest start', '2024-02-16 15:01:44', 2, 1),
+(12, 10, 'chaudhry1', '1708077704332.png', 'frest start', '2024-02-16 15:01:44', 3, 2),
 (13, 4, 'genny', '1710254208710.png', 'nothing', '2024-03-12 19:36:48', 1, 2),
-(14, 10, 'chaudhry1', '1710415161136.jpg', 'nothingggg', '2024-03-14 16:19:21', 2, 6),
+(14, 10, 'chaudhry1', '1710415161136.jpg', 'nothingggg', '2024-03-14 16:19:21', 2, 7),
 (15, 4, 'genny', '1710425646708.jpg', 'hjvgchf', '2024-03-14 19:14:06', 1, 0),
 (16, 4, 'genny', '1710488168947.jpg', '', '2024-03-15 12:36:08', 2, 2),
-(17, 4, 'genny', '1711438227932.jpg', 'heyy', '2024-03-26 12:30:27', 1, 0),
-(18, 4, 'genny', '1711454636785.jpg', 'i am genny', '2024-03-26 17:03:56', 0, 0),
 (19, 4, 'genny', '1714486932569.jpg', 'Star', '2024-04-30 19:22:12', 1, 1),
-(20, 4, 'genny', '1714538572085.jpg', 'test message', '2024-05-01 09:42:52', 0, 0),
-(21, 4, 'genny', '1714538744515.jpg', 'test 8', '2024-05-01 09:45:44', 0, 0),
-(22, 4, 'genny', '1714538753128.jpg', 'test 8', '2024-05-01 09:45:53', 0, 0),
-(23, 4, 'genny', '1714538978140.jpg', 'test 9', '2024-05-01 09:49:38', 0, 0),
-(24, 4, 'genny', '1714539003598.jpg', 'test 20', '2024-05-01 09:50:03', 0, 0),
-(25, 4, 'genny', '1714542109614.jpg', 'test99', '2024-05-01 10:41:49', 0, 0),
-(26, 4, 'genny', '1714542113182.jpg', 'test99', '2024-05-01 10:41:53', 0, 0),
-(27, 4, 'genny', '1714542389198.jpg', 'hey test 11133', '2024-05-01 10:46:29', 0, 0),
-(28, 4, 'genny', '1714543226553.jpg', 'test 11111', '2024-05-01 11:00:26', 1, 1),
 (29, 3, 'anny', '1714919250452.jpg', 'hey ', '2024-05-05 19:27:30', 0, 0),
-(30, 10, 'chaudhry1', '1715184448140.jpg', 'test post 1111', '2024-05-08 21:07:28', 2, 1);
+(31, 4, 'genny', '1715682428273.png', 'test1', '2024-05-14 15:27:08', 0, 0),
+(33, 4, 'genny', '1715682696359.jpg', 'buttery flies', '2024-05-14 15:31:36', 1, 1);
 
 -- --------------------------------------------------------
 
@@ -707,7 +720,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `username`, `password`, `email`, `created_at`, `is_blocked`) VALUES
-(2, 'rex', '12345', 'rex@gmail.com', '2024-01-24 17:47:35', 1),
+(2, 'rex', '12345', 'rex@gmail.com', '2024-01-24 17:47:35', 0),
 (3, 'anny', '12345', 'anny@gmail.com', '2024-01-24 18:00:58', 0),
 (4, 'genny', '12345', 'genny@gmail.com', '2024-01-27 10:37:13', 0),
 (5, 'annie', '12345', 'anny123@gmail.com', '2024-01-31 19:57:25', 0),
@@ -715,7 +728,7 @@ INSERT INTO `users` (`id`, `username`, `password`, `email`, `created_at`, `is_bl
 (10, 'chaudhry1', '12345', 'f200115@cfd.nu.edu.pk', '2024-02-16 14:58:45', 0),
 (11, 'sameed3', '12345', 'f200116@cfd.nu.edu.pk', '2024-02-16 17:19:12', 0),
 (12, 'ahsan1', '12345', 'usmanx458@gmail.com', '2024-03-19 12:28:23', 0),
-(13, 'mohinali', '12345', 'f200343@cfd.nu.edu.pk', '2024-03-26 12:33:50', 0);
+(13, 'mohinali', '12345', 'f200343@cfd.nu.edu.pk', '2024-03-26 12:33:50', 1);
 
 -- --------------------------------------------------------
 
@@ -729,6 +742,16 @@ CREATE TABLE `user_requests` (
   `request_text` text DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `user_requests`
+--
+
+INSERT INTO `user_requests` (`id`, `user_email`, `request_text`, `created_at`) VALUES
+(10, 'rex@gmail.com', 'someone blocked me kindly unblock me test 2', '2024-05-13 15:04:40'),
+(11, 'rex@gmail.com', 'someone blocked me kindly unblock me test 2', '2024-05-13 15:06:22'),
+(12, 'rex@gmail.com', 'kindly unblock me.....', '2024-05-13 15:07:52'),
+(14, 'rex@gmail.com', 'sfsdf', '2024-05-13 16:24:50');
 
 -- --------------------------------------------------------
 
@@ -755,7 +778,8 @@ CREATE TABLE `vet` (
 
 INSERT INTO `vet` (`fname`, `lname`, `specialization`, `qualification`, `license_number`, `email`, `timeslot`, `password`, `id`, `location`) VALUES
 ('John', 'Doe', 'One Health Approach', 'DVM', '123456', 'john.doe@example.com', 'Monday 9:00 AM - 5:00 PM', 'mypassword', 123, 'New York'),
-('Usman ', 'Ashfaq', 'Emergency and Critical Care', 'Bachelor of Veterinary Medicine (BVM)', '12123', 'chusmanjutt.129@gmail.com', 'Morning (8:00 AM - 12:00 PM)', '12345', 124, 'Faisalabad, Pakistan');
+('Usman ', 'Ashfaq', 'Emergency and Critical Care', 'Bachelor of Veterinary Medicine (BVM)', '12123', 'chusmanjutt.129@gmail.com', 'Morning (8:00 AM - 12:00 PM)', '12345', 124, 'Faisalabad, Pakistan'),
+('Ali', 'Ahmad', 'Veterinary Medicine', 'Bachelor of Veterinary Medicine (BVM)', '1216A', 'usmanx458@gmail.com', 'Morning (8:00 AM - 12:00 PM)', '1234567890', 125, 'Faisalabad, Pakistan');
 
 -- --------------------------------------------------------
 
@@ -886,6 +910,12 @@ ALTER TABLE `pet_profile`
   ADD KEY `fk_owner_id` (`owner_id`);
 
 --
+-- Indexes for table `pet_schedule`
+--
+ALTER TABLE `pet_schedule`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `products`
 --
 ALTER TABLE `products`
@@ -956,7 +986,7 @@ ALTER TABLE `admin_login`
 -- AUTO_INCREMENT for table `appointment`
 --
 ALTER TABLE `appointment`
-  MODIFY `id` int(244) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` int(244) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- AUTO_INCREMENT for table `articles`
@@ -974,31 +1004,31 @@ ALTER TABLE `behavior_records`
 -- AUTO_INCREMENT for table `commentinfo`
 --
 ALTER TABLE `commentinfo`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT for table `deliveries_order`
 --
 ALTER TABLE `deliveries_order`
-  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `feedback`
 --
 ALTER TABLE `feedback`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `followcount`
 --
 ALTER TABLE `followcount`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `followinfo`
 --
 ALTER TABLE `followinfo`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `health_records`
@@ -1010,19 +1040,19 @@ ALTER TABLE `health_records`
 -- AUTO_INCREMENT for table `likeinfo`
 --
 ALTER TABLE `likeinfo`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 
 --
 -- AUTO_INCREMENT for table `messages`
 --
 ALTER TABLE `messages`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `order_products`
 --
 ALTER TABLE `order_products`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=58;
 
 --
 -- AUTO_INCREMENT for table `pet_memories`
@@ -1043,28 +1073,34 @@ ALTER TABLE `pet_profile`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
+-- AUTO_INCREMENT for table `pet_schedule`
+--
+ALTER TABLE `pet_schedule`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `p_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
+  MODIFY `p_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
 
 --
 -- AUTO_INCREMENT for table `product_review`
 --
 ALTER TABLE `product_review`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `reports`
 --
 ALTER TABLE `reports`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
 -- AUTO_INCREMENT for table `userfeed`
 --
 ALTER TABLE `userfeed`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
 -- AUTO_INCREMENT for table `users`
@@ -1076,13 +1112,13 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `user_requests`
 --
 ALTER TABLE `user_requests`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `vet`
 --
 ALTER TABLE `vet`
-  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=125;
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=126;
 
 --
 -- AUTO_INCREMENT for table `wishlist`
