@@ -25,6 +25,8 @@
   <link rel="stylesheet" href="../public/assets/css/aos.css">
   <link rel="stylesheet" href="../public/assets/css/default.css">
   <link rel="stylesheet" href="../public/assets/css/main.css">
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 
 </head>
@@ -109,6 +111,7 @@
 
   <main class="fix">
 
+
     <section class="breadcrumb__area fix">
       <div class="container">
         <div class="row align-items-end">
@@ -138,12 +141,20 @@
         <img src="../public/assets/img/images/breadcrumb_shape02.png" alt="img" data-aos="fade-up-left"
           data-aos-delay="400">
       </div>
+      <select id="timePeriod">
+        <option value="7">Last 7 Days</option>
+        <option value="30">Last 30 Days</option>
+        <option value="365">Last Year</option>
+    </select>
     </section>
 
 
 
     </div>
 
+    
+
+   
     <canvas id="myChart" style="width:100%;max-width:700px"></canvas>
 
 

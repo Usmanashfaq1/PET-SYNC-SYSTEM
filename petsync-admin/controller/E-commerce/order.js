@@ -32,10 +32,19 @@ const handle_get_orders = (req, res) => {
 
 
 handle_get_orders_for_sales = (req, res) => {
+    const { days } = req.query;  
+    let daysFilter = '';
+
+    if (days === '7' || days === '30' || days === '365') {
+        daysFilter = `WHERE Date >= NOW() - INTERVAL ${days} DAY`;
+    }
+
     const sql = `
-    SELECT *
-    FROM deliveries_order    
+        SELECT *
+        FROM deliveries_order
+        ${daysFilter}
     `;
+
     connection.query(sql, (err, result) => {
         if (err) {
             console.error('Error fetching orders:', err);
